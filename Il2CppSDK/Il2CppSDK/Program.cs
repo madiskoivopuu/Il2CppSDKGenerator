@@ -331,7 +331,11 @@ namespace Il2CppSDK
 
             currentFile.WriteLine("};");
             currentFile.WriteLine();
-            currentFile.WriteLine("}");
+
+            if (useNamespace)
+            {
+                currentFile.WriteLine("}");
+            }
 
         }
         static void ParseClasses()
