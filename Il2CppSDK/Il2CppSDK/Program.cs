@@ -292,7 +292,7 @@ namespace Il2CppSDK
                 string baseClassName = (string)clazz.BaseType.Name.Replace("<", "").Replace(">", "");
                 string baseClassFilename = string.Concat(baseClassName.Split(Path.GetInvalidFileNameChars()));
                 baseClassNameValid = FormatToValidClassname(baseClassName);
-                currentFile.WriteLine(string.Format("#include \"{0}{1}\" ", tabInAndOutPrefix, baseClassFilename));
+                currentFile.WriteLine(string.Format("#include \"{0}{1}.h\" ", tabInAndOutPrefix, baseClassFilename));
             }
 
             if (useNamespace)
