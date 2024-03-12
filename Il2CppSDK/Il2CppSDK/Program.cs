@@ -280,6 +280,21 @@ namespace Il2CppSDK
 
             bool useNamespace = namespaze.Length > 0;
 
+            // if we inherit from a class, include its header file
+            // but currently only if we inherit from the same assembly
+            string baseClassNameValid = null;
+            if(clazz.BaseType != null && clazz.BaseType.DefinitionAssembly.Name == clazz.DefinitionAssembly.Name)
+            {
+                string tabInAndOutPrefix = clazz.Namespace.Replace("<", "").Replace(">", "").Length > 0 ? "../" : "";
+                string baseTypeNamespace = clazz.BaseType.Namespace.Replace("<", "").Replace(">", "");
+                tabInAndOutPrefix += baseTypeNamespace.Length > 0 ? baseTypeNamespace + "/" : "";
+
+                string baseClassName = (string)clazz.BaseType.Name.Replace("<", "").Replace(">", "");
+                string baseClassFilename = string.Concat(baseClassName.Split(Path.GetInvalidFileNameChars()));
+                baseClassNameValid = FormatToValidClassname(baseClassName);
+                currentFile.WriteLine(string.Format("#include \"{0}{1}\" ", tabInAndOutPrefix, baseClassFilename));
+            }
+
             if (useNamespace)
             {
                 currentFile.WriteLine("namespace " + namespaze + " {");
@@ -287,7 +302,14 @@ namespace Il2CppSDK
 
             currentFile.WriteLine();
 
-            currentFile.WriteLine("class " + validClassname);
+            currentFile.Write("class " + validClassname);
+            // inherit with : if needed
+            if (baseClassNameValid != null)
+            {
+                currentFile.Write(" : " + baseClassNameValid);
+            }
+
+            currentFile.WriteLine();
             currentFile.WriteLine("{");
             currentFile.WriteLine("public: ");
 
