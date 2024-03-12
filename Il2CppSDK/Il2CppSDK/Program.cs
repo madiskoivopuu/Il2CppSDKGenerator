@@ -306,7 +306,7 @@ namespace Il2CppSDK
             // inherit with : if needed
             if (baseClassNameValid != null)
             {
-                currentFile.Write(" : " + baseClassNameValid);
+                currentFile.Write(" : public " + baseClassNameValid);
             }
 
             currentFile.WriteLine();
