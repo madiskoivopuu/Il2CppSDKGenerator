@@ -270,7 +270,7 @@ namespace Il2CppSDK
         static void ParseClass(TypeDef clazz)
         {
             var module = clazz.Module;
-            var namespaze = clazz.Namespace;
+            var namespaze = FormatToValidClassname(clazz.Namespace);
             var className = (string)clazz.Name;
             var classFilename = string.Concat(className.Split(Path.GetInvalidFileNameChars()));
             var validClassname = FormatToValidClassname(className);
