@@ -8,6 +8,8 @@ using dnlib.DotNet;
 using dnlib.IO;
 using dnlib.Utils;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
+
 namespace Il2CppSDK
 {
     class Program
@@ -26,68 +28,86 @@ namespace Il2CppSDK
 
             string result = "uintptr_t";
 
-            if (type.FullName.Equals("System.Int8"))
-                result = "int8_t";
+            switch(type.GetElementType())
+            {
+                case ElementType.Void:
+                    result = "void";
+                    break;
 
-            if (type.FullName.Equals("System.UInt8"))
-                result = "uint8_t";
+                case ElementType.Boolean:
+                    result = "bool";
+                    break;
 
-            if (type.FullName.Equals("System.Int16"))
-                result = "int16_t";
+                case ElementType.Char:
+                    result = "char";
+                    break;
 
-            if (type.FullName.Equals("System.UInt16"))
-                result = "uint16_t";
+                case ElementType.I1:
+                    result = "int8_t";
+                    break;
 
-            if (type.FullName.Equals("System.Int32"))
-                result = "int32_t";
+                case ElementType.U1:
+                    result = "uint8_t";
+                    break;
 
-            if (type.FullName.Equals("System.UInt32"))
-                result = "uint32_t";
+                case ElementType.I2:
+                    result = "int16_t";
+                    break;
 
-            if (type.FullName.Equals("System.Int64"))
-                result = "int64_t";
+                case ElementType.U2:
+                    result = "uint16_t";
+                    break;
 
-            if (type.FullName.Equals("System.UInt64"))
-                result = "uint64_t";
+                case ElementType.I4:
+                    result = "int32_t";
+                    break;
 
-            if (type.FullName.Equals("System.Single"))
-                result = "float";
+                case ElementType.U4:
+                    result = "uint32_t";
+                    break;
 
-            if (type.FullName.Equals("System.Double"))
-                result = "double";
+                case ElementType.I8:
+                    result = "int64_t";
+                    break;
 
-            if (type.FullName.Equals("System.Boolean"))
-                result = "bool";
+                case ElementType.U8:
+                    result = "uint64_t";
+                    break;
 
-            if (type.FullName.Equals("System.Char"))
-                result = "char";
+                case ElementType.I:
+                    result = "intptr_t";
+                    break;
 
-            if (type.FullName.Equals("System.Byte"))
-                result = "unsigned char";
+                case ElementType.U:
+                    result = "uintptr_t";
+                    break;
 
-            if (type.FullName.Equals("System.SByte"))
-                result = "signed char";
+                case ElementType.R4:
+                    result = "float";
+                    break;
 
-            if (type.FullName.Equals("System.String"))
-                result = "Il2CppString*";
+                case ElementType.R8:
+                    result = "double";
+                    break;
 
-            if (type.FullName.Equals("UnityEngine.Vector2"))
-                result = "Il2CppVector2";
+                case ElementType.String:
+                    result = "Il2CppString*"; 
+                    break;
 
-            if (type.FullName.Equals("UnityEngine.Vector3"))
-                result = "Il2CppVector3";
+                case ElementType.SZArray:
+                    result = "Il2CppArray<uintptr_t>*";
+                    break;
 
-            if (type.FullName.Equals("UnityEngine.Quaternion"))
-                result = "Il2CppQuaternion";
+                // TODO: parse multidimensional arrays correctly
+                case ElementType.Array:
+                    Debugger.Break();
+                    result = "Il2CppArray<uintptr_t>*";
+                    break;
 
-            if (type.FullName.Equals("UnityEngine.Rect"))
-                result = "Il2CppRect";
-
-            if (type.FullName.Equals("System.Void"))
-                result = "void";
-
-            if (type.FullName.Contains("[]"))
-                result = "Il2CppArray<" + result + ">*";
+                case ElementType.Object:
+                    result = "Il2CppObject*";
+                    break;
+            }
 
             return result;
         }
