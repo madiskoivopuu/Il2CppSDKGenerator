@@ -1,0 +1,11 @@
+C:\Users\madis\source\repos\Il2CppSdkGenerator\Il2CppSDK\Il2CppSDK\bin\Debug\Il2CppSDK.exe.config
+C:\Users\madis\source\repos\Il2CppSdkGenerator\Il2CppSDK\Il2CppSDK\bin\Debug\Il2CppSDK.exe
+C:\Users\madis\source\repos\Il2CppSdkGenerator\Il2CppSDK\Il2CppSDK\bin\Debug\Il2CppSDK.pdb
+C:\Users\madis\source\repos\Il2CppSdkGenerator\Il2CppSDK\Il2CppSDK\bin\Debug\dnlib.dll
+C:\Users\madis\source\repos\Il2CppSdkGenerator\Il2CppSDK\Il2CppSDK\bin\Debug\dnlib.xml
+C:\Users\madis\source\repos\Il2CppSdkGenerator\Il2CppSDK\Il2CppSDK\obj\Debug\Il2CppSDK.csproj.AssemblyReference.cache
+C:\Users\madis\source\repos\Il2CppSdkGenerator\Il2CppSDK\Il2CppSDK\obj\Debug\Il2CppSDK.csproj.SuggestedBindingRedirects.cache
+C:\Users\madis\source\repos\Il2CppSdkGenerator\Il2CppSDK\Il2CppSDK\obj\Debug\Il2CppSDK.csproj.CoreCompileInputs.cache
+C:\Users\madis\source\repos\Il2CppSdkGenerator\Il2CppSDK\Il2CppSDK\obj\Debug\Il2CppSDK.csproj.CopyComplete
+C:\Users\madis\source\repos\Il2CppSdkGenerator\Il2CppSDK\Il2CppSDK\obj\Debug\Il2CppSDK.exe
+C:\Users\madis\source\repos\Il2CppSdkGenerator\Il2CppSDK\Il2CppSDK\obj\Debug\Il2CppSDK.pdb

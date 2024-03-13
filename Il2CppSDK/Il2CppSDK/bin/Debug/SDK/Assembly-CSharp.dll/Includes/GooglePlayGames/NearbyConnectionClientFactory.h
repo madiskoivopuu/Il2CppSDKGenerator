@@ -1,0 +1,20 @@
+#pragma once
+#include <Il2Cpp/Il2Cpp.h>
+namespace GooglePlayGames {
+
+class NearbyConnectionClientFactory
+{
+public: 
+
+	static Il2CppClass *StaticClass() {
+		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "GooglePlayGames", "NearbyConnectionClientFactory"));
+	}
+
+
+	template <typename T = void> static T Create(Action1INearbyConnectionClient*>* callback) {
+		return ((T (*)(void *, Action1INearbyConnectionClient*>*))(Il2CppBase() + 0x13A88AC))(0, callback);
+	}
+
+};
+
+}

@@ -1,0 +1,18 @@
+#pragma once
+#include <Il2Cpp/Il2Cpp.h>
+
+class ActivationStateComponent
+{
+public: 
+
+	static Il2CppClass *StaticClass() {
+		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "ActivationStateComponent"));
+	}
+
+	template <typename T = Nullable1int64_t>*> T& Time() {
+		return *(T*)((uintptr_t)this + 0x10);
+	}
+
+
+};
+

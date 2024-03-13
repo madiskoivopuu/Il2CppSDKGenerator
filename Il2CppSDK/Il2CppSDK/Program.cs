@@ -9,6 +9,7 @@ using dnlib.IO;
 using dnlib.Utils;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace Il2CppSDK
 {
@@ -100,12 +101,17 @@ namespace Il2CppSDK
 
                 // TODO: parse multidimensional arrays correctly
                 case ElementType.Array:
-                    Debugger.Break();
                     result = "Il2CppArray<uintptr_t>*";
                     break;
 
                 case ElementType.Object:
                     result = "Il2CppObject*";
+                    break;
+
+                case ElementType.ValueType:
+                case ElementType.Class:
+                    if(type.TryGetTypeDef() != null)
+                        result = GetFormattedFilenameForType(type.TryGetTypeDef().Name) + "*";
                     break;
             }
 
@@ -155,7 +161,7 @@ namespace Il2CppSDK
             }
             else
             {
-                return "void*";
+                result = GetFormattedFilenameForType(type.ToGenericInstSig().TypeName);
             }
             List<string> args = new List<string>();
             foreach (var arg in type.ToGenericInstSig().GenericArguments)
@@ -287,13 +293,41 @@ namespace Il2CppSDK
                 currentFile.WriteLine("\t}");
             }
         }
+
+        static string GetFormattedFilenameForType(string className) {
+            className = className.Replace("<", "").Replace(">", "");
+            className = FormatToValidClassname(string.Concat(className.Split(Path.GetInvalidFileNameChars())));
+            return className;
+        }
+
+        // Turns 
+        static string GetParentClassTypeAsString(TypeDef childClass, ITypeDefOrRef parentClass)
+        {
+            string baseClassName = GetFormattedFilenameForType(parentClass.Name);
+            if (parentClass.NumberOfGenericParameters > 0)
+            {
+                List<string> cppEquivalentTypes = new List<String>();
+                foreach (TypeSig generic in parentClass.TryGetGenericInstSig().GenericArguments)
+                    cppEquivalentTypes.Add(Il2CppTypeToCppType(generic));
+
+                baseClassName += "<";
+                baseClassName += string.Join(", ", cppEquivalentTypes);
+                baseClassName += ">";
+            }
+            
+             return baseClassName;
+        }
+
         static void ParseClass(TypeDef clazz)
         {
+            if (clazz.Name.Contains("GuildRoleComponent"))
+                Console.WriteLine("aaaa");
+            //else
+            //    return;
+
             var module = clazz.Module;
             var namespaze = FormatToValidClassname(clazz.Namespace);
-            var className = (string)clazz.Name;
-            var classFilename = string.Concat(className.Split(Path.GetInvalidFileNameChars()));
-            var validClassname = FormatToValidClassname(className);
+            var validClassname = GetFormattedFilenameForType(clazz.Name);
             
             currentFile.WriteLine("#pragma once");
             currentFile.WriteLine("#include <Il2Cpp/Il2Cpp.h>");
@@ -302,16 +336,14 @@ namespace Il2CppSDK
 
             // if we inherit from a class, include its header file
             // but currently only if we inherit from the same assembly
-            string baseClassNameValid = null;
-            if (clazz.BaseType != null && clazz.BaseType.DefinitionAssembly.Name == clazz.DefinitionAssembly.Name)
+            bool hasBaseClass = clazz.BaseType != null && clazz.BaseType.DefinitionAssembly.Name == clazz.DefinitionAssembly.Name;
+            if (hasBaseClass)
             {
                 string tabInAndOutPrefix = clazz.Namespace.Replace("<", "").Replace(">", "").Length > 0 ? "../" : "";
                 string baseTypeNamespace = clazz.BaseType.Namespace.Replace("<", "").Replace(">", "");
                 tabInAndOutPrefix += baseTypeNamespace.Length > 0 ? baseTypeNamespace + "/" : "";
 
-                string baseClassName = (string)clazz.BaseType.Name.Replace("<", "").Replace(">", "");
-                string baseClassFilename = string.Concat(baseClassName.Split(Path.GetInvalidFileNameChars()));
-                baseClassNameValid = FormatToValidClassname(baseClassName);
+                string baseClassFilename = GetFormattedFilenameForType(clazz.BaseType.Name);
                 currentFile.WriteLine(string.Format("#include \"{0}{1}.h\" ", tabInAndOutPrefix, baseClassFilename));
             }
 
@@ -324,9 +356,9 @@ namespace Il2CppSDK
 
             currentFile.Write("class " + validClassname);
             // inherit with : if needed
-            if (baseClassNameValid != null)
+            if (hasBaseClass)
             {
-                currentFile.Write(" : public " + baseClassNameValid);
+                currentFile.Write(" : public " + GetParentClassTypeAsString(clazz, clazz.BaseType));
             }
 
             currentFile.WriteLine();
@@ -336,7 +368,7 @@ namespace Il2CppSDK
             currentFile.WriteLine();
 
             currentFile.WriteLine("\tstatic Il2CppClass *StaticClass() {");
-            currentFile.WriteLine(string.Format("\t\treturn (Il2CppClass *)(Il2Cpp::GetClass(\"{0}\", \"{1}\", \"{2}\"));", module.Name, namespaze, className));
+            currentFile.WriteLine(string.Format("\t\treturn (Il2CppClass *)(Il2Cpp::GetClass(\"{0}\", \"{1}\", \"{2}\"));", module.Name, namespaze, clazz.Name));
             currentFile.WriteLine("\t}");
 
             currentFile.WriteLine();
@@ -373,7 +405,7 @@ namespace Il2CppSDK
                 var module = type.Module;
                 var namespaze = type.Namespace.Replace("<", "").Replace(">", "");
                 var className = (string)type.Name.Replace("<", "").Replace(">", "");
-                var classFilename = string.Concat(className.Split(Path.GetInvalidFileNameChars()));
+                var classFilename = FormatToValidClassname(string.Concat(className.Split(Path.GetInvalidFileNameChars())));
                 var validClassname = FormatToValidClassname(className);
 
                 string outputPath = OUTPUT_DIR;

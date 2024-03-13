@@ -1,0 +1,21 @@
+#pragma once
+#include <Il2Cpp/Il2Cpp.h>
+
+class TrophyPedestalHelper
+{
+public: 
+
+	static Il2CppClass *StaticClass() {
+		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "TrophyPedestalHelper"));
+	}
+
+
+	template <typename T = TrophyPedestalWindow*> static T ShowTrophyPedestal(UIWindowsManager* manager, int32_t targetId) {
+		return ((T (*)(void *, UIWindowsManager*, int32_t))(Il2CppBase() + 0x1527EF8))(0, manager, targetId);
+	}
+	template <typename T = void> static T CloseTrophyPedestal(UIWindowsManager* manager, int32_t targetId) {
+		return ((T (*)(void *, UIWindowsManager*, int32_t))(Il2CppBase() + 0x1527FC4))(0, manager, targetId);
+	}
+
+};
+

@@ -1,0 +1,6 @@
+#include "Includes/SlotRoll.ObjectPool/IFactory2.h"
+#include "Includes/SlotRoll.ObjectPool/IPoolableData.h"
+#include "Includes/SlotRoll.ObjectPool/IPoolable1.h"
+#include "Includes/SlotRoll.ObjectPool/IPolymorphPoolable1.h"
+#include "Includes/SlotRoll.ObjectPool/SimpleMonoObjectPool2.h"
+#include "Includes/SlotRoll.ObjectPool/PolymorphMonoObjectPool2.h"
