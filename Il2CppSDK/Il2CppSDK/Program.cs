@@ -96,7 +96,7 @@ namespace Il2CppSDK
                     break;
 
                 case ElementType.SZArray:
-                    result = "Il2CppArray<uintptr_t>*";
+                    result = "Il2CppArray<" + Il2CppTypeToCppType(type.Next) + ">*";
                     break;
 
                 // TODO: parse multidimensional arrays correctly
@@ -109,9 +109,20 @@ namespace Il2CppSDK
                     break;
 
                 case ElementType.ValueType:
+                    if (type.TryGetTypeDef() != null)
+                        if(type.TryGetTypeDef().IsEnum)
+                            result = "int32_t";
+                        else
+                            result = GetFormattedFilenameForType(type.TryGetTypeDef().Name) + "*";
+
+                    break;
                 case ElementType.Class:
                     if(type.TryGetTypeDef() != null)
                         result = GetFormattedFilenameForType(type.TryGetTypeDef().Name) + "*";
+                    break;
+
+                case ElementType.Var:
+                    result = type.FullName;
                     break;
             }
 
@@ -200,20 +211,33 @@ namespace Il2CppSDK
 
                 var fieldType = Il2CppTypeToCppType(field.FieldType);
                 var fieldOffset = GetFieldOffset(field);
+                bool containsGeneric = field.FieldType.ContainsGenericParameter || field.FieldType.IsGenericTypeParameter || field.FieldType.IsGenericParameter || field.FieldType.IsGenericInstanceType;
 
-                currentFile.Write(string.Format("\ttemplate <typename T = {0}>", fieldType));
-                currentFile.WriteLine(string.Format(" {0}{1}& {2}() {{", (field.IsStatic ? "static " : ""), "T", fieldName));
-                if(field.IsStatic)
+                string returnCast = "R";
+                if (containsGeneric)
+                    returnCast = fieldType;
+
+                // write the field getter method header
+                // we cannot nest multiple generic types inside a template, so we will need to check if return type is generic
+                currentFile.Write("\t");
+                if (!containsGeneric)
+                    currentFile.Write(string.Format("template <typename R = {0}>", fieldType));
+                
+                currentFile.WriteLine(string.Format(" {0}{1}& {2}() {{", (field.IsStatic ? "static " : ""), returnCast, fieldName));
+
+                // method body
+                if (field.IsStatic)
                 {
-                    currentFile.WriteLine(string.Format("\t\treturn *({0}*)((uintptr_t)StaticClass()->static_fields + {1});", "T", fieldOffset));
+                    currentFile.WriteLine(string.Format("\t\treturn *({0}*)((uintptr_t)StaticClass()->static_fields + {1});", returnCast, fieldOffset));
                 } 
                 else
                 {
-                    currentFile.WriteLine(string.Format("\t\treturn *({0}*)((uintptr_t)this + {1});", "T", fieldOffset));
+                    currentFile.WriteLine(string.Format("\t\treturn *({0}*)((uintptr_t)this + {1});", returnCast, fieldOffset));
                 }
                 currentFile.WriteLine("\t}");
             }
         }
+
         static void ParseMethods(TypeDef clazz)
         {
             foreach (var rid in currentModule.Metadata.GetMethodRidList(clazz.Rid))
@@ -231,6 +255,7 @@ namespace Il2CppSDK
                     methodName += "_";
 
                 var methodType = Il2CppTypeToCppType(method.ReturnType);
+                bool containsGeneric = method.ReturnType.ContainsGenericParameter || method.ReturnType.IsGenericTypeParameter || method.ReturnType.IsGenericParameter || method.ReturnType.IsGenericInstanceType;
                 var methodOffset = GetMethodOffset(method);
 
                 string methodKey = clazz.Namespace + clazz.FullName + method.Name;
@@ -270,24 +295,32 @@ namespace Il2CppSDK
                     }
                 }
 
-                currentFile.Write(string.Format("\ttemplate <typename T = {0}>", methodType));
-                currentFile.WriteLine(string.Format(" {0}{1} {2}({3}) {{", (method.IsStatic ? "static " : ""), "T", methodName, string.Join(", ", methodParams)));
+                string returnCast = "R";
+                if (containsGeneric)
+                    returnCast = methodType;
+
+                // we cannot nest multiple generic types inside a template, so we will need to check if return type is generic
+                currentFile.Write("\t");
+                if (!containsGeneric)
+                    currentFile.Write(string.Format("template <typename R = {0}>", methodType));
+
+                currentFile.WriteLine(string.Format(" {0}{1} {2}({3}) {{", (method.IsStatic ? "static " : ""), returnCast, methodName, string.Join(", ", methodParams)));
                 if (!method.IsStatic)
                 {
                     if (methodParams.Count > 0)
                     {
-                        currentFile.WriteLine("\t\treturn (({0} (*)({1}*, {2}))(Il2CppBase() + {3}))(this, {4});", "T", FormatToValidClassname(clazz.Name), string.Join(", ", paramTypes), methodOffset, string.Join(", ", paramNames));
-                    } else currentFile.WriteLine("\t\treturn (({0} (*)({1}*))(Il2CppBase() + {3}))(this);", "T", FormatToValidClassname(clazz.Name), string.Join(", ", paramTypes), methodOffset);
+                        currentFile.WriteLine("\t\treturn (({0} (*)({1}*, {2}))(Il2CppBase() + {3}))(this, {4});", returnCast, FormatToValidClassname(clazz.Name), string.Join(", ", paramTypes), methodOffset, string.Join(", ", paramNames));
+                    } else currentFile.WriteLine("\t\treturn (({0} (*)({1}*))(Il2CppBase() + {3}))(this);", returnCast, FormatToValidClassname(clazz.Name), string.Join(", ", paramTypes), methodOffset);
                 }
                 else
                 {
                     if (methodParams.Count > 0)
                     {
-                        currentFile.WriteLine("\t\treturn (({0} (*)(void *, {1}))(Il2CppBase() + {2}))(0, {3});", "T", string.Join(", ", paramTypes), methodOffset, string.Join(", ", paramNames));
+                        currentFile.WriteLine("\t\treturn (({0} (*)(void *, {1}))(Il2CppBase() + {2}))(0, {3});", returnCast, string.Join(", ", paramTypes), methodOffset, string.Join(", ", paramNames));
                     }
                     else
                     {
-                        currentFile.WriteLine("\t\treturn (({0} (*)(void *))(Il2CppBase() + {2}))(0);", "T", string.Join(", ", paramTypes), methodOffset, string.Join(", ", paramNames));
+                        currentFile.WriteLine("\t\treturn (({0} (*)(void *))(Il2CppBase() + {2}))(0);", returnCast, string.Join(", ", paramTypes), methodOffset, string.Join(", ", paramNames));
                     }
                 }
                 currentFile.WriteLine("\t}");
@@ -353,6 +386,23 @@ namespace Il2CppSDK
             }
 
             currentFile.WriteLine();
+
+            // check if class itself has any generic parameters
+            // then we make a template at the beginning of it
+            List<uint> templatesIds = new List<uint>(); // using this later so we can identify which template to use for fields, method params and method rvals
+            if(clazz.GenericParameters.Count > 0)
+            {
+                currentFile.Write("template <");
+                List<string> typenames = new List<string>();
+                foreach (GenericParam generic in clazz.GenericParameters)
+                {
+                    typenames.Add("typename " + generic.FullName);
+                    templatesIds.Add(generic.Rid);
+                }
+
+                currentFile.Write(string.Join(", ", typenames));
+                currentFile.WriteLine(">");
+            }
 
             currentFile.Write("class " + validClassname);
             // inherit with : if needed
