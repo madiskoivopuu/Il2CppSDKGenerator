@@ -400,9 +400,6 @@ namespace Il2CppSDK
 
         static void ParseClass(TypeDef clazz)
         {
-            if (clazz.Name.Contains("AllQuestsWindow"))
-                Console.WriteLine("aaaa");
-
             var module = clazz.Module;
             var namespaze = GetFormattedFilenameForType(clazz.Namespace);
             var validClassname = GetFormattedFilenameForType(clazz.Name);
@@ -596,9 +593,6 @@ namespace Il2CppSDK
             {
                 TypeDef type = currentModule.ResolveTypeDef(typeId);
                 if (type == null) continue;
-
-                if (type.Name.Contains("UIWindow"))
-                    Console.WriteLine("aa");
 
                 string namespace_ = GetFormattedFilenameForType(type.Namespace);
                 if (namespace_.Length > 0)
