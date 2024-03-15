@@ -1,0 +1,21 @@
+#pragma once
+#include <Il2Cpp/Il2Cpp.h>
+
+class GuildBossKilledConditionComponent
+{
+public: 
+
+	static Il2CppClass *StaticClass() {
+		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "GuildBossKilledConditionComponent"));
+	}
+
+	template <typename R = Il2CppString*> R& Name() {
+		return *(R*)((uintptr_t)this + 0x10);
+	}
+
+	template <typename R = void> R CopyTo(Il2CppObject* target) {
+		return ((R (*)(GuildBossKilledConditionComponent*, Il2CppObject*))(Il2CppBase() + 0x12E642C))(this, target);
+	}
+
+};
+

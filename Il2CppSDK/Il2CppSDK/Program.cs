@@ -494,11 +494,14 @@ namespace Il2CppSDK
             currentFile.WriteLine("{");
             currentFile.WriteLine();
 
-            foreach(FieldDef field in clazz.Fields)
+            for(int i = 1; i < clazz.Fields.Count; i++)
             {
-                if (field.Name == "value__") continue;
+                FieldDef field = clazz.Fields[i];
+                currentFile.Write(string.Format("\t{0} = {1}", GetFormattedFilenameForType(field.Name), Convert.ToInt32(field.Constant.Value)));
+                if(i != clazz.Fields.Count-1)
+                    currentFile.Write(",");
 
-                currentFile.WriteLine(string.Format("\t{0} = {1}", GetFormattedFilenameForType(field.Name), Convert.ToInt32(field.Constant.Value)));
+                currentFile.WriteLine();
             }
 
             currentFile.WriteLine();
