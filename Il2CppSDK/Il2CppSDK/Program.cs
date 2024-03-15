@@ -16,6 +16,8 @@ namespace Il2CppSDK
     class Program
     {
         static Dictionary<string, int> m_DuplicateMethodTable = new Dictionary<string, int>();
+        static HashSet<string> typeNamesInModule = new HashSet<string>();
+        static Dictionary<string, TypeDef> typeWithANamespace = new Dictionary<string, TypeDef>();
         static string OUTPUT_DIR = "SDK";
         static ModuleDefMD currentModule = null;
         static StreamWriter currentFile = null;
@@ -28,8 +30,11 @@ namespace Il2CppSDK
             }
 
             string result = "uintptr_t";
+            string namespace_ = GetFormattedFilenameForType(type.Namespace);
+            if (namespace_.Length > 0)
+                namespace_ += "::";
 
-            switch(type.GetElementType())
+            switch (type.GetElementType())
             {
                 case ElementType.Void:
                     result = "void";
@@ -110,19 +115,16 @@ namespace Il2CppSDK
 
                 case ElementType.ValueType:
                     if (type.TryGetTypeDef() != null)
-                        if(type.TryGetTypeDef().IsEnum)
-                            result = "int32_t";
-                        else
-                            result = GetFormattedFilenameForType(type.TryGetTypeDef().Name) + "*";
+                        result = namespace_ + GetFormattedFilenameForType(type.TryGetTypeDef().Name) + "*";
 
                     break;
                 case ElementType.Class:
                     if(type.TryGetTypeDef() != null)
-                        result = GetFormattedFilenameForType(type.TryGetTypeDef().Name) + "*";
+                        result = namespace_ + GetFormattedFilenameForType(type.TryGetTypeDef().Name) + "*";
                     break;
 
                 case ElementType.Var:
-                    result = type.FullName;
+                    result = namespace_ + type.FullName;
                     break;
             }
 
@@ -191,6 +193,40 @@ namespace Il2CppSDK
         {
             Regex rgx = new Regex("[^a-zA-Z0-9]");
             return rgx.Replace(className, "");
+        }
+
+        static List<string> GetReferencedTypesByInheritanceForClass(TypeDef clazz)
+        {
+            List<string> types = new List<string>();
+            bool hasParent = clazz.BaseType != null && clazz.BaseType.DefinitionAssembly.Name == clazz.DefinitionAssembly.Name;
+            if (!hasParent)
+                return types;
+
+            string baseTypeCppName = GetParentClassTypeAsString(null, clazz.BaseType);
+
+            // retarded way to do it but we will get all referenced types in baseTypeCppName by splitting the template <...> part from the class name, then work on whatever is inside <...>
+            Queue<string> workingQueue = new Queue<string>();
+            workingQueue.Enqueue(baseTypeCppName);
+            while(workingQueue.Count > 0)
+            {
+                string type = workingQueue.Dequeue();
+                string[] typeParts = type.Split(new[] { '<' }, 2); // this should always result in a list of at least length 1
+
+                string classType = typeParts[0];
+                if(typeNamesInModule.Contains(classType))
+                    types.Add(classType);
+
+                if(typeParts.Length == 2)
+                {
+                    string templateBody = typeParts[1].Remove(typeParts[1].Length - 1);
+                    string[] nestedTypes = templateBody.Split(new[] {", "}, StringSplitOptions.None);
+                    foreach(string nestedType in nestedTypes)
+                        workingQueue.Enqueue(nestedType);
+                }
+
+            }
+
+            return types;
         }
 
         static void ParseFields(TypeDef clazz)
@@ -359,25 +395,23 @@ namespace Il2CppSDK
             //    return;
 
             var module = clazz.Module;
-            var namespaze = FormatToValidClassname(clazz.Namespace);
+            var namespaze = GetFormattedFilenameForType(clazz.Namespace);
             var validClassname = GetFormattedFilenameForType(clazz.Name);
             
             currentFile.WriteLine("#pragma once");
             currentFile.WriteLine("#include <Il2Cpp/Il2Cpp.h>");
 
             bool useNamespace = namespaze.Length > 0;
-
-            // if we inherit from a class, include its header file
-            // but currently only if we inherit from the same assembly
             bool hasBaseClass = clazz.BaseType != null && clazz.BaseType.DefinitionAssembly.Name == clazz.DefinitionAssembly.Name;
-            if (hasBaseClass)
+
+            // include necessary classes/enums
+            List<string> includedTypes = GetReferencedTypesByInheritanceForClass(clazz);
+            foreach(string includedType in includedTypes)
             {
                 string tabInAndOutPrefix = clazz.Namespace.Replace("<", "").Replace(">", "").Length > 0 ? "../" : "";
-                string baseTypeNamespace = clazz.BaseType.Namespace.Replace("<", "").Replace(">", "");
-                tabInAndOutPrefix += baseTypeNamespace.Length > 0 ? baseTypeNamespace + "/" : "";
-
-                string baseClassFilename = GetFormattedFilenameForType(clazz.BaseType.Name);
-                currentFile.WriteLine(string.Format("#include \"{0}{1}.h\" ", tabInAndOutPrefix, baseClassFilename));
+                if(typeWithANamespace.ContainsKey(includedType))
+                    tabInAndOutPrefix += GetFormattedFilenameForType(typeWithANamespace[includedType].Name) + "/";
+                currentFile.WriteLine(string.Format("#include \"{0}{1}.h\" ", tabInAndOutPrefix, includedType));
             }
 
             if (useNamespace)
@@ -389,7 +423,6 @@ namespace Il2CppSDK
 
             // check if class itself has any generic parameters
             // then we make a template at the beginning of it
-            List<uint> templatesIds = new List<uint>(); // using this later so we can identify which template to use for fields, method params and method rvals
             if(clazz.GenericParameters.Count > 0)
             {
                 currentFile.Write("template <");
@@ -397,7 +430,6 @@ namespace Il2CppSDK
                 foreach (GenericParam generic in clazz.GenericParameters)
                 {
                     typenames.Add("typename " + generic.FullName);
-                    templatesIds.Add(generic.Rid);
                 }
 
                 currentFile.Write(string.Join(", ", typenames));
@@ -440,6 +472,46 @@ namespace Il2CppSDK
             }
 
         }
+
+        static void ParseEnum(TypeDef clazz)
+        {
+            var namespaze = GetFormattedFilenameForType(clazz.Namespace);
+            var validClassname = GetFormattedFilenameForType(clazz.Name);
+
+            currentFile.WriteLine("#pragma once");
+
+            bool useNamespace = namespaze.Length > 0;
+            if (useNamespace)
+            {
+                currentFile.WriteLine("namespace " + namespaze + " {");
+            }
+
+            currentFile.WriteLine();
+
+            currentFile.Write("class " + validClassname);
+
+            currentFile.WriteLine();
+            currentFile.WriteLine("{");
+            currentFile.WriteLine();
+
+            foreach(FieldDef field in clazz.Fields)
+            {
+                if (field.Name == "value__") continue;
+
+                currentFile.WriteLine(string.Format("\t{0} = {1}", GetFormattedFilenameForType(field.Name), Convert.ToInt32(field.Constant.Value)));
+            }
+
+            currentFile.WriteLine();
+            currentFile.WriteLine("};");
+            currentFile.WriteLine();
+
+            if (useNamespace)
+            {
+                currentFile.WriteLine("}");
+            }
+
+        }
+
         static void ParseClasses()
         {
             if (currentModule == null)
@@ -453,7 +525,7 @@ namespace Il2CppSDK
                     continue;
 
                 var module = type.Module;
-                var namespaze = type.Namespace.Replace("<", "").Replace(">", "");
+                var namespaze = GetFormattedFilenameForType(type.Namespace);
                 var className = (string)type.Name.Replace("<", "").Replace(">", "");
                 var classFilename = FormatToValidClassname(string.Concat(className.Split(Path.GetInvalidFileNameChars())));
                 var validClassname = FormatToValidClassname(className);
@@ -487,7 +559,10 @@ namespace Il2CppSDK
 
                 currentFile = new StreamWriter(outputPath);
 
-                ParseClass(type);
+                if (!type.IsEnum)
+                    ParseClass(type);
+                else
+                    ParseEnum(type);
                 currentFile.Close();
             }
         }
@@ -502,6 +577,15 @@ namespace Il2CppSDK
 
             if (!Directory.Exists(moduleOutput))
                 Directory.CreateDirectory(moduleOutput);
+
+            foreach (TypeDef type in currentModule.Types)
+            {
+                typeNamesInModule.Add(GetFormattedFilenameForType(type.Name));
+
+                string namespace_ = GetFormattedFilenameForType(type.Namespace);
+                if (namespace_.Length > 0)
+                    typeWithANamespace.Add(namespace_ + "::" + GetFormattedFilenameForType(type.Name), type);
+            }
 
             ParseClasses();
         }
