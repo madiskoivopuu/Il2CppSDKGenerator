@@ -9,21 +9,18 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "PlayerState"));
 	}
 
-	template <typename R = PlayerState*> static R& Default() {
-		return *(R*)((uintptr_t)StaticClass()->static_fields + 0x0);
-	}
-	template <typename R = float> R& Hunger() {
+	template <typename R = int64_t> R& PlayerId() {
 		return *(R*)((uintptr_t)this + 0x0);
 	}
-	template <typename R = float> R& Thirst() {
-		return *(R*)((uintptr_t)this + 0x4);
-	}
-	template <typename R = Il2CppString*> R& EndId() {
+	template <typename R = LobbyPlayerState*> R& State() {
 		return *(R*)((uintptr_t)this + 0x8);
 	}
 
-	template <typename R = PlayerState*> static R GetDefaultCopy() {
-		return ((R (*)(void *))(Il2CppBase() + 0x156F200))(0);
+	template <typename R = void> R Write(uintptr_t writer) {
+		return ((R (*)(PlayerState*, uintptr_t))(Il2CppBase() + 0x115CB00))(this, writer);
+	}
+	template <typename R = Il2CppString*> R Read(uintptr_t reader) {
+		return ((R (*)(PlayerState*, uintptr_t))(Il2CppBase() + 0x115CB44))(this, reader);
 	}
 
 };

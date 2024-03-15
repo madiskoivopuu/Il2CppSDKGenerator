@@ -174,7 +174,7 @@ namespace Il2CppSDK
             }
             else
             {
-                result = GetFormattedFilenameForType(type.ToGenericInstSig().TypeName);
+                result = GetFormattedFilenameForType(type.ToGenericInstSig().TypeName) + "<";
             }
             List<string> args = new List<string>();
             foreach (var arg in type.ToGenericInstSig().GenericArguments)
@@ -391,7 +391,7 @@ namespace Il2CppSDK
 
         static void ParseClass(TypeDef clazz)
         {
-            if (clazz.Name.Contains("ActionContext"))
+            if (clazz.Name.Contains("BlueprintContext"))
                 Console.WriteLine("aaaa");
             //else
             //    return;
