@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "MultiplierByConditionComponent"));
 	}
 
-	template <typename R = Il2CppArray<Item*>*> R& Items() {
+	template <typename R = Il2CppArray<Item>*> R& Items() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
 

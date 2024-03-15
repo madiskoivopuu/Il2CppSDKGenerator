@@ -15,8 +15,8 @@ public:
 	template <typename R = Il2CppArray<Il2CppString*>*> R& Names() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
-	 Nullable1float>*& Duration() {
-		return *(Nullable1float>**)((uintptr_t)this + 0x20);
+	 Nullable1<float>*& Duration() {
+		return *(Nullable1<float>**)((uintptr_t)this + 0x20);
 	}
 	template <typename R = bool> R& SourceDuration() {
 		return *(R*)((uintptr_t)this + 0x28);

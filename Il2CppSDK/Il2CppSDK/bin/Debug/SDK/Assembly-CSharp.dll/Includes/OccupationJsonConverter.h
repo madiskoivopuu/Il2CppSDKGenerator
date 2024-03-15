@@ -3,7 +3,7 @@
 #include "TypeTypeJsonConverter1.h" 
 #include "OccupationType.h" 
 
-class OccupationJsonConverter : public TypeTypeJsonConverter1<OccupationType*>
+class OccupationJsonConverter : public TypeTypeJsonConverter1<OccupationType>
 {
 public: 
 

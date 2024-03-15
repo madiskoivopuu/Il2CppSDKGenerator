@@ -18,7 +18,7 @@ public:
 	template <typename R = int32_t> R& ResetCount() {
 		return *(R*)((uintptr_t)this + 0x20);
 	}
-	template <typename R = CurrencyType*> R& CurrencyType() {
+	template <typename R = CurrencyType> R& CurrencyType() {
 		return *(R*)((uintptr_t)this + 0x24);
 	}
 	template <typename R = int32_t> R& Price() {

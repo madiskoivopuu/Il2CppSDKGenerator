@@ -13,7 +13,7 @@ public:
 	template <typename R = void> R CopyTo(Il2CppObject* target) {
 		return ((R (*)(BaseBoolModifierComponent*, Il2CppObject*))(Il2CppBase() + 0xFBC7F8))(this, target);
 	}
-	template <typename R = ModifierGroup*> R GetGroup() {
+	template <typename R = ModifierGroup> R GetGroup() {
 		return ((R (*)(BaseBoolModifierComponent*))(Il2CppBase() + 0xFBC7FC))(this);
 	}
 	template <typename R = float> R GetValue() {

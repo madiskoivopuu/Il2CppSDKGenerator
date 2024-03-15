@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "PortalQuestComponent"));
 	}
 
-	template <typename R = PortalQuestType*> R& Type() {
+	template <typename R = PortalQuestType> R& Type() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
 

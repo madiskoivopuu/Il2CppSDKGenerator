@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "Price"));
 	}
 
-	template <typename R = PriceType*> R& Type() {
+	template <typename R = PriceType> R& Type() {
 		return *(R*)((uintptr_t)this + 0x0);
 	}
 	template <typename R = Il2CppString*> R& Name() {
@@ -25,8 +25,8 @@ public:
 	template <typename R = Il2CppString*> R Read(uintptr_t reader) {
 		return ((R (*)(Price*, uintptr_t))(Il2CppBase() + 0x10BBC50))(this, reader);
 	}
-	template <typename R = bool> R Equals(Price* other) {
-		return ((R (*)(Price*, Price*))(Il2CppBase() + 0x10BBD24))(this, other);
+	template <typename R = bool> R Equals(Price other) {
+		return ((R (*)(Price*, Price))(Il2CppBase() + 0x10BBD24))(this, other);
 	}
 
 };

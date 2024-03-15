@@ -12,14 +12,14 @@ public:
 	template <typename R = bool> R& Has() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
-	 Nullable1bool>*& BaseNotZero() {
-		return *(Nullable1bool>**)((uintptr_t)this + 0x11);
+	 Nullable1<bool>*& BaseNotZero() {
+		return *(Nullable1<bool>**)((uintptr_t)this + 0x11);
 	}
-	 Nullable1float>*& Min() {
-		return *(Nullable1float>**)((uintptr_t)this + 0x14);
+	 Nullable1<float>*& Min() {
+		return *(Nullable1<float>**)((uintptr_t)this + 0x14);
 	}
-	 Nullable1float>*& Max() {
-		return *(Nullable1float>**)((uintptr_t)this + 0x1C);
+	 Nullable1<float>*& Max() {
+		return *(Nullable1<float>**)((uintptr_t)this + 0x1C);
 	}
 
 	template <typename R = void> R CopyTo(Il2CppObject* target) {

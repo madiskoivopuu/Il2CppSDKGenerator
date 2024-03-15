@@ -12,7 +12,7 @@ public:
 	template <typename R = int32_t> R& TargetId() {
 		return *(R*)((uintptr_t)this + 0x0);
 	}
-	template <typename R = StoreCategory*> R& Category() {
+	template <typename R = StoreCategory> R& Category() {
 		return *(R*)((uintptr_t)this + 0x4);
 	}
 

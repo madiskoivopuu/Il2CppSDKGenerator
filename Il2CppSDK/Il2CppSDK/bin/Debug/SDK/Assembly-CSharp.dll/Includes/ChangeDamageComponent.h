@@ -9,13 +9,13 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "ChangeDamageComponent"));
 	}
 
-	 Nullable1float>*& Coef() {
-		return *(Nullable1float>**)((uintptr_t)this + 0x10);
+	 Nullable1<float>*& Coef() {
+		return *(Nullable1<float>**)((uintptr_t)this + 0x10);
 	}
-	 Nullable1float>*& LifeSteal() {
-		return *(Nullable1float>**)((uintptr_t)this + 0x18);
+	 Nullable1<float>*& LifeSteal() {
+		return *(Nullable1<float>**)((uintptr_t)this + 0x18);
 	}
-	template <typename R = DamageType*> R& AddDamageType() {
+	template <typename R = DamageType> R& AddDamageType() {
 		return *(R*)((uintptr_t)this + 0x20);
 	}
 

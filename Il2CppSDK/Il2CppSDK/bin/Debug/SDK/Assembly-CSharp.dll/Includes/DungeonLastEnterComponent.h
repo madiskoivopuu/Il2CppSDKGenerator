@@ -9,8 +9,8 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "DungeonLastEnterComponent"));
 	}
 
-	 Il2CppDictionary<Il2CppString*, ValueTuple2int64_t, int64_t>*>*& Values() {
-		return *(Il2CppDictionary<Il2CppString*, ValueTuple2int64_t, int64_t>*>**)((uintptr_t)this + 0x10);
+	 Il2CppDictionary<Il2CppString*, ValueTuple2<int64_t, int64_t>*>*& Values() {
+		return *(Il2CppDictionary<Il2CppString*, ValueTuple2<int64_t, int64_t>*>**)((uintptr_t)this + 0x10);
 	}
 
 	template <typename R = void> R CopyTo(Il2CppObject* target) {

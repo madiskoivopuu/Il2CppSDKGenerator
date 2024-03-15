@@ -18,7 +18,7 @@ public:
 	template <typename R = Il2CppString*> R& IconName() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
-	template <typename R = Rarity*> R& Rarity() {
+	template <typename R = Rarity> R& Rarity() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
 

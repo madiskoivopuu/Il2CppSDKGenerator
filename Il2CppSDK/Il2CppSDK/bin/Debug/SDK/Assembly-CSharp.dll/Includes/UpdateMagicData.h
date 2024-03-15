@@ -18,11 +18,11 @@ public:
 	template <typename R = int32_t> R& UseCount() {
 		return *(R*)((uintptr_t)this + 0x8);
 	}
-	 Nullable1int64_t>*& StartTime() {
-		return *(Nullable1int64_t>**)((uintptr_t)this + 0x10);
+	 Nullable1<int64_t>*& StartTime() {
+		return *(Nullable1<int64_t>**)((uintptr_t)this + 0x10);
 	}
-	 Nullable1float>*& Duration() {
-		return *(Nullable1float>**)((uintptr_t)this + 0x20);
+	 Nullable1<float>*& Duration() {
+		return *(Nullable1<float>**)((uintptr_t)this + 0x20);
 	}
 
 	template <typename R = void> R Write(uintptr_t writer) {

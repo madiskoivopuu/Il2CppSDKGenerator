@@ -3,7 +3,7 @@
 #include "TypeTypeJsonConverter1.h" 
 #include "GuildRole.h" 
 
-class GuildRoleJsonConverter : public TypeTypeJsonConverter1<GuildRole*>
+class GuildRoleJsonConverter : public TypeTypeJsonConverter1<GuildRole>
 {
 public: 
 

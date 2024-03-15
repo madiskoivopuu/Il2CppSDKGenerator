@@ -24,7 +24,7 @@ public:
 	template <typename R = int32_t> R& Price() {
 		return *(R*)((uintptr_t)this + 0x30);
 	}
-	template <typename R = ButtonType*> R& Type() {
+	template <typename R = ButtonType> R& Type() {
 		return *(R*)((uintptr_t)this + 0x34);
 	}
 	template <typename R = Il2CppString*> R& ActiveCondition() {

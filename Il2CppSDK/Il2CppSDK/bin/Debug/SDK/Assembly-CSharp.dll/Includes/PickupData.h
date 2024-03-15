@@ -12,7 +12,7 @@ public:
 	template <typename R = int32_t> R& TargetId() {
 		return *(R*)((uintptr_t)this + 0x0);
 	}
-	template <typename R = Il2CppArray<PickupResourceData*>*> R& Resources() {
+	template <typename R = Il2CppArray<PickupResourceData>*> R& Resources() {
 		return *(R*)((uintptr_t)this + 0x8);
 	}
 

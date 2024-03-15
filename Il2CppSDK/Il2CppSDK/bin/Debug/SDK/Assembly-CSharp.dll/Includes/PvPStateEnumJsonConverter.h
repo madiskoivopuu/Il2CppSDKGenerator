@@ -3,7 +3,7 @@
 #include "TypeEnumJsonConverter1.h" 
 #include "PvPState.h" 
 
-class PvPStateEnumJsonConverter : public TypeEnumJsonConverter1<PvPState*>
+class PvPStateEnumJsonConverter : public TypeEnumJsonConverter1<PvPState>
 {
 public: 
 

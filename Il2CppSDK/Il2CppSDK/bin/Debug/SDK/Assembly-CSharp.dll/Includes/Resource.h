@@ -15,10 +15,10 @@ public:
 	template <typename R = int32_t> R& Count() {
 		return *(R*)((uintptr_t)this + 0x8);
 	}
-	 Nullable1float>*& Durability() {
-		return *(Nullable1float>**)((uintptr_t)this + 0xC);
+	 Nullable1<float>*& Durability() {
+		return *(Nullable1<float>**)((uintptr_t)this + 0xC);
 	}
-	template <typename R = Resource*> static R& Empty() {
+	template <typename R = Resource> static R& Empty() {
 		return *(R*)((uintptr_t)StaticClass()->static_fields + 0x0);
 	}
 
@@ -28,8 +28,8 @@ public:
 	template <typename R = Il2CppString*> R Read(uintptr_t reader) {
 		return ((R (*)(Resource*, uintptr_t))(Il2CppBase() + 0x10C46CC))(this, reader);
 	}
-	template <typename R = bool> R Equals(Resource* other) {
-		return ((R (*)(Resource*, Resource*))(Il2CppBase() + 0x10C4794))(this, other);
+	template <typename R = bool> R Equals(Resource other) {
+		return ((R (*)(Resource*, Resource))(Il2CppBase() + 0x10C4794))(this, other);
 	}
 
 };

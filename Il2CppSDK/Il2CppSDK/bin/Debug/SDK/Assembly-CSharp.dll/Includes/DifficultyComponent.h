@@ -3,7 +3,7 @@
 #include "EnumComponent1.h" 
 #include "Difficulty.h" 
 
-class DifficultyComponent : public EnumComponent1<Difficulty*>
+class DifficultyComponent : public EnumComponent1<Difficulty>
 {
 public: 
 

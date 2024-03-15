@@ -9,8 +9,8 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "DistributeDamageComponent"));
 	}
 
-	 Nullable1float>*& Coef() {
-		return *(Nullable1float>**)((uintptr_t)this + 0x10);
+	 Nullable1<float>*& Coef() {
+		return *(Nullable1<float>**)((uintptr_t)this + 0x10);
 	}
 	template <typename R = TargetsSelector*> R& Selector() {
 		return *(R*)((uintptr_t)this + 0x18);

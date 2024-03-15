@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "TriggerPlayerClassProgressComponent"));
 	}
 
-	template <typename R = PlayerClassProgress*> R& Type() {
+	template <typename R = PlayerClassProgress> R& Type() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
 

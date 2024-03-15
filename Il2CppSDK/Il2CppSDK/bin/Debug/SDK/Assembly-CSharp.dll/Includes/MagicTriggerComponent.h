@@ -15,14 +15,14 @@ public:
 	template <typename R = Il2CppArray<Il2CppString*>*> R& Names() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
-	template <typename R = MagicTriggerType*> R& Types() {
+	template <typename R = MagicTriggerType> R& Types() {
 		return *(R*)((uintptr_t)this + 0x20);
 	}
 
 	template <typename R = void> R CopyTo(Il2CppObject* target) {
 		return ((R (*)(MagicTriggerComponent*, Il2CppObject*))(Il2CppBase() + 0x1A2F870))(this, target);
 	}
-	template <typename R = ModifierGroup*> R GetGroup() {
+	template <typename R = ModifierGroup> R GetGroup() {
 		return ((R (*)(MagicTriggerComponent*))(Il2CppBase() + 0x1A2F924))(this);
 	}
 	template <typename R = float> R GetValue() {

@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "TrackingSettingComponent"));
 	}
 
-	template <typename R = TrackingSlot*> R& Slot() {
+	template <typename R = TrackingSlot> R& Slot() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
 	template <typename R = bool> R& ZeroOne() {

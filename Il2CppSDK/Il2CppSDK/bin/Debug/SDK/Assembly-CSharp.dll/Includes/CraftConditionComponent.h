@@ -9,8 +9,8 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "CraftConditionComponent"));
 	}
 
-	 Nullable1bool>*& OutputSlotsEmpty() {
-		return *(Nullable1bool>**)((uintptr_t)this + 0x10);
+	 Nullable1<bool>*& OutputSlotsEmpty() {
+		return *(Nullable1<bool>**)((uintptr_t)this + 0x10);
 	}
 
 	template <typename R = void> R CopyTo(Il2CppObject* target) {

@@ -52,7 +52,7 @@ public:
 		return *(R*)((uintptr_t)StaticClass()->static_fields + 0x68);
 	}
 
-	template <typename R = TestGroup*> R GetTestGroup() {
+	template <typename R = TestGroup> R GetTestGroup() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1D9E780))(this);
 	}
 	template <typename R = Il2CppString*> R ToString() {
@@ -235,11 +235,11 @@ public:
 	template <typename R = bool> R get_hasBPRewards() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DA0A0C))(this);
 	}
-	template <typename R = void> R AddBPRewards(Il2CppDictionary<CurrencyType*, Reward*>* newDictionary) {
-		return ((R (*)(AccountEntity*, Il2CppDictionary<CurrencyType*, Reward*>*))(Il2CppBase() + 0x1DA0A18))(this, newDictionary);
+	template <typename R = void> R AddBPRewards(Il2CppDictionary<CurrencyType, Reward>* newDictionary) {
+		return ((R (*)(AccountEntity*, Il2CppDictionary<CurrencyType, Reward>*))(Il2CppBase() + 0x1DA0A18))(this, newDictionary);
 	}
-	template <typename R = void> R ReplaceBPRewards(Il2CppDictionary<CurrencyType*, Reward*>* newDictionary) {
-		return ((R (*)(AccountEntity*, Il2CppDictionary<CurrencyType*, Reward*>*))(Il2CppBase() + 0x1DA0B2C))(this, newDictionary);
+	template <typename R = void> R ReplaceBPRewards(Il2CppDictionary<CurrencyType, Reward>* newDictionary) {
+		return ((R (*)(AccountEntity*, Il2CppDictionary<CurrencyType, Reward>*))(Il2CppBase() + 0x1DA0B2C))(this, newDictionary);
 	}
 	template <typename R = void> R RemoveBPRewards() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DA0C40))(this);
@@ -271,11 +271,11 @@ public:
 	template <typename R = bool> R get_hasCartCache() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DA10C0))(this);
 	}
-	template <typename R = void> R AddCartCache(int32_t newLevel, Il2CppArray<Resource*>* newResources) {
-		return ((R (*)(AccountEntity*, int32_t, Il2CppArray<Resource*>*))(Il2CppBase() + 0x1DA10CC))(this, newLevel, newResources);
+	template <typename R = void> R AddCartCache(int32_t newLevel, Il2CppArray<Resource>* newResources) {
+		return ((R (*)(AccountEntity*, int32_t, Il2CppArray<Resource>*))(Il2CppBase() + 0x1DA10CC))(this, newLevel, newResources);
 	}
-	template <typename R = void> R ReplaceCartCache(int32_t newLevel, Il2CppArray<Resource*>* newResources) {
-		return ((R (*)(AccountEntity*, int32_t, Il2CppArray<Resource*>*))(Il2CppBase() + 0x1DA11E8))(this, newLevel, newResources);
+	template <typename R = void> R ReplaceCartCache(int32_t newLevel, Il2CppArray<Resource>* newResources) {
+		return ((R (*)(AccountEntity*, int32_t, Il2CppArray<Resource>*))(Il2CppBase() + 0x1DA11E8))(this, newLevel, newResources);
 	}
 	template <typename R = void> R RemoveCartCache() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DA1304))(this);
@@ -361,11 +361,11 @@ public:
 	template <typename R = bool> R get_hasClassRunes() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DA21C0))(this);
 	}
-	template <typename R = void> R AddClassRunes(Il2CppDictionary<PlayerClassType*, Il2CppArray<Il2CppString*>*>* newAllClassRunes) {
-		return ((R (*)(AccountEntity*, Il2CppDictionary<PlayerClassType*, Il2CppArray<Il2CppString*>*>*))(Il2CppBase() + 0x1DA21CC))(this, newAllClassRunes);
+	template <typename R = void> R AddClassRunes(Il2CppDictionary<PlayerClassType, Il2CppArray<Il2CppString*>*>* newAllClassRunes) {
+		return ((R (*)(AccountEntity*, Il2CppDictionary<PlayerClassType, Il2CppArray<Il2CppString*>*>*))(Il2CppBase() + 0x1DA21CC))(this, newAllClassRunes);
 	}
-	template <typename R = void> R ReplaceClassRunes(Il2CppDictionary<PlayerClassType*, Il2CppArray<Il2CppString*>*>* newAllClassRunes) {
-		return ((R (*)(AccountEntity*, Il2CppDictionary<PlayerClassType*, Il2CppArray<Il2CppString*>*>*))(Il2CppBase() + 0x1DA22E0))(this, newAllClassRunes);
+	template <typename R = void> R ReplaceClassRunes(Il2CppDictionary<PlayerClassType, Il2CppArray<Il2CppString*>*>* newAllClassRunes) {
+		return ((R (*)(AccountEntity*, Il2CppDictionary<PlayerClassType, Il2CppArray<Il2CppString*>*>*))(Il2CppBase() + 0x1DA22E0))(this, newAllClassRunes);
 	}
 	template <typename R = void> R RemoveClassRunes() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DA23F4))(this);
@@ -376,11 +376,11 @@ public:
 	template <typename R = bool> R get_hasClassRunesEndTime() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DA2488))(this);
 	}
-	template <typename R = void> R AddClassRunesEndTime(Il2CppDictionary<RuneSlotKey*, int64_t>* newValues) {
-		return ((R (*)(AccountEntity*, Il2CppDictionary<RuneSlotKey*, int64_t>*))(Il2CppBase() + 0x1DA2494))(this, newValues);
+	template <typename R = void> R AddClassRunesEndTime(Il2CppDictionary<RuneSlotKey, int64_t>* newValues) {
+		return ((R (*)(AccountEntity*, Il2CppDictionary<RuneSlotKey, int64_t>*))(Il2CppBase() + 0x1DA2494))(this, newValues);
 	}
-	template <typename R = void> R ReplaceClassRunesEndTime(Il2CppDictionary<RuneSlotKey*, int64_t>* newValues) {
-		return ((R (*)(AccountEntity*, Il2CppDictionary<RuneSlotKey*, int64_t>*))(Il2CppBase() + 0x1DA25A8))(this, newValues);
+	template <typename R = void> R ReplaceClassRunesEndTime(Il2CppDictionary<RuneSlotKey, int64_t>* newValues) {
+		return ((R (*)(AccountEntity*, Il2CppDictionary<RuneSlotKey, int64_t>*))(Il2CppBase() + 0x1DA25A8))(this, newValues);
 	}
 	template <typename R = void> R RemoveClassRunesEndTime() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DA26BC))(this);
@@ -538,11 +538,11 @@ public:
 	template <typename R = bool> R get_hasDistrictState() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DA4228))(this);
 	}
-	template <typename R = void> R AddDistrictState(DistrictState* newType) {
-		return ((R (*)(AccountEntity*, DistrictState*))(Il2CppBase() + 0x1DA4234))(this, newType);
+	template <typename R = void> R AddDistrictState(DistrictState newType) {
+		return ((R (*)(AccountEntity*, DistrictState))(Il2CppBase() + 0x1DA4234))(this, newType);
 	}
-	template <typename R = void> R ReplaceDistrictState(DistrictState* newType) {
-		return ((R (*)(AccountEntity*, DistrictState*))(Il2CppBase() + 0x1DA4338))(this, newType);
+	template <typename R = void> R ReplaceDistrictState(DistrictState newType) {
+		return ((R (*)(AccountEntity*, DistrictState))(Il2CppBase() + 0x1DA4338))(this, newType);
 	}
 	template <typename R = void> R RemoveDistrictState() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DA443C))(this);
@@ -553,11 +553,11 @@ public:
 	template <typename R = bool> R get_hasDungeonLastEnter() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DA44D0))(this);
 	}
-	template <typename R = void> R AddDungeonLastEnter(Il2CppDictionary<Il2CppString*, ValueTuple2int64_t, int64_t>*>* newValues) {
-		return ((R (*)(AccountEntity*, Il2CppDictionary<Il2CppString*, ValueTuple2int64_t, int64_t>*>*))(Il2CppBase() + 0x1DA44DC))(this, newValues);
+	template <typename R = void> R AddDungeonLastEnter(Il2CppDictionary<Il2CppString*, ValueTuple2<int64_t, int64_t>*>* newValues) {
+		return ((R (*)(AccountEntity*, Il2CppDictionary<Il2CppString*, ValueTuple2<int64_t, int64_t>*>*))(Il2CppBase() + 0x1DA44DC))(this, newValues);
 	}
-	template <typename R = void> R ReplaceDungeonLastEnter(Il2CppDictionary<Il2CppString*, ValueTuple2int64_t, int64_t>*>* newValues) {
-		return ((R (*)(AccountEntity*, Il2CppDictionary<Il2CppString*, ValueTuple2int64_t, int64_t>*>*))(Il2CppBase() + 0x1DA45F0))(this, newValues);
+	template <typename R = void> R ReplaceDungeonLastEnter(Il2CppDictionary<Il2CppString*, ValueTuple2<int64_t, int64_t>*>* newValues) {
+		return ((R (*)(AccountEntity*, Il2CppDictionary<Il2CppString*, ValueTuple2<int64_t, int64_t>*>*))(Il2CppBase() + 0x1DA45F0))(this, newValues);
 	}
 	template <typename R = void> R RemoveDungeonLastEnter() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DA4704))(this);
@@ -775,11 +775,11 @@ public:
 	template <typename R = bool> R get_hasGender() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DA6CD0))(this);
 	}
-	template <typename R = void> R AddGender(Gender* newType) {
-		return ((R (*)(AccountEntity*, Gender*))(Il2CppBase() + 0x1DA6CDC))(this, newType);
+	template <typename R = void> R AddGender(Gender newType) {
+		return ((R (*)(AccountEntity*, Gender))(Il2CppBase() + 0x1DA6CDC))(this, newType);
 	}
-	template <typename R = void> R ReplaceGender(Gender* newType) {
-		return ((R (*)(AccountEntity*, Gender*))(Il2CppBase() + 0x1DA6DE0))(this, newType);
+	template <typename R = void> R ReplaceGender(Gender newType) {
+		return ((R (*)(AccountEntity*, Gender))(Il2CppBase() + 0x1DA6DE0))(this, newType);
 	}
 	template <typename R = void> R RemoveGender() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DA6EE4))(this);
@@ -865,11 +865,11 @@ public:
 	template <typename R = bool> R get_hasGuildRole() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DA7CC0))(this);
 	}
-	template <typename R = void> R AddGuildRole(GuildRole* newType) {
-		return ((R (*)(AccountEntity*, GuildRole*))(Il2CppBase() + 0x1DA7CCC))(this, newType);
+	template <typename R = void> R AddGuildRole(GuildRole newType) {
+		return ((R (*)(AccountEntity*, GuildRole))(Il2CppBase() + 0x1DA7CCC))(this, newType);
 	}
-	template <typename R = void> R ReplaceGuildRole(GuildRole* newType) {
-		return ((R (*)(AccountEntity*, GuildRole*))(Il2CppBase() + 0x1DA7DD0))(this, newType);
+	template <typename R = void> R ReplaceGuildRole(GuildRole newType) {
+		return ((R (*)(AccountEntity*, GuildRole))(Il2CppBase() + 0x1DA7DD0))(this, newType);
 	}
 	template <typename R = void> R RemoveGuildRole() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DA7ED4))(this);
@@ -958,11 +958,11 @@ public:
 	template <typename R = bool> R get_hasInventoryPower() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DA8D94))(this);
 	}
-	template <typename R = void> R AddInventoryPower(InventoryPower* newValue) {
-		return ((R (*)(AccountEntity*, InventoryPower*))(Il2CppBase() + 0x1DA8DA0))(this, newValue);
+	template <typename R = void> R AddInventoryPower(InventoryPower newValue) {
+		return ((R (*)(AccountEntity*, InventoryPower))(Il2CppBase() + 0x1DA8DA0))(this, newValue);
 	}
-	template <typename R = void> R ReplaceInventoryPower(InventoryPower* newValue) {
-		return ((R (*)(AccountEntity*, InventoryPower*))(Il2CppBase() + 0x1DA8EBC))(this, newValue);
+	template <typename R = void> R ReplaceInventoryPower(InventoryPower newValue) {
+		return ((R (*)(AccountEntity*, InventoryPower))(Il2CppBase() + 0x1DA8EBC))(this, newValue);
 	}
 	template <typename R = void> R RemoveInventoryPower() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DA8FD8))(this);
@@ -973,11 +973,11 @@ public:
 	template <typename R = bool> R get_hasItemCooldowns() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DA906C))(this);
 	}
-	template <typename R = void> R AddItemCooldowns(Il2CppList<ItemCooldown*>* newList) {
-		return ((R (*)(AccountEntity*, Il2CppList<ItemCooldown*>*))(Il2CppBase() + 0x1DA9078))(this, newList);
+	template <typename R = void> R AddItemCooldowns(Il2CppList<ItemCooldown>* newList) {
+		return ((R (*)(AccountEntity*, Il2CppList<ItemCooldown>*))(Il2CppBase() + 0x1DA9078))(this, newList);
 	}
-	template <typename R = void> R ReplaceItemCooldowns(Il2CppList<ItemCooldown*>* newList) {
-		return ((R (*)(AccountEntity*, Il2CppList<ItemCooldown*>*))(Il2CppBase() + 0x1DA918C))(this, newList);
+	template <typename R = void> R ReplaceItemCooldowns(Il2CppList<ItemCooldown>* newList) {
+		return ((R (*)(AccountEntity*, Il2CppList<ItemCooldown>*))(Il2CppBase() + 0x1DA918C))(this, newList);
 	}
 	template <typename R = void> R RemoveItemCooldowns() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DA92A0))(this);
@@ -1033,11 +1033,11 @@ public:
 	template <typename R = bool> R get_hasLand() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DA99B4))(this);
 	}
-	template <typename R = void> R AddLand(LandType* newType) {
-		return ((R (*)(AccountEntity*, LandType*))(Il2CppBase() + 0x1DA99C0))(this, newType);
+	template <typename R = void> R AddLand(LandType newType) {
+		return ((R (*)(AccountEntity*, LandType))(Il2CppBase() + 0x1DA99C0))(this, newType);
 	}
-	template <typename R = void> R ReplaceLand(LandType* newType) {
-		return ((R (*)(AccountEntity*, LandType*))(Il2CppBase() + 0x1DA9AC4))(this, newType);
+	template <typename R = void> R ReplaceLand(LandType newType) {
+		return ((R (*)(AccountEntity*, LandType))(Il2CppBase() + 0x1DA9AC4))(this, newType);
 	}
 	template <typename R = void> R RemoveLand() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DA9BC8))(this);
@@ -1279,11 +1279,11 @@ public:
 	template <typename R = bool> R get_hasLocationAuto() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DAC590))(this);
 	}
-	template <typename R = void> R AddLocationAuto(Il2CppDictionary<Il2CppString*, Attempt*>* newAttempts) {
-		return ((R (*)(AccountEntity*, Il2CppDictionary<Il2CppString*, Attempt*>*))(Il2CppBase() + 0x1DAC59C))(this, newAttempts);
+	template <typename R = void> R AddLocationAuto(Il2CppDictionary<Il2CppString*, Attempt>* newAttempts) {
+		return ((R (*)(AccountEntity*, Il2CppDictionary<Il2CppString*, Attempt>*))(Il2CppBase() + 0x1DAC59C))(this, newAttempts);
 	}
-	template <typename R = void> R ReplaceLocationAuto(Il2CppDictionary<Il2CppString*, Attempt*>* newAttempts) {
-		return ((R (*)(AccountEntity*, Il2CppDictionary<Il2CppString*, Attempt*>*))(Il2CppBase() + 0x1DAC6B0))(this, newAttempts);
+	template <typename R = void> R ReplaceLocationAuto(Il2CppDictionary<Il2CppString*, Attempt>* newAttempts) {
+		return ((R (*)(AccountEntity*, Il2CppDictionary<Il2CppString*, Attempt>*))(Il2CppBase() + 0x1DAC6B0))(this, newAttempts);
 	}
 	template <typename R = void> R RemoveLocationAuto() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DAC7C4))(this);
@@ -1294,11 +1294,11 @@ public:
 	template <typename R = bool> R get_hasLocationResetInfo() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DAC858))(this);
 	}
-	template <typename R = void> R AddLocationResetInfo(int64_t newResetPriceTime, int64_t newCooldownTime, int32_t newResetCount, CurrencyType* newCurrencyType, int32_t newPrice) {
-		return ((R (*)(AccountEntity*, int64_t, int64_t, int32_t, CurrencyType*, int32_t))(Il2CppBase() + 0x1DAC864))(this, newResetPriceTime, newCooldownTime, newResetCount, newCurrencyType, newPrice);
+	template <typename R = void> R AddLocationResetInfo(int64_t newResetPriceTime, int64_t newCooldownTime, int32_t newResetCount, CurrencyType newCurrencyType, int32_t newPrice) {
+		return ((R (*)(AccountEntity*, int64_t, int64_t, int32_t, CurrencyType, int32_t))(Il2CppBase() + 0x1DAC864))(this, newResetPriceTime, newCooldownTime, newResetCount, newCurrencyType, newPrice);
 	}
-	template <typename R = void> R ReplaceLocationResetInfo(int64_t newResetPriceTime, int64_t newCooldownTime, int32_t newResetCount, CurrencyType* newCurrencyType, int32_t newPrice) {
-		return ((R (*)(AccountEntity*, int64_t, int64_t, int32_t, CurrencyType*, int32_t))(Il2CppBase() + 0x1DAC990))(this, newResetPriceTime, newCooldownTime, newResetCount, newCurrencyType, newPrice);
+	template <typename R = void> R ReplaceLocationResetInfo(int64_t newResetPriceTime, int64_t newCooldownTime, int32_t newResetCount, CurrencyType newCurrencyType, int32_t newPrice) {
+		return ((R (*)(AccountEntity*, int64_t, int64_t, int32_t, CurrencyType, int32_t))(Il2CppBase() + 0x1DAC990))(this, newResetPriceTime, newCooldownTime, newResetCount, newCurrencyType, newPrice);
 	}
 	template <typename R = void> R RemoveLocationResetInfo() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DACABC))(this);
@@ -1474,11 +1474,11 @@ public:
 	template <typename R = bool> R get_hasOccupation() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DAE9E8))(this);
 	}
-	template <typename R = void> R AddOccupation(OccupationType* newType) {
-		return ((R (*)(AccountEntity*, OccupationType*))(Il2CppBase() + 0x1DAE9F4))(this, newType);
+	template <typename R = void> R AddOccupation(OccupationType newType) {
+		return ((R (*)(AccountEntity*, OccupationType))(Il2CppBase() + 0x1DAE9F4))(this, newType);
 	}
-	template <typename R = void> R ReplaceOccupation(OccupationType* newType) {
-		return ((R (*)(AccountEntity*, OccupationType*))(Il2CppBase() + 0x1DAEAF8))(this, newType);
+	template <typename R = void> R ReplaceOccupation(OccupationType newType) {
+		return ((R (*)(AccountEntity*, OccupationType))(Il2CppBase() + 0x1DAEAF8))(this, newType);
 	}
 	template <typename R = void> R RemoveOccupation() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DAEBFC))(this);
@@ -1504,11 +1504,11 @@ public:
 	template <typename R = bool> R get_hasOfflineDeathInfo() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DAEF38))(this);
 	}
-	template <typename R = void> R AddOfflineDeathInfo(DamageStatType* newType, Il2CppString* newName, Il2CppString* newBlueprint, Il2CppString* newGuildTag, Il2CppString* newClanName, Il2CppString* newLocationName) {
-		return ((R (*)(AccountEntity*, DamageStatType*, Il2CppString*, Il2CppString*, Il2CppString*, Il2CppString*, Il2CppString*))(Il2CppBase() + 0x1DAEF44))(this, newType, newName, newBlueprint, newGuildTag, newClanName, newLocationName);
+	template <typename R = void> R AddOfflineDeathInfo(DamageStatType newType, Il2CppString* newName, Il2CppString* newBlueprint, Il2CppString* newGuildTag, Il2CppString* newClanName, Il2CppString* newLocationName) {
+		return ((R (*)(AccountEntity*, DamageStatType, Il2CppString*, Il2CppString*, Il2CppString*, Il2CppString*, Il2CppString*))(Il2CppBase() + 0x1DAEF44))(this, newType, newName, newBlueprint, newGuildTag, newClanName, newLocationName);
 	}
-	template <typename R = void> R ReplaceOfflineDeathInfo(DamageStatType* newType, Il2CppString* newName, Il2CppString* newBlueprint, Il2CppString* newGuildTag, Il2CppString* newClanName, Il2CppString* newLocationName) {
-		return ((R (*)(AccountEntity*, DamageStatType*, Il2CppString*, Il2CppString*, Il2CppString*, Il2CppString*, Il2CppString*))(Il2CppBase() + 0x1DAF0C0))(this, newType, newName, newBlueprint, newGuildTag, newClanName, newLocationName);
+	template <typename R = void> R ReplaceOfflineDeathInfo(DamageStatType newType, Il2CppString* newName, Il2CppString* newBlueprint, Il2CppString* newGuildTag, Il2CppString* newClanName, Il2CppString* newLocationName) {
+		return ((R (*)(AccountEntity*, DamageStatType, Il2CppString*, Il2CppString*, Il2CppString*, Il2CppString*, Il2CppString*))(Il2CppBase() + 0x1DAF0C0))(this, newType, newName, newBlueprint, newGuildTag, newClanName, newLocationName);
 	}
 	template <typename R = void> R RemoveOfflineDeathInfo() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DAF23C))(this);
@@ -1534,11 +1534,11 @@ public:
 	template <typename R = bool> R get_hasPatchCommands() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DAF578))(this);
 	}
-	template <typename R = void> R AddPatchCommands(Il2CppList<PatchCommand*>* newList) {
-		return ((R (*)(AccountEntity*, Il2CppList<PatchCommand*>*))(Il2CppBase() + 0x1DAF584))(this, newList);
+	template <typename R = void> R AddPatchCommands(Il2CppList<PatchCommand>* newList) {
+		return ((R (*)(AccountEntity*, Il2CppList<PatchCommand>*))(Il2CppBase() + 0x1DAF584))(this, newList);
 	}
-	template <typename R = void> R ReplacePatchCommands(Il2CppList<PatchCommand*>* newList) {
-		return ((R (*)(AccountEntity*, Il2CppList<PatchCommand*>*))(Il2CppBase() + 0x1DAF698))(this, newList);
+	template <typename R = void> R ReplacePatchCommands(Il2CppList<PatchCommand>* newList) {
+		return ((R (*)(AccountEntity*, Il2CppList<PatchCommand>*))(Il2CppBase() + 0x1DAF698))(this, newList);
 	}
 	template <typename R = void> R RemovePatchCommands() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DAF7AC))(this);
@@ -1717,11 +1717,11 @@ public:
 	template <typename R = bool> R get_hasRGSave() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DB1548))(this);
 	}
-	template <typename R = void> R AddRGSave(Il2CppDictionary<Il2CppString*, RGSave*>* newValues) {
-		return ((R (*)(AccountEntity*, Il2CppDictionary<Il2CppString*, RGSave*>*))(Il2CppBase() + 0x1DB1554))(this, newValues);
+	template <typename R = void> R AddRGSave(Il2CppDictionary<Il2CppString*, RGSave>* newValues) {
+		return ((R (*)(AccountEntity*, Il2CppDictionary<Il2CppString*, RGSave>*))(Il2CppBase() + 0x1DB1554))(this, newValues);
 	}
-	template <typename R = void> R ReplaceRGSave(Il2CppDictionary<Il2CppString*, RGSave*>* newValues) {
-		return ((R (*)(AccountEntity*, Il2CppDictionary<Il2CppString*, RGSave*>*))(Il2CppBase() + 0x1DB1668))(this, newValues);
+	template <typename R = void> R ReplaceRGSave(Il2CppDictionary<Il2CppString*, RGSave>* newValues) {
+		return ((R (*)(AccountEntity*, Il2CppDictionary<Il2CppString*, RGSave>*))(Il2CppBase() + 0x1DB1668))(this, newValues);
 	}
 	template <typename R = void> R RemoveRGSave() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DB177C))(this);
@@ -2077,11 +2077,11 @@ public:
 	template <typename R = bool> R get_hasUnlockedEmojis() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DB555C))(this);
 	}
-	template <typename R = void> R AddUnlockedEmojis(int32_t newNewEmojisCount, Il2CppList<UnlockedEmoji*>* newList) {
-		return ((R (*)(AccountEntity*, int32_t, Il2CppList<UnlockedEmoji*>*))(Il2CppBase() + 0x1DB5568))(this, newNewEmojisCount, newList);
+	template <typename R = void> R AddUnlockedEmojis(int32_t newNewEmojisCount, Il2CppList<UnlockedEmoji>* newList) {
+		return ((R (*)(AccountEntity*, int32_t, Il2CppList<UnlockedEmoji>*))(Il2CppBase() + 0x1DB5568))(this, newNewEmojisCount, newList);
 	}
-	template <typename R = void> R ReplaceUnlockedEmojis(int32_t newNewEmojisCount, Il2CppList<UnlockedEmoji*>* newList) {
-		return ((R (*)(AccountEntity*, int32_t, Il2CppList<UnlockedEmoji*>*))(Il2CppBase() + 0x1DB5684))(this, newNewEmojisCount, newList);
+	template <typename R = void> R ReplaceUnlockedEmojis(int32_t newNewEmojisCount, Il2CppList<UnlockedEmoji>* newList) {
+		return ((R (*)(AccountEntity*, int32_t, Il2CppList<UnlockedEmoji>*))(Il2CppBase() + 0x1DB5684))(this, newNewEmojisCount, newList);
 	}
 	template <typename R = void> R RemoveUnlockedEmojis() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DB57A0))(this);
@@ -2173,11 +2173,11 @@ public:
 	template <typename R = bool> R get_hasWorldStatus() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DB66E0))(this);
 	}
-	template <typename R = void> R AddWorldStatus(ProtoModels::WorldStatusType* newType) {
-		return ((R (*)(AccountEntity*, ProtoModels::WorldStatusType*))(Il2CppBase() + 0x1DB66EC))(this, newType);
+	template <typename R = void> R AddWorldStatus(ProtoModels::WorldStatusType newType) {
+		return ((R (*)(AccountEntity*, ProtoModels::WorldStatusType))(Il2CppBase() + 0x1DB66EC))(this, newType);
 	}
-	template <typename R = void> R ReplaceWorldStatus(ProtoModels::WorldStatusType* newType) {
-		return ((R (*)(AccountEntity*, ProtoModels::WorldStatusType*))(Il2CppBase() + 0x1DB67F0))(this, newType);
+	template <typename R = void> R ReplaceWorldStatus(ProtoModels::WorldStatusType newType) {
+		return ((R (*)(AccountEntity*, ProtoModels::WorldStatusType))(Il2CppBase() + 0x1DB67F0))(this, newType);
 	}
 	template <typename R = void> R RemoveWorldStatus() {
 		return ((R (*)(AccountEntity*))(Il2CppBase() + 0x1DB68F4))(this);

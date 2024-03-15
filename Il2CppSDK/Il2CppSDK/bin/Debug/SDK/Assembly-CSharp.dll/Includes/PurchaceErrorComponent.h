@@ -2,7 +2,7 @@
 #include <Il2Cpp/Il2Cpp.h>
 #include "TypeValueComponent1.h" 
 
-class PurchaceErrorComponent : public TypeValueComponent1<ProtoModels::PurchaceErrorEnum*>
+class PurchaceErrorComponent : public TypeValueComponent1<ProtoModels::PurchaceErrorEnum>
 {
 public: 
 

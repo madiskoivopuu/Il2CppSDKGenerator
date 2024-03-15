@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "ScoutConditionComponent"));
 	}
 
-	template <typename R = ScoutStatus*> R& Status() {
+	template <typename R = ScoutStatus> R& Status() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
 

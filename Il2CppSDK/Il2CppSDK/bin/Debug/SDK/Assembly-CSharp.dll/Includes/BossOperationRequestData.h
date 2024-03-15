@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "BossOperationRequestData"));
 	}
 
-	template <typename R = BossActions*> R& BossAction() {
+	template <typename R = BossActions> R& BossAction() {
 		return *(R*)((uintptr_t)this + 0x0);
 	}
 	template <typename R = Il2CppString*> R& BossName() {

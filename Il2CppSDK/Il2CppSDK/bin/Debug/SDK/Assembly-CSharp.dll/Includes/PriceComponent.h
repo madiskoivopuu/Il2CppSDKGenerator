@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "PriceComponent"));
 	}
 
-	template <typename R = Il2CppArray<Price*>*> R& List() {
+	template <typename R = Il2CppArray<Price>*> R& List() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
 
@@ -22,7 +22,7 @@ public:
 	template <typename R = void> R Write(uintptr_t writer) {
 		return ((R (*)(PriceComponent*, uintptr_t))(Il2CppBase() + 0x16E39E8))(this, writer);
 	}
-	template <typename R = Price*> R GetPriceWithIndex(int32_t index) {
+	template <typename R = Price> R GetPriceWithIndex(int32_t index) {
 		return ((R (*)(PriceComponent*, int32_t))(Il2CppBase() + 0x16E3A90))(this, index);
 	}
 

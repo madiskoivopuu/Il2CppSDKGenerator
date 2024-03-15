@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "CosmeticsData"));
 	}
 
-	template <typename R = Gender*> R& Gender() {
+	template <typename R = Gender> R& Gender() {
 		return *(R*)((uintptr_t)this + 0x0);
 	}
 	 Il2CppDictionary<int32_t, Il2CppString*>*& Slots() {

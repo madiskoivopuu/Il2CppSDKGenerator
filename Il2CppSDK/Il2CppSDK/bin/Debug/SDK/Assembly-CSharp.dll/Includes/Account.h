@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "Account"));
 	}
 
-	template <typename R = AccountStatus*> R& Status() {
+	template <typename R = AccountStatus> R& Status() {
 		return *(R*)((uintptr_t)this + 0x0);
 	}
 	template <typename R = Il2CppString*> R& BattleTag() {

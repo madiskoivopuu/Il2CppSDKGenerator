@@ -11,7 +11,7 @@ public:
 	}
 
 
-	template <typename R = TestGroup*> R GetTestGroup() {
+	template <typename R = TestGroup> R GetTestGroup() {
 		return ((R (*)(TestGroupComponent*))(Il2CppBase() + 0x16B64C4))(this);
 	}
 

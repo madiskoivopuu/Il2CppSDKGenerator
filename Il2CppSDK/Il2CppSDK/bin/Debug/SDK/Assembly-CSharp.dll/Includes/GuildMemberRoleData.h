@@ -12,7 +12,7 @@ public:
 	template <typename R = int64_t> R& TargetPlayerId() {
 		return *(R*)((uintptr_t)this + 0x0);
 	}
-	template <typename R = GuildRole*> R& Role() {
+	template <typename R = GuildRole> R& Role() {
 		return *(R*)((uintptr_t)this + 0x8);
 	}
 

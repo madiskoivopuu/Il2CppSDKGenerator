@@ -12,7 +12,7 @@ public:
 	template <typename R = Il2CppString*> R& Name() {
 		return *(R*)((uintptr_t)this + 0x0);
 	}
-	template <typename R = NotifyQuestPhase*> R& Phase() {
+	template <typename R = NotifyQuestPhase> R& Phase() {
 		return *(R*)((uintptr_t)this + 0x8);
 	}
 

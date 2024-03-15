@@ -3,7 +3,7 @@
 #include "EnumValueComponent1.h" 
 #include "ConfigType.h" 
 
-class ConfigTypeComponent : public EnumValueComponent1<ConfigType*>
+class ConfigTypeComponent : public EnumValueComponent1<ConfigType>
 {
 public: 
 

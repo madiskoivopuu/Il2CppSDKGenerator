@@ -15,7 +15,7 @@ public:
 	template <typename R = Il2CppString*> R& ShowCondition() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
-	template <typename R = WalletType*> R& Type() {
+	template <typename R = WalletType> R& Type() {
 		return *(R*)((uintptr_t)this + 0x20);
 	}
 

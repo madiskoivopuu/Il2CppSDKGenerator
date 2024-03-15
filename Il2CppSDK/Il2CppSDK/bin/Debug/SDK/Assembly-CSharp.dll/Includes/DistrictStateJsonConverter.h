@@ -3,7 +3,7 @@
 #include "TypeEnumJsonConverter1.h" 
 #include "DistrictState.h" 
 
-class DistrictStateJsonConverter : public TypeEnumJsonConverter1<DistrictState*>
+class DistrictStateJsonConverter : public TypeEnumJsonConverter1<DistrictState>
 {
 public: 
 

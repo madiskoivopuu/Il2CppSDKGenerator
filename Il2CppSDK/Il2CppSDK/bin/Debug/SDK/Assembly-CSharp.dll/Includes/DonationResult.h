@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "DonationResult"));
 	}
 
-	template <typename R = PlayerClassProgress*> R& ProgressType() {
+	template <typename R = PlayerClassProgress> R& ProgressType() {
 		return *(R*)((uintptr_t)this + 0x0);
 	}
 	template <typename R = int32_t> R& BaseAddPoints() {

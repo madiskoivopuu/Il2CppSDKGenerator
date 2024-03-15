@@ -15,7 +15,7 @@ public:
 	template <typename R = Il2CppArray<Il2CppString*>*> R& IntNames() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
-	template <typename R = Il2CppArray<FloatParam*>*> R& Floats() {
+	template <typename R = Il2CppArray<FloatParam>*> R& Floats() {
 		return *(R*)((uintptr_t)this + 0x20);
 	}
 

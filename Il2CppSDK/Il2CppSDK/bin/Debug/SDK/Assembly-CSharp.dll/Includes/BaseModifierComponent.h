@@ -12,11 +12,11 @@ public:
 	template <typename R = float> R& Value() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
-	template <typename R = ModifierGroup*> R& Group() {
+	template <typename R = ModifierGroup> R& Group() {
 		return *(R*)((uintptr_t)this + 0x14);
 	}
 
-	template <typename R = ModifierGroup*> R GetGroup() {
+	template <typename R = ModifierGroup> R GetGroup() {
 		return ((R (*)(BaseModifierComponent*))(Il2CppBase() + 0x166F51C))(this);
 	}
 	template <typename R = float> R GetValue() {

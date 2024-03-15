@@ -3,7 +3,7 @@
 #include "EnumValueComponent1.h" 
 #include "BattleStatisticType.h" 
 
-class BattleStatisticTypeComponent : public EnumValueComponent1<BattleStatisticType*>
+class BattleStatisticTypeComponent : public EnumValueComponent1<BattleStatisticType>
 {
 public: 
 

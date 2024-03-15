@@ -3,7 +3,7 @@
 #include "EnumComponent1.h" 
 #include "RelationshipRules.h" 
 
-class RelationshipComponent : public EnumComponent1<RelationshipRules*>
+class RelationshipComponent : public EnumComponent1<RelationshipRules>
 {
 public: 
 

@@ -9,10 +9,10 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "PurchaseData"));
 	}
 
-	template <typename R = ExternalStore*> R& Store() {
+	template <typename R = ExternalStore> R& Store() {
 		return *(R*)((uintptr_t)this + 0x0);
 	}
-	template <typename R = PurchaseMethod*> R& Method() {
+	template <typename R = PurchaseMethod> R& Method() {
 		return *(R*)((uintptr_t)this + 0x4);
 	}
 	template <typename R = Il2CppString*> R& BlueprintName() {

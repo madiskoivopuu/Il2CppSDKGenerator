@@ -3,7 +3,7 @@
 #include "TypeListComponent1.h" 
 #include "PatchCommand.h" 
 
-class PatchCommandsComponent : public TypeListComponent1<PatchCommand*>
+class PatchCommandsComponent : public TypeListComponent1<PatchCommand>
 {
 public: 
 

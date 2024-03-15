@@ -21,8 +21,8 @@ public:
 	template <typename R = float> R& PosY() {
 		return *(R*)((uintptr_t)this + 0x14);
 	}
-	 Nullable1float>*& Rotation() {
-		return *(Nullable1float>**)((uintptr_t)this + 0x18);
+	 Nullable1<float>*& Rotation() {
+		return *(Nullable1<float>**)((uintptr_t)this + 0x18);
 	}
 
 	template <typename R = void> R Write(uintptr_t writer) {

@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "RuneComponent"));
 	}
 
-	template <typename R = RuneType*> R& Type() {
+	template <typename R = RuneType> R& Type() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
 

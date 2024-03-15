@@ -11,20 +11,20 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "AccountContext"));
 	}
 
-	 PrimaryEntityIndex2AccountEntity*, int64_t>*& _playerIdIndex() {
-		return *(PrimaryEntityIndex2AccountEntity*, int64_t>**)((uintptr_t)this + 0xF8);
+	 PrimaryEntityIndex2<AccountEntity*, int64_t>*& _playerIdIndex() {
+		return *(PrimaryEntityIndex2<AccountEntity*, int64_t>**)((uintptr_t)this + 0xF8);
 	}
-	 EntityIndex2AccountEntity*, bool>*& _playerAccountIndex() {
-		return *(EntityIndex2AccountEntity*, bool>**)((uintptr_t)this + 0x100);
+	 EntityIndex2<AccountEntity*, bool>*& _playerAccountIndex() {
+		return *(EntityIndex2<AccountEntity*, bool>**)((uintptr_t)this + 0x100);
 	}
-	 PrimaryEntityIndex2AccountEntity*, uintptr_t>*& _ipIndex() {
-		return *(PrimaryEntityIndex2AccountEntity*, uintptr_t>**)((uintptr_t)this + 0x108);
+	 PrimaryEntityIndex2<AccountEntity*, uintptr_t>*& _ipIndex() {
+		return *(PrimaryEntityIndex2<AccountEntity*, uintptr_t>**)((uintptr_t)this + 0x108);
 	}
-	 EntityIndex2AccountEntity*, int64_t>*& _clanIndex() {
-		return *(EntityIndex2AccountEntity*, int64_t>**)((uintptr_t)this + 0x110);
+	 EntityIndex2<AccountEntity*, int64_t>*& _clanIndex() {
+		return *(EntityIndex2<AccountEntity*, int64_t>**)((uintptr_t)this + 0x110);
 	}
-	 EntityIndex2AccountEntity*, int64_t>*& _guildIndex() {
-		return *(EntityIndex2AccountEntity*, int64_t>**)((uintptr_t)this + 0x118);
+	 EntityIndex2<AccountEntity*, int64_t>*& _guildIndex() {
+		return *(EntityIndex2<AccountEntity*, int64_t>**)((uintptr_t)this + 0x118);
 	}
 	 Il2CppDictionary<int32_t, uintptr_t>*& _blueprint() {
 		return *(Il2CppDictionary<int32_t, uintptr_t>**)((uintptr_t)this + 0x120);
@@ -33,10 +33,10 @@ public:
 	template <typename R = int32_t> R get_IdComponentIndex() {
 		return ((R (*)(AccountContext*))(Il2CppBase() + 0x1D9D44C))(this);
 	}
-	template <typename R = Commands*> R get_EntityCommand() {
+	template <typename R = Commands> R get_EntityCommand() {
 		return ((R (*)(AccountContext*))(Il2CppBase() + 0x1D9D454))(this);
 	}
-	template <typename R = Commands*> R get_ComponentCommand() {
+	template <typename R = Commands> R get_ComponentCommand() {
 		return ((R (*)(AccountContext*))(Il2CppBase() + 0x1D9D45C))(this);
 	}
 	template <typename R = AccountEntity*> R get_Item(int64_t playerId) {
@@ -48,14 +48,14 @@ public:
 	template <typename R = AccountEntity*> R GetEntityWithIp(uintptr_t ip) {
 		return ((R (*)(AccountContext*, uintptr_t))(Il2CppBase() + 0x1D9DD44))(this, ip);
 	}
-	 HashSet1AccountEntity*>* GetPlayerAccounts() {
-		return ((HashSet1AccountEntity*>* (*)(AccountContext*))(Il2CppBase() + 0x1D9DDA8))(this);
+	 HashSet1<AccountEntity*>* GetPlayerAccounts() {
+		return ((HashSet1<AccountEntity*>* (*)(AccountContext*))(Il2CppBase() + 0x1D9DDA8))(this);
 	}
-	 HashSet1AccountEntity*>* GetEntitiesWithClanId(int64_t clanId) {
-		return ((HashSet1AccountEntity*>* (*)(AccountContext*, int64_t))(Il2CppBase() + 0x1D9DE00))(this, clanId);
+	 HashSet1<AccountEntity*>* GetEntitiesWithClanId(int64_t clanId) {
+		return ((HashSet1<AccountEntity*>* (*)(AccountContext*, int64_t))(Il2CppBase() + 0x1D9DE00))(this, clanId);
 	}
-	 HashSet1AccountEntity*>* GetEntitiesWithGuildId(int64_t guildId) {
-		return ((HashSet1AccountEntity*>* (*)(AccountContext*, int64_t))(Il2CppBase() + 0x1D9DE64))(this, guildId);
+	 HashSet1<AccountEntity*>* GetEntitiesWithGuildId(int64_t guildId) {
+		return ((HashSet1<AccountEntity*>* (*)(AccountContext*, int64_t))(Il2CppBase() + 0x1D9DE64))(this, guildId);
 	}
 	template <typename R = Il2CppString*> R SaveAccount(AccountEntity* entity) {
 		return ((R (*)(AccountContext*, AccountEntity*))(Il2CppBase() + 0x1D9DEC8))(this, entity);

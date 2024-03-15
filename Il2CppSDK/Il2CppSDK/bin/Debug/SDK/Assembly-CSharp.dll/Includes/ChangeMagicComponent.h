@@ -12,11 +12,11 @@ public:
 	template <typename R = float> R& AddDuration() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
-	 Nullable1float>*& DurationCoef() {
-		return *(Nullable1float>**)((uintptr_t)this + 0x14);
+	 Nullable1<float>*& DurationCoef() {
+		return *(Nullable1<float>**)((uintptr_t)this + 0x14);
 	}
-	 Nullable1float>*& DamageCoef() {
-		return *(Nullable1float>**)((uintptr_t)this + 0x1C);
+	 Nullable1<float>*& DamageCoef() {
+		return *(Nullable1<float>**)((uintptr_t)this + 0x1C);
 	}
 	template <typename R = Il2CppArray<Il2CppString*>*> R& AddChildren() {
 		return *(R*)((uintptr_t)this + 0x28);

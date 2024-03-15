@@ -15,10 +15,10 @@ public:
 	template <typename R = Il2CppString*> R& ActionName() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
-	template <typename R = ActionLabels*> R& AddLabel() {
+	template <typename R = ActionLabels> R& AddLabel() {
 		return *(R*)((uintptr_t)this + 0x20);
 	}
-	template <typename R = ActionLabels*> R& RemoveLabel() {
+	template <typename R = ActionLabels> R& RemoveLabel() {
 		return *(R*)((uintptr_t)this + 0x30);
 	}
 

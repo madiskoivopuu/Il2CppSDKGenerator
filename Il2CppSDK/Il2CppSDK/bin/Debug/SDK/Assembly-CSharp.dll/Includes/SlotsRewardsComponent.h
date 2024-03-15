@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "SlotsRewardsComponent"));
 	}
 
-	template <typename R = Il2CppArray<Resource*>*> R& List() {
+	template <typename R = Il2CppArray<Resource>*> R& List() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
 

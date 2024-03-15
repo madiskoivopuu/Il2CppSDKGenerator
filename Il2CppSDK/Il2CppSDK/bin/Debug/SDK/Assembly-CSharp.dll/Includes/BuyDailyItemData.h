@@ -12,7 +12,7 @@ public:
 	template <typename R = int32_t> R& SlotId() {
 		return *(R*)((uintptr_t)this + 0x0);
 	}
-	template <typename R = ServiceMessage*> R& Result() {
+	template <typename R = ServiceMessage> R& Result() {
 		return *(R*)((uintptr_t)this + 0x4);
 	}
 

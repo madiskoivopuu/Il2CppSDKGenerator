@@ -28,11 +28,11 @@ public:
 	template <typename R = void> static R UpdateChatRoomLastOpened(AccountEntity* account, Il2CppString* channel, int64_t lastOpenedTime, bool saveSelected) {
 		return ((R (*)(void *, AccountEntity*, Il2CppString*, int64_t, bool))(Il2CppBase() + 0xFCF128))(0, account, channel, lastOpenedTime, saveSelected);
 	}
-	template <typename R = int32_t> static R GetCurrentBPStep(AccountEntity* account, ICommonContexts* world, CurrencyType* currency, int32_t delta) {
-		return ((R (*)(void *, AccountEntity*, ICommonContexts*, CurrencyType*, int32_t))(Il2CppBase() + 0xFCF304))(0, account, world, currency, delta);
+	template <typename R = int32_t> static R GetCurrentBPStep(AccountEntity* account, ICommonContexts* world, CurrencyType currency, int32_t delta) {
+		return ((R (*)(void *, AccountEntity*, ICommonContexts*, CurrencyType, int32_t))(Il2CppBase() + 0xFCF304))(0, account, world, currency, delta);
 	}
-	template <typename R = bool> static R HasBPReward(AccountEntity* account, ICommonContexts* world, CurrencyType* currency) {
-		return ((R (*)(void *, AccountEntity*, ICommonContexts*, CurrencyType*))(Il2CppBase() + 0xFCF86C))(0, account, world, currency);
+	template <typename R = bool> static R HasBPReward(AccountEntity* account, ICommonContexts* world, CurrencyType currency) {
+		return ((R (*)(void *, AccountEntity*, ICommonContexts*, CurrencyType))(Il2CppBase() + 0xFCF86C))(0, account, world, currency);
 	}
 	template <typename R = int32_t> static R GetMasteryPoints(AccountEntity* account) {
 		return ((R (*)(void *, AccountEntity*))(Il2CppBase() + 0xFCF984))(0, account);
@@ -46,11 +46,11 @@ public:
 	template <typename R = void> static R SetExpertisePoints(AccountEntity* account, int32_t value) {
 		return ((R (*)(void *, AccountEntity*, int32_t))(Il2CppBase() + 0xFCFA34))(0, account, value);
 	}
-	template <typename R = int32_t> static R GetPlayerClassProgressPoints(AccountEntity* account, PlayerClassProgress* progressType) {
-		return ((R (*)(void *, AccountEntity*, PlayerClassProgress*))(Il2CppBase() + 0xFCFA4C))(0, account, progressType);
+	template <typename R = int32_t> static R GetPlayerClassProgressPoints(AccountEntity* account, PlayerClassProgress progressType) {
+		return ((R (*)(void *, AccountEntity*, PlayerClassProgress))(Il2CppBase() + 0xFCFA4C))(0, account, progressType);
 	}
-	template <typename R = void> static R SetPlayerClassProgressPoints(AccountEntity* account, PlayerClassProgress* progressType, int32_t value) {
-		return ((R (*)(void *, AccountEntity*, PlayerClassProgress*, int32_t))(Il2CppBase() + 0xFCFB14))(0, account, progressType, value);
+	template <typename R = void> static R SetPlayerClassProgressPoints(AccountEntity* account, PlayerClassProgress progressType, int32_t value) {
+		return ((R (*)(void *, AccountEntity*, PlayerClassProgress, int32_t))(Il2CppBase() + 0xFCFB14))(0, account, progressType, value);
 	}
 	template <typename R = void> static R UpdateRGSaves(AccountEntity* account, ICommonContexts* world) {
 		return ((R (*)(void *, AccountEntity*, ICommonContexts*))(Il2CppBase() + 0xFCFBF8))(0, account, world);

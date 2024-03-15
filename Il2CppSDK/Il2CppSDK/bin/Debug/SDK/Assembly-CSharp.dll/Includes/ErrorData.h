@@ -9,10 +9,10 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "ErrorData"));
 	}
 
-	template <typename R = Commands*> R& CommandId() {
+	template <typename R = Commands> R& CommandId() {
 		return *(R*)((uintptr_t)this + 0x0);
 	}
-	template <typename R = Errors*> R& ErrorId() {
+	template <typename R = Errors> R& ErrorId() {
 		return *(R*)((uintptr_t)this + 0x2);
 	}
 	template <typename R = Il2CppString*> R& Msg() {

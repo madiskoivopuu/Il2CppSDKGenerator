@@ -9,11 +9,11 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "WaterfallConfigurationBuilder"));
 	}
 
-	 Nullable1double>*& ceiling() {
-		return *(Nullable1double>**)((uintptr_t)this + 0x10);
+	 Nullable1<double>*& ceiling() {
+		return *(Nullable1<double>**)((uintptr_t)this + 0x10);
 	}
-	 Nullable1double>*& floor() {
-		return *(Nullable1double>**)((uintptr_t)this + 0x20);
+	 Nullable1<double>*& floor() {
+		return *(Nullable1<double>**)((uintptr_t)this + 0x20);
 	}
 
 	template <typename R = WaterfallConfigurationBuilder*> R SetCeiling(double ceiling) {

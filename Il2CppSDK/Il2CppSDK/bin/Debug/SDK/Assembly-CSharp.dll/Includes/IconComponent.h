@@ -34,7 +34,7 @@ public:
 	template <typename R = void> R Write(uintptr_t writer) {
 		return ((R (*)(IconComponent*, uintptr_t))(Il2CppBase() + 0x1E3CE58))(this, writer);
 	}
-	template <typename R = Icon*> R ToIcon() {
+	template <typename R = Icon> R ToIcon() {
 		return ((R (*)(IconComponent*))(Il2CppBase() + 0x1E3CEB8))(this);
 	}
 

@@ -9,11 +9,11 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "RollChestRewardResponse"));
 	}
 
-	template <typename R = ServiceMessage*> R& Result() {
+	template <typename R = ServiceMessage> R& Result() {
 		return *(R*)((uintptr_t)this + 0x0);
 	}
-	 Il2CppList<Resource*>*& List() {
-		return *(Il2CppList<Resource*>**)((uintptr_t)this + 0x8);
+	 Il2CppList<Resource>*& List() {
+		return *(Il2CppList<Resource>**)((uintptr_t)this + 0x8);
 	}
 
 	template <typename R = void> R Write(uintptr_t writer) {

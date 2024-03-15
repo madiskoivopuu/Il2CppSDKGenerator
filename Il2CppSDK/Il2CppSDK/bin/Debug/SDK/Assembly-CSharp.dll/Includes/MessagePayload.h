@@ -15,7 +15,7 @@ public:
 	template <typename R = Il2CppArray<Il2CppString*>*> R& Parameters() {
 		return *(R*)((uintptr_t)this + 0x8);
 	}
-	template <typename R = MessagePayloadType*> R& Type() {
+	template <typename R = MessagePayloadType> R& Type() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
 

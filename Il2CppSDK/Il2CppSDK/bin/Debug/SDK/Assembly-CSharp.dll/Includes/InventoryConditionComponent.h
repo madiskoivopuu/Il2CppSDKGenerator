@@ -12,8 +12,8 @@ public:
 	template <typename R = bool> R& IsEmpty() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
-	 Nullable1int32_t>*& MinCount() {
-		return *(Nullable1int32_t>**)((uintptr_t)this + 0x14);
+	 Nullable1<int32_t>*& MinCount() {
+		return *(Nullable1<int32_t>**)((uintptr_t)this + 0x14);
 	}
 	template <typename R = bool> R& CountArming() {
 		return *(R*)((uintptr_t)this + 0x1C);

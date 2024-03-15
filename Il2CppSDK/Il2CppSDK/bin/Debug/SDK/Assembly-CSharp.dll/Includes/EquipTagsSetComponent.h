@@ -9,8 +9,8 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "EquipTagsSetComponent"));
 	}
 
-	 HashSet1Il2CppString*>*& Values() {
-		return *(HashSet1Il2CppString*>**)((uintptr_t)this + 0x10);
+	 HashSet1<Il2CppString*>*& Values() {
+		return *(HashSet1<Il2CppString*>**)((uintptr_t)this + 0x10);
 	}
 
 

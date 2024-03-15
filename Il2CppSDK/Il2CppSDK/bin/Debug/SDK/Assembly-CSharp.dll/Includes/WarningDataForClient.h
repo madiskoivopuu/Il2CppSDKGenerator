@@ -9,13 +9,13 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "WarningDataForClient"));
 	}
 
-	template <typename R = ServiceMessage*> R& Message() {
+	template <typename R = ServiceMessage> R& Message() {
 		return *(R*)((uintptr_t)this + 0x0);
 	}
 	template <typename R = Il2CppString*> R& Text() {
 		return *(R*)((uintptr_t)this + 0x8);
 	}
-	template <typename R = MessageLayer*> R& Layer() {
+	template <typename R = MessageLayer> R& Layer() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
 

@@ -9,11 +9,11 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "PowerRangeComponent"));
 	}
 
-	 Nullable1float>*& Min() {
-		return *(Nullable1float>**)((uintptr_t)this + 0x10);
+	 Nullable1<float>*& Min() {
+		return *(Nullable1<float>**)((uintptr_t)this + 0x10);
 	}
-	 Nullable1float>*& Max() {
-		return *(Nullable1float>**)((uintptr_t)this + 0x18);
+	 Nullable1<float>*& Max() {
+		return *(Nullable1<float>**)((uintptr_t)this + 0x18);
 	}
 
 	template <typename R = void> R CopyTo(Il2CppObject* target) {

@@ -15,7 +15,7 @@ public:
 	template <typename R = Il2CppString*> R& Name() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
-	template <typename R = Il2CppArray<Item*>*> R& List() {
+	template <typename R = Il2CppArray<Item>*> R& List() {
 		return *(R*)((uintptr_t)this + 0x20);
 	}
 	template <typename R = TargetsSelector*> R& Selector() {

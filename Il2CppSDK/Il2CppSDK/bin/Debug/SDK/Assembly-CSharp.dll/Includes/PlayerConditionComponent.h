@@ -9,8 +9,8 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "PlayerConditionComponent"));
 	}
 
-	 Nullable1bool>*& Real() {
-		return *(Nullable1bool>**)((uintptr_t)this + 0x10);
+	 Nullable1<bool>*& Real() {
+		return *(Nullable1<bool>**)((uintptr_t)this + 0x10);
 	}
 	template <typename R = bool> R& Value() {
 		return *(R*)((uintptr_t)this + 0x12);

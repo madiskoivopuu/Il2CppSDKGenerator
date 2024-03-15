@@ -3,7 +3,7 @@
 #include "TypeListComponent1.h" 
 #include "ItemCooldown.h" 
 
-class ItemCooldownsComponent : public TypeListComponent1<ItemCooldown*>
+class ItemCooldownsComponent : public TypeListComponent1<ItemCooldown>
 {
 public: 
 

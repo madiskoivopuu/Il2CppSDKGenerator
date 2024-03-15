@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "OfflineDeathInfoComponent"));
 	}
 
-	template <typename R = DamageStatType*> R& Type() {
+	template <typename R = DamageStatType> R& Type() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
 	template <typename R = Il2CppString*> R& Name() {

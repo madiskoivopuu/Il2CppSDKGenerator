@@ -9,8 +9,8 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "AnimatorEventsProxy"));
 	}
 
-	 HashSet1IAnimatorEventsProxyListener*>*& _listeners() {
-		return *(HashSet1IAnimatorEventsProxyListener*>**)((uintptr_t)this + 0x18);
+	 HashSet1<IAnimatorEventsProxyListener*>*& _listeners() {
+		return *(HashSet1<IAnimatorEventsProxyListener*>**)((uintptr_t)this + 0x18);
 	}
 
 	template <typename R = void> R Raise(uintptr_t animationEvent) {

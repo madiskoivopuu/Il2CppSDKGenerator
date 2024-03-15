@@ -9,8 +9,8 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "RGSaveComponent"));
 	}
 
-	 Il2CppDictionary<Il2CppString*, RGSave*>*& Values() {
-		return *(Il2CppDictionary<Il2CppString*, RGSave*>**)((uintptr_t)this + 0x10);
+	 Il2CppDictionary<Il2CppString*, RGSave>*& Values() {
+		return *(Il2CppDictionary<Il2CppString*, RGSave>**)((uintptr_t)this + 0x10);
 	}
 
 	template <typename R = void> R CopyTo(Il2CppObject* target) {

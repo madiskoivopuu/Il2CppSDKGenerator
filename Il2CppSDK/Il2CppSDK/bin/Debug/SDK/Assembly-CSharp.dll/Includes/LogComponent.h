@@ -3,7 +3,7 @@
 #include "EnumValueComponent1.h" 
 #include "LogType.h" 
 
-class LogComponent : public EnumValueComponent1<LogType*>
+class LogComponent : public EnumValueComponent1<LogType>
 {
 public: 
 

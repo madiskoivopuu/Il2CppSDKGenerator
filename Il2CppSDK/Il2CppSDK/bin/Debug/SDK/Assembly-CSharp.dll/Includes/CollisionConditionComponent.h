@@ -18,14 +18,14 @@ public:
 	template <typename R = float> R& OffsetY() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
-	 Nullable1float>*& Radius() {
-		return *(Nullable1float>**)((uintptr_t)this + 0x1C);
+	 Nullable1<float>*& Radius() {
+		return *(Nullable1<float>**)((uintptr_t)this + 0x1C);
 	}
-	 Nullable1bool>*& OnBorder() {
-		return *(Nullable1bool>**)((uintptr_t)this + 0x24);
+	 Nullable1<bool>*& OnBorder() {
+		return *(Nullable1<bool>**)((uintptr_t)this + 0x24);
 	}
 
-	template <typename R = Vec2*> R GetOffset() {
+	template <typename R = Vec2> R GetOffset() {
 		return ((R (*)(CollisionConditionComponent*))(Il2CppBase() + 0xE23B14))(this);
 	}
 	template <typename R = void> R CopyTo(Il2CppObject* target) {

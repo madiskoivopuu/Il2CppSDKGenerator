@@ -27,10 +27,10 @@ public:
 	template <typename R = float> R& Shielded() {
 		return *(R*)((uintptr_t)this + 0x14);
 	}
-	template <typename R = DamageType*> R& DamageType() {
+	template <typename R = DamageType> R& DamageType() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
-	template <typename R = ActionType*> R& ActionType() {
+	template <typename R = ActionType> R& ActionType() {
 		return *(R*)((uintptr_t)this + 0x20);
 	}
 

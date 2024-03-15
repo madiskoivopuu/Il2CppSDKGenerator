@@ -28,8 +28,8 @@ public:
 		return *(R*)((uintptr_t)this + 0x31);
 	}
 
-	template <typename R = Il2CppArray<Il2CppString*>*> R GetNames(ActivateQuestsState* state) {
-		return ((R (*)(ActivateQuestsComponent*, ActivateQuestsState*))(Il2CppBase() + 0x18ACF68))(this, state);
+	template <typename R = Il2CppArray<Il2CppString*>*> R GetNames(ActivateQuestsState state) {
+		return ((R (*)(ActivateQuestsComponent*, ActivateQuestsState))(Il2CppBase() + 0x18ACF68))(this, state);
 	}
 	template <typename R = bool> R IsActivate(Il2CppString* questName) {
 		return ((R (*)(ActivateQuestsComponent*, Il2CppString*))(Il2CppBase() + 0x18ACFB4))(this, questName);

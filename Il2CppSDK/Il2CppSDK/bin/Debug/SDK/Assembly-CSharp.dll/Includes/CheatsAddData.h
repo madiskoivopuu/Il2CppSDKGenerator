@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "CheatsAddData"));
 	}
 
-	template <typename R = Kinds*> R& Kind() {
+	template <typename R = Kinds> R& Kind() {
 		return *(R*)((uintptr_t)this + 0x0);
 	}
 	template <typename R = Il2CppString*> R& Name() {
@@ -18,8 +18,8 @@ public:
 	template <typename R = int32_t> R& IntParam() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
-	 Nullable1float>*& FloatParam() {
-		return *(Nullable1float>**)((uintptr_t)this + 0x14);
+	 Nullable1<float>*& FloatParam() {
+		return *(Nullable1<float>**)((uintptr_t)this + 0x14);
 	}
 
 	template <typename R = void> R Write(uintptr_t writer) {

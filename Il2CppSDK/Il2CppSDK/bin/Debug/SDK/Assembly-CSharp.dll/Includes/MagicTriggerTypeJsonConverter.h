@@ -3,7 +3,7 @@
 #include "ValueEnumJsonConverter1.h" 
 #include "MagicTriggerType.h" 
 
-class MagicTriggerTypeJsonConverter : public ValueEnumJsonConverter1<MagicTriggerType*>
+class MagicTriggerTypeJsonConverter : public ValueEnumJsonConverter1<MagicTriggerType>
 {
 public: 
 

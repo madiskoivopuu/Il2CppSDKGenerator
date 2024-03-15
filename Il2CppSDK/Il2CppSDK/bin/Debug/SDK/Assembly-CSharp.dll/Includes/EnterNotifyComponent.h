@@ -9,10 +9,10 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "EnterNotifyComponent"));
 	}
 
-	template <typename R = EnterNotify*> R& OwnerNotify() {
+	template <typename R = EnterNotify> R& OwnerNotify() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
-	template <typename R = EnterNotify*> R& ForeignNotify() {
+	template <typename R = EnterNotify> R& ForeignNotify() {
 		return *(R*)((uintptr_t)this + 0x28);
 	}
 

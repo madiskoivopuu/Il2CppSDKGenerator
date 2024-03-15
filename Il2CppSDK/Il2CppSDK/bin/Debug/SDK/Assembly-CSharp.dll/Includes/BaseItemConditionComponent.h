@@ -24,7 +24,7 @@ public:
 	template <typename R = Il2CppString*> R& NoTag() {
 		return *(R*)((uintptr_t)this + 0x30);
 	}
-	template <typename R = EquipmentType*> R& EquipmentType() {
+	template <typename R = EquipmentType> R& EquipmentType() {
 		return *(R*)((uintptr_t)this + 0x38);
 	}
 

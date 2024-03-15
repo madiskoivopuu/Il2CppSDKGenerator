@@ -10,8 +10,8 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "TeamUnhiddenComponent"));
 	}
 
-	 HashSet1int64_t>*& Teams() {
-		return *(HashSet1int64_t>**)((uintptr_t)this + 0x10);
+	 HashSet1<int64_t>*& Teams() {
+		return *(HashSet1<int64_t>**)((uintptr_t)this + 0x10);
 	}
 
 

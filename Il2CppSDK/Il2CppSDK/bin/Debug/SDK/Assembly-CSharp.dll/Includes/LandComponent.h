@@ -3,7 +3,7 @@
 #include "EnumComponent1.h" 
 #include "LandType.h" 
 
-class LandComponent : public EnumComponent1<LandType*>
+class LandComponent : public EnumComponent1<LandType>
 {
 public: 
 

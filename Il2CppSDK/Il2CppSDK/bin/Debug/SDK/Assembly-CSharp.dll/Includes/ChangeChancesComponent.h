@@ -9,8 +9,8 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "ChangeChancesComponent"));
 	}
 
-	 Il2CppDictionary<Il2CppString*, Item*>*& Data() {
-		return *(Il2CppDictionary<Il2CppString*, Item*>**)((uintptr_t)this + 0x10);
+	 Il2CppDictionary<Il2CppString*, Item>*& Data() {
+		return *(Il2CppDictionary<Il2CppString*, Item>**)((uintptr_t)this + 0x10);
 	}
 
 	template <typename R = float> R GetValue(Il2CppString* name, float baseValue) {

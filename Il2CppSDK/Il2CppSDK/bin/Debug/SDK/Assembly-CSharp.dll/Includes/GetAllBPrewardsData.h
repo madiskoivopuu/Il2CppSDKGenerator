@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "GetAllBPrewardsData"));
 	}
 
-	template <typename R = CurrencyType*> R& CurrencyType() {
+	template <typename R = CurrencyType> R& CurrencyType() {
 		return *(R*)((uintptr_t)this + 0x0);
 	}
 

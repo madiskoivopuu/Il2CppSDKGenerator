@@ -18,8 +18,8 @@ public:
 	template <typename R = bool> R& IsBonusSent() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
-	 Il2CppList<LinkingPlayerData*>*& LinkedPlayers() {
-		return *(Il2CppList<LinkingPlayerData*>**)((uintptr_t)this + 0x18);
+	 Il2CppList<LinkingPlayerData>*& LinkedPlayers() {
+		return *(Il2CppList<LinkingPlayerData>**)((uintptr_t)this + 0x18);
 	}
 
 	template <typename R = void> R Write(uintptr_t writer) {

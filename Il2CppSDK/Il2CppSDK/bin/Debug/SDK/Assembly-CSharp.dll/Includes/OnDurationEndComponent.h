@@ -9,8 +9,8 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "OnDurationEndComponent"));
 	}
 
-	 Nullable1int32_t>*& MaxCount() {
-		return *(Nullable1int32_t>**)((uintptr_t)this + 0x10);
+	 Nullable1<int32_t>*& MaxCount() {
+		return *(Nullable1<int32_t>**)((uintptr_t)this + 0x10);
 	}
 	template <typename R = Il2CppString*> R& SpawnMagic() {
 		return *(R*)((uintptr_t)this + 0x18);

@@ -10,11 +10,11 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "MagicConditionComponent"));
 	}
 
-	 Nullable1int32_t>*& MaxCount() {
-		return *(Nullable1int32_t>**)((uintptr_t)this + 0x2C);
+	 Nullable1<int32_t>*& MaxCount() {
+		return *(Nullable1<int32_t>**)((uintptr_t)this + 0x2C);
 	}
-	 Nullable1int32_t>*& MinCount() {
-		return *(Nullable1int32_t>**)((uintptr_t)this + 0x34);
+	 Nullable1<int32_t>*& MinCount() {
+		return *(Nullable1<int32_t>**)((uintptr_t)this + 0x34);
 	}
 
 	template <typename R = void> R CopyTo(Il2CppObject* target) {

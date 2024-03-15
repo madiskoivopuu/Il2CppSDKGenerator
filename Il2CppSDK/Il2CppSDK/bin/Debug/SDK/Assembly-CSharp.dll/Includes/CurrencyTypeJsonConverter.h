@@ -3,7 +3,7 @@
 #include "TypeEnumJsonConverter1.h" 
 #include "CurrencyType.h" 
 
-class CurrencyTypeJsonConverter : public TypeEnumJsonConverter1<CurrencyType*>
+class CurrencyTypeJsonConverter : public TypeEnumJsonConverter1<CurrencyType>
 {
 public: 
 

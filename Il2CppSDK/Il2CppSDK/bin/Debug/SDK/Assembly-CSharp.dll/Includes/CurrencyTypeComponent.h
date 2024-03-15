@@ -3,7 +3,7 @@
 #include "EnumComponent1.h" 
 #include "CurrencyType.h" 
 
-class CurrencyTypeComponent : public EnumComponent1<CurrencyType*>
+class CurrencyTypeComponent : public EnumComponent1<CurrencyType>
 {
 public: 
 

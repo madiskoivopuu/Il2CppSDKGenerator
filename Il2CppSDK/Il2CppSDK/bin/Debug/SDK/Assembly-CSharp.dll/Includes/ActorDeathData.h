@@ -18,7 +18,7 @@ public:
 	template <typename R = int64_t> R& TimeOut() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
-	template <typename R = DamageStatType*> R& DamageStat() {
+	template <typename R = DamageStatType> R& DamageStat() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
 

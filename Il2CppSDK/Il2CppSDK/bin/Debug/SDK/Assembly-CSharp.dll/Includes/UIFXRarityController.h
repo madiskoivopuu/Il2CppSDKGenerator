@@ -13,8 +13,8 @@ public:
 		return *(R*)((uintptr_t)this + 0x18);
 	}
 
-	template <typename R = void> R SetFXRarity(Rarity* rarity) {
-		return ((R (*)(UIFXRarityController*, Rarity*))(Il2CppBase() + 0x102F66C))(this, rarity);
+	template <typename R = void> R SetFXRarity(Rarity rarity) {
+		return ((R (*)(UIFXRarityController*, Rarity))(Il2CppBase() + 0x102F66C))(this, rarity);
 	}
 
 };

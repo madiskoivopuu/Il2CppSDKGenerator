@@ -21,8 +21,8 @@ public:
 	template <typename R = Il2CppString*> R& Quest() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
-	 Nullable1int32_t>*& Grade() {
-		return *(Nullable1int32_t>**)((uintptr_t)this + 0x18);
+	 Nullable1<int32_t>*& Grade() {
+		return *(Nullable1<int32_t>**)((uintptr_t)this + 0x18);
 	}
 
 	template <typename R = void> R Write(uintptr_t writer) {

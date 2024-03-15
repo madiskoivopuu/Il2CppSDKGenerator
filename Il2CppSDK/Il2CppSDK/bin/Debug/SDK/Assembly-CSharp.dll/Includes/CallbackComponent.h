@@ -9,8 +9,8 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "CallbackComponent"));
 	}
 
-	 Action2TransactionEntity*, bool>*& Method() {
-		return *(Action2TransactionEntity*, bool>**)((uintptr_t)this + 0x10);
+	 Action2<TransactionEntity*, bool>*& Method() {
+		return *(Action2<TransactionEntity*, bool>**)((uintptr_t)this + 0x10);
 	}
 
 	template <typename R = void> R Clear() {

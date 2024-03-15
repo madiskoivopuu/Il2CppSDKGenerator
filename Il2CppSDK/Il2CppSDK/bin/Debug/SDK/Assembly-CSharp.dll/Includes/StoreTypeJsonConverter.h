@@ -3,7 +3,7 @@
 #include "TypeEnumJsonConverter1.h" 
 #include "StoreType.h" 
 
-class StoreTypeJsonConverter : public TypeEnumJsonConverter1<StoreType*>
+class StoreTypeJsonConverter : public TypeEnumJsonConverter1<StoreType>
 {
 public: 
 

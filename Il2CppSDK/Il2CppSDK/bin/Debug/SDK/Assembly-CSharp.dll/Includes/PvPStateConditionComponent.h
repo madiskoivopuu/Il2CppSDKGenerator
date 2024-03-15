@@ -9,10 +9,10 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "PvPStateConditionComponent"));
 	}
 
-	template <typename R = Il2CppArray<PvPState*>*> R& Any() {
+	template <typename R = Il2CppArray<PvPState>*> R& Any() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
-	template <typename R = Il2CppArray<PvPState*>*> R& Not() {
+	template <typename R = Il2CppArray<PvPState>*> R& Not() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
 

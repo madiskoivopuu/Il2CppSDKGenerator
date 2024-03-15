@@ -3,7 +3,7 @@
 #include "EnumComponent1.h" 
 #include "GuildType.h" 
 
-class GuildTypeComponent : public EnumComponent1<GuildType*>
+class GuildTypeComponent : public EnumComponent1<GuildType>
 {
 public: 
 

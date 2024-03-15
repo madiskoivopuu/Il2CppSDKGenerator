@@ -3,7 +3,7 @@
 #include "TypeListJsonConverter1.h" 
 #include "ItemCooldown.h" 
 
-class ItemCooldownsJsonConverter : public TypeListJsonConverter1<ItemCooldown*>
+class ItemCooldownsJsonConverter : public TypeListJsonConverter1<ItemCooldown>
 {
 public: 
 

@@ -15,17 +15,17 @@ public:
 	template <typename R = Il2CppArray<Il2CppString*>*> R& Names() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
-	template <typename R = RelationshipTypes*> R& Relationship() {
+	template <typename R = RelationshipTypes> R& Relationship() {
 		return *(R*)((uintptr_t)this + 0x20);
 	}
 	template <typename R = bool> R& IsAggroTarget() {
 		return *(R*)((uintptr_t)this + 0x24);
 	}
-	 Nullable1float>*& HpCoefLess() {
-		return *(Nullable1float>**)((uintptr_t)this + 0x28);
+	 Nullable1<float>*& HpCoefLess() {
+		return *(Nullable1<float>**)((uintptr_t)this + 0x28);
 	}
-	 Nullable1float>*& HpCoefMore() {
-		return *(Nullable1float>**)((uintptr_t)this + 0x30);
+	 Nullable1<float>*& HpCoefMore() {
+		return *(Nullable1<float>**)((uintptr_t)this + 0x30);
 	}
 	template <typename R = float> R& MinDistance() {
 		return *(R*)((uintptr_t)this + 0x38);
@@ -33,11 +33,11 @@ public:
 	template <typename R = float> R& MaxDistance() {
 		return *(R*)((uintptr_t)this + 0x3C);
 	}
-	 Nullable1bool>*& IsTriggerOwner() {
-		return *(Nullable1bool>**)((uintptr_t)this + 0x40);
+	 Nullable1<bool>*& IsTriggerOwner() {
+		return *(Nullable1<bool>**)((uintptr_t)this + 0x40);
 	}
-	 Nullable1float>*& ViewAngle() {
-		return *(Nullable1float>**)((uintptr_t)this + 0x44);
+	 Nullable1<float>*& ViewAngle() {
+		return *(Nullable1<float>**)((uintptr_t)this + 0x44);
 	}
 
 	template <typename R = void> R CopyTo(Il2CppObject* target) {

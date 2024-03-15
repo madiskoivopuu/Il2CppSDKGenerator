@@ -115,7 +115,7 @@ namespace Il2CppSDK
 
                 case ElementType.ValueType:
                     if (type.TryGetTypeDef() != null)
-                        result = namespace_ + GetFormattedFilenameForType(type.TryGetTypeDef().Name) + "*";
+                        result = namespace_ + GetFormattedFilenameForType(type.TryGetTypeDef().Name);
 
                     break;
                 case ElementType.Class:
@@ -391,10 +391,6 @@ namespace Il2CppSDK
 
         static void ParseClass(TypeDef clazz)
         {
-            if (clazz.Name.Contains("BlueprintContext"))
-                Console.WriteLine("aaaa");
-            //else
-            //    return;
 
             var module = clazz.Module;
             var namespaze = GetFormattedFilenameForType(clazz.Namespace);

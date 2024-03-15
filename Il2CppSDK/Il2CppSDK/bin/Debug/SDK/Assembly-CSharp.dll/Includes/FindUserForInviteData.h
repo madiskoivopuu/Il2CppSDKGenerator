@@ -12,7 +12,7 @@ public:
 	template <typename R = Il2CppString*> R& UserName() {
 		return *(R*)((uintptr_t)this + 0x0);
 	}
-	template <typename R = FindUserForInviteTarget*> R& Target() {
+	template <typename R = FindUserForInviteTarget> R& Target() {
 		return *(R*)((uintptr_t)this + 0x8);
 	}
 

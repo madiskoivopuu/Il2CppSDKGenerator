@@ -21,8 +21,8 @@ public:
 	template <typename R = Il2CppString*> R& DescriptionText() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
-	 Nullable1Icon*>*& Icon() {
-		return *(Nullable1Icon*>**)((uintptr_t)this + 0x20);
+	 Nullable1<Icon>*& Icon() {
+		return *(Nullable1<Icon>**)((uintptr_t)this + 0x20);
 	}
 	template <typename R = Il2CppString*> R& UniqueLookup() {
 		return *(R*)((uintptr_t)this + 0x48);
@@ -51,7 +51,7 @@ public:
 	template <typename R = int64_t> R& QAEndTime() {
 		return *(R*)((uintptr_t)this + 0x80);
 	}
-	template <typename R = CyclicTime*> R& CyclicTime() {
+	template <typename R = CyclicTime> R& CyclicTime() {
 		return *(R*)((uintptr_t)this + 0x88);
 	}
 	template <typename R = Il2CppString*> R& InfoDialogue() {
@@ -72,16 +72,16 @@ public:
 	template <typename R = Il2CppString*> R& Point() {
 		return *(R*)((uintptr_t)this + 0xE0);
 	}
-	 Nullable1int32_t>*& Version() {
-		return *(Nullable1int32_t>**)((uintptr_t)this + 0xE8);
+	 Nullable1<int32_t>*& Version() {
+		return *(Nullable1<int32_t>**)((uintptr_t)this + 0xE8);
 	}
 	template <typename R = float> R& TransactionDuration() {
 		return *(R*)((uintptr_t)this + 0xF0);
 	}
-	template <typename R = Ease*> R& TransactionEase() {
+	template <typename R = Ease> R& TransactionEase() {
 		return *(R*)((uintptr_t)this + 0xF4);
 	}
-	template <typename R = Il2CppArray<Resource*>*> R& Resources() {
+	template <typename R = Il2CppArray<Resource>*> R& Resources() {
 		return *(R*)((uintptr_t)this + 0xF8);
 	}
 	template <typename R = bool> R& ServerLifeTime() {

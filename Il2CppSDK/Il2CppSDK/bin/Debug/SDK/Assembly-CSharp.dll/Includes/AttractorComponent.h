@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "AttractorComponent"));
 	}
 
-	template <typename R = DirectionType*> R& Direction() {
+	template <typename R = DirectionType> R& Direction() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
 	template <typename R = float> R& Distance() {

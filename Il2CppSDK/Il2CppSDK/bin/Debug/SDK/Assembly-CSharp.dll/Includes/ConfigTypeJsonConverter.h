@@ -3,7 +3,7 @@
 #include "ValueEnumJsonConverter1.h" 
 #include "ConfigType.h" 
 
-class ConfigTypeJsonConverter : public ValueEnumJsonConverter1<ConfigType*>
+class ConfigTypeJsonConverter : public ValueEnumJsonConverter1<ConfigType>
 {
 public: 
 

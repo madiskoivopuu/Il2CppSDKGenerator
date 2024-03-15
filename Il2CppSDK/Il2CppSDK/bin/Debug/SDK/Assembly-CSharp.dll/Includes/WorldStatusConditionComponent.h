@@ -9,10 +9,10 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "WorldStatusConditionComponent"));
 	}
 
-	template <typename R = Il2CppArray<ProtoModels::WorldStatusType*>*> R& Any() {
+	template <typename R = Il2CppArray<ProtoModels::WorldStatusType>*> R& Any() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
-	template <typename R = Il2CppArray<ProtoModels::WorldStatusType*>*> R& Not() {
+	template <typename R = Il2CppArray<ProtoModels::WorldStatusType>*> R& Not() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
 

@@ -18,7 +18,7 @@ public:
 	template <typename R = Il2CppArray<float>*> R& CoefByGrade() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
-	template <typename R = Il2CppArray<TagValue*>*> R& Items() {
+	template <typename R = Il2CppArray<TagValue>*> R& Items() {
 		return *(R*)((uintptr_t)this + 0x20);
 	}
 

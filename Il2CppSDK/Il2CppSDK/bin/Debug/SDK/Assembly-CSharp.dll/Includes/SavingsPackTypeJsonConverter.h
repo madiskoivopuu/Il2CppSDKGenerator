@@ -3,7 +3,7 @@
 #include "TypeEnumJsonConverter1.h" 
 #include "SavingsPackType.h" 
 
-class SavingsPackTypeJsonConverter : public TypeEnumJsonConverter1<SavingsPackType*>
+class SavingsPackTypeJsonConverter : public TypeEnumJsonConverter1<SavingsPackType>
 {
 public: 
 

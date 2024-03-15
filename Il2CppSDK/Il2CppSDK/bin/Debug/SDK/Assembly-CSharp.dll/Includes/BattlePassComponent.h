@@ -21,7 +21,7 @@ public:
 	template <typename R = int32_t> R& InfinityPoints() {
 		return *(R*)((uintptr_t)this + 0x24);
 	}
-	template <typename R = CurrencyType*> R& CurrencyType() {
+	template <typename R = CurrencyType> R& CurrencyType() {
 		return *(R*)((uintptr_t)this + 0x28);
 	}
 	template <typename R = bool> R& NextBestReward() {
@@ -33,16 +33,16 @@ public:
 	template <typename R = Il2CppArray<uint8_t>*> R& BestPremiumRewards() {
 		return *(R*)((uintptr_t)this + 0x38);
 	}
-	template <typename R = Il2CppArray<MainServerRewardType*>*> R& MasterServerMainRewards() {
+	template <typename R = Il2CppArray<MainServerRewardType>*> R& MasterServerMainRewards() {
 		return *(R*)((uintptr_t)this + 0x40);
 	}
-	template <typename R = Il2CppArray<MainServerRewardType*>*> R& MasterServerPremiumRewards() {
+	template <typename R = Il2CppArray<MainServerRewardType>*> R& MasterServerPremiumRewards() {
 		return *(R*)((uintptr_t)this + 0x48);
 	}
-	template <typename R = Il2CppArray<Resource*>*> R& MainReward() {
+	template <typename R = Il2CppArray<Resource>*> R& MainReward() {
 		return *(R*)((uintptr_t)this + 0x50);
 	}
-	template <typename R = Il2CppArray<Resource*>*> R& PremiumReward() {
+	template <typename R = Il2CppArray<Resource>*> R& PremiumReward() {
 		return *(R*)((uintptr_t)this + 0x58);
 	}
 

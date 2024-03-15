@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "RandomNameComponent"));
 	}
 
-	template <typename R = RandomNameRules*> R& Rule() {
+	template <typename R = RandomNameRules> R& Rule() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
 	template <typename R = Il2CppArray<Il2CppString*>*> R& Names() {

@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "LocationRulesComponent"));
 	}
 
-	template <typename R = StatusNameShow*> R& StatusNameShow() {
+	template <typename R = StatusNameShow> R& StatusNameShow() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
 	template <typename R = bool> R& KillOnTimeout() {
@@ -18,14 +18,14 @@ public:
 	template <typename R = Il2CppString*> R& KillOnTimeoutCondition() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
-	 Nullable1float>*& ArmorDurabilityDecreaseCoef() {
-		return *(Nullable1float>**)((uintptr_t)this + 0x20);
+	 Nullable1<float>*& ArmorDurabilityDecreaseCoef() {
+		return *(Nullable1<float>**)((uintptr_t)this + 0x20);
 	}
-	 Nullable1float>*& WeaponDurabilityDecreaseCoef() {
-		return *(Nullable1float>**)((uintptr_t)this + 0x28);
+	 Nullable1<float>*& WeaponDurabilityDecreaseCoef() {
+		return *(Nullable1<float>**)((uintptr_t)this + 0x28);
 	}
-	 Nullable1float>*& OnDeathDurabilityDecreaseCoef() {
-		return *(Nullable1float>**)((uintptr_t)this + 0x30);
+	 Nullable1<float>*& OnDeathDurabilityDecreaseCoef() {
+		return *(Nullable1<float>**)((uintptr_t)this + 0x30);
 	}
 	template <typename R = bool> R& PersonalCorpse() {
 		return *(R*)((uintptr_t)this + 0x38);
@@ -33,7 +33,7 @@ public:
 	template <typename R = bool> R& RespawnOnArena() {
 		return *(R*)((uintptr_t)this + 0x39);
 	}
-	template <typename R = SpawnTypes*> R& SpawnType() {
+	template <typename R = SpawnTypes> R& SpawnType() {
 		return *(R*)((uintptr_t)this + 0x3A);
 	}
 	template <typename R = bool> R& ShowChangeHealthOnlyForPlayer() {

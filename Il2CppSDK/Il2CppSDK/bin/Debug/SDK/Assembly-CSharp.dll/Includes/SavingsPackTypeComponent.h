@@ -3,7 +3,7 @@
 #include "EnumComponent1.h" 
 #include "SavingsPackType.h" 
 
-class SavingsPackTypeComponent : public EnumComponent1<SavingsPackType*>
+class SavingsPackTypeComponent : public EnumComponent1<SavingsPackType>
 {
 public: 
 

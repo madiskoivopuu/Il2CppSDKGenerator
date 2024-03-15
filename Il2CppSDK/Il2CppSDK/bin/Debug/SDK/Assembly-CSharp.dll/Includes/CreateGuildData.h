@@ -21,7 +21,7 @@ public:
 	template <typename R = int32_t> R& Language() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
-	template <typename R = GuildType*> R& Type() {
+	template <typename R = GuildType> R& Type() {
 		return *(R*)((uintptr_t)this + 0x1C);
 	}
 

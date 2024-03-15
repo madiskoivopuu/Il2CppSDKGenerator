@@ -15,14 +15,14 @@ public:
 	template <typename R = Il2CppObject*> static R& _threadLock() {
 		return *(R*)((uintptr_t)StaticClass()->static_fields + 0x0);
 	}
-	 static Il2CppDictionary<Il2CppString*, OldComponentLookup*>*& _oldComponentsLookup() {
-		return *(Il2CppDictionary<Il2CppString*, OldComponentLookup*>**)((uintptr_t)StaticClass()->static_fields + 0x8);
+	 static Il2CppDictionary<Il2CppString*, OldComponentLookup>*& _oldComponentsLookup() {
+		return *(Il2CppDictionary<Il2CppString*, OldComponentLookup>**)((uintptr_t)StaticClass()->static_fields + 0x8);
 	}
 	 static Il2CppDictionary<int32_t, uintptr_t>*& _oldComponentsMethodLookup() {
 		return *(Il2CppDictionary<int32_t, uintptr_t>**)((uintptr_t)StaticClass()->static_fields + 0x10);
 	}
 
-	template <typename R = OldComponentLookup*> static R GetComponentWithName(Il2CppString* componentKey) {
+	template <typename R = OldComponentLookup> static R GetComponentWithName(Il2CppString* componentKey) {
 		return ((R (*)(void *, Il2CppString*))(Il2CppBase() + 0xFE064C))(0, componentKey);
 	}
 	template <typename R = uintptr_t> static R GetConvertMethodWithIndex(int32_t componentIndex) {

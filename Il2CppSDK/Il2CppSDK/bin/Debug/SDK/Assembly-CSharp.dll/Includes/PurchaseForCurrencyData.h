@@ -12,7 +12,7 @@ public:
 	template <typename R = int64_t> R& StoreId() {
 		return *(R*)((uintptr_t)this + 0x0);
 	}
-	template <typename R = CurrencyType*> R& Currency() {
+	template <typename R = CurrencyType> R& Currency() {
 		return *(R*)((uintptr_t)this + 0x8);
 	}
 

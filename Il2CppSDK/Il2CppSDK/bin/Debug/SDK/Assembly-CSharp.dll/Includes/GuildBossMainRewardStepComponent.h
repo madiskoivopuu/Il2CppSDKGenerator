@@ -11,7 +11,7 @@ public:
 	}
 
 
-	template <typename R = CurrencyType*> R get_CurrencyType() {
+	template <typename R = CurrencyType> R get_CurrencyType() {
 		return ((R (*)(GuildBossMainRewardStepComponent*))(Il2CppBase() + 0x12E72D8))(this);
 	}
 	template <typename R = bool> R get_Premium() {

@@ -9,8 +9,8 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "MaxHealthAndDmgCoefData"));
 	}
 
-	 Il2CppList<Item*>*& Values() {
-		return *(Il2CppList<Item*>**)((uintptr_t)this + 0x0);
+	 Il2CppList<Item>*& Values() {
+		return *(Il2CppList<Item>**)((uintptr_t)this + 0x0);
 	}
 
 	template <typename R = void> R Write(uintptr_t writer) {

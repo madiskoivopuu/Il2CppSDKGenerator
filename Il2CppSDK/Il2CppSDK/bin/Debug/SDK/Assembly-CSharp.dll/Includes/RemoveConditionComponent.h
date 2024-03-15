@@ -36,14 +36,14 @@ public:
 	template <typename R = Il2CppString*> R& TargetNoEquipClass() {
 		return *(R*)((uintptr_t)this + 0x30);
 	}
-	 Nullable1bool>*& TargetSneaked() {
-		return *(Nullable1bool>**)((uintptr_t)this + 0x38);
+	 Nullable1<bool>*& TargetSneaked() {
+		return *(Nullable1<bool>**)((uintptr_t)this + 0x38);
 	}
 	template <typename R = Il2CppString*> R& TargetHasntMagic() {
 		return *(R*)((uintptr_t)this + 0x40);
 	}
-	 Nullable1bool>*& TargetRiding() {
-		return *(Nullable1bool>**)((uintptr_t)this + 0x48);
+	 Nullable1<bool>*& TargetRiding() {
+		return *(Nullable1<bool>**)((uintptr_t)this + 0x48);
 	}
 	template <typename R = Il2CppString*> R& TargetCondition() {
 		return *(R*)((uintptr_t)this + 0x50);

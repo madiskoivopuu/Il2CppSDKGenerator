@@ -36,20 +36,20 @@ public:
 	template <typename R = Il2CppString*> R& instanceId() {
 		return *(R*)((uintptr_t)this + 0x50);
 	}
-	 Nullable1double>*& revenue() {
-		return *(Nullable1double>**)((uintptr_t)this + 0x58);
+	 Nullable1<double>*& revenue() {
+		return *(Nullable1<double>**)((uintptr_t)this + 0x58);
 	}
 	template <typename R = Il2CppString*> R& precision() {
 		return *(R*)((uintptr_t)this + 0x68);
 	}
-	 Nullable1double>*& lifetimeRevenue() {
-		return *(Nullable1double>**)((uintptr_t)this + 0x70);
+	 Nullable1<double>*& lifetimeRevenue() {
+		return *(Nullable1<double>**)((uintptr_t)this + 0x70);
 	}
 	template <typename R = Il2CppString*> R& encryptedCPM() {
 		return *(R*)((uintptr_t)this + 0x80);
 	}
-	 Nullable1int32_t>*& conversionValue() {
-		return *(Nullable1int32_t>**)((uintptr_t)this + 0x88);
+	 Nullable1<int32_t>*& conversionValue() {
+		return *(Nullable1<int32_t>**)((uintptr_t)this + 0x88);
 	}
 	template <typename R = Il2CppString*> R& allData() {
 		return *(R*)((uintptr_t)this + 0x90);

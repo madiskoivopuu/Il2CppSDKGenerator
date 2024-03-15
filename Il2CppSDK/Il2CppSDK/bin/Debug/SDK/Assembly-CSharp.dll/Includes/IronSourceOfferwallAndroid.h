@@ -9,8 +9,8 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "IronSourceOfferwallAndroid"));
 	}
 
-	 Action1IronSourceError*>*& OnOfferwallShowFailed() {
-		return *(Action1IronSourceError*>**)((uintptr_t)this + 0x20);
+	 Action1<IronSourceError*>*& OnOfferwallShowFailed() {
+		return *(Action1<IronSourceError*>**)((uintptr_t)this + 0x20);
 	}
 	template <typename R = uintptr_t> R& OnOfferwallOpened() {
 		return *(R*)((uintptr_t)this + 0x28);
@@ -18,21 +18,21 @@ public:
 	template <typename R = uintptr_t> R& OnOfferwallClosed() {
 		return *(R*)((uintptr_t)this + 0x30);
 	}
-	 Action1IronSourceError*>*& OnGetOfferwallCreditsFailed() {
-		return *(Action1IronSourceError*>**)((uintptr_t)this + 0x38);
+	 Action1<IronSourceError*>*& OnGetOfferwallCreditsFailed() {
+		return *(Action1<IronSourceError*>**)((uintptr_t)this + 0x38);
 	}
-	 Action1Il2CppDictionary<Il2CppString*, Il2CppObject*>*>*& OnOfferwallAdCredited() {
-		return *(Action1Il2CppDictionary<Il2CppString*, Il2CppObject*>*>**)((uintptr_t)this + 0x40);
+	 Action1<Il2CppDictionary<Il2CppString*, Il2CppObject*>*>*& OnOfferwallAdCredited() {
+		return *(Action1<Il2CppDictionary<Il2CppString*, Il2CppObject*>*>**)((uintptr_t)this + 0x40);
 	}
-	 Action1bool>*& OnOfferwallAvailable() {
-		return *(Action1bool>**)((uintptr_t)this + 0x48);
+	 Action1<bool>*& OnOfferwallAvailable() {
+		return *(Action1<bool>**)((uintptr_t)this + 0x48);
 	}
 
-	template <typename R = void> R add_OnOfferwallShowFailed(Action1IronSourceError*>* value) {
-		return ((R (*)(IronSourceOfferwallAndroid*, Action1IronSourceError*>*))(Il2CppBase() + 0x10DD09C))(this, value);
+	template <typename R = void> R add_OnOfferwallShowFailed(Action1<IronSourceError*>* value) {
+		return ((R (*)(IronSourceOfferwallAndroid*, Action1<IronSourceError*>*))(Il2CppBase() + 0x10DD09C))(this, value);
 	}
-	template <typename R = void> R remove_OnOfferwallShowFailed(Action1IronSourceError*>* value) {
-		return ((R (*)(IronSourceOfferwallAndroid*, Action1IronSourceError*>*))(Il2CppBase() + 0x10DD13C))(this, value);
+	template <typename R = void> R remove_OnOfferwallShowFailed(Action1<IronSourceError*>* value) {
+		return ((R (*)(IronSourceOfferwallAndroid*, Action1<IronSourceError*>*))(Il2CppBase() + 0x10DD13C))(this, value);
 	}
 	template <typename R = void> R add_OnOfferwallOpened(uintptr_t value) {
 		return ((R (*)(IronSourceOfferwallAndroid*, uintptr_t))(Il2CppBase() + 0x10DD1DC))(this, value);
@@ -46,23 +46,23 @@ public:
 	template <typename R = void> R remove_OnOfferwallClosed(uintptr_t value) {
 		return ((R (*)(IronSourceOfferwallAndroid*, uintptr_t))(Il2CppBase() + 0x10DD3BC))(this, value);
 	}
-	template <typename R = void> R add_OnGetOfferwallCreditsFailed(Action1IronSourceError*>* value) {
-		return ((R (*)(IronSourceOfferwallAndroid*, Action1IronSourceError*>*))(Il2CppBase() + 0x10DD45C))(this, value);
+	template <typename R = void> R add_OnGetOfferwallCreditsFailed(Action1<IronSourceError*>* value) {
+		return ((R (*)(IronSourceOfferwallAndroid*, Action1<IronSourceError*>*))(Il2CppBase() + 0x10DD45C))(this, value);
 	}
-	template <typename R = void> R remove_OnGetOfferwallCreditsFailed(Action1IronSourceError*>* value) {
-		return ((R (*)(IronSourceOfferwallAndroid*, Action1IronSourceError*>*))(Il2CppBase() + 0x10DD4FC))(this, value);
+	template <typename R = void> R remove_OnGetOfferwallCreditsFailed(Action1<IronSourceError*>* value) {
+		return ((R (*)(IronSourceOfferwallAndroid*, Action1<IronSourceError*>*))(Il2CppBase() + 0x10DD4FC))(this, value);
 	}
-	template <typename R = void> R add_OnOfferwallAdCredited(Action1Il2CppDictionary<Il2CppString*, Il2CppObject*>*>* value) {
-		return ((R (*)(IronSourceOfferwallAndroid*, Action1Il2CppDictionary<Il2CppString*, Il2CppObject*>*>*))(Il2CppBase() + 0x10DD59C))(this, value);
+	template <typename R = void> R add_OnOfferwallAdCredited(Action1<Il2CppDictionary<Il2CppString*, Il2CppObject*>*>* value) {
+		return ((R (*)(IronSourceOfferwallAndroid*, Action1<Il2CppDictionary<Il2CppString*, Il2CppObject*>*>*))(Il2CppBase() + 0x10DD59C))(this, value);
 	}
-	template <typename R = void> R remove_OnOfferwallAdCredited(Action1Il2CppDictionary<Il2CppString*, Il2CppObject*>*>* value) {
-		return ((R (*)(IronSourceOfferwallAndroid*, Action1Il2CppDictionary<Il2CppString*, Il2CppObject*>*>*))(Il2CppBase() + 0x10DD63C))(this, value);
+	template <typename R = void> R remove_OnOfferwallAdCredited(Action1<Il2CppDictionary<Il2CppString*, Il2CppObject*>*>* value) {
+		return ((R (*)(IronSourceOfferwallAndroid*, Action1<Il2CppDictionary<Il2CppString*, Il2CppObject*>*>*))(Il2CppBase() + 0x10DD63C))(this, value);
 	}
-	template <typename R = void> R add_OnOfferwallAvailable(Action1bool>* value) {
-		return ((R (*)(IronSourceOfferwallAndroid*, Action1bool>*))(Il2CppBase() + 0x10DD6DC))(this, value);
+	template <typename R = void> R add_OnOfferwallAvailable(Action1<bool>* value) {
+		return ((R (*)(IronSourceOfferwallAndroid*, Action1<bool>*))(Il2CppBase() + 0x10DD6DC))(this, value);
 	}
-	template <typename R = void> R remove_OnOfferwallAvailable(Action1bool>* value) {
-		return ((R (*)(IronSourceOfferwallAndroid*, Action1bool>*))(Il2CppBase() + 0x10DD77C))(this, value);
+	template <typename R = void> R remove_OnOfferwallAvailable(Action1<bool>* value) {
+		return ((R (*)(IronSourceOfferwallAndroid*, Action1<bool>*))(Il2CppBase() + 0x10DD77C))(this, value);
 	}
 	template <typename R = void> R onOfferwallOpened() {
 		return ((R (*)(IronSourceOfferwallAndroid*))(Il2CppBase() + 0x10DD81C))(this);

@@ -30,7 +30,7 @@ public:
 	template <typename R = float> R& ShieldRevealTime() {
 		return *(R*)((uintptr_t)this + 0x34);
 	}
-	template <typename R = Il2CppArray<Vec2SL*>*> R& Points() {
+	template <typename R = Il2CppArray<Vec2SL>*> R& Points() {
 		return *(R*)((uintptr_t)this + 0x38);
 	}
 	template <typename R = int32_t> R& PointIndex() {
@@ -43,7 +43,7 @@ public:
 		return *(R*)((uintptr_t)this + 0x45);
 	}
 
-	template <typename R = Vec2*> R GetPoint() {
+	template <typename R = Vec2> R GetPoint() {
 		return ((R (*)(PortalComponent*))(Il2CppBase() + 0x1576D88))(this);
 	}
 	template <typename R = void> R CopyTo(Il2CppObject* targetObject) {

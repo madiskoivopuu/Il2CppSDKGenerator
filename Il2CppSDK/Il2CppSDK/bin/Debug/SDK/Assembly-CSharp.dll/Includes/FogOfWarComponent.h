@@ -12,7 +12,7 @@ public:
 	template <typename R = Il2CppString*> R& PrefabName() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
-	template <typename R = ProtoModels::WorldResourcesType*> R& ResourceType() {
+	template <typename R = ProtoModels::WorldResourcesType> R& ResourceType() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
 

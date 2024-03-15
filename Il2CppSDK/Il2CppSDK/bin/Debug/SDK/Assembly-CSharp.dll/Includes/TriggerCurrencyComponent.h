@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "TriggerCurrencyComponent"));
 	}
 
-	template <typename R = CurrencyType*> R& Type() {
+	template <typename R = CurrencyType> R& Type() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
 	template <typename R = bool> R& Spending() {

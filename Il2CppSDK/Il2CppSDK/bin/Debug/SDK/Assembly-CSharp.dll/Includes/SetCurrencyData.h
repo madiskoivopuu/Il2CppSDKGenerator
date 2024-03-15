@@ -12,7 +12,7 @@ public:
 	template <typename R = int32_t> R& TargetId() {
 		return *(R*)((uintptr_t)this + 0x0);
 	}
-	template <typename R = CurrencyType*> R& CurrencyType() {
+	template <typename R = CurrencyType> R& CurrencyType() {
 		return *(R*)((uintptr_t)this + 0x4);
 	}
 	template <typename R = int32_t> R& Count() {

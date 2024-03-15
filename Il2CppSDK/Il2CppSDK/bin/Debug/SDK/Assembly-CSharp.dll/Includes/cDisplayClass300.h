@@ -9,15 +9,12 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "<>c__DisplayClass30_0"));
 	}
 
-	template <typename R = IronSourcePlacement*> R& IronSourcePlacement() {
-		return *(R*)((uintptr_t)this + 0x10);
-	}
-	template <typename R = IronSourceAdInfo*> R& IronSourceAdInfo() {
-		return *(R*)((uintptr_t)this + 0x18);
+	 Action1<Il2CppString*>*& callback() {
+		return *(Action1<Il2CppString*>**)((uintptr_t)this + 0x10);
 	}
 
-	template <typename R = void> R registerRewardedVideoEventsb__7() {
-		return ((R (*)(cDisplayClass300*))(Il2CppBase() + 0x1155690))(this);
+	template <typename R = void> R DoGetAnotherServerAuthCodeb__0(uintptr_t tokenResult) {
+		return ((R (*)(cDisplayClass300*, uintptr_t))(Il2CppBase() + 0x1147BFC))(this, tokenResult);
 	}
 
 };

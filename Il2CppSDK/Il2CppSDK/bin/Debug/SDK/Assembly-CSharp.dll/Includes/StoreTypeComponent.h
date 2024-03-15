@@ -3,7 +3,7 @@
 #include "EnumComponent1.h" 
 #include "StoreType.h" 
 
-class StoreTypeComponent : public EnumComponent1<StoreType*>
+class StoreTypeComponent : public EnumComponent1<StoreType>
 {
 public: 
 

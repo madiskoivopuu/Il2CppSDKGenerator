@@ -24,8 +24,8 @@ public:
 	template <typename R = uintptr_t> R& OnBannerAdClicked() {
 		return *(R*)((uintptr_t)this + 0x40);
 	}
-	 Action1IronSourceError*>*& OnBannerAdLoadFailed() {
-		return *(Action1IronSourceError*>**)((uintptr_t)this + 0x48);
+	 Action1<IronSourceError*>*& OnBannerAdLoadFailed() {
+		return *(Action1<IronSourceError*>**)((uintptr_t)this + 0x48);
 	}
 
 	template <typename R = void> R add_OnBannerAdLoaded(uintptr_t value) {
@@ -58,11 +58,11 @@ public:
 	template <typename R = void> R remove_OnBannerAdClicked(uintptr_t value) {
 		return ((R (*)(IronSourceBannerAndroid*, uintptr_t))(Il2CppBase() + 0x124CC9C))(this, value);
 	}
-	template <typename R = void> R add_OnBannerAdLoadFailed(Action1IronSourceError*>* value) {
-		return ((R (*)(IronSourceBannerAndroid*, Action1IronSourceError*>*))(Il2CppBase() + 0x124CD3C))(this, value);
+	template <typename R = void> R add_OnBannerAdLoadFailed(Action1<IronSourceError*>* value) {
+		return ((R (*)(IronSourceBannerAndroid*, Action1<IronSourceError*>*))(Il2CppBase() + 0x124CD3C))(this, value);
 	}
-	template <typename R = void> R remove_OnBannerAdLoadFailed(Action1IronSourceError*>* value) {
-		return ((R (*)(IronSourceBannerAndroid*, Action1IronSourceError*>*))(Il2CppBase() + 0x124CDDC))(this, value);
+	template <typename R = void> R remove_OnBannerAdLoadFailed(Action1<IronSourceError*>* value) {
+		return ((R (*)(IronSourceBannerAndroid*, Action1<IronSourceError*>*))(Il2CppBase() + 0x124CDDC))(this, value);
 	}
 	template <typename R = void> R onBannerAdLoaded() {
 		return ((R (*)(IronSourceBannerAndroid*))(Il2CppBase() + 0x124D6D0))(this);

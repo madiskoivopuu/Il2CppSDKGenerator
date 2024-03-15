@@ -16,7 +16,7 @@ public:
 	template <typename R = void> R CopyTo(Il2CppObject* target) {
 		return ((R (*)(EquipTagsComponent*, Il2CppObject*))(Il2CppBase() + 0x137C34C))(this, target);
 	}
-	template <typename R = ModifierGroup*> R GetGroup() {
+	template <typename R = ModifierGroup> R GetGroup() {
 		return ((R (*)(EquipTagsComponent*))(Il2CppBase() + 0x137C3E4))(this);
 	}
 	template <typename R = float> R GetValue() {

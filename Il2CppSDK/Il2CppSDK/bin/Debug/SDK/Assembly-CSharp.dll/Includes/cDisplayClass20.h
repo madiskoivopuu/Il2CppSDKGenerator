@@ -9,12 +9,15 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "<>c__DisplayClass2_0"));
 	}
 
-	template <typename R = Il2CppString*> R& name() {
+	template <typename R = OnCaptureOverlayStateListenerProxy*> R& 4__this() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
+	template <typename R = int32_t> R& overlayState() {
+		return *(R*)((uintptr_t)this + 0x18);
+	}
 
-	template <typename R = bool> R Containsb__0(Il2CppString* t) {
-		return ((R (*)(cDisplayClass20*, Il2CppString*))(Il2CppBase() + 0x10BC414))(this, t);
+	template <typename R = void> R onCaptureOverlayStateChangedb__0() {
+		return ((R (*)(cDisplayClass20*))(Il2CppBase() + 0x22A89B8))(this);
 	}
 
 };

@@ -13,7 +13,7 @@ public:
 	template <typename R = void> R UpdateOpenKey(Il2CppString* token) {
 		return ((R (*)(IKefirAuthValidator*, Il2CppString*))(Il2CppBase() + 0x0))(this, token);
 	}
-	template <typename R = KefirAuthValidatorResult*> R Validate(Il2CppString* token) {
+	template <typename R = KefirAuthValidatorResult> R Validate(Il2CppString* token) {
 		return ((R (*)(IKefirAuthValidator*, Il2CppString*))(Il2CppBase() + 0x0))(this, token);
 	}
 

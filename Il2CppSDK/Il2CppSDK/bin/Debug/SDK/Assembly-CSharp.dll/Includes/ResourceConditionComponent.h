@@ -12,11 +12,11 @@ public:
 	template <typename R = Il2CppString*> R& Name() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
-	 Nullable1int32_t>*& MinCount() {
-		return *(Nullable1int32_t>**)((uintptr_t)this + 0x18);
+	 Nullable1<int32_t>*& MinCount() {
+		return *(Nullable1<int32_t>**)((uintptr_t)this + 0x18);
 	}
-	 Nullable1int32_t>*& MaxCount() {
-		return *(Nullable1int32_t>**)((uintptr_t)this + 0x20);
+	 Nullable1<int32_t>*& MaxCount() {
+		return *(Nullable1<int32_t>**)((uintptr_t)this + 0x20);
 	}
 	template <typename R = bool> R& WithExternal() {
 		return *(R*)((uintptr_t)this + 0x28);

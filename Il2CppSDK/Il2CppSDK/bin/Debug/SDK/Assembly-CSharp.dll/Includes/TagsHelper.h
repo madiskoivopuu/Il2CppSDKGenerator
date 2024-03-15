@@ -13,14 +13,14 @@ public:
 	template <typename R = bool> static R TryAddDataTag(ITagsEntity* targetData, Il2CppString* tag) {
 		return ((R (*)(void *, ITagsEntity*, Il2CppString*))(Il2CppBase() + 0x16A376C))(0, targetData, tag);
 	}
-	template <typename R = bool> static R ContainsAnyTags(IList1Il2CppString*>* targetTags, Il2CppArray<Il2CppString*>* tags) {
-		return ((R (*)(void *, IList1Il2CppString*>*, Il2CppArray<Il2CppString*>*))(Il2CppBase() + 0x16A3B28))(0, targetTags, tags);
+	template <typename R = bool> static R ContainsAnyTags(IList1<Il2CppString*>* targetTags, Il2CppArray<Il2CppString*>* tags) {
+		return ((R (*)(void *, IList1<Il2CppString*>*, Il2CppArray<Il2CppString*>*))(Il2CppBase() + 0x16A3B28))(0, targetTags, tags);
 	}
-	template <typename R = bool> static R ContainsAllTags(IList1Il2CppString*>* targetTags, Il2CppArray<Il2CppString*>* tags) {
-		return ((R (*)(void *, IList1Il2CppString*>*, Il2CppArray<Il2CppString*>*))(Il2CppBase() + 0x16A3CAC))(0, targetTags, tags);
+	template <typename R = bool> static R ContainsAllTags(IList1<Il2CppString*>* targetTags, Il2CppArray<Il2CppString*>* tags) {
+		return ((R (*)(void *, IList1<Il2CppString*>*, Il2CppArray<Il2CppString*>*))(Il2CppBase() + 0x16A3CAC))(0, targetTags, tags);
 	}
-	template <typename R = bool> static R ContainsTag(IList1Il2CppString*>* targetTags, Il2CppString* tag) {
-		return ((R (*)(void *, IList1Il2CppString*>*, Il2CppString*))(Il2CppBase() + 0x16A3E34))(0, targetTags, tag);
+	template <typename R = bool> static R ContainsTag(IList1<Il2CppString*>* targetTags, Il2CppString* tag) {
+		return ((R (*)(void *, IList1<Il2CppString*>*, Il2CppString*))(Il2CppBase() + 0x16A3E34))(0, targetTags, tag);
 	}
 	template <typename R = bool> static R ContainsTag_1(ITagsEntity* target, Il2CppString* tag) {
 		return ((R (*)(void *, ITagsEntity*, Il2CppString*))(Il2CppBase() + 0x16A3FF8))(0, target, tag);

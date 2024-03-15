@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "ClassRuneDeactivatedData"));
 	}
 
-	template <typename R = Il2CppArray<RuneSlotKey*>*> R& Keys() {
+	template <typename R = Il2CppArray<RuneSlotKey>*> R& Keys() {
 		return *(R*)((uintptr_t)this + 0x0);
 	}
 

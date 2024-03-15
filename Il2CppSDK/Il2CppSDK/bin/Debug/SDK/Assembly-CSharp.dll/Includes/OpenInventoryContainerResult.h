@@ -12,7 +12,7 @@ public:
 	template <typename R = Il2CppString*> R& Key() {
 		return *(R*)((uintptr_t)this + 0x0);
 	}
-	template <typename R = Il2CppArray<Resource*>*> R& Resources() {
+	template <typename R = Il2CppArray<Resource>*> R& Resources() {
 		return *(R*)((uintptr_t)this + 0x8);
 	}
 	template <typename R = Il2CppString*> R& ErrorMsg() {

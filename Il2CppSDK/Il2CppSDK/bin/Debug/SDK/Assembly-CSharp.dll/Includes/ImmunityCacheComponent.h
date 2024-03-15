@@ -9,14 +9,14 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "ImmunityCacheComponent"));
 	}
 
-	 HashSet1Il2CppString*>*& Tags() {
-		return *(HashSet1Il2CppString*>**)((uintptr_t)this + 0x10);
+	 HashSet1<Il2CppString*>*& Tags() {
+		return *(HashSet1<Il2CppString*>**)((uintptr_t)this + 0x10);
 	}
-	 HashSet1Il2CppString*>*& Names() {
-		return *(HashSet1Il2CppString*>**)((uintptr_t)this + 0x18);
+	 HashSet1<Il2CppString*>*& Names() {
+		return *(HashSet1<Il2CppString*>**)((uintptr_t)this + 0x18);
 	}
 
-	template <typename R = ModifierGroup*> R GetGroup() {
+	template <typename R = ModifierGroup> R GetGroup() {
 		return ((R (*)(ImmunityCacheComponent*))(Il2CppBase() + 0x1E3DCB8))(this);
 	}
 	template <typename R = float> R GetValue() {

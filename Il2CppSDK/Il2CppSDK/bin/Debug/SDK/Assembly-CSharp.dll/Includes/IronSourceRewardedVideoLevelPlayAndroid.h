@@ -9,63 +9,63 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "IronSourceRewardedVideoLevelPlayAndroid"));
 	}
 
-	 Action2IronSourceError*, IronSourceAdInfo*>*& OnAdShowFailed() {
-		return *(Action2IronSourceError*, IronSourceAdInfo*>**)((uintptr_t)this + 0x20);
+	 Action2<IronSourceError*, IronSourceAdInfo*>*& OnAdShowFailed() {
+		return *(Action2<IronSourceError*, IronSourceAdInfo*>**)((uintptr_t)this + 0x20);
 	}
-	 Action1IronSourceAdInfo*>*& OnAdOpened() {
-		return *(Action1IronSourceAdInfo*>**)((uintptr_t)this + 0x28);
+	 Action1<IronSourceAdInfo*>*& OnAdOpened() {
+		return *(Action1<IronSourceAdInfo*>**)((uintptr_t)this + 0x28);
 	}
-	 Action1IronSourceAdInfo*>*& OnAdClosed() {
-		return *(Action1IronSourceAdInfo*>**)((uintptr_t)this + 0x30);
+	 Action1<IronSourceAdInfo*>*& OnAdClosed() {
+		return *(Action1<IronSourceAdInfo*>**)((uintptr_t)this + 0x30);
 	}
-	 Action2IronSourcePlacement*, IronSourceAdInfo*>*& OnAdRewarded() {
-		return *(Action2IronSourcePlacement*, IronSourceAdInfo*>**)((uintptr_t)this + 0x38);
+	 Action2<IronSourcePlacement*, IronSourceAdInfo*>*& OnAdRewarded() {
+		return *(Action2<IronSourcePlacement*, IronSourceAdInfo*>**)((uintptr_t)this + 0x38);
 	}
-	 Action2IronSourcePlacement*, IronSourceAdInfo*>*& OnAdClicked() {
-		return *(Action2IronSourcePlacement*, IronSourceAdInfo*>**)((uintptr_t)this + 0x40);
+	 Action2<IronSourcePlacement*, IronSourceAdInfo*>*& OnAdClicked() {
+		return *(Action2<IronSourcePlacement*, IronSourceAdInfo*>**)((uintptr_t)this + 0x40);
 	}
-	 Action1IronSourceAdInfo*>*& OnAdAvailable() {
-		return *(Action1IronSourceAdInfo*>**)((uintptr_t)this + 0x48);
+	 Action1<IronSourceAdInfo*>*& OnAdAvailable() {
+		return *(Action1<IronSourceAdInfo*>**)((uintptr_t)this + 0x48);
 	}
 	template <typename R = uintptr_t> R& OnAdUnavailable() {
 		return *(R*)((uintptr_t)this + 0x50);
 	}
 
-	template <typename R = void> R add_OnAdShowFailed(Action2IronSourceError*, IronSourceAdInfo*>* value) {
-		return ((R (*)(IronSourceRewardedVideoLevelPlayAndroid*, Action2IronSourceError*, IronSourceAdInfo*>*))(Il2CppBase() + 0x10E3514))(this, value);
+	template <typename R = void> R add_OnAdShowFailed(Action2<IronSourceError*, IronSourceAdInfo*>* value) {
+		return ((R (*)(IronSourceRewardedVideoLevelPlayAndroid*, Action2<IronSourceError*, IronSourceAdInfo*>*))(Il2CppBase() + 0x10E3514))(this, value);
 	}
-	template <typename R = void> R remove_OnAdShowFailed(Action2IronSourceError*, IronSourceAdInfo*>* value) {
-		return ((R (*)(IronSourceRewardedVideoLevelPlayAndroid*, Action2IronSourceError*, IronSourceAdInfo*>*))(Il2CppBase() + 0x10E35B4))(this, value);
+	template <typename R = void> R remove_OnAdShowFailed(Action2<IronSourceError*, IronSourceAdInfo*>* value) {
+		return ((R (*)(IronSourceRewardedVideoLevelPlayAndroid*, Action2<IronSourceError*, IronSourceAdInfo*>*))(Il2CppBase() + 0x10E35B4))(this, value);
 	}
-	template <typename R = void> R add_OnAdOpened(Action1IronSourceAdInfo*>* value) {
-		return ((R (*)(IronSourceRewardedVideoLevelPlayAndroid*, Action1IronSourceAdInfo*>*))(Il2CppBase() + 0x10E3654))(this, value);
+	template <typename R = void> R add_OnAdOpened(Action1<IronSourceAdInfo*>* value) {
+		return ((R (*)(IronSourceRewardedVideoLevelPlayAndroid*, Action1<IronSourceAdInfo*>*))(Il2CppBase() + 0x10E3654))(this, value);
 	}
-	template <typename R = void> R remove_OnAdOpened(Action1IronSourceAdInfo*>* value) {
-		return ((R (*)(IronSourceRewardedVideoLevelPlayAndroid*, Action1IronSourceAdInfo*>*))(Il2CppBase() + 0x10E36F4))(this, value);
+	template <typename R = void> R remove_OnAdOpened(Action1<IronSourceAdInfo*>* value) {
+		return ((R (*)(IronSourceRewardedVideoLevelPlayAndroid*, Action1<IronSourceAdInfo*>*))(Il2CppBase() + 0x10E36F4))(this, value);
 	}
-	template <typename R = void> R add_OnAdClosed(Action1IronSourceAdInfo*>* value) {
-		return ((R (*)(IronSourceRewardedVideoLevelPlayAndroid*, Action1IronSourceAdInfo*>*))(Il2CppBase() + 0x10E3794))(this, value);
+	template <typename R = void> R add_OnAdClosed(Action1<IronSourceAdInfo*>* value) {
+		return ((R (*)(IronSourceRewardedVideoLevelPlayAndroid*, Action1<IronSourceAdInfo*>*))(Il2CppBase() + 0x10E3794))(this, value);
 	}
-	template <typename R = void> R remove_OnAdClosed(Action1IronSourceAdInfo*>* value) {
-		return ((R (*)(IronSourceRewardedVideoLevelPlayAndroid*, Action1IronSourceAdInfo*>*))(Il2CppBase() + 0x10E3834))(this, value);
+	template <typename R = void> R remove_OnAdClosed(Action1<IronSourceAdInfo*>* value) {
+		return ((R (*)(IronSourceRewardedVideoLevelPlayAndroid*, Action1<IronSourceAdInfo*>*))(Il2CppBase() + 0x10E3834))(this, value);
 	}
-	template <typename R = void> R add_OnAdRewarded(Action2IronSourcePlacement*, IronSourceAdInfo*>* value) {
-		return ((R (*)(IronSourceRewardedVideoLevelPlayAndroid*, Action2IronSourcePlacement*, IronSourceAdInfo*>*))(Il2CppBase() + 0x10E38D4))(this, value);
+	template <typename R = void> R add_OnAdRewarded(Action2<IronSourcePlacement*, IronSourceAdInfo*>* value) {
+		return ((R (*)(IronSourceRewardedVideoLevelPlayAndroid*, Action2<IronSourcePlacement*, IronSourceAdInfo*>*))(Il2CppBase() + 0x10E38D4))(this, value);
 	}
-	template <typename R = void> R remove_OnAdRewarded(Action2IronSourcePlacement*, IronSourceAdInfo*>* value) {
-		return ((R (*)(IronSourceRewardedVideoLevelPlayAndroid*, Action2IronSourcePlacement*, IronSourceAdInfo*>*))(Il2CppBase() + 0x10E3974))(this, value);
+	template <typename R = void> R remove_OnAdRewarded(Action2<IronSourcePlacement*, IronSourceAdInfo*>* value) {
+		return ((R (*)(IronSourceRewardedVideoLevelPlayAndroid*, Action2<IronSourcePlacement*, IronSourceAdInfo*>*))(Il2CppBase() + 0x10E3974))(this, value);
 	}
-	template <typename R = void> R add_OnAdClicked(Action2IronSourcePlacement*, IronSourceAdInfo*>* value) {
-		return ((R (*)(IronSourceRewardedVideoLevelPlayAndroid*, Action2IronSourcePlacement*, IronSourceAdInfo*>*))(Il2CppBase() + 0x10E3A14))(this, value);
+	template <typename R = void> R add_OnAdClicked(Action2<IronSourcePlacement*, IronSourceAdInfo*>* value) {
+		return ((R (*)(IronSourceRewardedVideoLevelPlayAndroid*, Action2<IronSourcePlacement*, IronSourceAdInfo*>*))(Il2CppBase() + 0x10E3A14))(this, value);
 	}
-	template <typename R = void> R remove_OnAdClicked(Action2IronSourcePlacement*, IronSourceAdInfo*>* value) {
-		return ((R (*)(IronSourceRewardedVideoLevelPlayAndroid*, Action2IronSourcePlacement*, IronSourceAdInfo*>*))(Il2CppBase() + 0x10E3AB4))(this, value);
+	template <typename R = void> R remove_OnAdClicked(Action2<IronSourcePlacement*, IronSourceAdInfo*>* value) {
+		return ((R (*)(IronSourceRewardedVideoLevelPlayAndroid*, Action2<IronSourcePlacement*, IronSourceAdInfo*>*))(Il2CppBase() + 0x10E3AB4))(this, value);
 	}
-	template <typename R = void> R add_OnAdAvailable(Action1IronSourceAdInfo*>* value) {
-		return ((R (*)(IronSourceRewardedVideoLevelPlayAndroid*, Action1IronSourceAdInfo*>*))(Il2CppBase() + 0x10E3B54))(this, value);
+	template <typename R = void> R add_OnAdAvailable(Action1<IronSourceAdInfo*>* value) {
+		return ((R (*)(IronSourceRewardedVideoLevelPlayAndroid*, Action1<IronSourceAdInfo*>*))(Il2CppBase() + 0x10E3B54))(this, value);
 	}
-	template <typename R = void> R remove_OnAdAvailable(Action1IronSourceAdInfo*>* value) {
-		return ((R (*)(IronSourceRewardedVideoLevelPlayAndroid*, Action1IronSourceAdInfo*>*))(Il2CppBase() + 0x10E3BF4))(this, value);
+	template <typename R = void> R remove_OnAdAvailable(Action1<IronSourceAdInfo*>* value) {
+		return ((R (*)(IronSourceRewardedVideoLevelPlayAndroid*, Action1<IronSourceAdInfo*>*))(Il2CppBase() + 0x10E3BF4))(this, value);
 	}
 	template <typename R = void> R add_OnAdUnavailable(uintptr_t value) {
 		return ((R (*)(IronSourceRewardedVideoLevelPlayAndroid*, uintptr_t))(Il2CppBase() + 0x10E3C94))(this, value);

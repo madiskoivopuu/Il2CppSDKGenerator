@@ -10,17 +10,17 @@ public:
 	}
 
 
-	template <typename R = void> R add_OnImpressionDataReady(Action1IronSourceImpressionData*>* value) {
-		return ((R (*)(IUnityImpressionData*, Action1IronSourceImpressionData*>*))(Il2CppBase() + 0x0))(this, value);
+	template <typename R = void> R add_OnImpressionDataReady(Action1<IronSourceImpressionData*>* value) {
+		return ((R (*)(IUnityImpressionData*, Action1<IronSourceImpressionData*>*))(Il2CppBase() + 0x0))(this, value);
 	}
-	template <typename R = void> R remove_OnImpressionDataReady(Action1IronSourceImpressionData*>* value) {
-		return ((R (*)(IUnityImpressionData*, Action1IronSourceImpressionData*>*))(Il2CppBase() + 0x0))(this, value);
+	template <typename R = void> R remove_OnImpressionDataReady(Action1<IronSourceImpressionData*>* value) {
+		return ((R (*)(IUnityImpressionData*, Action1<IronSourceImpressionData*>*))(Il2CppBase() + 0x0))(this, value);
 	}
-	template <typename R = void> R add_OnImpressionSuccess(Action1IronSourceImpressionData*>* value) {
-		return ((R (*)(IUnityImpressionData*, Action1IronSourceImpressionData*>*))(Il2CppBase() + 0x0))(this, value);
+	template <typename R = void> R add_OnImpressionSuccess(Action1<IronSourceImpressionData*>* value) {
+		return ((R (*)(IUnityImpressionData*, Action1<IronSourceImpressionData*>*))(Il2CppBase() + 0x0))(this, value);
 	}
-	template <typename R = void> R remove_OnImpressionSuccess(Action1IronSourceImpressionData*>* value) {
-		return ((R (*)(IUnityImpressionData*, Action1IronSourceImpressionData*>*))(Il2CppBase() + 0x0))(this, value);
+	template <typename R = void> R remove_OnImpressionSuccess(Action1<IronSourceImpressionData*>* value) {
+		return ((R (*)(IUnityImpressionData*, Action1<IronSourceImpressionData*>*))(Il2CppBase() + 0x0))(this, value);
 	}
 
 };

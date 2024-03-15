@@ -3,7 +3,7 @@
 #include "EnumComponent1.h" 
 #include "ConsumeType.h" 
 
-class ConsumeTypeComponent : public EnumComponent1<ConsumeType*>
+class ConsumeTypeComponent : public EnumComponent1<ConsumeType>
 {
 public: 
 

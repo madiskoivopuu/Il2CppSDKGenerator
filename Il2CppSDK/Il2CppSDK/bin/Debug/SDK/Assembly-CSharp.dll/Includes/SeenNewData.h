@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "SeenNewData"));
 	}
 
-	template <typename R = SeenNewType*> R& Type() {
+	template <typename R = SeenNewType> R& Type() {
 		return *(R*)((uintptr_t)this + 0x0);
 	}
 	template <typename R = Il2CppString*> R& Param() {

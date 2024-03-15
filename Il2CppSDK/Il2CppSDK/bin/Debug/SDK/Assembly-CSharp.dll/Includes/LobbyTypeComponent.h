@@ -3,7 +3,7 @@
 #include "EnumComponent1.h" 
 #include "LobbyType.h" 
 
-class LobbyTypeComponent : public EnumComponent1<LobbyType*>
+class LobbyTypeComponent : public EnumComponent1<LobbyType>
 {
 public: 
 

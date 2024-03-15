@@ -12,7 +12,7 @@ public:
 	template <typename R = int32_t> R& Level() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
-	template <typename R = Il2CppArray<Resource*>*> R& Resources() {
+	template <typename R = Il2CppArray<Resource>*> R& Resources() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
 

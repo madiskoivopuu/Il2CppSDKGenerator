@@ -9,11 +9,11 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "ControlsConditionComponent"));
 	}
 
-	 Nullable1bool>*& Stunned() {
-		return *(Nullable1bool>**)((uintptr_t)this + 0x10);
+	 Nullable1<bool>*& Stunned() {
+		return *(Nullable1<bool>**)((uintptr_t)this + 0x10);
 	}
-	 Nullable1bool>*& Rooted() {
-		return *(Nullable1bool>**)((uintptr_t)this + 0x12);
+	 Nullable1<bool>*& Rooted() {
+		return *(Nullable1<bool>**)((uintptr_t)this + 0x12);
 	}
 
 	template <typename R = void> R CopyTo(Il2CppObject* target) {

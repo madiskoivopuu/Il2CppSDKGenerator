@@ -19,8 +19,8 @@ public:
 	template <typename R = float> static R GetMaxTenacity_1(GameEntity* gameEntity) {
 		return ((R (*)(void *, GameEntity*))(Il2CppBase() + 0x16B61E8))(0, gameEntity);
 	}
-	 static Nullable1float>* GetTenacity(GameEntity* gameEntity) {
-		return ((Nullable1float>* (*)(void *, GameEntity*))(Il2CppBase() + 0x16B6264))(0, gameEntity);
+	 static Nullable1<float>* GetTenacity(GameEntity* gameEntity) {
+		return ((Nullable1<float>* (*)(void *, GameEntity*))(Il2CppBase() + 0x16B6264))(0, gameEntity);
 	}
 	template <typename R = float> static R GetTenacityCoef(GameEntity* entity) {
 		return ((R (*)(void *, GameEntity*))(Il2CppBase() + 0x16B634C))(0, entity);

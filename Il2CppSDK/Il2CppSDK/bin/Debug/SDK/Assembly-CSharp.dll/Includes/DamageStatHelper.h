@@ -19,7 +19,7 @@ public:
 	template <typename R = void> static R ReplaceDamageStat_1(IDamageStatEntity* entity, DamageStat* damageStat) {
 		return ((R (*)(void *, IDamageStatEntity*, DamageStat*))(Il2CppBase() + 0x164C6BC))(0, entity, damageStat);
 	}
-	template <typename R = DamageStatType*> static R GetLastDamagerType(GameEntity* entity) {
+	template <typename R = DamageStatType> static R GetLastDamagerType(GameEntity* entity) {
 		return ((R (*)(void *, GameEntity*))(Il2CppBase() + 0x164C7F4))(0, entity);
 	}
 	template <typename R = bool> static R SetLastDamager(GameEntity* entity, DamageStat* damageStat, int64_t now) {

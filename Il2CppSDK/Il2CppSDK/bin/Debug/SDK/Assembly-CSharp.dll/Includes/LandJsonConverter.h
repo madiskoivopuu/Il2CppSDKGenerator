@@ -3,7 +3,7 @@
 #include "TypeTypeJsonConverter1.h" 
 #include "LandType.h" 
 
-class LandJsonConverter : public TypeTypeJsonConverter1<LandType*>
+class LandJsonConverter : public TypeTypeJsonConverter1<LandType>
 {
 public: 
 

@@ -12,7 +12,7 @@ public:
 	template <typename R = Il2CppString*> R& DefaultDescription() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
-	template <typename R = Il2CppArray<Difficulty*>*> R& List() {
+	template <typename R = Il2CppArray<Difficulty>*> R& List() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
 

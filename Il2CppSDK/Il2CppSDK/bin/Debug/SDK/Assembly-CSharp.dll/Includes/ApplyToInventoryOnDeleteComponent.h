@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "ApplyToInventoryOnDeleteComponent"));
 	}
 
-	template <typename R = Il2CppArray<Resource*>*> R& ToCommonInventory() {
+	template <typename R = Il2CppArray<Resource>*> R& ToCommonInventory() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
 

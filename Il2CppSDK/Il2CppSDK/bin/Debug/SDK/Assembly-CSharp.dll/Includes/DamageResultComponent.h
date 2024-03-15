@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "DamageResultComponent"));
 	}
 
-	template <typename R = DamageResultParams*> R& Params() {
+	template <typename R = DamageResultParams> R& Params() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
 

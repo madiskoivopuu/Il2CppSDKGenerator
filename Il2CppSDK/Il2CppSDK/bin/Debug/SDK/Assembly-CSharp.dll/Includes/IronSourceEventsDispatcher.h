@@ -12,8 +12,8 @@ public:
 	template <typename R = IronSourceEventsDispatcher*> static R& instance() {
 		return *(R*)((uintptr_t)StaticClass()->static_fields + 0x0);
 	}
-	 static Queue1uintptr_t>*& ironSourceExecuteOnMainThreadQueue() {
-		return *(Queue1uintptr_t>**)((uintptr_t)StaticClass()->static_fields + 0x8);
+	 static Queue1<uintptr_t>*& ironSourceExecuteOnMainThreadQueue() {
+		return *(Queue1<uintptr_t>**)((uintptr_t)StaticClass()->static_fields + 0x8);
 	}
 
 	template <typename R = void> static R executeAction(uintptr_t action) {

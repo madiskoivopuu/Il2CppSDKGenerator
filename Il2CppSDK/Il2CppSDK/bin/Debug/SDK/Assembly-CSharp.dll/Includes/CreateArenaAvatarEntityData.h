@@ -51,7 +51,7 @@ public:
 	template <typename R = int64_t> R& GuildId() {
 		return *(R*)((uintptr_t)this + 0x48);
 	}
-	template <typename R = Gender*> R& Gender() {
+	template <typename R = Gender> R& Gender() {
 		return *(R*)((uintptr_t)this + 0x50);
 	}
 	template <typename R = int64_t> R& Ticks() {

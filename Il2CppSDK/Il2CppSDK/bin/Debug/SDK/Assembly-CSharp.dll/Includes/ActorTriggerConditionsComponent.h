@@ -15,11 +15,11 @@ public:
 	template <typename R = Il2CppArray<Il2CppString*>*> R& Names() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
-	 Nullable1float>*& HpCoefLess() {
-		return *(Nullable1float>**)((uintptr_t)this + 0x20);
+	 Nullable1<float>*& HpCoefLess() {
+		return *(Nullable1<float>**)((uintptr_t)this + 0x20);
 	}
-	 Nullable1float>*& HpCoefMore() {
-		return *(Nullable1float>**)((uintptr_t)this + 0x28);
+	 Nullable1<float>*& HpCoefMore() {
+		return *(Nullable1<float>**)((uintptr_t)this + 0x28);
 	}
 
 	template <typename R = void> R CopyTo(Il2CppObject* target) {

@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "DescriptionStatsComponent"));
 	}
 
-	template <typename R = Il2CppArray<PlayerStatType*>*> R& Values() {
+	template <typename R = Il2CppArray<PlayerStatType>*> R& Values() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
 

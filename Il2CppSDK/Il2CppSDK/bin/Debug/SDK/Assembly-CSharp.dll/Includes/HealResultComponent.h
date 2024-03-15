@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "HealResultComponent"));
 	}
 
-	template <typename R = HealResultParams*> R& Params() {
+	template <typename R = HealResultParams> R& Params() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
 

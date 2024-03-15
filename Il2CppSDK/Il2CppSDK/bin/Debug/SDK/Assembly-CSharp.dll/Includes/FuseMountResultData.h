@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "FuseMountResultData"));
 	}
 
-	template <typename R = Result*> R& Result() {
+	template <typename R = Result> R& Result() {
 		return *(R*)((uintptr_t)this + 0x0);
 	}
 	template <typename R = int32_t> R& SlotId() {

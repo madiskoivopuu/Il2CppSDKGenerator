@@ -40,8 +40,8 @@ public:
 	template <typename R = void> R CopyTo(Il2CppObject* targetObject) {
 		return ((R (*)(LobbyActiveTimeComponent*, Il2CppObject*))(Il2CppBase() + 0x1435FE4))(this, targetObject);
 	}
-	 ValueTuple3bool, int64_t, bool>* GetState(ICommonContexts* world) {
-		return ((ValueTuple3bool, int64_t, bool>* (*)(LobbyActiveTimeComponent*, ICommonContexts*))(Il2CppBase() + 0x14360D4))(this, world);
+	 ValueTuple3<bool, int64_t, bool>* GetState(ICommonContexts* world) {
+		return ((ValueTuple3<bool, int64_t, bool>* (*)(LobbyActiveTimeComponent*, ICommonContexts*))(Il2CppBase() + 0x14360D4))(this, world);
 	}
 
 };

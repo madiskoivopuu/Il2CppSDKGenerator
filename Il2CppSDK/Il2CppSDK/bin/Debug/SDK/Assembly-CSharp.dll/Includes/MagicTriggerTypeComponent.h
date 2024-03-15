@@ -3,7 +3,7 @@
 #include "EnumValueComponent1.h" 
 #include "MagicTriggerType.h" 
 
-class MagicTriggerTypeComponent : public EnumValueComponent1<MagicTriggerType*>
+class MagicTriggerTypeComponent : public EnumValueComponent1<MagicTriggerType>
 {
 public: 
 

@@ -15,7 +15,7 @@ public:
 	template <typename R = bool> R& ToMain() {
 		return *(R*)((uintptr_t)this + 0x11);
 	}
-	template <typename R = Il2CppArray<Reward*>*> R& List() {
+	template <typename R = Il2CppArray<Reward>*> R& List() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
 

@@ -3,7 +3,7 @@
 #include "TypeEnumJsonConverter1.h" 
 #include "TournamentState.h" 
 
-class TournamentStateEnumJsonConverter : public TypeEnumJsonConverter1<TournamentState*>
+class TournamentStateEnumJsonConverter : public TypeEnumJsonConverter1<TournamentState>
 {
 public: 
 

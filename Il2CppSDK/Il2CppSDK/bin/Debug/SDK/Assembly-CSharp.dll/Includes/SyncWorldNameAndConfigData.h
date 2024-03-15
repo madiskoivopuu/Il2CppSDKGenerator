@@ -12,7 +12,7 @@ public:
 	template <typename R = Il2CppString*> R& Name() {
 		return *(R*)((uintptr_t)this + 0x0);
 	}
-	template <typename R = ConfigFromServer*> R& Config() {
+	template <typename R = ConfigFromServer> R& Config() {
 		return *(R*)((uintptr_t)this + 0x8);
 	}
 

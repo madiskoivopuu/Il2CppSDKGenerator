@@ -18,8 +18,8 @@ public:
 	template <typename R = Il2CppString*> R& UseFishnetName() {
 		return *(R*)((uintptr_t)this + 0x20);
 	}
-	 Nullable1bool>*& Success() {
-		return *(Nullable1bool>**)((uintptr_t)this + 0x28);
+	 Nullable1<bool>*& Success() {
+		return *(Nullable1<bool>**)((uintptr_t)this + 0x28);
 	}
 	template <typename R = Il2CppString*> R& LureName() {
 		return *(R*)((uintptr_t)this + 0x30);
@@ -27,8 +27,8 @@ public:
 	template <typename R = Il2CppString*> R& NodeName() {
 		return *(R*)((uintptr_t)this + 0x38);
 	}
-	 Nullable1float>*& Duration() {
-		return *(Nullable1float>**)((uintptr_t)this + 0x40);
+	 Nullable1<float>*& Duration() {
+		return *(Nullable1<float>**)((uintptr_t)this + 0x40);
 	}
 	 Il2CppDictionary<Il2CppString*, int32_t>*& Result() {
 		return *(Il2CppDictionary<Il2CppString*, int32_t>**)((uintptr_t)this + 0x48);

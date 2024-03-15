@@ -27,11 +27,11 @@ public:
 	template <typename R = int32_t> R& Count() {
 		return *(R*)((uintptr_t)this + 0x20);
 	}
-	 Nullable1int64_t>*& Signature() {
-		return *(Nullable1int64_t>**)((uintptr_t)this + 0x28);
+	 Nullable1<int64_t>*& Signature() {
+		return *(Nullable1<int64_t>**)((uintptr_t)this + 0x28);
 	}
-	 Nullable1float>*& DurabilityCoef() {
-		return *(Nullable1float>**)((uintptr_t)this + 0x38);
+	 Nullable1<float>*& DurabilityCoef() {
+		return *(Nullable1<float>**)((uintptr_t)this + 0x38);
 	}
 	template <typename R = int32_t> R& MaxCount() {
 		return *(R*)((uintptr_t)this + 0x40);

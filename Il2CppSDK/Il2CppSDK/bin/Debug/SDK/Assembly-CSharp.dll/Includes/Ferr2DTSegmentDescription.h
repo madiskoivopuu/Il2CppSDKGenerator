@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "Ferr2DT_SegmentDescription"));
 	}
 
-	template <typename R = Ferr2DTTerrainDirection*> R& applyTo() {
+	template <typename R = Ferr2DTTerrainDirection> R& applyTo() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
 	template <typename R = float> R& zOffset() {

@@ -28,11 +28,11 @@ public:
 	template <typename R = bool> R get_hasBattlePassView() {
 		return ((R (*)(BattlePassEntity*))(Il2CppBase() + 0x1675A74))(this);
 	}
-	template <typename R = void> R AddBattlePassView(Il2CppString* newNPC_Icon, Il2CppString* newNPC_Icon_Back, Il2CppString* newNPC_Text, Il2CppString* newNPC_Done_Text, Il2CppString* newTracery_Icon, bool newIsSeason, int32_t newSeasonDepends, bool newShowBestReward, bool newRightAlignment, Il2CppString* newMainColor, Il2CppString* newBottomColor, Il2CppString* newProgressColor, Il2CppString* newTextColor, Il2CppString* newLockedTextColor, Il2CppString* newAnalyticsEventName, Il2CppString* newPremiumNameCaption, Il2CppString* newBuyPremiumCaption, bool newIsLevelsSale, Il2CppString* newBuyLevelsButtonCaption, StoreCategory* newStoreCategory, Il2CppString* newBuyLevelsCaption, Il2CppArray<int32_t>* newSpecialSteps, Il2CppString* newSpecialImage, bool newHideNextBestRewards) {
-		return ((R (*)(BattlePassEntity*, Il2CppString*, Il2CppString*, Il2CppString*, Il2CppString*, Il2CppString*, bool, int32_t, bool, bool, Il2CppString*, Il2CppString*, Il2CppString*, Il2CppString*, Il2CppString*, Il2CppString*, Il2CppString*, Il2CppString*, bool, Il2CppString*, StoreCategory*, Il2CppString*, Il2CppArray<int32_t>*, Il2CppString*, bool))(Il2CppBase() + 0x1675A80))(this, newNPC_Icon, newNPC_Icon_Back, newNPC_Text, newNPC_Done_Text, newTracery_Icon, newIsSeason, newSeasonDepends, newShowBestReward, newRightAlignment, newMainColor, newBottomColor, newProgressColor, newTextColor, newLockedTextColor, newAnalyticsEventName, newPremiumNameCaption, newBuyPremiumCaption, newIsLevelsSale, newBuyLevelsButtonCaption, newStoreCategory, newBuyLevelsCaption, newSpecialSteps, newSpecialImage, newHideNextBestRewards);
+	template <typename R = void> R AddBattlePassView(Il2CppString* newNPC_Icon, Il2CppString* newNPC_Icon_Back, Il2CppString* newNPC_Text, Il2CppString* newNPC_Done_Text, Il2CppString* newTracery_Icon, bool newIsSeason, int32_t newSeasonDepends, bool newShowBestReward, bool newRightAlignment, Il2CppString* newMainColor, Il2CppString* newBottomColor, Il2CppString* newProgressColor, Il2CppString* newTextColor, Il2CppString* newLockedTextColor, Il2CppString* newAnalyticsEventName, Il2CppString* newPremiumNameCaption, Il2CppString* newBuyPremiumCaption, bool newIsLevelsSale, Il2CppString* newBuyLevelsButtonCaption, StoreCategory newStoreCategory, Il2CppString* newBuyLevelsCaption, Il2CppArray<int32_t>* newSpecialSteps, Il2CppString* newSpecialImage, bool newHideNextBestRewards) {
+		return ((R (*)(BattlePassEntity*, Il2CppString*, Il2CppString*, Il2CppString*, Il2CppString*, Il2CppString*, bool, int32_t, bool, bool, Il2CppString*, Il2CppString*, Il2CppString*, Il2CppString*, Il2CppString*, Il2CppString*, Il2CppString*, Il2CppString*, bool, Il2CppString*, StoreCategory, Il2CppString*, Il2CppArray<int32_t>*, Il2CppString*, bool))(Il2CppBase() + 0x1675A80))(this, newNPC_Icon, newNPC_Icon_Back, newNPC_Text, newNPC_Done_Text, newTracery_Icon, newIsSeason, newSeasonDepends, newShowBestReward, newRightAlignment, newMainColor, newBottomColor, newProgressColor, newTextColor, newLockedTextColor, newAnalyticsEventName, newPremiumNameCaption, newBuyPremiumCaption, newIsLevelsSale, newBuyLevelsButtonCaption, newStoreCategory, newBuyLevelsCaption, newSpecialSteps, newSpecialImage, newHideNextBestRewards);
 	}
-	template <typename R = void> R ReplaceBattlePassView(Il2CppString* newNPC_Icon, Il2CppString* newNPC_Icon_Back, Il2CppString* newNPC_Text, Il2CppString* newNPC_Done_Text, Il2CppString* newTracery_Icon, bool newIsSeason, int32_t newSeasonDepends, bool newShowBestReward, bool newRightAlignment, Il2CppString* newMainColor, Il2CppString* newBottomColor, Il2CppString* newProgressColor, Il2CppString* newTextColor, Il2CppString* newLockedTextColor, Il2CppString* newAnalyticsEventName, Il2CppString* newPremiumNameCaption, Il2CppString* newBuyPremiumCaption, bool newIsLevelsSale, Il2CppString* newBuyLevelsButtonCaption, StoreCategory* newStoreCategory, Il2CppString* newBuyLevelsCaption, Il2CppArray<int32_t>* newSpecialSteps, Il2CppString* newSpecialImage, bool newHideNextBestRewards) {
-		return ((R (*)(BattlePassEntity*, Il2CppString*, Il2CppString*, Il2CppString*, Il2CppString*, Il2CppString*, bool, int32_t, bool, bool, Il2CppString*, Il2CppString*, Il2CppString*, Il2CppString*, Il2CppString*, Il2CppString*, Il2CppString*, Il2CppString*, bool, Il2CppString*, StoreCategory*, Il2CppString*, Il2CppArray<int32_t>*, Il2CppString*, bool))(Il2CppBase() + 0x1675D7C))(this, newNPC_Icon, newNPC_Icon_Back, newNPC_Text, newNPC_Done_Text, newTracery_Icon, newIsSeason, newSeasonDepends, newShowBestReward, newRightAlignment, newMainColor, newBottomColor, newProgressColor, newTextColor, newLockedTextColor, newAnalyticsEventName, newPremiumNameCaption, newBuyPremiumCaption, newIsLevelsSale, newBuyLevelsButtonCaption, newStoreCategory, newBuyLevelsCaption, newSpecialSteps, newSpecialImage, newHideNextBestRewards);
+	template <typename R = void> R ReplaceBattlePassView(Il2CppString* newNPC_Icon, Il2CppString* newNPC_Icon_Back, Il2CppString* newNPC_Text, Il2CppString* newNPC_Done_Text, Il2CppString* newTracery_Icon, bool newIsSeason, int32_t newSeasonDepends, bool newShowBestReward, bool newRightAlignment, Il2CppString* newMainColor, Il2CppString* newBottomColor, Il2CppString* newProgressColor, Il2CppString* newTextColor, Il2CppString* newLockedTextColor, Il2CppString* newAnalyticsEventName, Il2CppString* newPremiumNameCaption, Il2CppString* newBuyPremiumCaption, bool newIsLevelsSale, Il2CppString* newBuyLevelsButtonCaption, StoreCategory newStoreCategory, Il2CppString* newBuyLevelsCaption, Il2CppArray<int32_t>* newSpecialSteps, Il2CppString* newSpecialImage, bool newHideNextBestRewards) {
+		return ((R (*)(BattlePassEntity*, Il2CppString*, Il2CppString*, Il2CppString*, Il2CppString*, Il2CppString*, bool, int32_t, bool, bool, Il2CppString*, Il2CppString*, Il2CppString*, Il2CppString*, Il2CppString*, Il2CppString*, Il2CppString*, Il2CppString*, bool, Il2CppString*, StoreCategory, Il2CppString*, Il2CppArray<int32_t>*, Il2CppString*, bool))(Il2CppBase() + 0x1675D7C))(this, newNPC_Icon, newNPC_Icon_Back, newNPC_Text, newNPC_Done_Text, newTracery_Icon, newIsSeason, newSeasonDepends, newShowBestReward, newRightAlignment, newMainColor, newBottomColor, newProgressColor, newTextColor, newLockedTextColor, newAnalyticsEventName, newPremiumNameCaption, newBuyPremiumCaption, newIsLevelsSale, newBuyLevelsButtonCaption, newStoreCategory, newBuyLevelsCaption, newSpecialSteps, newSpecialImage, newHideNextBestRewards);
 	}
 	template <typename R = void> R RemoveBattlePassView() {
 		return ((R (*)(BattlePassEntity*))(Il2CppBase() + 0x1676078))(this);
@@ -73,11 +73,11 @@ public:
 	template <typename R = bool> R get_hasCurrencyType() {
 		return ((R (*)(BattlePassEntity*))(Il2CppBase() + 0x16765E8))(this);
 	}
-	template <typename R = void> R AddCurrencyType(CurrencyType* newType) {
-		return ((R (*)(BattlePassEntity*, CurrencyType*))(Il2CppBase() + 0x16765F4))(this, newType);
+	template <typename R = void> R AddCurrencyType(CurrencyType newType) {
+		return ((R (*)(BattlePassEntity*, CurrencyType))(Il2CppBase() + 0x16765F4))(this, newType);
 	}
-	template <typename R = void> R ReplaceCurrencyType(CurrencyType* newType) {
-		return ((R (*)(BattlePassEntity*, CurrencyType*))(Il2CppBase() + 0x16766F8))(this, newType);
+	template <typename R = void> R ReplaceCurrencyType(CurrencyType newType) {
+		return ((R (*)(BattlePassEntity*, CurrencyType))(Il2CppBase() + 0x16766F8))(this, newType);
 	}
 	template <typename R = void> R RemoveCurrencyType() {
 		return ((R (*)(BattlePassEntity*))(Il2CppBase() + 0x16767FC))(this);
@@ -124,11 +124,11 @@ public:
 	template <typename R = bool> R get_hasReset() {
 		return ((R (*)(BattlePassEntity*))(Il2CppBase() + 0x1676F24))(this);
 	}
-	template <typename R = void> R AddReset(int32_t newCircleDuration, int32_t newOffset, int32_t newReverseOffset, bool newRewardAfterActivity, bool newManual, ResetType* newResetTo) {
-		return ((R (*)(BattlePassEntity*, int32_t, int32_t, int32_t, bool, bool, ResetType*))(Il2CppBase() + 0x1676F30))(this, newCircleDuration, newOffset, newReverseOffset, newRewardAfterActivity, newManual, newResetTo);
+	template <typename R = void> R AddReset(int32_t newCircleDuration, int32_t newOffset, int32_t newReverseOffset, bool newRewardAfterActivity, bool newManual, ResetType newResetTo) {
+		return ((R (*)(BattlePassEntity*, int32_t, int32_t, int32_t, bool, bool, ResetType))(Il2CppBase() + 0x1676F30))(this, newCircleDuration, newOffset, newReverseOffset, newRewardAfterActivity, newManual, newResetTo);
 	}
-	template <typename R = void> R ReplaceReset(int32_t newCircleDuration, int32_t newOffset, int32_t newReverseOffset, bool newRewardAfterActivity, bool newManual, ResetType* newResetTo) {
-		return ((R (*)(BattlePassEntity*, int32_t, int32_t, int32_t, bool, bool, ResetType*))(Il2CppBase() + 0x1677070))(this, newCircleDuration, newOffset, newReverseOffset, newRewardAfterActivity, newManual, newResetTo);
+	template <typename R = void> R ReplaceReset(int32_t newCircleDuration, int32_t newOffset, int32_t newReverseOffset, bool newRewardAfterActivity, bool newManual, ResetType newResetTo) {
+		return ((R (*)(BattlePassEntity*, int32_t, int32_t, int32_t, bool, bool, ResetType))(Il2CppBase() + 0x1677070))(this, newCircleDuration, newOffset, newReverseOffset, newRewardAfterActivity, newManual, newResetTo);
 	}
 	template <typename R = void> R RemoveReset() {
 		return ((R (*)(BattlePassEntity*))(Il2CppBase() + 0x16771B0))(this);
@@ -151,11 +151,11 @@ public:
 	template <typename R = bool> R get_hasTemporary() {
 		return ((R (*)(BattlePassEntity*))(Il2CppBase() + 0x167588C))(this);
 	}
-	template <typename R = void> R AddTemporary(int64_t newStartTime, int64_t newEndTime, int64_t newOBTStartTime, int64_t newOBTEndTime, int64_t newQAStartTime, int64_t newQAEndTime, CyclicTime* newCyclic) {
-		return ((R (*)(BattlePassEntity*, int64_t, int64_t, int64_t, int64_t, int64_t, int64_t, CyclicTime*))(Il2CppBase() + 0x167748C))(this, newStartTime, newEndTime, newOBTStartTime, newOBTEndTime, newQAStartTime, newQAEndTime, newCyclic);
+	template <typename R = void> R AddTemporary(int64_t newStartTime, int64_t newEndTime, int64_t newOBTStartTime, int64_t newOBTEndTime, int64_t newQAStartTime, int64_t newQAEndTime, CyclicTime newCyclic) {
+		return ((R (*)(BattlePassEntity*, int64_t, int64_t, int64_t, int64_t, int64_t, int64_t, CyclicTime))(Il2CppBase() + 0x167748C))(this, newStartTime, newEndTime, newOBTStartTime, newOBTEndTime, newQAStartTime, newQAEndTime, newCyclic);
 	}
-	template <typename R = void> R ReplaceTemporary(int64_t newStartTime, int64_t newEndTime, int64_t newOBTStartTime, int64_t newOBTEndTime, int64_t newQAStartTime, int64_t newQAEndTime, CyclicTime* newCyclic) {
-		return ((R (*)(BattlePassEntity*, int64_t, int64_t, int64_t, int64_t, int64_t, int64_t, CyclicTime*))(Il2CppBase() + 0x16775D8))(this, newStartTime, newEndTime, newOBTStartTime, newOBTEndTime, newQAStartTime, newQAEndTime, newCyclic);
+	template <typename R = void> R ReplaceTemporary(int64_t newStartTime, int64_t newEndTime, int64_t newOBTStartTime, int64_t newOBTEndTime, int64_t newQAStartTime, int64_t newQAEndTime, CyclicTime newCyclic) {
+		return ((R (*)(BattlePassEntity*, int64_t, int64_t, int64_t, int64_t, int64_t, int64_t, CyclicTime))(Il2CppBase() + 0x16775D8))(this, newStartTime, newEndTime, newOBTStartTime, newOBTEndTime, newQAStartTime, newQAEndTime, newCyclic);
 	}
 	template <typename R = void> R RemoveTemporary() {
 		return ((R (*)(BattlePassEntity*))(Il2CppBase() + 0x1677724))(this);

@@ -12,7 +12,7 @@ public:
 	template <typename R = Il2CppString*> R& Action() {
 		return *(R*)((uintptr_t)this + 0x0);
 	}
-	template <typename R = AdsActor*> R& Actor() {
+	template <typename R = AdsActor> R& Actor() {
 		return *(R*)((uintptr_t)this + 0x8);
 	}
 	template <typename R = Il2CppString*> R& Reason() {

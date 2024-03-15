@@ -33,14 +33,14 @@ public:
 	template <typename R = Il2CppString*> R& instanceId() {
 		return *(R*)((uintptr_t)this + 0x48);
 	}
-	 Nullable1double>*& revenue() {
-		return *(Nullable1double>**)((uintptr_t)this + 0x50);
+	 Nullable1<double>*& revenue() {
+		return *(Nullable1<double>**)((uintptr_t)this + 0x50);
 	}
 	template <typename R = Il2CppString*> R& precision() {
 		return *(R*)((uintptr_t)this + 0x60);
 	}
-	 Nullable1double>*& lifetimeRevenue() {
-		return *(Nullable1double>**)((uintptr_t)this + 0x68);
+	 Nullable1<double>*& lifetimeRevenue() {
+		return *(Nullable1<double>**)((uintptr_t)this + 0x68);
 	}
 	template <typename R = Il2CppString*> R& encryptedCPM() {
 		return *(R*)((uintptr_t)this + 0x78);

@@ -9,10 +9,10 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "DamageCondition"));
 	}
 
-	template <typename R = DamageType*> R& IngoreDamageType() {
+	template <typename R = DamageType> R& IngoreDamageType() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
-	template <typename R = DamageType*> R& DamageType() {
+	template <typename R = DamageType> R& DamageType() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
 	template <typename R = float> R& MinBlocked() {

@@ -39,14 +39,14 @@ public:
 	template <typename R = int32_t> R& UseCount() {
 		return *(R*)((uintptr_t)this + 0x2C);
 	}
-	 Nullable1int64_t>*& StartTime() {
-		return *(Nullable1int64_t>**)((uintptr_t)this + 0x30);
+	 Nullable1<int64_t>*& StartTime() {
+		return *(Nullable1<int64_t>**)((uintptr_t)this + 0x30);
 	}
-	 Nullable1float>*& Duration() {
-		return *(Nullable1float>**)((uintptr_t)this + 0x40);
+	 Nullable1<float>*& Duration() {
+		return *(Nullable1<float>**)((uintptr_t)this + 0x40);
 	}
-	 Nullable1int32_t>*& InventoryIndex() {
-		return *(Nullable1int32_t>**)((uintptr_t)this + 0x48);
+	 Nullable1<int32_t>*& InventoryIndex() {
+		return *(Nullable1<int32_t>**)((uintptr_t)this + 0x48);
 	}
 	template <typename R = Il2CppString*> R& Blueprint() {
 		return *(R*)((uintptr_t)this + 0x50);
@@ -54,8 +54,8 @@ public:
 	template <typename R = Il2CppString*> R& Item() {
 		return *(R*)((uintptr_t)this + 0x58);
 	}
-	 Nullable1int64_t>*& ClanId() {
-		return *(Nullable1int64_t>**)((uintptr_t)this + 0x60);
+	 Nullable1<int64_t>*& ClanId() {
+		return *(Nullable1<int64_t>**)((uintptr_t)this + 0x60);
 	}
 	template <typename R = int64_t> R& GuildId() {
 		return *(R*)((uintptr_t)this + 0x70);
@@ -66,7 +66,7 @@ public:
 	template <typename R = AutoRotationStateComponent*> R& AutoRotationState() {
 		return *(R*)((uintptr_t)this + 0x80);
 	}
-	template <typename R = Il2CppArray<CreateMagicTriggerData*>*> R& Triggers() {
+	template <typename R = Il2CppArray<CreateMagicTriggerData>*> R& Triggers() {
 		return *(R*)((uintptr_t)this + 0x88);
 	}
 

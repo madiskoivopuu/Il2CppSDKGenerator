@@ -12,7 +12,7 @@ public:
 	template <typename R = int32_t> R& Count() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
-	template <typename R = Il2CppArray<GachaResources*>*> R& Data() {
+	template <typename R = Il2CppArray<GachaResources>*> R& Data() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
 

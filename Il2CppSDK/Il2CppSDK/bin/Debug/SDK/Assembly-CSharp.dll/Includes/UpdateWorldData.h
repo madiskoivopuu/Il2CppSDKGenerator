@@ -9,8 +9,8 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "UpdateWorldData"));
 	}
 
-	 Il2CppList<KeyValuePair2Il2CppString*, EntityBlueprint*>*>*& Blueprints() {
-		return *(Il2CppList<KeyValuePair2Il2CppString*, EntityBlueprint*>*>**)((uintptr_t)this + 0x0);
+	 Il2CppList<KeyValuePair2<Il2CppString*, EntityBlueprint*>*>*& Blueprints() {
+		return *(Il2CppList<KeyValuePair2<Il2CppString*, EntityBlueprint*>*>**)((uintptr_t)this + 0x0);
 	}
 	template <typename R = Il2CppArray<uint8_t>*> static R& _compressionBuffer() {
 		return *(R*)((uintptr_t)StaticClass()->static_fields + 0x0);

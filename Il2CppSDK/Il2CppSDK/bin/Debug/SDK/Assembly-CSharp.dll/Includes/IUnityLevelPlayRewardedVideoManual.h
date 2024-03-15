@@ -10,17 +10,17 @@ public:
 	}
 
 
-	template <typename R = void> R add_OnAdReady(Action1IronSourceAdInfo*>* value) {
-		return ((R (*)(IUnityLevelPlayRewardedVideoManual*, Action1IronSourceAdInfo*>*))(Il2CppBase() + 0x0))(this, value);
+	template <typename R = void> R add_OnAdReady(Action1<IronSourceAdInfo*>* value) {
+		return ((R (*)(IUnityLevelPlayRewardedVideoManual*, Action1<IronSourceAdInfo*>*))(Il2CppBase() + 0x0))(this, value);
 	}
-	template <typename R = void> R remove_OnAdReady(Action1IronSourceAdInfo*>* value) {
-		return ((R (*)(IUnityLevelPlayRewardedVideoManual*, Action1IronSourceAdInfo*>*))(Il2CppBase() + 0x0))(this, value);
+	template <typename R = void> R remove_OnAdReady(Action1<IronSourceAdInfo*>* value) {
+		return ((R (*)(IUnityLevelPlayRewardedVideoManual*, Action1<IronSourceAdInfo*>*))(Il2CppBase() + 0x0))(this, value);
 	}
-	template <typename R = void> R add_OnAdLoadFailed(Action1IronSourceError*>* value) {
-		return ((R (*)(IUnityLevelPlayRewardedVideoManual*, Action1IronSourceError*>*))(Il2CppBase() + 0x0))(this, value);
+	template <typename R = void> R add_OnAdLoadFailed(Action1<IronSourceError*>* value) {
+		return ((R (*)(IUnityLevelPlayRewardedVideoManual*, Action1<IronSourceError*>*))(Il2CppBase() + 0x0))(this, value);
 	}
-	template <typename R = void> R remove_OnAdLoadFailed(Action1IronSourceError*>* value) {
-		return ((R (*)(IUnityLevelPlayRewardedVideoManual*, Action1IronSourceError*>*))(Il2CppBase() + 0x0))(this, value);
+	template <typename R = void> R remove_OnAdLoadFailed(Action1<IronSourceError*>* value) {
+		return ((R (*)(IUnityLevelPlayRewardedVideoManual*, Action1<IronSourceError*>*))(Il2CppBase() + 0x0))(this, value);
 	}
 
 };

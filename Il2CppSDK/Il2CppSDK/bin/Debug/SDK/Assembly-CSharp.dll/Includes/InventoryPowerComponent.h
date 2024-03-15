@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "InventoryPowerComponent"));
 	}
 
-	template <typename R = InventoryPower*> R& Value() {
+	template <typename R = InventoryPower> R& Value() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
 

@@ -18,7 +18,7 @@ public:
 	template <typename R = Il2CppString*> R& AnyWithTag() {
 		return *(R*)((uintptr_t)this + 0x20);
 	}
-	template <typename R = QuestStatus*> R& Status() {
+	template <typename R = QuestStatus> R& Status() {
 		return *(R*)((uintptr_t)this + 0x28);
 	}
 

@@ -40,7 +40,7 @@ public:
 	template <typename R = int32_t> R& GuildBossCoins() {
 		return *(R*)((uintptr_t)this + 0x98);
 	}
-	template <typename R = InventoryPower*> R& InventoryPower() {
+	template <typename R = InventoryPower> R& InventoryPower() {
 		return *(R*)((uintptr_t)this + 0x9C);
 	}
 	 Il2CppList<PurchaseEntry*>*& PurchaseHistory() {

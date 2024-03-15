@@ -15,14 +15,14 @@ public:
 	template <typename R = Il2CppString*> R& UniqueName() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
-	 Nullable1int32_t>*& MinCount() {
-		return *(Nullable1int32_t>**)((uintptr_t)this + 0x20);
+	 Nullable1<int32_t>*& MinCount() {
+		return *(Nullable1<int32_t>**)((uintptr_t)this + 0x20);
 	}
-	 Nullable1int32_t>*& MaxCount() {
-		return *(Nullable1int32_t>**)((uintptr_t)this + 0x28);
+	 Nullable1<int32_t>*& MaxCount() {
+		return *(Nullable1<int32_t>**)((uintptr_t)this + 0x28);
 	}
-	 Nullable1bool>*& PlaceOwner() {
-		return *(Nullable1bool>**)((uintptr_t)this + 0x30);
+	 Nullable1<bool>*& PlaceOwner() {
+		return *(Nullable1<bool>**)((uintptr_t)this + 0x30);
 	}
 
 	template <typename R = void> R CopyTo(Il2CppObject* target) {

@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "GroupCooldownComponent"));
 	}
 
-	template <typename R = Il2CppArray<NameFloat*>*> R& Values() {
+	template <typename R = Il2CppArray<NameFloat>*> R& Values() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
 

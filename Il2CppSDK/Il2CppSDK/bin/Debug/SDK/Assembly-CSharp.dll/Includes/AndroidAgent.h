@@ -40,8 +40,8 @@ public:
 	template <typename R = void> R initEventsDispatcher() {
 		return ((R (*)(AndroidAgent*))(Il2CppBase() + 0x12A5020))(this);
 	}
-	template <typename R = void> R SetWaterfallConfiguration(WaterfallConfiguration* waterfallConfiguration, AdFormat* adFormat) {
-		return ((R (*)(AndroidAgent*, WaterfallConfiguration*, AdFormat*))(Il2CppBase() + 0x12A5350))(this, waterfallConfiguration, adFormat);
+	template <typename R = void> R SetWaterfallConfiguration(WaterfallConfiguration* waterfallConfiguration, AdFormat adFormat) {
+		return ((R (*)(AndroidAgent*, WaterfallConfiguration*, AdFormat))(Il2CppBase() + 0x12A5350))(this, waterfallConfiguration, adFormat);
 	}
 	template <typename R = void> R onApplicationPause(bool pause) {
 		return ((R (*)(AndroidAgent*, bool))(Il2CppBase() + 0x12A5668))(this, pause);
@@ -67,8 +67,8 @@ public:
 	template <typename R = void> R setMetaData_1(Il2CppString* key, Il2CppArray<Il2CppString*>* values) {
 		return ((R (*)(AndroidAgent*, Il2CppString*, Il2CppArray<Il2CppString*>*))(Il2CppBase() + 0x12A5DB4))(this, key, values);
 	}
-	 Nullable1int32_t>* getConversionValue() {
-		return ((Nullable1int32_t>* (*)(AndroidAgent*))(Il2CppBase() + 0x12A5ECC))(this);
+	 Nullable1<int32_t>* getConversionValue() {
+		return ((Nullable1<int32_t>* (*)(AndroidAgent*))(Il2CppBase() + 0x12A5ECC))(this);
 	}
 	template <typename R = void> R setManualLoadRewardedVideo(bool isOn) {
 		return ((R (*)(AndroidAgent*, bool))(Il2CppBase() + 0x12A5ED4))(this, isOn);
@@ -160,11 +160,11 @@ public:
 	template <typename R = bool> R isOfferwallAvailable() {
 		return ((R (*)(AndroidAgent*))(Il2CppBase() + 0x12A81E0))(this);
 	}
-	template <typename R = void> R loadBanner(IronSourceBannerSize* size, IronSourceBannerPosition* position) {
-		return ((R (*)(AndroidAgent*, IronSourceBannerSize*, IronSourceBannerPosition*))(Il2CppBase() + 0x12A82F0))(this, size, position);
+	template <typename R = void> R loadBanner(IronSourceBannerSize* size, IronSourceBannerPosition position) {
+		return ((R (*)(AndroidAgent*, IronSourceBannerSize*, IronSourceBannerPosition))(Il2CppBase() + 0x12A82F0))(this, size, position);
 	}
-	template <typename R = void> R loadBanner_1(IronSourceBannerSize* size, IronSourceBannerPosition* position, Il2CppString* placementName) {
-		return ((R (*)(AndroidAgent*, IronSourceBannerSize*, IronSourceBannerPosition*, Il2CppString*))(Il2CppBase() + 0x12A834C))(this, size, position, placementName);
+	template <typename R = void> R loadBanner_1(IronSourceBannerSize* size, IronSourceBannerPosition position, Il2CppString* placementName) {
+		return ((R (*)(AndroidAgent*, IronSourceBannerSize*, IronSourceBannerPosition, Il2CppString*))(Il2CppBase() + 0x12A834C))(this, size, position, placementName);
 	}
 	template <typename R = void> R destroyBanner() {
 		return ((R (*)(AndroidAgent*))(Il2CppBase() + 0x12A85E0))(this);

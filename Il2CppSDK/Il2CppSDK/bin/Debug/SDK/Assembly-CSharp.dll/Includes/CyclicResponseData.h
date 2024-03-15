@@ -9,13 +9,13 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "CyclicResponseData"));
 	}
 
-	template <typename R = Account*> R& CyclicAccount() {
+	template <typename R = Account> R& CyclicAccount() {
 		return *(R*)((uintptr_t)this + 0x0);
 	}
-	template <typename R = Account*> R& CyclicMasterAccount() {
+	template <typename R = Account> R& CyclicMasterAccount() {
 		return *(R*)((uintptr_t)this + 0x20);
 	}
-	template <typename R = ServerDetail*> R& CyclicServerDetail() {
+	template <typename R = ServerDetail> R& CyclicServerDetail() {
 		return *(R*)((uintptr_t)this + 0x40);
 	}
 	template <typename R = int32_t> R& WipePrice() {

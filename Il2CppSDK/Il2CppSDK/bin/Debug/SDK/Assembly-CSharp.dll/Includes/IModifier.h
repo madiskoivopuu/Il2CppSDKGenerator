@@ -13,7 +13,7 @@ public:
 	template <typename R = float> R GetValue() {
 		return ((R (*)(IModifier*))(Il2CppBase() + 0x0))(this);
 	}
-	template <typename R = ModifierGroup*> R GetGroup() {
+	template <typename R = ModifierGroup> R GetGroup() {
 		return ((R (*)(IModifier*))(Il2CppBase() + 0x0))(this);
 	}
 

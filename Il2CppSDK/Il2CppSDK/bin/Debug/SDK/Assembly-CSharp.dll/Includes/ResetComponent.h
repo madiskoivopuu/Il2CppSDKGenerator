@@ -24,7 +24,7 @@ public:
 	template <typename R = bool> R& Manual() {
 		return *(R*)((uintptr_t)this + 0x1D);
 	}
-	template <typename R = ResetType*> R& ResetTo() {
+	template <typename R = ResetType> R& ResetTo() {
 		return *(R*)((uintptr_t)this + 0x20);
 	}
 

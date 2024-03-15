@@ -19,7 +19,7 @@ public:
 	template <typename R = void> R CopyTo(Il2CppObject* target) {
 		return ((R (*)(CoefChanceComponent*, Il2CppObject*))(Il2CppBase() + 0xE236AC))(this, target);
 	}
-	template <typename R = ModifierGroup*> R GetGroup() {
+	template <typename R = ModifierGroup> R GetGroup() {
 		return ((R (*)(CoefChanceComponent*))(Il2CppBase() + 0xE23750))(this);
 	}
 	template <typename R = float> R GetValue() {

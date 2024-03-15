@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "ClassRuneChangedData"));
 	}
 
-	template <typename R = PlayerClassType*> R& ClassType() {
+	template <typename R = PlayerClassType> R& ClassType() {
 		return *(R*)((uintptr_t)this + 0x0);
 	}
 	template <typename R = int32_t> R& FromClassSlotIndex() {

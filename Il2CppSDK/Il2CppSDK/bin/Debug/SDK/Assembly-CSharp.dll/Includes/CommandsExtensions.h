@@ -10,8 +10,8 @@ public:
 	}
 
 
-	template <typename R = int16_t> static R Value(Commands* command) {
-		return ((R (*)(void *, Commands*))(Il2CppBase() + 0xE292C4))(0, command);
+	template <typename R = int16_t> static R Value(Commands command) {
+		return ((R (*)(void *, Commands))(Il2CppBase() + 0xE292C4))(0, command);
 	}
 
 };

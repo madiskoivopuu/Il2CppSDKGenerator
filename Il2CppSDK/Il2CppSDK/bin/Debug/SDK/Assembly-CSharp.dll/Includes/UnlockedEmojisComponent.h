@@ -2,7 +2,7 @@
 #include <Il2Cpp/Il2Cpp.h>
 #include "TypeListComponent1.h" 
 
-class UnlockedEmojisComponent : public TypeListComponent1<UnlockedEmoji*>
+class UnlockedEmojisComponent : public TypeListComponent1<UnlockedEmoji>
 {
 public: 
 

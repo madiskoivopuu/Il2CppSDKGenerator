@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "DiscountComponent"));
 	}
 
-	template <typename R = Il2CppArray<Discount*>*> R& List() {
+	template <typename R = Il2CppArray<Discount>*> R& List() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
 
@@ -22,7 +22,7 @@ public:
 	template <typename R = void> R Write(uintptr_t writer) {
 		return ((R (*)(DiscountComponent*, uintptr_t))(Il2CppBase() + 0x130254C))(this, writer);
 	}
-	template <typename R = Discount*> R GetDiscountWithIndex(int32_t index) {
+	template <typename R = Discount> R GetDiscountWithIndex(int32_t index) {
 		return ((R (*)(DiscountComponent*, int32_t))(Il2CppBase() + 0x13025F4))(this, index);
 	}
 

@@ -12,7 +12,7 @@ public:
 	template <typename R = int32_t> R& Id() {
 		return *(R*)((uintptr_t)this + 0x0);
 	}
-	template <typename R = Gender*> R& Gender() {
+	template <typename R = Gender> R& Gender() {
 		return *(R*)((uintptr_t)this + 0x4);
 	}
 

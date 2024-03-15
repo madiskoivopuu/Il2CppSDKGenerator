@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "PositionTransactionComponent"));
 	}
 
-	template <typename R = Ease*> R& Ease() {
+	template <typename R = Ease> R& Ease() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
 	template <typename R = float> R& Duration() {
@@ -18,10 +18,10 @@ public:
 	template <typename R = int64_t> R& StartTime() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
-	template <typename R = Vec2*> R& StartPosition() {
+	template <typename R = Vec2> R& StartPosition() {
 		return *(R*)((uintptr_t)this + 0x20);
 	}
-	template <typename R = Vec2*> R& EndPosition() {
+	template <typename R = Vec2> R& EndPosition() {
 		return *(R*)((uintptr_t)this + 0x28);
 	}
 

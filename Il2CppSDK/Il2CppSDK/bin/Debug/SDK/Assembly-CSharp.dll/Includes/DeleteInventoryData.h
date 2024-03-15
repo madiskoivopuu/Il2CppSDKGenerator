@@ -12,8 +12,8 @@ public:
 	template <typename R = int32_t> R& Id() {
 		return *(R*)((uintptr_t)this + 0x0);
 	}
-	 Nullable1int32_t>*& MaxCount() {
-		return *(Nullable1int32_t>**)((uintptr_t)this + 0x4);
+	 Nullable1<int32_t>*& MaxCount() {
+		return *(Nullable1<int32_t>**)((uintptr_t)this + 0x4);
 	}
 
 	template <typename R = void> R Write(uintptr_t writer) {

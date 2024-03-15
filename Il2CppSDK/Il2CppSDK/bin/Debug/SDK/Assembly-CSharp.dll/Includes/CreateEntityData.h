@@ -36,29 +36,29 @@ public:
 	template <typename R = Il2CppString*> R& Blueprint() {
 		return *(R*)((uintptr_t)this + 0x30);
 	}
-	 Nullable1int64_t>*& ClanId() {
-		return *(Nullable1int64_t>**)((uintptr_t)this + 0x38);
+	 Nullable1<int64_t>*& ClanId() {
+		return *(Nullable1<int64_t>**)((uintptr_t)this + 0x38);
 	}
 	template <typename R = int64_t> R& GuildId() {
 		return *(R*)((uintptr_t)this + 0x48);
 	}
-	 Nullable1int64_t>*& OwnerId() {
-		return *(Nullable1int64_t>**)((uintptr_t)this + 0x50);
+	 Nullable1<int64_t>*& OwnerId() {
+		return *(Nullable1<int64_t>**)((uintptr_t)this + 0x50);
 	}
-	 Nullable1int64_t>*& PlaceOwnerId() {
-		return *(Nullable1int64_t>**)((uintptr_t)this + 0x60);
+	 Nullable1<int64_t>*& PlaceOwnerId() {
+		return *(Nullable1<int64_t>**)((uintptr_t)this + 0x60);
 	}
-	 Nullable1int32_t>*& MountInventoryId() {
-		return *(Nullable1int32_t>**)((uintptr_t)this + 0x70);
+	 Nullable1<int32_t>*& MountInventoryId() {
+		return *(Nullable1<int32_t>**)((uintptr_t)this + 0x70);
 	}
-	 Nullable1int32_t>*& ParentId() {
-		return *(Nullable1int32_t>**)((uintptr_t)this + 0x78);
+	 Nullable1<int32_t>*& ParentId() {
+		return *(Nullable1<int32_t>**)((uintptr_t)this + 0x78);
 	}
-	 Nullable1float>*& HealthCoef() {
-		return *(Nullable1float>**)((uintptr_t)this + 0x80);
+	 Nullable1<float>*& HealthCoef() {
+		return *(Nullable1<float>**)((uintptr_t)this + 0x80);
 	}
-	 Nullable1float>*& MaxHealthCoef() {
-		return *(Nullable1float>**)((uintptr_t)this + 0x88);
+	 Nullable1<float>*& MaxHealthCoef() {
+		return *(Nullable1<float>**)((uintptr_t)this + 0x88);
 	}
 	template <typename R = float> R& BonusHealth() {
 		return *(R*)((uintptr_t)this + 0x90);
@@ -69,11 +69,11 @@ public:
 	template <typename R = bool> R& New() {
 		return *(R*)((uintptr_t)this + 0xA0);
 	}
-	 Nullable1int32_t>*& GroupChildId() {
-		return *(Nullable1int32_t>**)((uintptr_t)this + 0xA4);
+	 Nullable1<int32_t>*& GroupChildId() {
+		return *(Nullable1<int32_t>**)((uintptr_t)this + 0xA4);
 	}
-	 Nullable1EntityId*>*& Bind() {
-		return *(Nullable1EntityId*>**)((uintptr_t)this + 0xAC);
+	 Nullable1<EntityId>*& Bind() {
+		return *(Nullable1<EntityId>**)((uintptr_t)this + 0xAC);
 	}
 
 	template <typename R = void> R Write(uintptr_t writer) {

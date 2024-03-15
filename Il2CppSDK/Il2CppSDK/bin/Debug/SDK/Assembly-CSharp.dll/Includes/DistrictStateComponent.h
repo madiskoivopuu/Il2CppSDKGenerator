@@ -3,7 +3,7 @@
 #include "EnumComponent1.h" 
 #include "DistrictState.h" 
 
-class DistrictStateComponent : public EnumComponent1<DistrictState*>
+class DistrictStateComponent : public EnumComponent1<DistrictState>
 {
 public: 
 

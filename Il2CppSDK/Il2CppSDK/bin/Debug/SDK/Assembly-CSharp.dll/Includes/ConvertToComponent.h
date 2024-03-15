@@ -12,7 +12,7 @@ public:
 	template <typename R = Il2CppString*> R& Name() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
-	template <typename R = Il2CppArray<ResourceElement*>*> R& Names() {
+	template <typename R = Il2CppArray<ResourceElement>*> R& Names() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
 

@@ -15,8 +15,8 @@ public:
 	template <typename R = Il2CppArray<int32_t>*> R& Dependents() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
-	 Action3ICommonContexts*, bool, GameEntity*>*& Calc() {
-		return *(Action3ICommonContexts*, bool, GameEntity*>**)((uintptr_t)this + 0x20);
+	 Action3<ICommonContexts*, bool, GameEntity*>*& Calc() {
+		return *(Action3<ICommonContexts*, bool, GameEntity*>**)((uintptr_t)this + 0x20);
 	}
 
 

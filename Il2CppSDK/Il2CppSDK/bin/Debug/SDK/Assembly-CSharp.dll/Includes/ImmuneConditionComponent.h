@@ -9,11 +9,11 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "ImmuneConditionComponent"));
 	}
 
-	 Nullable1bool>*& Unstopable() {
-		return *(Nullable1bool>**)((uintptr_t)this + 0x10);
+	 Nullable1<bool>*& Unstopable() {
+		return *(Nullable1<bool>**)((uintptr_t)this + 0x10);
 	}
-	 Nullable1bool>*& DebuffImmune() {
-		return *(Nullable1bool>**)((uintptr_t)this + 0x12);
+	 Nullable1<bool>*& DebuffImmune() {
+		return *(Nullable1<bool>**)((uintptr_t)this + 0x12);
 	}
 
 	template <typename R = void> R CopyTo(Il2CppObject* target) {

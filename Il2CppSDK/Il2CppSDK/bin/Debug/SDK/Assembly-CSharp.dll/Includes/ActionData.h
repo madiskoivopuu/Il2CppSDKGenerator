@@ -12,7 +12,7 @@ public:
 	template <typename R = int32_t> R& Id() {
 		return *(R*)((uintptr_t)this + 0x0);
 	}
-	template <typename R = ActionType*> R& ActionType() {
+	template <typename R = ActionType> R& ActionType() {
 		return *(R*)((uintptr_t)this + 0x4);
 	}
 	template <typename R = Il2CppString*> R& ActionName() {
@@ -39,11 +39,11 @@ public:
 	template <typename R = float> R& DurationCoef() {
 		return *(R*)((uintptr_t)this + 0x30);
 	}
-	 Nullable1Vec2*>*& TargetPosition() {
-		return *(Nullable1Vec2*>**)((uintptr_t)this + 0x34);
+	 Nullable1<Vec2>*& TargetPosition() {
+		return *(Nullable1<Vec2>**)((uintptr_t)this + 0x34);
 	}
-	 Nullable1int32_t>*& SequenceValue() {
-		return *(Nullable1int32_t>**)((uintptr_t)this + 0x40);
+	 Nullable1<int32_t>*& SequenceValue() {
+		return *(Nullable1<int32_t>**)((uintptr_t)this + 0x40);
 	}
 
 	template <typename R = void> R Write(uintptr_t writer) {

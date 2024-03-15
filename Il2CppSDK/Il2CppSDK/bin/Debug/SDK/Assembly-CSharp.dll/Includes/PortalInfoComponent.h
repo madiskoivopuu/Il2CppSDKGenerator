@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "PortalInfoComponent"));
 	}
 
-	template <typename R = LobbyType*> R& Type() {
+	template <typename R = LobbyType> R& Type() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
 	template <typename R = int32_t> R& PortalsRank() {

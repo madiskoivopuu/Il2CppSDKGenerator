@@ -3,7 +3,7 @@
 #include "EnumComponent1.h" 
 #include "PvPState.h" 
 
-class PvPStateComponent : public EnumComponent1<PvPState*>
+class PvPStateComponent : public EnumComponent1<PvPState>
 {
 public: 
 

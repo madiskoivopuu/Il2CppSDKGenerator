@@ -21,7 +21,7 @@ public:
 	template <typename R = Il2CppString*> R& CurrentOpenBoss() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
-	template <typename R = Il2CppArray<BossState*>*> R& States() {
+	template <typename R = Il2CppArray<BossState>*> R& States() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
 

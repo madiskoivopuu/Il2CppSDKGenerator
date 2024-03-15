@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "BaseNotifyComponent"));
 	}
 
-	template <typename R = NotifyType*> R& Type() {
+	template <typename R = NotifyType> R& Type() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
 	template <typename R = Il2CppString*> R& Icon() {

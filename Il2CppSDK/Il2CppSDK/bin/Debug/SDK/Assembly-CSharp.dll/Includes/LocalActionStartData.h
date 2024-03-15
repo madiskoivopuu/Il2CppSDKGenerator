@@ -24,8 +24,8 @@ public:
 	template <typename R = float> R& DurationCoef() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
-	 Nullable1Vec2*>*& TargetPosition() {
-		return *(Nullable1Vec2*>**)((uintptr_t)this + 0x1C);
+	 Nullable1<Vec2>*& TargetPosition() {
+		return *(Nullable1<Vec2>**)((uintptr_t)this + 0x1C);
 	}
 
 	template <typename R = void> R Write(uintptr_t writer) {

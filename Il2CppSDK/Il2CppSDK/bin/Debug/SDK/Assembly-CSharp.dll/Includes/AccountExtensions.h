@@ -16,7 +16,7 @@ public:
 	template <typename R = int32_t> static R GetLocationAutoCount(AccountEntity* account, Il2CppString* pointName, int64_t now) {
 		return ((R (*)(void *, AccountEntity*, Il2CppString*, int64_t))(Il2CppBase() + 0xFCE59C))(0, account, pointName, now);
 	}
-	template <typename R = Attempt*> static R GetLocationAutoAttempt(AccountEntity* account, Il2CppString* pointName, int64_t now) {
+	template <typename R = Attempt> static R GetLocationAutoAttempt(AccountEntity* account, Il2CppString* pointName, int64_t now) {
 		return ((R (*)(void *, AccountEntity*, Il2CppString*, int64_t))(Il2CppBase() + 0xFCE67C))(0, account, pointName, now);
 	}
 	template <typename R = void> static R IncLocationAuto(AccountEntity* account, Il2CppString* pointName, int64_t now) {

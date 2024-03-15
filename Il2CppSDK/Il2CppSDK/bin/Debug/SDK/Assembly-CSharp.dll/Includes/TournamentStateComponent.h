@@ -3,7 +3,7 @@
 #include "EnumComponent1.h" 
 #include "TournamentState.h" 
 
-class TournamentStateComponent : public EnumComponent1<TournamentState*>
+class TournamentStateComponent : public EnumComponent1<TournamentState>
 {
 public: 
 

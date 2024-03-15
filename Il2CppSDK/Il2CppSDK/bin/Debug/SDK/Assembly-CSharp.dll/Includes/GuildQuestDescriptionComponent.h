@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "GuildQuestDescriptionComponent"));
 	}
 
-	template <typename R = GuildQuestDifficulty*> R& Difficulty() {
+	template <typename R = GuildQuestDifficulty> R& Difficulty() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
 	template <typename R = int32_t> R& MinGuildRankPoints() {

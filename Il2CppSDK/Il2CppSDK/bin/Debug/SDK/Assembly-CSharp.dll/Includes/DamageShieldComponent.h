@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "DamageShieldComponent"));
 	}
 
-	template <typename R = DamageShieldDepends*> R& Depends() {
+	template <typename R = DamageShieldDepends> R& Depends() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
 	template <typename R = float> R& Value() {

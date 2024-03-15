@@ -66,7 +66,7 @@ public:
 	template <typename R = Il2CppString*> R& BuyLevelsButtonCaption() {
 		return *(R*)((uintptr_t)this + 0x90);
 	}
-	template <typename R = StoreCategory*> R& StoreCategory() {
+	template <typename R = StoreCategory> R& StoreCategory() {
 		return *(R*)((uintptr_t)this + 0x98);
 	}
 	template <typename R = Il2CppString*> R& BuyLevelsCaption() {

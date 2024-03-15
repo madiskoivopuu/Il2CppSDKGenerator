@@ -22,8 +22,8 @@ public:
 		return *(R*)((uintptr_t)this + 0x20);
 	}
 
-	 ValueTuple2int32_t, int64_t>* GetPhase(int64_t now) {
-		return ((ValueTuple2int32_t, int64_t>* (*)(PhasesComponent*, int64_t))(Il2CppBase() + 0x16F63B4))(this, now);
+	 ValueTuple2<int32_t, int64_t>* GetPhase(int64_t now) {
+		return ((ValueTuple2<int32_t, int64_t>* (*)(PhasesComponent*, int64_t))(Il2CppBase() + 0x16F63B4))(this, now);
 	}
 	template <typename R = void> R CopyTo(Il2CppObject* target) {
 		return ((R (*)(PhasesComponent*, Il2CppObject*))(Il2CppBase() + 0x16F65A0))(this, target);

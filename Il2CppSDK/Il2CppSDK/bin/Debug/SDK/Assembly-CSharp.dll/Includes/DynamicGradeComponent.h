@@ -9,14 +9,14 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "DynamicGradeComponent"));
 	}
 
-	template <typename R = DynamicGradeType*> R& Type() {
+	template <typename R = DynamicGradeType> R& Type() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
 	template <typename R = int32_t> R& Offset() {
 		return *(R*)((uintptr_t)this + 0x14);
 	}
-	 Nullable1int32_t>*& Max() {
-		return *(Nullable1int32_t>**)((uintptr_t)this + 0x18);
+	 Nullable1<int32_t>*& Max() {
+		return *(Nullable1<int32_t>**)((uintptr_t)this + 0x18);
 	}
 
 	template <typename R = void> R CopyTo(Il2CppObject* target) {

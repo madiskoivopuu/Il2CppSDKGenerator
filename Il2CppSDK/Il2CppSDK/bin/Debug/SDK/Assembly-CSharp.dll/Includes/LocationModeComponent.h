@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "LocationModeComponent"));
 	}
 
-	template <typename R = LocationMode*> R& Type() {
+	template <typename R = LocationMode> R& Type() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
 	template <typename R = Il2CppString*> R& Caption() {
@@ -21,11 +21,11 @@ public:
 	template <typename R = Il2CppString*> R& Icon() {
 		return *(R*)((uintptr_t)this + 0x28);
 	}
-	 Nullable1int32_t>*& DifficultyIndex() {
-		return *(Nullable1int32_t>**)((uintptr_t)this + 0x30);
+	 Nullable1<int32_t>*& DifficultyIndex() {
+		return *(Nullable1<int32_t>**)((uintptr_t)this + 0x30);
 	}
-	 Nullable1int32_t>*& LootIndex() {
-		return *(Nullable1int32_t>**)((uintptr_t)this + 0x38);
+	 Nullable1<int32_t>*& LootIndex() {
+		return *(Nullable1<int32_t>**)((uintptr_t)this + 0x38);
 	}
 	template <typename R = Il2CppString*> R& PvPName() {
 		return *(R*)((uintptr_t)this + 0x40);

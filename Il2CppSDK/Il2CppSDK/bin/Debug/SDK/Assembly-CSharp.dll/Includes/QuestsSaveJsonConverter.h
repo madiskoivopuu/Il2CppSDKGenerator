@@ -28,8 +28,8 @@ public:
 	template <typename R = Il2CppObject*> R ReadJson(uintptr_t reader, uintptr_t objectType, Il2CppObject* existingValue, uintptr_t serializer) {
 		return ((R (*)(QuestsSaveJsonConverter*, uintptr_t, uintptr_t, Il2CppObject*, uintptr_t))(Il2CppBase() + 0x1708AB0))(this, reader, objectType, existingValue, serializer);
 	}
-	template <typename R = void> R ParseResources(Il2CppString* data, Il2CppList<Resource*>* result) {
-		return ((R (*)(QuestsSaveJsonConverter*, Il2CppString*, Il2CppList<Resource*>*))(Il2CppBase() + 0x1709490))(this, data, result);
+	template <typename R = void> R ParseResources(Il2CppString* data, Il2CppList<Resource>* result) {
+		return ((R (*)(QuestsSaveJsonConverter*, Il2CppString*, Il2CppList<Resource>*))(Il2CppBase() + 0x1709490))(this, data, result);
 	}
 	template <typename R = bool> R get_CanRead() {
 		return ((R (*)(QuestsSaveJsonConverter*))(Il2CppBase() + 0x170970C))(this);

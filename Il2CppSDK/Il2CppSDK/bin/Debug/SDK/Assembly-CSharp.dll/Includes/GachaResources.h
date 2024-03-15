@@ -9,14 +9,14 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "GachaResources"));
 	}
 
-	template <typename R = Resource*> R& Base() {
+	template <typename R = Resource> R& Base() {
 		return *(R*)((uintptr_t)this + 0x0);
 	}
-	template <typename R = Resource*> R& Additional() {
+	template <typename R = Resource> R& Additional() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
-	 Il2CppList<Resource*>*& ListAdditional() {
-		return *(Il2CppList<Resource*>**)((uintptr_t)this + 0x30);
+	 Il2CppList<Resource>*& ListAdditional() {
+		return *(Il2CppList<Resource>**)((uintptr_t)this + 0x30);
 	}
 
 	template <typename R = void> R Write(uintptr_t writer) {

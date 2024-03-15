@@ -3,7 +3,7 @@
 #include "TypeTypeComponent1.h" 
 #include "Gender.h" 
 
-class GenderComponent : public TypeTypeComponent1<Gender*>
+class GenderComponent : public TypeTypeComponent1<Gender>
 {
 public: 
 
@@ -21,7 +21,7 @@ public:
 	template <typename R = bool> R IsEqualsDefault(Il2CppObject* blueprintComponent) {
 		return ((R (*)(GenderComponent*, Il2CppObject*))(Il2CppBase() + 0x176E2B8))(this, blueprintComponent);
 	}
-	template <typename R = ModifierGroup*> R GetGroup() {
+	template <typename R = ModifierGroup> R GetGroup() {
 		return ((R (*)(GenderComponent*))(Il2CppBase() + 0x176E354))(this);
 	}
 	template <typename R = float> R GetValue() {

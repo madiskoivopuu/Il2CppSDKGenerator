@@ -19,7 +19,7 @@ public:
 	template <typename R = void> R CopyTo(Il2CppObject* target) {
 		return ((R (*)(OverrideCooldownComponent*, Il2CppObject*))(Il2CppBase() + 0x11E6728))(this, target);
 	}
-	template <typename R = ModifierGroup*> R GetGroup() {
+	template <typename R = ModifierGroup> R GetGroup() {
 		return ((R (*)(OverrideCooldownComponent*))(Il2CppBase() + 0x11E67CC))(this);
 	}
 	template <typename R = float> R GetValue() {

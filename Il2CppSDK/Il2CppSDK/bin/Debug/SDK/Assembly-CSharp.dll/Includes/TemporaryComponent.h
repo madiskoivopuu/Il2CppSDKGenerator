@@ -27,7 +27,7 @@ public:
 	template <typename R = int64_t> R& QAEndTime() {
 		return *(R*)((uintptr_t)this + 0x38);
 	}
-	template <typename R = CyclicTime*> R& Cyclic() {
+	template <typename R = CyclicTime> R& Cyclic() {
 		return *(R*)((uintptr_t)this + 0x40);
 	}
 

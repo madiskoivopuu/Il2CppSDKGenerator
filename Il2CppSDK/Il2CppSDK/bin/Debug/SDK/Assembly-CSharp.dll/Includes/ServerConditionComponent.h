@@ -9,14 +9,14 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "ServerConditionComponent"));
 	}
 
-	 Nullable1bool>*& IsCyclic() {
-		return *(Nullable1bool>**)((uintptr_t)this + 0x10);
+	 Nullable1<bool>*& IsCyclic() {
+		return *(Nullable1<bool>**)((uintptr_t)this + 0x10);
 	}
-	 Nullable1bool>*& IsOBT() {
-		return *(Nullable1bool>**)((uintptr_t)this + 0x12);
+	 Nullable1<bool>*& IsOBT() {
+		return *(Nullable1<bool>**)((uintptr_t)this + 0x12);
 	}
-	 Nullable1bool>*& IsQA() {
-		return *(Nullable1bool>**)((uintptr_t)this + 0x14);
+	 Nullable1<bool>*& IsQA() {
+		return *(Nullable1<bool>**)((uintptr_t)this + 0x14);
 	}
 
 	template <typename R = void> R CopyTo(Il2CppObject* target) {

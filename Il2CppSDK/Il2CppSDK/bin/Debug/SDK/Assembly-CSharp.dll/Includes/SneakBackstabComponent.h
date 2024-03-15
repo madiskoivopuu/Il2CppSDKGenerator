@@ -11,7 +11,7 @@ public:
 	}
 
 
-	template <typename R = BackstabType*> R get_BackstabType() {
+	template <typename R = BackstabType> R get_BackstabType() {
 		return ((R (*)(SneakBackstabComponent*))(Il2CppBase() + 0x148475C))(this);
 	}
 

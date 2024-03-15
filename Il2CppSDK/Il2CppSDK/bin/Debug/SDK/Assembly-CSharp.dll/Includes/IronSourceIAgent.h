@@ -10,8 +10,8 @@ public:
 	}
 
 
-	template <typename R = void> R SetWaterfallConfiguration(WaterfallConfiguration* waterfallConfiguration, AdFormat* adFormat) {
-		return ((R (*)(IronSourceIAgent*, WaterfallConfiguration*, AdFormat*))(Il2CppBase() + 0x0))(this, waterfallConfiguration, adFormat);
+	template <typename R = void> R SetWaterfallConfiguration(WaterfallConfiguration* waterfallConfiguration, AdFormat adFormat) {
+		return ((R (*)(IronSourceIAgent*, WaterfallConfiguration*, AdFormat))(Il2CppBase() + 0x0))(this, waterfallConfiguration, adFormat);
 	}
 	template <typename R = void> R onApplicationPause(bool pause) {
 		return ((R (*)(IronSourceIAgent*, bool))(Il2CppBase() + 0x0))(this, pause);
@@ -37,8 +37,8 @@ public:
 	template <typename R = void> R setMetaData_1(Il2CppString* key, Il2CppArray<Il2CppString*>* values) {
 		return ((R (*)(IronSourceIAgent*, Il2CppString*, Il2CppArray<Il2CppString*>*))(Il2CppBase() + 0x0))(this, key, values);
 	}
-	 Nullable1int32_t>* getConversionValue() {
-		return ((Nullable1int32_t>* (*)(IronSourceIAgent*))(Il2CppBase() + 0x0))(this);
+	 Nullable1<int32_t>* getConversionValue() {
+		return ((Nullable1<int32_t>* (*)(IronSourceIAgent*))(Il2CppBase() + 0x0))(this);
 	}
 	template <typename R = void> R setManualLoadRewardedVideo(bool isOn) {
 		return ((R (*)(IronSourceIAgent*, bool))(Il2CppBase() + 0x0))(this, isOn);
@@ -130,11 +130,11 @@ public:
 	template <typename R = void> R getOfferwallCredits() {
 		return ((R (*)(IronSourceIAgent*))(Il2CppBase() + 0x0))(this);
 	}
-	template <typename R = void> R loadBanner(IronSourceBannerSize* size, IronSourceBannerPosition* position) {
-		return ((R (*)(IronSourceIAgent*, IronSourceBannerSize*, IronSourceBannerPosition*))(Il2CppBase() + 0x0))(this, size, position);
+	template <typename R = void> R loadBanner(IronSourceBannerSize* size, IronSourceBannerPosition position) {
+		return ((R (*)(IronSourceIAgent*, IronSourceBannerSize*, IronSourceBannerPosition))(Il2CppBase() + 0x0))(this, size, position);
 	}
-	template <typename R = void> R loadBanner_1(IronSourceBannerSize* size, IronSourceBannerPosition* position, Il2CppString* placementName) {
-		return ((R (*)(IronSourceIAgent*, IronSourceBannerSize*, IronSourceBannerPosition*, Il2CppString*))(Il2CppBase() + 0x0))(this, size, position, placementName);
+	template <typename R = void> R loadBanner_1(IronSourceBannerSize* size, IronSourceBannerPosition position, Il2CppString* placementName) {
+		return ((R (*)(IronSourceIAgent*, IronSourceBannerSize*, IronSourceBannerPosition, Il2CppString*))(Il2CppBase() + 0x0))(this, size, position, placementName);
 	}
 	template <typename R = void> R destroyBanner() {
 		return ((R (*)(IronSourceIAgent*))(Il2CppBase() + 0x0))(this);

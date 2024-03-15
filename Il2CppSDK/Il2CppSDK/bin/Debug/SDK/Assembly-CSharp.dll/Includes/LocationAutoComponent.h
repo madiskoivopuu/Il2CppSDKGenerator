@@ -9,8 +9,8 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "LocationAutoComponent"));
 	}
 
-	 Il2CppDictionary<Il2CppString*, Attempt*>*& Attempts() {
-		return *(Il2CppDictionary<Il2CppString*, Attempt*>**)((uintptr_t)this + 0x10);
+	 Il2CppDictionary<Il2CppString*, Attempt>*& Attempts() {
+		return *(Il2CppDictionary<Il2CppString*, Attempt>**)((uintptr_t)this + 0x10);
 	}
 
 	template <typename R = void> R CopyTo(Il2CppObject* targetObject) {

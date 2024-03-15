@@ -15,11 +15,11 @@ public:
 	template <typename R = Il2CppString*> R& Blueprint() {
 		return *(R*)((uintptr_t)this + 0x8);
 	}
-	 Nullable1int64_t>*& StartTime() {
-		return *(Nullable1int64_t>**)((uintptr_t)this + 0x10);
+	 Nullable1<int64_t>*& StartTime() {
+		return *(Nullable1<int64_t>**)((uintptr_t)this + 0x10);
 	}
-	 Nullable1int64_t>*& EndTime() {
-		return *(Nullable1int64_t>**)((uintptr_t)this + 0x20);
+	 Nullable1<int64_t>*& EndTime() {
+		return *(Nullable1<int64_t>**)((uintptr_t)this + 0x20);
 	}
 	template <typename R = int32_t> R& Progress() {
 		return *(R*)((uintptr_t)this + 0x30);
@@ -51,10 +51,10 @@ public:
 	template <typename R = float> R& RewardCoef() {
 		return *(R*)((uintptr_t)this + 0x50);
 	}
-	template <typename R = Il2CppArray<Resource*>*> R& GeneretedResources() {
+	template <typename R = Il2CppArray<Resource>*> R& GeneretedResources() {
 		return *(R*)((uintptr_t)this + 0x58);
 	}
-	template <typename R = Il2CppArray<Resource*>*> R& GeneretedPremiumResources() {
+	template <typename R = Il2CppArray<Resource>*> R& GeneretedPremiumResources() {
 		return *(R*)((uintptr_t)this + 0x60);
 	}
 

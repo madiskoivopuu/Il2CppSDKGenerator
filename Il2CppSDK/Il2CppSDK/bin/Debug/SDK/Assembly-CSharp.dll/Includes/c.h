@@ -12,18 +12,18 @@ public:
 	template <typename R = c*> static R& 9() {
 		return *(R*)((uintptr_t)StaticClass()->static_fields + 0x0);
 	}
-	 static Func1BattlePassEntity*>*& 9__2_0() {
-		return *(Func1BattlePassEntity*>**)((uintptr_t)StaticClass()->static_fields + 0x8);
+	 static Func2<bool, Il2CppString*>*& 9__14_0() {
+		return *(Func2<bool, Il2CppString*>**)((uintptr_t)StaticClass()->static_fields + 0x8);
 	}
-	 static Func3BattlePassEntity*, uintptr_t, CurrencyType*>*& 9__3_0() {
-		return *(Func3BattlePassEntity*, uintptr_t, CurrencyType*>**)((uintptr_t)StaticClass()->static_fields + 0x10);
+	 static Func2<bool, Il2CppString*>*& 9__14_1() {
+		return *(Func2<bool, Il2CppString*>**)((uintptr_t)StaticClass()->static_fields + 0x10);
 	}
 
-	template <typename R = BattlePassEntity*> R _ctorb__2_0() {
-		return ((R (*)(c*))(Il2CppBase() + 0xEEA3F8))(this);
+	template <typename R = Il2CppString*> R ToStringb__14_0(bool p) {
+		return ((R (*)(c*, bool))(Il2CppBase() + 0x22A5CB4))(this, p);
 	}
-	template <typename R = CurrencyType*> R AddEntityIndexesb__3_0(BattlePassEntity* e, uintptr_t c) {
-		return ((R (*)(c*, BattlePassEntity*, uintptr_t))(Il2CppBase() + 0xEEA450))(this, e, c);
+	template <typename R = Il2CppString*> R ToStringb__14_1(bool p) {
+		return ((R (*)(c*, bool))(Il2CppBase() + 0x22A5CE0))(this, p);
 	}
 
 };

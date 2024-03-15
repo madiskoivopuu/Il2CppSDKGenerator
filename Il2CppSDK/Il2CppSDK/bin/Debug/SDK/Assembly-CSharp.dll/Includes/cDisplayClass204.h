@@ -9,12 +9,18 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "<>c__DisplayClass20_4"));
 	}
 
-	template <typename R = IronSourceAdInfo*> R& IronSourceAdInfo() {
+	template <typename R = Il2CppObject*> R& sender() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
+	template <typename R = uintptr_t> R& args() {
+		return *(R*)((uintptr_t)this + 0x18);
+	}
+	template <typename R = ChatManager*> R& 4__this() {
+		return *(R*)((uintptr_t)this + 0x20);
+	}
 
-	template <typename R = void> R registerBannerEventsb__10() {
-		return ((R (*)(cDisplayClass204*))(Il2CppBase() + 0x114EF3C))(this);
+	template <typename R = void> R Loginb__15() {
+		return ((R (*)(cDisplayClass204*))(Il2CppBase() + 0x1119468))(this);
 	}
 
 };

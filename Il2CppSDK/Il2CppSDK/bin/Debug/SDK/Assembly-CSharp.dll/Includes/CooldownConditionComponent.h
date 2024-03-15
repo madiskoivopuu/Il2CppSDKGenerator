@@ -18,8 +18,8 @@ public:
 	template <typename R = Il2CppString*> R& Tag() {
 		return *(R*)((uintptr_t)this + 0x20);
 	}
-	 Nullable1int32_t>*& ArmingIndex() {
-		return *(Nullable1int32_t>**)((uintptr_t)this + 0x28);
+	 Nullable1<int32_t>*& ArmingIndex() {
+		return *(Nullable1<int32_t>**)((uintptr_t)this + 0x28);
 	}
 
 	template <typename R = void> R CopyTo(Il2CppObject* target) {

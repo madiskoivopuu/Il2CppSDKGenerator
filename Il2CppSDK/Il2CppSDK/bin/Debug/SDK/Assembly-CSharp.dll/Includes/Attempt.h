@@ -16,7 +16,7 @@ public:
 		return *(R*)((uintptr_t)this + 0x8);
 	}
 
-	template <typename R = Attempt*> static R get_Default() {
+	template <typename R = Attempt> static R get_Default() {
 		return ((R (*)(void *))(Il2CppBase() + 0x115ED30))(0);
 	}
 	template <typename R = Il2CppString*> R Read(uintptr_t reader) {

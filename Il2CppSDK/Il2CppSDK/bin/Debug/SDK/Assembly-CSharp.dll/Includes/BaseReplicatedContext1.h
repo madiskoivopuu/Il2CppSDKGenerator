@@ -15,10 +15,10 @@ public:
 	template <typename R = int32_t> R get_IdComponentIndex() {
 		return ((R (*)(BaseReplicatedContext1*))(Il2CppBase() + 0x0))(this);
 	}
-	template <typename R = Commands*> R get_EntityCommand() {
+	template <typename R = Commands> R get_EntityCommand() {
 		return ((R (*)(BaseReplicatedContext1*))(Il2CppBase() + 0x0))(this);
 	}
-	template <typename R = Commands*> R get_ComponentCommand() {
+	template <typename R = Commands> R get_ComponentCommand() {
 		return ((R (*)(BaseReplicatedContext1*))(Il2CppBase() + 0x0))(this);
 	}
 	template <typename R = Il2CppString*> R GetEntity(uintptr_t reader, uintptr_t* entity) {
@@ -30,8 +30,8 @@ public:
 	template <typename R = Il2CppString*> R ReadEntity(uintptr_t reader, uintptr_t* entity) {
 		return ((R (*)(BaseReplicatedContext1*, uintptr_t, uintptr_t*))(Il2CppBase() + 0x0))(this, reader, entity);
 	}
-	template <typename R = Il2CppString*> R ReadComponent(uintptr_t reader, Action1TEntity>* OnDestroy) {
-		return ((R (*)(BaseReplicatedContext1*, uintptr_t, Action1TEntity>*))(Il2CppBase() + 0x0))(this, reader, OnDestroy);
+	template <typename R = Il2CppString*> R ReadComponent(uintptr_t reader, Action1<TEntity>* OnDestroy) {
+		return ((R (*)(BaseReplicatedContext1*, uintptr_t, Action1<TEntity>*))(Il2CppBase() + 0x0))(this, reader, OnDestroy);
 	}
 
 };

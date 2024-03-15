@@ -12,7 +12,7 @@ public:
 	template <typename R = Il2CppString*> R& QuestName() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
-	template <typename R = StartGuildQuestResult*> R& Result() {
+	template <typename R = StartGuildQuestResult> R& Result() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
 

@@ -15,10 +15,10 @@ public:
 	template <typename R = Il2CppString*> R& Description() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
-	template <typename R = Il2CppArray<ConditionText*>*> R& Conditions() {
+	template <typename R = Il2CppArray<ConditionText>*> R& Conditions() {
 		return *(R*)((uintptr_t)this + 0x20);
 	}
-	template <typename R = Il2CppArray<Resource*>*> R& Resources() {
+	template <typename R = Il2CppArray<Resource>*> R& Resources() {
 		return *(R*)((uintptr_t)this + 0x28);
 	}
 	template <typename R = Il2CppString*> R& ToItemName() {
@@ -34,8 +34,8 @@ public:
 	template <typename R = void> R CopyTo(Il2CppObject* target) {
 		return ((R (*)(GradeUpComponent*, Il2CppObject*))(Il2CppBase() + 0x12E21A8))(this, target);
 	}
-	 ValueTuple2bool, Il2CppString*>* CheckConditions(ICommonContexts* world, GameEntity* player) {
-		return ((ValueTuple2bool, Il2CppString*>* (*)(GradeUpComponent*, ICommonContexts*, GameEntity*))(Il2CppBase() + 0x12E2298))(this, world, player);
+	 ValueTuple2<bool, Il2CppString*>* CheckConditions(ICommonContexts* world, GameEntity* player) {
+		return ((ValueTuple2<bool, Il2CppString*>* (*)(GradeUpComponent*, ICommonContexts*, GameEntity*))(Il2CppBase() + 0x12E2298))(this, world, player);
 	}
 	template <typename R = bool> R CheckResources(ICommonContexts* world, GameEntity* player) {
 		return ((R (*)(GradeUpComponent*, ICommonContexts*, GameEntity*))(Il2CppBase() + 0x12E23BC))(this, world, player);

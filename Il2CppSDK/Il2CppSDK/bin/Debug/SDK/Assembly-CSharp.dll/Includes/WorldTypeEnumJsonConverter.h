@@ -3,7 +3,7 @@
 #include "TypeEnumJsonConverter1.h" 
 #include "WorldType.h" 
 
-class WorldTypeEnumJsonConverter : public TypeEnumJsonConverter1<WorldType*>
+class WorldTypeEnumJsonConverter : public TypeEnumJsonConverter1<WorldType>
 {
 public: 
 

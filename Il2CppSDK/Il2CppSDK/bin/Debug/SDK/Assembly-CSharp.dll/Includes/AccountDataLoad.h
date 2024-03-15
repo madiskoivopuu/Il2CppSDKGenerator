@@ -22,7 +22,7 @@ public:
 	template <typename R = Il2CppString*> R& BattleTag() {
 		return *(R*)((uintptr_t)this + 0x80);
 	}
-	template <typename R = ProtoModels::WorldStatusType*> R& WorldStatus() {
+	template <typename R = ProtoModels::WorldStatusType> R& WorldStatus() {
 		return *(R*)((uintptr_t)this + 0x88);
 	}
 	template <typename R = bool> R& IsGooglePlayConnected() {
@@ -37,7 +37,7 @@ public:
 	template <typename R = bool> R& IsDeepLog() {
 		return *(R*)((uintptr_t)this + 0x98);
 	}
-	template <typename R = Currencies*> R& Currencies() {
+	template <typename R = Currencies> R& Currencies() {
 		return *(R*)((uintptr_t)this + 0x9C);
 	}
 	template <typename R = int64_t> R& TournamentStartSearchingTime() {
@@ -49,7 +49,7 @@ public:
 	template <typename R = Il2CppArray<Il2CppString*>*> R& Tags() {
 		return *(R*)((uintptr_t)this + 0x108);
 	}
-	template <typename R = OccupationType*> R& OccupationType() {
+	template <typename R = OccupationType> R& OccupationType() {
 		return *(R*)((uintptr_t)this + 0x110);
 	}
 	template <typename R = Il2CppArray<Il2CppString*>*> R& BlockedPushes() {

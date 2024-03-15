@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "AnalyticsComponent"));
 	}
 
-	template <typename R = AnalyticsTypes*> R& Type() {
+	template <typename R = AnalyticsTypes> R& Type() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
 	template <typename R = Il2CppString*> R& Param() {

@@ -2,7 +2,7 @@
 #include <Il2Cpp/Il2Cpp.h>
 #include "TypeTypeJsonConverter1.h" 
 
-class WorldStatusJsonConverter : public TypeTypeJsonConverter1<ProtoModels::WorldStatusType*>
+class WorldStatusJsonConverter : public TypeTypeJsonConverter1<ProtoModels::WorldStatusType>
 {
 public: 
 

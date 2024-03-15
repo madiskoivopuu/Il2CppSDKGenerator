@@ -9,11 +9,11 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "IronSourceInterstitialAndroid"));
 	}
 
-	 Action1IronSourceError*>*& OnInterstitialAdShowFailed() {
-		return *(Action1IronSourceError*>**)((uintptr_t)this + 0x20);
+	 Action1<IronSourceError*>*& OnInterstitialAdShowFailed() {
+		return *(Action1<IronSourceError*>**)((uintptr_t)this + 0x20);
 	}
-	 Action1IronSourceError*>*& OnInterstitialAdLoadFailed() {
-		return *(Action1IronSourceError*>**)((uintptr_t)this + 0x28);
+	 Action1<IronSourceError*>*& OnInterstitialAdLoadFailed() {
+		return *(Action1<IronSourceError*>**)((uintptr_t)this + 0x28);
 	}
 	template <typename R = uintptr_t> R& OnInterstitialAdReady() {
 		return *(R*)((uintptr_t)this + 0x30);
@@ -33,36 +33,36 @@ public:
 	template <typename R = uintptr_t> R& OnInterstitialAdRewarded() {
 		return *(R*)((uintptr_t)this + 0x58);
 	}
-	 Action1Il2CppString*>*& OnInterstitialAdReadyDemandOnly() {
-		return *(Action1Il2CppString*>**)((uintptr_t)this + 0x60);
+	 Action1<Il2CppString*>*& OnInterstitialAdReadyDemandOnly() {
+		return *(Action1<Il2CppString*>**)((uintptr_t)this + 0x60);
 	}
-	 Action1Il2CppString*>*& OnInterstitialAdOpenedDemandOnly() {
-		return *(Action1Il2CppString*>**)((uintptr_t)this + 0x68);
+	 Action1<Il2CppString*>*& OnInterstitialAdOpenedDemandOnly() {
+		return *(Action1<Il2CppString*>**)((uintptr_t)this + 0x68);
 	}
-	 Action1Il2CppString*>*& OnInterstitialAdClosedDemandOnly() {
-		return *(Action1Il2CppString*>**)((uintptr_t)this + 0x70);
+	 Action1<Il2CppString*>*& OnInterstitialAdClosedDemandOnly() {
+		return *(Action1<Il2CppString*>**)((uintptr_t)this + 0x70);
 	}
-	 Action2Il2CppString*, IronSourceError*>*& OnInterstitialAdLoadFailedDemandOnly() {
-		return *(Action2Il2CppString*, IronSourceError*>**)((uintptr_t)this + 0x78);
+	 Action2<Il2CppString*, IronSourceError*>*& OnInterstitialAdLoadFailedDemandOnly() {
+		return *(Action2<Il2CppString*, IronSourceError*>**)((uintptr_t)this + 0x78);
 	}
-	 Action1Il2CppString*>*& OnInterstitialAdClickedDemandOnly() {
-		return *(Action1Il2CppString*>**)((uintptr_t)this + 0x80);
+	 Action1<Il2CppString*>*& OnInterstitialAdClickedDemandOnly() {
+		return *(Action1<Il2CppString*>**)((uintptr_t)this + 0x80);
 	}
-	 Action2Il2CppString*, IronSourceError*>*& OnInterstitialAdShowFailedDemandOnly() {
-		return *(Action2Il2CppString*, IronSourceError*>**)((uintptr_t)this + 0x88);
+	 Action2<Il2CppString*, IronSourceError*>*& OnInterstitialAdShowFailedDemandOnly() {
+		return *(Action2<Il2CppString*, IronSourceError*>**)((uintptr_t)this + 0x88);
 	}
 
-	template <typename R = void> R add_OnInterstitialAdShowFailed(Action1IronSourceError*>* value) {
-		return ((R (*)(IronSourceInterstitialAndroid*, Action1IronSourceError*>*))(Il2CppBase() + 0x10D7DB8))(this, value);
+	template <typename R = void> R add_OnInterstitialAdShowFailed(Action1<IronSourceError*>* value) {
+		return ((R (*)(IronSourceInterstitialAndroid*, Action1<IronSourceError*>*))(Il2CppBase() + 0x10D7DB8))(this, value);
 	}
-	template <typename R = void> R remove_OnInterstitialAdShowFailed(Action1IronSourceError*>* value) {
-		return ((R (*)(IronSourceInterstitialAndroid*, Action1IronSourceError*>*))(Il2CppBase() + 0x10D7E58))(this, value);
+	template <typename R = void> R remove_OnInterstitialAdShowFailed(Action1<IronSourceError*>* value) {
+		return ((R (*)(IronSourceInterstitialAndroid*, Action1<IronSourceError*>*))(Il2CppBase() + 0x10D7E58))(this, value);
 	}
-	template <typename R = void> R add_OnInterstitialAdLoadFailed(Action1IronSourceError*>* value) {
-		return ((R (*)(IronSourceInterstitialAndroid*, Action1IronSourceError*>*))(Il2CppBase() + 0x10D7EF8))(this, value);
+	template <typename R = void> R add_OnInterstitialAdLoadFailed(Action1<IronSourceError*>* value) {
+		return ((R (*)(IronSourceInterstitialAndroid*, Action1<IronSourceError*>*))(Il2CppBase() + 0x10D7EF8))(this, value);
 	}
-	template <typename R = void> R remove_OnInterstitialAdLoadFailed(Action1IronSourceError*>* value) {
-		return ((R (*)(IronSourceInterstitialAndroid*, Action1IronSourceError*>*))(Il2CppBase() + 0x10D7F98))(this, value);
+	template <typename R = void> R remove_OnInterstitialAdLoadFailed(Action1<IronSourceError*>* value) {
+		return ((R (*)(IronSourceInterstitialAndroid*, Action1<IronSourceError*>*))(Il2CppBase() + 0x10D7F98))(this, value);
 	}
 	template <typename R = void> R add_OnInterstitialAdReady(uintptr_t value) {
 		return ((R (*)(IronSourceInterstitialAndroid*, uintptr_t))(Il2CppBase() + 0x10D8038))(this, value);
@@ -100,41 +100,41 @@ public:
 	template <typename R = void> R remove_OnInterstitialAdRewarded(uintptr_t value) {
 		return ((R (*)(IronSourceInterstitialAndroid*, uintptr_t))(Il2CppBase() + 0x10D8718))(this, value);
 	}
-	template <typename R = void> R add_OnInterstitialAdReadyDemandOnly(Action1Il2CppString*>* value) {
-		return ((R (*)(IronSourceInterstitialAndroid*, Action1Il2CppString*>*))(Il2CppBase() + 0x10D87B8))(this, value);
+	template <typename R = void> R add_OnInterstitialAdReadyDemandOnly(Action1<Il2CppString*>* value) {
+		return ((R (*)(IronSourceInterstitialAndroid*, Action1<Il2CppString*>*))(Il2CppBase() + 0x10D87B8))(this, value);
 	}
-	template <typename R = void> R remove_OnInterstitialAdReadyDemandOnly(Action1Il2CppString*>* value) {
-		return ((R (*)(IronSourceInterstitialAndroid*, Action1Il2CppString*>*))(Il2CppBase() + 0x10D8858))(this, value);
+	template <typename R = void> R remove_OnInterstitialAdReadyDemandOnly(Action1<Il2CppString*>* value) {
+		return ((R (*)(IronSourceInterstitialAndroid*, Action1<Il2CppString*>*))(Il2CppBase() + 0x10D8858))(this, value);
 	}
-	template <typename R = void> R add_OnInterstitialAdOpenedDemandOnly(Action1Il2CppString*>* value) {
-		return ((R (*)(IronSourceInterstitialAndroid*, Action1Il2CppString*>*))(Il2CppBase() + 0x10D88F8))(this, value);
+	template <typename R = void> R add_OnInterstitialAdOpenedDemandOnly(Action1<Il2CppString*>* value) {
+		return ((R (*)(IronSourceInterstitialAndroid*, Action1<Il2CppString*>*))(Il2CppBase() + 0x10D88F8))(this, value);
 	}
-	template <typename R = void> R remove_OnInterstitialAdOpenedDemandOnly(Action1Il2CppString*>* value) {
-		return ((R (*)(IronSourceInterstitialAndroid*, Action1Il2CppString*>*))(Il2CppBase() + 0x10D8998))(this, value);
+	template <typename R = void> R remove_OnInterstitialAdOpenedDemandOnly(Action1<Il2CppString*>* value) {
+		return ((R (*)(IronSourceInterstitialAndroid*, Action1<Il2CppString*>*))(Il2CppBase() + 0x10D8998))(this, value);
 	}
-	template <typename R = void> R add_OnInterstitialAdClosedDemandOnly(Action1Il2CppString*>* value) {
-		return ((R (*)(IronSourceInterstitialAndroid*, Action1Il2CppString*>*))(Il2CppBase() + 0x10D8A38))(this, value);
+	template <typename R = void> R add_OnInterstitialAdClosedDemandOnly(Action1<Il2CppString*>* value) {
+		return ((R (*)(IronSourceInterstitialAndroid*, Action1<Il2CppString*>*))(Il2CppBase() + 0x10D8A38))(this, value);
 	}
-	template <typename R = void> R remove_OnInterstitialAdClosedDemandOnly(Action1Il2CppString*>* value) {
-		return ((R (*)(IronSourceInterstitialAndroid*, Action1Il2CppString*>*))(Il2CppBase() + 0x10D8AD8))(this, value);
+	template <typename R = void> R remove_OnInterstitialAdClosedDemandOnly(Action1<Il2CppString*>* value) {
+		return ((R (*)(IronSourceInterstitialAndroid*, Action1<Il2CppString*>*))(Il2CppBase() + 0x10D8AD8))(this, value);
 	}
-	template <typename R = void> R add_OnInterstitialAdLoadFailedDemandOnly(Action2Il2CppString*, IronSourceError*>* value) {
-		return ((R (*)(IronSourceInterstitialAndroid*, Action2Il2CppString*, IronSourceError*>*))(Il2CppBase() + 0x10D8B78))(this, value);
+	template <typename R = void> R add_OnInterstitialAdLoadFailedDemandOnly(Action2<Il2CppString*, IronSourceError*>* value) {
+		return ((R (*)(IronSourceInterstitialAndroid*, Action2<Il2CppString*, IronSourceError*>*))(Il2CppBase() + 0x10D8B78))(this, value);
 	}
-	template <typename R = void> R remove_OnInterstitialAdLoadFailedDemandOnly(Action2Il2CppString*, IronSourceError*>* value) {
-		return ((R (*)(IronSourceInterstitialAndroid*, Action2Il2CppString*, IronSourceError*>*))(Il2CppBase() + 0x10D8C18))(this, value);
+	template <typename R = void> R remove_OnInterstitialAdLoadFailedDemandOnly(Action2<Il2CppString*, IronSourceError*>* value) {
+		return ((R (*)(IronSourceInterstitialAndroid*, Action2<Il2CppString*, IronSourceError*>*))(Il2CppBase() + 0x10D8C18))(this, value);
 	}
-	template <typename R = void> R add_OnInterstitialAdClickedDemandOnly(Action1Il2CppString*>* value) {
-		return ((R (*)(IronSourceInterstitialAndroid*, Action1Il2CppString*>*))(Il2CppBase() + 0x10D8CB8))(this, value);
+	template <typename R = void> R add_OnInterstitialAdClickedDemandOnly(Action1<Il2CppString*>* value) {
+		return ((R (*)(IronSourceInterstitialAndroid*, Action1<Il2CppString*>*))(Il2CppBase() + 0x10D8CB8))(this, value);
 	}
-	template <typename R = void> R remove_OnInterstitialAdClickedDemandOnly(Action1Il2CppString*>* value) {
-		return ((R (*)(IronSourceInterstitialAndroid*, Action1Il2CppString*>*))(Il2CppBase() + 0x10D8D58))(this, value);
+	template <typename R = void> R remove_OnInterstitialAdClickedDemandOnly(Action1<Il2CppString*>* value) {
+		return ((R (*)(IronSourceInterstitialAndroid*, Action1<Il2CppString*>*))(Il2CppBase() + 0x10D8D58))(this, value);
 	}
-	template <typename R = void> R add_OnInterstitialAdShowFailedDemandOnly(Action2Il2CppString*, IronSourceError*>* value) {
-		return ((R (*)(IronSourceInterstitialAndroid*, Action2Il2CppString*, IronSourceError*>*))(Il2CppBase() + 0x10D8DF8))(this, value);
+	template <typename R = void> R add_OnInterstitialAdShowFailedDemandOnly(Action2<Il2CppString*, IronSourceError*>* value) {
+		return ((R (*)(IronSourceInterstitialAndroid*, Action2<Il2CppString*, IronSourceError*>*))(Il2CppBase() + 0x10D8DF8))(this, value);
 	}
-	template <typename R = void> R remove_OnInterstitialAdShowFailedDemandOnly(Action2Il2CppString*, IronSourceError*>* value) {
-		return ((R (*)(IronSourceInterstitialAndroid*, Action2Il2CppString*, IronSourceError*>*))(Il2CppBase() + 0x10D8E98))(this, value);
+	template <typename R = void> R remove_OnInterstitialAdShowFailedDemandOnly(Action2<Il2CppString*, IronSourceError*>* value) {
+		return ((R (*)(IronSourceInterstitialAndroid*, Action2<Il2CppString*, IronSourceError*>*))(Il2CppBase() + 0x10D8E98))(this, value);
 	}
 	template <typename R = void> R onInterstitialAdShowFailed(Il2CppString* description) {
 		return ((R (*)(IronSourceInterstitialAndroid*, Il2CppString*))(Il2CppBase() + 0x10D8F38))(this, description);

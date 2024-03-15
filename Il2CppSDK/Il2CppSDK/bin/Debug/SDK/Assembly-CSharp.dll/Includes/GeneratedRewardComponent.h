@@ -9,10 +9,10 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "GeneratedRewardComponent"));
 	}
 
-	template <typename R = Il2CppArray<Resource*>*> R& Resources() {
+	template <typename R = Il2CppArray<Resource>*> R& Resources() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
-	template <typename R = Il2CppArray<Resource*>*> R& PremiumResources() {
+	template <typename R = Il2CppArray<Resource>*> R& PremiumResources() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
 

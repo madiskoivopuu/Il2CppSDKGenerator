@@ -25,56 +25,56 @@ public:
 	template <typename R = void> static R Reset() {
 		return ((R (*)(void *))(Il2CppBase() + 0x1D6A818))(0);
 	}
-	template <typename R = float> static R GetSum(HashSet1MagicEntity*>* magics, int32_t componentDataIndex) {
-		return ((R (*)(void *, HashSet1MagicEntity*>*, int32_t))(Il2CppBase() + 0x1D6A924))(0, magics, componentDataIndex);
+	template <typename R = float> static R GetSum(HashSet1<MagicEntity*>* magics, int32_t componentDataIndex) {
+		return ((R (*)(void *, HashSet1<MagicEntity*>*, int32_t))(Il2CppBase() + 0x1D6A924))(0, magics, componentDataIndex);
 	}
-	template <typename R = float> static R GetCoef(HashSet1MagicEntity*>* magics, int32_t componentDataIndex) {
-		return ((R (*)(void *, HashSet1MagicEntity*>*, int32_t))(Il2CppBase() + 0x1D6AB74))(0, magics, componentDataIndex);
+	template <typename R = float> static R GetCoef(HashSet1<MagicEntity*>* magics, int32_t componentDataIndex) {
+		return ((R (*)(void *, HashSet1<MagicEntity*>*, int32_t))(Il2CppBase() + 0x1D6AB74))(0, magics, componentDataIndex);
 	}
-	template <typename R = float> static R GetBool(HashSet1MagicEntity*>* magics, int32_t componentDataIndex) {
-		return ((R (*)(void *, HashSet1MagicEntity*>*, int32_t))(Il2CppBase() + 0x1D6ADC4))(0, magics, componentDataIndex);
+	template <typename R = float> static R GetBool(HashSet1<MagicEntity*>* magics, int32_t componentDataIndex) {
+		return ((R (*)(void *, HashSet1<MagicEntity*>*, int32_t))(Il2CppBase() + 0x1D6ADC4))(0, magics, componentDataIndex);
 	}
-	template <typename R = float> static R GetMax(HashSet1MagicEntity*>* magics, int32_t componentDataIndex) {
-		return ((R (*)(void *, HashSet1MagicEntity*>*, int32_t))(Il2CppBase() + 0x1D6B00C))(0, magics, componentDataIndex);
+	template <typename R = float> static R GetMax(HashSet1<MagicEntity*>* magics, int32_t componentDataIndex) {
+		return ((R (*)(void *, HashSet1<MagicEntity*>*, int32_t))(Il2CppBase() + 0x1D6B00C))(0, magics, componentDataIndex);
 	}
 	template <typename R = float> static R GetMax_1(Il2CppList<MagicDataEntity*>* magicsData, int32_t componentDataIndex) {
 		return ((R (*)(void *, Il2CppList<MagicDataEntity*>*, int32_t))(Il2CppBase() + 0x1D6B264))(0, magicsData, componentDataIndex);
 	}
-	 static Nullable1float>* GetMin(HashSet1MagicEntity*>* magics, int32_t componentDataIndex) {
-		return ((Nullable1float>* (*)(void *, HashSet1MagicEntity*>*, int32_t))(Il2CppBase() + 0x1D6B49C))(0, magics, componentDataIndex);
+	 static Nullable1<float>* GetMin(HashSet1<MagicEntity*>* magics, int32_t componentDataIndex) {
+		return ((Nullable1<float>* (*)(void *, HashSet1<MagicEntity*>*, int32_t))(Il2CppBase() + 0x1D6B49C))(0, magics, componentDataIndex);
 	}
-	template <typename R = float> static R GetValueSum(HashSet1MagicEntity*>* magics, int32_t componentDataIndex) {
-		return ((R (*)(void *, HashSet1MagicEntity*>*, int32_t))(Il2CppBase() + 0x1D6B788))(0, magics, componentDataIndex);
+	template <typename R = float> static R GetValueSum(HashSet1<MagicEntity*>* magics, int32_t componentDataIndex) {
+		return ((R (*)(void *, HashSet1<MagicEntity*>*, int32_t))(Il2CppBase() + 0x1D6B788))(0, magics, componentDataIndex);
 	}
 	template <typename R = float> static R GetValueSum_1(Il2CppList<MagicDataEntity*>* magicsData, int32_t componentDataIndex) {
 		return ((R (*)(void *, Il2CppList<MagicDataEntity*>*, int32_t))(Il2CppBase() + 0x1D6BCA4))(0, magicsData, componentDataIndex);
 	}
-	template <typename R = float> static R GetPercentBonusWithChance(ICommonContexts* world, GameEntity* target, HashSet1MagicEntity*>* magics, int32_t componentDataIndex, IModifier* additional, bool withoutChance) {
-		return ((R (*)(void *, ICommonContexts*, GameEntity*, HashSet1MagicEntity*>*, int32_t, IModifier*, bool))(Il2CppBase() + 0x1D6C1A0))(0, world, target, magics, componentDataIndex, additional, withoutChance);
+	template <typename R = float> static R GetPercentBonusWithChance(ICommonContexts* world, GameEntity* target, HashSet1<MagicEntity*>* magics, int32_t componentDataIndex, IModifier* additional, bool withoutChance) {
+		return ((R (*)(void *, ICommonContexts*, GameEntity*, HashSet1<MagicEntity*>*, int32_t, IModifier*, bool))(Il2CppBase() + 0x1D6C1A0))(0, world, target, magics, componentDataIndex, additional, withoutChance);
 	}
-	template <typename R = float> static R GetPercentBonus(HashSet1MagicEntity*>* magics, int32_t componentDataIndex) {
-		return ((R (*)(void *, HashSet1MagicEntity*>*, int32_t))(Il2CppBase() + 0x1D6CAC8))(0, magics, componentDataIndex);
+	template <typename R = float> static R GetPercentBonus(HashSet1<MagicEntity*>* magics, int32_t componentDataIndex) {
+		return ((R (*)(void *, HashSet1<MagicEntity*>*, int32_t))(Il2CppBase() + 0x1D6CAC8))(0, magics, componentDataIndex);
 	}
 	template <typename R = float> static R GetPercentBonus_1(Il2CppList<MagicDataEntity*>* magicsData, int32_t componentDataIndex) {
 		return ((R (*)(void *, Il2CppList<MagicDataEntity*>*, int32_t))(Il2CppBase() + 0x1D6D0E0))(0, magicsData, componentDataIndex);
 	}
-	template <typename R = float> static R GetPercentReduction(HashSet1MagicEntity*>* magics, int32_t componentDataIndex) {
-		return ((R (*)(void *, HashSet1MagicEntity*>*, int32_t))(Il2CppBase() + 0x1D6D6D8))(0, magics, componentDataIndex);
+	template <typename R = float> static R GetPercentReduction(HashSet1<MagicEntity*>* magics, int32_t componentDataIndex) {
+		return ((R (*)(void *, HashSet1<MagicEntity*>*, int32_t))(Il2CppBase() + 0x1D6D6D8))(0, magics, componentDataIndex);
 	}
-	template <typename R = float> static R GetPercentReductionWithChance(ICommonContexts* world, HashSet1MagicEntity*>* magics, int32_t componentDataIndex, IModifier* additional) {
-		return ((R (*)(void *, ICommonContexts*, HashSet1MagicEntity*>*, int32_t, IModifier*))(Il2CppBase() + 0x1D6DD00))(0, world, magics, componentDataIndex, additional);
+	template <typename R = float> static R GetPercentReductionWithChance(ICommonContexts* world, HashSet1<MagicEntity*>* magics, int32_t componentDataIndex, IModifier* additional) {
+		return ((R (*)(void *, ICommonContexts*, HashSet1<MagicEntity*>*, int32_t, IModifier*))(Il2CppBase() + 0x1D6DD00))(0, world, magics, componentDataIndex, additional);
 	}
-	template <typename R = MagicEntity*> static R GetLatestWithComponent(HashSet1MagicEntity*>* magics, int32_t componentDataIndex) {
-		return ((R (*)(void *, HashSet1MagicEntity*>*, int32_t))(Il2CppBase() + 0x1D6E510))(0, magics, componentDataIndex);
+	template <typename R = MagicEntity*> static R GetLatestWithComponent(HashSet1<MagicEntity*>* magics, int32_t componentDataIndex) {
+		return ((R (*)(void *, HashSet1<MagicEntity*>*, int32_t))(Il2CppBase() + 0x1D6E510))(0, magics, componentDataIndex);
 	}
-	 static ValueTuple2MagicEntity*, float>* CalcDot(Il2CppList<MagicEntity*>* magics, int32_t componentIndex) {
-		return ((ValueTuple2MagicEntity*, float>* (*)(void *, Il2CppList<MagicEntity*>*, int32_t))(Il2CppBase() + 0x1D6E6E8))(0, magics, componentIndex);
+	 static ValueTuple2<MagicEntity*, float>* CalcDot(Il2CppList<MagicEntity*>* magics, int32_t componentIndex) {
+		return ((ValueTuple2<MagicEntity*, float>* (*)(void *, Il2CppList<MagicEntity*>*, int32_t))(Il2CppBase() + 0x1D6E6E8))(0, magics, componentIndex);
 	}
-	 static ValueTuple2MagicEntity*, float>* CalcHot(Il2CppList<MagicEntity*>* magics, int32_t componentIndex) {
-		return ((ValueTuple2MagicEntity*, float>* (*)(void *, Il2CppList<MagicEntity*>*, int32_t))(Il2CppBase() + 0x1D6ECA8))(0, magics, componentIndex);
+	 static ValueTuple2<MagicEntity*, float>* CalcHot(Il2CppList<MagicEntity*>* magics, int32_t componentIndex) {
+		return ((ValueTuple2<MagicEntity*, float>* (*)(void *, Il2CppList<MagicEntity*>*, int32_t))(Il2CppBase() + 0x1D6ECA8))(0, magics, componentIndex);
 	}
-	 static ValueTuple2float, BaseApplyEffectComponent*>* ApplyDamageBlock(ICommonContexts* world, HashSet1MagicEntity*>* magics, bool stunnedOrImpotent) {
-		return ((ValueTuple2float, BaseApplyEffectComponent*>* (*)(void *, ICommonContexts*, HashSet1MagicEntity*>*, bool))(Il2CppBase() + 0x1D6F214))(0, world, magics, stunnedOrImpotent);
+	 static ValueTuple2<float, BaseApplyEffectComponent*>* ApplyDamageBlock(ICommonContexts* world, HashSet1<MagicEntity*>* magics, bool stunnedOrImpotent) {
+		return ((ValueTuple2<float, BaseApplyEffectComponent*>* (*)(void *, ICommonContexts*, HashSet1<MagicEntity*>*, bool))(Il2CppBase() + 0x1D6F214))(0, world, magics, stunnedOrImpotent);
 	}
 	template <typename R = void> static R SetPursuit(ICommonContexts* world, GameEntity* target, MagicEntity* magic) {
 		return ((R (*)(void *, ICommonContexts*, GameEntity*, MagicEntity*))(Il2CppBase() + 0x1D6F9B4))(0, world, target, magic);

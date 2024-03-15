@@ -10,20 +10,20 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "DataEntityIndex`2"));
 	}
 
-	 static HashSet1TEntity>*& _emptySet() {
-		return *(HashSet1TEntity>**)((uintptr_t)StaticClass()->static_fields + 0x0);
+	 static HashSet1<TEntity>*& _emptySet() {
+		return *(HashSet1<TEntity>**)((uintptr_t)StaticClass()->static_fields + 0x0);
 	}
 	template <typename R = Il2CppString*> R& name() {
 		return *(R*)((uintptr_t)this + 0x0);
 	}
-	 IEqualityComparer1TEntity>*& _comparer() {
-		return *(IEqualityComparer1TEntity>**)((uintptr_t)this + 0x0);
+	 IEqualityComparer1<TEntity>*& _comparer() {
+		return *(IEqualityComparer1<TEntity>**)((uintptr_t)this + 0x0);
 	}
-	 IGroup1TEntity>*& _group() {
-		return *(IGroup1TEntity>**)((uintptr_t)this + 0x0);
+	 IGroup1<TEntity>*& _group() {
+		return *(IGroup1<TEntity>**)((uintptr_t)this + 0x0);
 	}
-	 Il2CppDictionary<Il2CppString*, HashSet1TEntity>*>*& _index() {
-		return *(Il2CppDictionary<Il2CppString*, HashSet1TEntity>*>**)((uintptr_t)this + 0x0);
+	 Il2CppDictionary<Il2CppString*, HashSet1<TEntity>*>*& _index() {
+		return *(Il2CppDictionary<Il2CppString*, HashSet1<TEntity>*>**)((uintptr_t)this + 0x0);
 	}
 	template <typename R = int32_t> R& _dataComponentIndex() {
 		return *(R*)((uintptr_t)this + 0x0);
@@ -38,8 +38,8 @@ public:
 	template <typename R = void> R set_name(Il2CppString* value) {
 		return ((R (*)(DataEntityIndex2*, Il2CppString*))(Il2CppBase() + 0x0))(this, value);
 	}
-	 HashSet1TEntity>* GetEntities(Il2CppString* dataName) {
-		return ((HashSet1TEntity>* (*)(DataEntityIndex2*, Il2CppString*))(Il2CppBase() + 0x0))(this, dataName);
+	 HashSet1<TEntity>* GetEntities(Il2CppString* dataName) {
+		return ((HashSet1<TEntity>* (*)(DataEntityIndex2*, Il2CppString*))(Il2CppBase() + 0x0))(this, dataName);
 	}
 	template <typename R = void> R Activate() {
 		return ((R (*)(DataEntityIndex2*))(Il2CppBase() + 0x0))(this);
@@ -47,11 +47,11 @@ public:
 	template <typename R = void> R Deactivate() {
 		return ((R (*)(DataEntityIndex2*))(Il2CppBase() + 0x0))(this);
 	}
-	template <typename R = void> R OnEntityAdded(IGroup1TEntity>* group, TEntity entity, int32_t index, uintptr_t component) {
-		return ((R (*)(DataEntityIndex2*, IGroup1TEntity>*, TEntity, int32_t, uintptr_t))(Il2CppBase() + 0x0))(this, group, entity, index, component);
+	template <typename R = void> R OnEntityAdded(IGroup1<TEntity>* group, TEntity entity, int32_t index, uintptr_t component) {
+		return ((R (*)(DataEntityIndex2*, IGroup1<TEntity>*, TEntity, int32_t, uintptr_t))(Il2CppBase() + 0x0))(this, group, entity, index, component);
 	}
-	template <typename R = void> R OnEntityRemoved(IGroup1TEntity>* group, TEntity entity, int32_t index, uintptr_t component) {
-		return ((R (*)(DataEntityIndex2*, IGroup1TEntity>*, TEntity, int32_t, uintptr_t))(Il2CppBase() + 0x0))(this, group, entity, index, component);
+	template <typename R = void> R OnEntityRemoved(IGroup1<TEntity>* group, TEntity entity, int32_t index, uintptr_t component) {
+		return ((R (*)(DataEntityIndex2*, IGroup1<TEntity>*, TEntity, int32_t, uintptr_t))(Il2CppBase() + 0x0))(this, group, entity, index, component);
 	}
 	template <typename R = void> R Clear() {
 		return ((R (*)(DataEntityIndex2*))(Il2CppBase() + 0x0))(this);

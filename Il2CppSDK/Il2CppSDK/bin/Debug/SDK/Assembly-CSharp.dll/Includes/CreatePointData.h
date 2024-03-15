@@ -18,14 +18,14 @@ public:
 	template <typename R = int32_t> R& Id() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
-	 Nullable1int64_t>*& EndTime() {
-		return *(Nullable1int64_t>**)((uintptr_t)this + 0x18);
+	 Nullable1<int64_t>*& EndTime() {
+		return *(Nullable1<int64_t>**)((uintptr_t)this + 0x18);
 	}
-	 Nullable1int64_t>*& ResetTime() {
-		return *(Nullable1int64_t>**)((uintptr_t)this + 0x28);
+	 Nullable1<int64_t>*& ResetTime() {
+		return *(Nullable1<int64_t>**)((uintptr_t)this + 0x28);
 	}
-	 Nullable1int64_t>*& ClanId() {
-		return *(Nullable1int64_t>**)((uintptr_t)this + 0x38);
+	 Nullable1<int64_t>*& ClanId() {
+		return *(Nullable1<int64_t>**)((uintptr_t)this + 0x38);
 	}
 
 	template <typename R = void> R Write(uintptr_t writer) {

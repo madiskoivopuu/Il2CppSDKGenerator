@@ -3,7 +3,7 @@
 #include "TypeTypeComponent1.h" 
 #include "TransactionType.h" 
 
-class TransactionTypeComponent : public TypeTypeComponent1<TransactionType*>
+class TransactionTypeComponent : public TypeTypeComponent1<TransactionType>
 {
 public: 
 

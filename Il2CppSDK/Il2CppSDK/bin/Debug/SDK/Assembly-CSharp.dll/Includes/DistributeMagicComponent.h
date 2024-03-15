@@ -9,11 +9,11 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "DistributeMagicComponent"));
 	}
 
-	 Nullable1float>*& DurationCoef() {
-		return *(Nullable1float>**)((uintptr_t)this + 0x10);
+	 Nullable1<float>*& DurationCoef() {
+		return *(Nullable1<float>**)((uintptr_t)this + 0x10);
 	}
-	 Nullable1float>*& DamageCoef() {
-		return *(Nullable1float>**)((uintptr_t)this + 0x18);
+	 Nullable1<float>*& DamageCoef() {
+		return *(Nullable1<float>**)((uintptr_t)this + 0x18);
 	}
 	template <typename R = TargetsSelector*> R& Selector() {
 		return *(R*)((uintptr_t)this + 0x20);

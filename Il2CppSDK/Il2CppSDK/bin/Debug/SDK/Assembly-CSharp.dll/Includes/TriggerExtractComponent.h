@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "TriggerExtractComponent"));
 	}
 
-	template <typename R = RequestType*> R& Type() {
+	template <typename R = RequestType> R& Type() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
 

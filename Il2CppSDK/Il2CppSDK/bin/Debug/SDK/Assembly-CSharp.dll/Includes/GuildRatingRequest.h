@@ -9,7 +9,7 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "GuildRatingRequest"));
 	}
 
-	template <typename R = RatingGuildType*> R& RatingGuildType() {
+	template <typename R = RatingGuildType> R& RatingGuildType() {
 		return *(R*)((uintptr_t)this + 0x0);
 	}
 

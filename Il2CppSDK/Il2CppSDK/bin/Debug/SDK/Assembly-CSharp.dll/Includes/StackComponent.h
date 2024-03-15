@@ -15,8 +15,8 @@ public:
 	template <typename R = int32_t> R& Count() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
-	 Nullable1int64_t>*& Signature() {
-		return *(Nullable1int64_t>**)((uintptr_t)this + 0x20);
+	 Nullable1<int64_t>*& Signature() {
+		return *(Nullable1<int64_t>**)((uintptr_t)this + 0x20);
 	}
 
 	template <typename R = void> R CopyTo(Il2CppObject* targetObject) {

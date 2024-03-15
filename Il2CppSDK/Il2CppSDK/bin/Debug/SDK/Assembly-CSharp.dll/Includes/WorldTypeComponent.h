@@ -3,7 +3,7 @@
 #include "EnumComponent1.h" 
 #include "WorldType.h" 
 
-class WorldTypeComponent : public EnumComponent1<WorldType*>
+class WorldTypeComponent : public EnumComponent1<WorldType>
 {
 public: 
 

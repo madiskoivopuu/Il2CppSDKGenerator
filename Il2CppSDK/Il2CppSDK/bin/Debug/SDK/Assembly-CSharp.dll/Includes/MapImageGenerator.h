@@ -55,8 +55,8 @@ public:
 	template <typename R = void> R OnLocation(EntityBlueprint* location) {
 		return ((R (*)(MapImageGenerator*, EntityBlueprint*))(Il2CppBase() + 0x1272FD8))(this, location);
 	}
-	 static Il2CppList<KeyValuePair2Il2CppString*, EntityBlueprint*>*>* ParseList(Il2CppString* jsonString, Il2CppArray<Il2CppString*>* componentNames, Il2CppArray<uintptr_t>* componentTypes) {
-		return ((Il2CppList<KeyValuePair2Il2CppString*, EntityBlueprint*>*>* (*)(void *, Il2CppString*, Il2CppArray<Il2CppString*>*, Il2CppArray<uintptr_t>*))(Il2CppBase() + 0x1271FAC))(0, jsonString, componentNames, componentTypes);
+	 static Il2CppList<KeyValuePair2<Il2CppString*, EntityBlueprint*>*>* ParseList(Il2CppString* jsonString, Il2CppArray<Il2CppString*>* componentNames, Il2CppArray<uintptr_t>* componentTypes) {
+		return ((Il2CppList<KeyValuePair2<Il2CppString*, EntityBlueprint*>*>* (*)(void *, Il2CppString*, Il2CppArray<Il2CppString*>*, Il2CppArray<uintptr_t>*))(Il2CppBase() + 0x1271FAC))(0, jsonString, componentNames, componentTypes);
 	}
 	template <typename R = Il2CppString*> static R GetFullName(Il2CppDictionary<Il2CppString*, Il2CppString*>* names, Il2CppString* name) {
 		return ((R (*)(void *, Il2CppDictionary<Il2CppString*, Il2CppString*>*, Il2CppString*))(Il2CppBase() + 0x1273B20))(0, names, name);

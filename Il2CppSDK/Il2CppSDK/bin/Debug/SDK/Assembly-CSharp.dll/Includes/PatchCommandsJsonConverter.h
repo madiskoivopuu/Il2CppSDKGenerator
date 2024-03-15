@@ -3,7 +3,7 @@
 #include "TypeListJsonConverter1.h" 
 #include "PatchCommand.h" 
 
-class PatchCommandsJsonConverter : public TypeListJsonConverter1<PatchCommand*>
+class PatchCommandsJsonConverter : public TypeListJsonConverter1<PatchCommand>
 {
 public: 
 

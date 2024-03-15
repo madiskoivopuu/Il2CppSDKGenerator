@@ -19,7 +19,7 @@ public:
 	template <typename R = void> R CopyTo(Il2CppObject* target) {
 		return ((R (*)(ImmunityComponent*, Il2CppObject*))(Il2CppBase() + 0x1E3DCD0))(this, target);
 	}
-	template <typename R = ModifierGroup*> R GetGroup() {
+	template <typename R = ModifierGroup> R GetGroup() {
 		return ((R (*)(ImmunityComponent*))(Il2CppBase() + 0x1E3DD78))(this);
 	}
 	template <typename R = float> R GetValue() {

@@ -2,7 +2,7 @@
 #include <Il2Cpp/Il2Cpp.h>
 #include "TypeTypeComponent1.h" 
 
-class WorldStatusComponent : public TypeTypeComponent1<ProtoModels::WorldStatusType*>
+class WorldStatusComponent : public TypeTypeComponent1<ProtoModels::WorldStatusType>
 {
 public: 
 

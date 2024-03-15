@@ -15,16 +15,16 @@ public:
 	template <typename R = bool> R& SendToMailOnEndTime() {
 		return *(R*)((uintptr_t)this + 0x11);
 	}
-	template <typename R = RewardRules*> R& Rule() {
+	template <typename R = RewardRules> R& Rule() {
 		return *(R*)((uintptr_t)this + 0x12);
 	}
-	template <typename R = Il2CppArray<Resource*>*> R& Resources() {
+	template <typename R = Il2CppArray<Resource>*> R& Resources() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
-	template <typename R = Il2CppArray<Resource*>*> R& PremiumResources() {
+	template <typename R = Il2CppArray<Resource>*> R& PremiumResources() {
 		return *(R*)((uintptr_t)this + 0x20);
 	}
-	template <typename R = Il2CppArray<Resource*>*> R& MainServerResources() {
+	template <typename R = Il2CppArray<Resource>*> R& MainServerResources() {
 		return *(R*)((uintptr_t)this + 0x28);
 	}
 	template <typename R = Il2CppString*> R& RandomGroup() {

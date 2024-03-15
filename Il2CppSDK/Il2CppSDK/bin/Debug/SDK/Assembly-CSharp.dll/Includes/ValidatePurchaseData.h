@@ -18,7 +18,7 @@ public:
 	template <typename R = Il2CppString*> R& TransactionId() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
-	template <typename R = ProtoModels::PurchaseProvider*> R& Store() {
+	template <typename R = ProtoModels::PurchaseProvider> R& Store() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
 	template <typename R = float> R& USDPrice() {

@@ -15,11 +15,11 @@ public:
 	template <typename R = bool> R& Active() {
 		return *(R*)((uintptr_t)this + 0x14);
 	}
-	 Nullable1int32_t>*& MinDayIndex() {
-		return *(Nullable1int32_t>**)((uintptr_t)this + 0x18);
+	 Nullable1<int32_t>*& MinDayIndex() {
+		return *(Nullable1<int32_t>**)((uintptr_t)this + 0x18);
 	}
-	 Nullable1int32_t>*& MaxDayIndex() {
-		return *(Nullable1int32_t>**)((uintptr_t)this + 0x20);
+	 Nullable1<int32_t>*& MaxDayIndex() {
+		return *(Nullable1<int32_t>**)((uintptr_t)this + 0x20);
 	}
 
 	template <typename R = void> R CopyTo(Il2CppObject* target) {

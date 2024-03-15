@@ -9,13 +9,13 @@ public:
 		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "ApplyResourcesComponent"));
 	}
 
-	template <typename R = RecipientType*> R& Recipient() {
+	template <typename R = RecipientType> R& Recipient() {
 		return *(R*)((uintptr_t)this + 0x10);
 	}
 	template <typename R = Il2CppString*> R& RandomGroup() {
 		return *(R*)((uintptr_t)this + 0x18);
 	}
-	template <typename R = Il2CppArray<Resource*>*> R& Values() {
+	template <typename R = Il2CppArray<Resource>*> R& Values() {
 		return *(R*)((uintptr_t)this + 0x20);
 	}
 
