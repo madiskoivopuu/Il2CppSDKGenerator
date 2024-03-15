@@ -1,6 +1,7 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "BaseReplicatedContext1.h" 
+#include "PlayerEntity.h" 
 
 class PlayerContext : public BaseReplicatedContext1<PlayerEntity*>
 {

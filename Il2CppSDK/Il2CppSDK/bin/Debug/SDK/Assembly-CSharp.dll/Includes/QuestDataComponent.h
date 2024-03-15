@@ -1,6 +1,7 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "BaseDataComponent1.h" 
+#include "QuestDataEntity.h" 
 
 class QuestDataComponent : public BaseDataComponent1<QuestDataEntity*>
 {

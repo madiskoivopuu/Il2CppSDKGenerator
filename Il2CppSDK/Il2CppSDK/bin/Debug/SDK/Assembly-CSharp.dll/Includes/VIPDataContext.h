@@ -1,6 +1,7 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "BaseReplicatedContext1.h" 
+#include "VIPDataEntity.h" 
 
 class VIPDataContext : public BaseReplicatedContext1<VIPDataEntity*>
 {

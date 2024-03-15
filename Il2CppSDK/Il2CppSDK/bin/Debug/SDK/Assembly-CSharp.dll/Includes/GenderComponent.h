@@ -1,6 +1,7 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "TypeTypeComponent1.h" 
+#include "Gender.h" 
 
 class GenderComponent : public TypeTypeComponent1<Gender*>
 {

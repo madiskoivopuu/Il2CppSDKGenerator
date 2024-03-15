@@ -1,6 +1,7 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "TypeEnumJsonConverter1.h" 
+#include "TournamentState.h" 
 
 class TournamentStateEnumJsonConverter : public TypeEnumJsonConverter1<TournamentState*>
 {

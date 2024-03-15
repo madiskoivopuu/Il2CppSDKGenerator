@@ -1,6 +1,8 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "NewBlueprintContext2.h" 
+#include "GameEntity.h" 
+#include "GameDataEntity.h" 
 
 class GameContext : public NewBlueprintContext2<GameEntity*, GameDataEntity*>
 {

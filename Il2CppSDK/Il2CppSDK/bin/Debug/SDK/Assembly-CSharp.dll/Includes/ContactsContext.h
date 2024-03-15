@@ -1,6 +1,7 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "Context1.h" 
+#include "ContactsEntity.h" 
 
 class ContactsContext : public Context1<ContactsEntity*>
 {

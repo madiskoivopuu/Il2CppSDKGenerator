@@ -1,6 +1,8 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "NewBlueprintContext2.h" 
+#include "MagicTriggerEntity.h" 
+#include "MagicTriggerDataEntity.h" 
 
 class MagicTriggerContext : public NewBlueprintContext2<MagicTriggerEntity*, MagicTriggerDataEntity*>
 {

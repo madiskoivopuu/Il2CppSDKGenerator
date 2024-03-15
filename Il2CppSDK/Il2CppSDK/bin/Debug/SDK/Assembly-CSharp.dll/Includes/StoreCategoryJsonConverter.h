@@ -1,6 +1,7 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "TypeEnumJsonConverter1.h" 
+#include "StoreCategory.h" 
 
 class StoreCategoryJsonConverter : public TypeEnumJsonConverter1<StoreCategory*>
 {

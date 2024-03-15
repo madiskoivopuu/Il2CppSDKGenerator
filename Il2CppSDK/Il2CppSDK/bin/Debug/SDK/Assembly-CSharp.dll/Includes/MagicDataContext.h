@@ -1,6 +1,7 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "DataContext1.h" 
+#include "MagicDataEntity.h" 
 
 class MagicDataContext : public DataContext1<MagicDataEntity*>
 {

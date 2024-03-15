@@ -1,6 +1,8 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "NewBlueprintContext2.h" 
+#include "QuestEntity.h" 
+#include "QuestDataEntity.h" 
 
 class QuestContext : public NewBlueprintContext2<QuestEntity*, QuestDataEntity*>
 {

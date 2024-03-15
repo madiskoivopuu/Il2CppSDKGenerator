@@ -1,6 +1,8 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "NewBlueprintContext2.h" 
+#include "MagicEntity.h" 
+#include "MagicDataEntity.h" 
 
 class MagicContext : public NewBlueprintContext2<MagicEntity*, MagicDataEntity*>
 {

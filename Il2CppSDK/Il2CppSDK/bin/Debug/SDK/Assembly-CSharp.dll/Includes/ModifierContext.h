@@ -1,6 +1,7 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "Context1.h" 
+#include "ModifierEntity.h" 
 
 class ModifierContext : public Context1<ModifierEntity*>
 {

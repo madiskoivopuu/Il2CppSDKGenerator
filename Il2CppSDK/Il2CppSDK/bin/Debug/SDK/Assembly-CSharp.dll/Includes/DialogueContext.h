@@ -1,6 +1,7 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "BlueprintContext2.h" 
+#include "DialogueEntity.h" 
 
 class DialogueContext : public BlueprintContext2<DialogueEntity*, DialogueEntity*>
 {

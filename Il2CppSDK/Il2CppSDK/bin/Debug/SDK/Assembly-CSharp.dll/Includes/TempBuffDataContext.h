@@ -1,6 +1,7 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "DataContext1.h" 
+#include "TempBuffEntity.h" 
 
 class TempBuffDataContext : public DataContext1<TempBuffEntity*>
 {

@@ -1,6 +1,7 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "BlueprintContext2.h" 
+#include "ActionEntity.h" 
 
 class ActionContext : public BlueprintContext2<ActionEntity*, ActionEntity*>
 {

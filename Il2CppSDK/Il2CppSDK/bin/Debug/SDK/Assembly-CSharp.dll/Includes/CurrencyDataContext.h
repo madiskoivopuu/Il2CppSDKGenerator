@@ -1,6 +1,7 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "DataContext1.h" 
+#include "CurrencyEntity.h" 
 
 class CurrencyDataContext : public DataContext1<CurrencyEntity*>
 {

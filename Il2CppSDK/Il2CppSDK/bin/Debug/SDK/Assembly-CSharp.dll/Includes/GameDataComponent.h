@@ -1,6 +1,7 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "BaseDataComponent1.h" 
+#include "GameDataEntity.h" 
 
 class GameDataComponent : public BaseDataComponent1<GameDataEntity*>
 {

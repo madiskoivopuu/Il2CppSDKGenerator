@@ -1,6 +1,7 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "BlueprintContext2.h" 
+#include "InventorySlotEntity.h" 
 
 class InventorySlotContext : public BlueprintContext2<InventorySlotEntity*, InventorySlotEntity*>
 {

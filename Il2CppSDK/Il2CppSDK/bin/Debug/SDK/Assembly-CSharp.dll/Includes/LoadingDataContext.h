@@ -1,6 +1,7 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "DataContext1.h" 
+#include "LoadingEntity.h" 
 
 class LoadingDataContext : public DataContext1<LoadingEntity*>
 {

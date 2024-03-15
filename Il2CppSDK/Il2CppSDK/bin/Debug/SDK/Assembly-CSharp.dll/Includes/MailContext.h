@@ -1,6 +1,7 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "ToPlayerReplicatedContext1.h" 
+#include "MailEntity.h" 
 
 class MailContext : public ToPlayerReplicatedContext1<MailEntity*>
 {

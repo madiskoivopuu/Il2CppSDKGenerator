@@ -1,6 +1,7 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "TypeListComponent1.h" 
+#include "ItemCooldown.h" 
 
 class ItemCooldownsComponent : public TypeListComponent1<ItemCooldown*>
 {

@@ -1,6 +1,7 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "ValueEnumJsonConverter1.h" 
+#include "ConfigType.h" 
 
 class ConfigTypeJsonConverter : public ValueEnumJsonConverter1<ConfigType*>
 {

@@ -1,6 +1,7 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "DataContext1.h" 
+#include "BlueprintEntity.h" 
 
 class BlueprintDataContext : public DataContext1<BlueprintEntity*>
 {

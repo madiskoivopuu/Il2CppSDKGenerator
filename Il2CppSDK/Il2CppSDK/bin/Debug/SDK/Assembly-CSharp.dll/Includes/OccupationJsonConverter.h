@@ -1,6 +1,7 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "TypeTypeJsonConverter1.h" 
+#include "OccupationType.h" 
 
 class OccupationJsonConverter : public TypeTypeJsonConverter1<OccupationType*>
 {

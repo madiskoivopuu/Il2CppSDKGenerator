@@ -1,6 +1,7 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "DataContext1.h" 
+#include "ConditionEntity.h" 
 
 class ConditionContext : public DataContext1<ConditionEntity*>
 {

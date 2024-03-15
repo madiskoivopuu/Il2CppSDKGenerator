@@ -1,6 +1,7 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "EnumComponent1.h" 
+#include "AvailablePlatform.h" 
 
 class AvailablePlatformComponent : public EnumComponent1<AvailablePlatform*>
 {

@@ -1,6 +1,7 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "TypeTypeComponent1.h" 
+#include "TransactionType.h" 
 
 class TransactionTypeComponent : public TypeTypeComponent1<TransactionType*>
 {

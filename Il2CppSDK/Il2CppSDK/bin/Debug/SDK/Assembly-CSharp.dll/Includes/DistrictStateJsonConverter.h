@@ -1,6 +1,7 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "TypeEnumJsonConverter1.h" 
+#include "DistrictState.h" 
 
 class DistrictStateJsonConverter : public TypeEnumJsonConverter1<DistrictState*>
 {

@@ -1,6 +1,7 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "BaseContext1.h" 
+#include "InputEntity.h" 
 
 class InputContext : public BaseContext1<InputEntity*>
 {

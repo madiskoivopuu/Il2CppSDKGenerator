@@ -1,6 +1,7 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "BaseReplicatedContext1.h" 
+#include "DiplomacyEntity.h" 
 
 class DiplomacyContext : public BaseReplicatedContext1<DiplomacyEntity*>
 {

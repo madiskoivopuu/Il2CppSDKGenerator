@@ -1,6 +1,7 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "BaseDataComponent1.h" 
+#include "MagicDataEntity.h" 
 
 class MagicDataComponent : public BaseDataComponent1<MagicDataEntity*>
 {

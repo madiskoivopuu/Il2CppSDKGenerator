@@ -1,6 +1,7 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "EnumValueComponent1.h" 
+#include "SortingType.h" 
 
 class SortingComponent : public EnumValueComponent1<SortingType*>
 {

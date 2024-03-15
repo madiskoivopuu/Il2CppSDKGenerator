@@ -1,6 +1,7 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "Context1.h" 
+#include "EventEntity.h" 
 
 class EventContext : public Context1<EventEntity*>
 {

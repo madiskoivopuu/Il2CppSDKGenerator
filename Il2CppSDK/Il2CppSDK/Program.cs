@@ -195,9 +195,9 @@ namespace Il2CppSDK
             return rgx.Replace(className, "");
         }
 
-        static List<string> GetReferencedTypesByInheritanceForClass(TypeDef clazz)
+        static HashSet<string> GetReferencedTypesByInheritanceForClass(TypeDef clazz)
         {
-            List<string> types = new List<string>();
+            HashSet<string> types = new HashSet<string>();
             bool hasParent = clazz.BaseType != null && clazz.BaseType.DefinitionAssembly.Name == clazz.DefinitionAssembly.Name;
             if (!hasParent)
                 return types;
@@ -212,9 +212,11 @@ namespace Il2CppSDK
                 string type = workingQueue.Dequeue();
                 string[] typeParts = type.Split(new[] { '<' }, 2); // this should always result in a list of at least length 1
 
-                string classType = typeParts[0];
-                if(typeNamesInModule.Contains(classType))
-                    types.Add(classType);
+                string classType = GetFormattedFilenameForType(typeParts[0]); // we have to format it due to pointers and maybe a few other chars that appear
+                if (typeNamesInModule.Contains(classType))
+                    types.Add(
+                        classType
+                    );
 
                 if(typeParts.Length == 2)
                 {
@@ -389,7 +391,7 @@ namespace Il2CppSDK
 
         static void ParseClass(TypeDef clazz)
         {
-            if (clazz.Name.Contains("GuildRoleComponent"))
+            if (clazz.Name.Contains("ActionContext"))
                 Console.WriteLine("aaaa");
             //else
             //    return;
@@ -405,7 +407,7 @@ namespace Il2CppSDK
             bool hasBaseClass = clazz.BaseType != null && clazz.BaseType.DefinitionAssembly.Name == clazz.DefinitionAssembly.Name;
 
             // include necessary classes/enums
-            List<string> includedTypes = GetReferencedTypesByInheritanceForClass(clazz);
+            HashSet<string> includedTypes = GetReferencedTypesByInheritanceForClass(clazz);
             foreach(string includedType in includedTypes)
             {
                 string tabInAndOutPrefix = clazz.Namespace.Replace("<", "").Replace(">", "").Length > 0 ? "../" : "";

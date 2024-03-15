@@ -1,6 +1,7 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "TypeListJsonConverter1.h" 
+#include "ItemCooldown.h" 
 
 class ItemCooldownsJsonConverter : public TypeListJsonConverter1<ItemCooldown*>
 {

@@ -1,6 +1,7 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "DataContext1.h" 
+#include "HintEntity.h" 
 
 class HintDataContext : public DataContext1<HintEntity*>
 {

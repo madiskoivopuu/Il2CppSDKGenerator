@@ -1,6 +1,7 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "EnumComponent1.h" 
+#include "PvPState.h" 
 
 class PvPStateComponent : public EnumComponent1<PvPState*>
 {

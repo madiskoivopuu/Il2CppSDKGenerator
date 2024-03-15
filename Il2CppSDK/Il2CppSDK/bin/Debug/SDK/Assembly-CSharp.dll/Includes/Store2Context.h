@@ -1,6 +1,7 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "ToPlayerReplicatedContext1.h" 
+#include "Store2Entity.h" 
 
 class Store2Context : public ToPlayerReplicatedContext1<Store2Entity*>
 {

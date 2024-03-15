@@ -1,6 +1,7 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "BaseReplicatedContext1.h" 
+#include "Store2DataEntity.h" 
 
 class Store2DataContext : public BaseReplicatedContext1<Store2DataEntity*>
 {

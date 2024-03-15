@@ -1,6 +1,7 @@
 #pragma once
 #include <Il2Cpp/Il2Cpp.h>
 #include "DataContext1.h" 
+#include "BattlePassEntity.h" 
 
 class BattlePassDataContext : public DataContext1<BattlePassEntity*>
 {
