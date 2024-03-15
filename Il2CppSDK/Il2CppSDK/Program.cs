@@ -10,6 +10,7 @@ using dnlib.Utils;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
 using System.Security.Claims;
+using System.Security.Cryptography;
 
 namespace Il2CppSDK
 {
@@ -212,10 +213,18 @@ namespace Il2CppSDK
                 string type = workingQueue.Dequeue();
                 string[] typeParts = type.Split(new[] { '<' }, 2); // this should always result in a list of at least length 1
 
-                string classType = GetFormattedFilenameForType(typeParts[0]); // we have to format it due to pointers and maybe a few other chars that appear
-                if (typeNamesInModule.Contains(classType))
+                string fullClassNameWithNamespace = typeParts[0]; // we have to format it due to pointers and our namespace chars, but we will handle it with an if
+                if(fullClassNameWithNamespace.Contains("::"))
+                {
+                    string namespace_ = fullClassNameWithNamespace.Substring(0, fullClassNameWithNamespace.LastIndexOf("::"));
+                    string onlyClassName = fullClassNameWithNamespace.Substring(fullClassNameWithNamespace.LastIndexOf(":") + 1);
+                    fullClassNameWithNamespace = namespace_ + "::" + GetFormattedFilenameForType(onlyClassName);
+                } else
+                    fullClassNameWithNamespace = GetFormattedFilenameForType(fullClassNameWithNamespace);
+
+                if (typeNamesInModule.Contains(fullClassNameWithNamespace))
                     types.Add(
-                        classType
+                        fullClassNameWithNamespace
                     );
 
                 if(typeParts.Length == 2)
@@ -391,6 +400,8 @@ namespace Il2CppSDK
 
         static void ParseClass(TypeDef clazz)
         {
+            if (clazz.Name.Contains("AllQuestsWindow"))
+                Console.WriteLine("aaaa");
 
             var module = clazz.Module;
             var namespaze = GetFormattedFilenameForType(clazz.Namespace);
@@ -408,8 +419,16 @@ namespace Il2CppSDK
             {
                 string tabInAndOutPrefix = clazz.Namespace.Replace("<", "").Replace(">", "").Length > 0 ? "../" : "";
                 if(typeWithANamespace.ContainsKey(includedType))
-                    tabInAndOutPrefix += GetFormattedFilenameForType(typeWithANamespace[includedType].Name) + "/";
-                currentFile.WriteLine(string.Format("#include \"{0}{1}.h\" ", tabInAndOutPrefix, includedType));
+                    tabInAndOutPrefix += GetFormattedFilenameForType(typeWithANamespace[includedType].Namespace) + "/";
+
+                // since the type name may contain namespace, get rid of it
+                if(includedType.Contains("::"))
+                {
+                    string onlyClassname = includedType.Substring(includedType.LastIndexOf(":") + 1);
+                    currentFile.WriteLine(string.Format("#include \"{0}{1}.h\" ", tabInAndOutPrefix, onlyClassname));
+                }
+                else
+                    currentFile.WriteLine(string.Format("#include \"{0}{1}.h\" ", tabInAndOutPrefix, includedType));
             }
 
             if (useNamespace)
@@ -532,12 +551,14 @@ namespace Il2CppSDK
                 var validClassname = FormatToValidClassname(className);
 
                 string outputPath = OUTPUT_DIR;
+
                 outputPath += "\\" + module.Name;
 
                 if (!Directory.Exists(outputPath))
                     Directory.CreateDirectory(outputPath);
 
-                if (namespaze.Length > 0)
+                // skip the namespace include thing
+                /*if (namespaze.Length > 0)
                 {
                     File.AppendAllText(outputPath + "\\" + namespaze + ".h", string.Format("#include \"Includes/{0}/{1}.h\"\r\n", namespaze, classFilename));
                 }
@@ -546,9 +567,9 @@ namespace Il2CppSDK
                     File.AppendAllText(outputPath + "\\-.h", string.Format("#include \"Includes/{0}.h\"\r\n", classFilename));
                 }
 
-                outputPath += "\\Includes";
+                outputPath += "\\Includes";*/
 
-                if(namespaze.Length > 0)
+                if (namespaze.Length > 0)
                 {
                     outputPath += "\\" + namespaze;
                 }
@@ -567,6 +588,47 @@ namespace Il2CppSDK
                 currentFile.Close();
             }
         }
+
+        // Parse types and modify them a bit so that later on the rest of the code can do work easier on the types, without that many edge cases
+        static void PreParseTypes()
+        {
+            foreach (uint typeId in currentModule.Metadata.GetTypeDefRidList())
+            {
+                TypeDef type = currentModule.ResolveTypeDef(typeId);
+                if (type == null) continue;
+
+                if (type.Name.Contains("UIWindow"))
+                    Console.WriteLine("aa");
+
+                string namespace_ = GetFormattedFilenameForType(type.Namespace);
+                if (namespace_.Length > 0)
+                {
+                    type.Namespace = namespace_;
+                    typeWithANamespace.Add(namespace_ + "::" + GetFormattedFilenameForType(type.Name), type);
+                }
+                else if (type.FullName.LastIndexOf('/') != -1) // sometimes it has slashes, sometimes dots..... seems like the 2nd last element would be a good namespace
+                {
+                    // use long class name as the namespace
+                    string[] potentialNamespaces = type.FullName.Split('/');
+                    string useAsNamespace = potentialNamespaces[potentialNamespaces.Length - 2];
+                    type.Namespace = useAsNamespace;
+
+                    typeWithANamespace.Add(GetFormattedFilenameForType(type.Namespace) + "::" + GetFormattedFilenameForType(type.Name), type);
+                }
+                else if (type.FullName.LastIndexOf('.') != -1) // if dnlib for some reason doesn't use slashes
+                {
+                    string[] potentialNamespaces = type.FullName.Split('.');
+                    string useAsNamespace = potentialNamespaces[potentialNamespaces.Length - 2];
+                    type.Namespace = useAsNamespace;
+                }
+
+                if(type.Namespace.Length > 0)
+                    typeNamesInModule.Add(type.Namespace + "::" + GetFormattedFilenameForType(type.Name));
+                else
+                    typeNamesInModule.Add(GetFormattedFilenameForType(type.Name));
+            }
+        }
+
         static void ParseModule(string moduleFile)
         {
             Console.WriteLine("Generating SDK for {0}...", Path.GetFileName(moduleFile));
@@ -579,14 +641,7 @@ namespace Il2CppSDK
             if (!Directory.Exists(moduleOutput))
                 Directory.CreateDirectory(moduleOutput);
 
-            foreach (TypeDef type in currentModule.Types)
-            {
-                typeNamesInModule.Add(GetFormattedFilenameForType(type.Name));
-
-                string namespace_ = GetFormattedFilenameForType(type.Namespace);
-                if (namespace_.Length > 0)
-                    typeWithANamespace.Add(namespace_ + "::" + GetFormattedFilenameForType(type.Name), type);
-            }
+            PreParseTypes();
 
             ParseClasses();
         }
