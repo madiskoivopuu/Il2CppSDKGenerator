@@ -1,0 +1,25 @@
+#pragma once
+
+#include "../mscorlib/System/ValueType.h"
+
+
+class BattleStateData : public ValueType {
+public:
+
+	static Il2CppClass* ClassDef() {
+		return (Il2CppClass *)(Il2Cpp::GetClass("Assembly-CSharp.dll", "", "BattleStateData"));
+	}
+
+	int32_t& TargetId() {
+		return *(int32_t*)((uintptr_t)this + 0x0);
+	}
+
+	int64_t& StartTime() {
+		return *(int64_t*)((uintptr_t)this + 0x8);
+	}
+
+	int32_t& PhaseIndex() {
+		return *(int32_t*)((uintptr_t)this + 0x10);
+	}
+
+};};

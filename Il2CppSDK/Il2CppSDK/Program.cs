@@ -14,16 +14,16 @@ using System.Security.Cryptography;
 
 namespace Il2CppSDK
 {
-    class Program
+    internal class Program
     {
         static Dictionary<string, int> m_DuplicateMethodTable = new Dictionary<string, int>();
         static HashSet<string> typeNamesInModule = new HashSet<string>();
         static Dictionary<string, TypeDef> typeWithANamespace = new Dictionary<string, TypeDef>();
-        static string OUTPUT_DIR = "SDK";
-        static ModuleDefMD currentModule = null;
+        public static string OUTPUT_DIR = "SDK";
+        public static ModuleDefMD currentModule = null;
         static StreamWriter currentFile = null;
 
-        static string Il2CppTypeToCppType(TypeSig type)
+        /*static string Il2CppTypeToCppType(TypeSig type)
         {
             if (type.IsGenericInstanceType)
             {
@@ -374,12 +374,6 @@ namespace Il2CppSDK
             }
         }
 
-        static string GetFormattedFilenameForType(string className) {
-            className = className.Replace("<", "").Replace(">", "");
-            className = FormatToValidClassname(string.Concat(className.Split(Path.GetInvalidFileNameChars())));
-            return className;
-        }
-
         // Turns 
         static string GetParentClassTypeAsString(TypeDef childClass, ITypeDefOrRef parentClass)
         {
@@ -555,7 +549,7 @@ namespace Il2CppSDK
                     Directory.CreateDirectory(outputPath);
 
                 // skip the namespace include thing
-                /*if (namespaze.Length > 0)
+                if (namespaze.Length > 0)
                 {
                     File.AppendAllText(outputPath + "\\" + namespaze + ".h", string.Format("#include \"Includes/{0}/{1}.h\"\r\n", namespaze, classFilename));
                 }
@@ -564,7 +558,7 @@ namespace Il2CppSDK
                     File.AppendAllText(outputPath + "\\-.h", string.Format("#include \"Includes/{0}.h\"\r\n", classFilename));
                 }
 
-                outputPath += "\\Includes";*/
+                outputPath += "\\Includes";
 
                 if (namespaze.Length > 0)
                 {
@@ -621,7 +615,7 @@ namespace Il2CppSDK
                 else
                     typeNamesInModule.Add(GetFormattedFilenameForType(type.Name));
             }
-        }
+        }*/
 
         static void ParseModule(string moduleFile)
         {
@@ -630,14 +624,10 @@ namespace Il2CppSDK
             ModuleContext modCtx = ModuleDef.CreateModuleContext();
             currentModule = ModuleDefMD.Load(moduleFile, modCtx);
 
-            string moduleOutput = OUTPUT_DIR + "\\" + currentModule.Name;
+            currentModule.ResolveAssembly;
 
-            if (!Directory.Exists(moduleOutput))
-                Directory.CreateDirectory(moduleOutput);
-
-            PreParseTypes();
-
-            ParseClasses();
+            Preprocess.PreprocessModule(currentModule);
+            CodeGen.GenerateSDK(currentModule);
         }
         static void Main(string[] args)
         {

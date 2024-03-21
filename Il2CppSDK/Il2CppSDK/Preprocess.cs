@@ -1,0 +1,249 @@
+﻿using dnlib.DotNet;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Il2CppSDK
+{
+    public class TypeInfo
+    {
+        public TypeDef ownTypeDef;
+        public TypeSig typeSig;
+
+        public string cppTypeName;
+        public string cppNamespace;
+
+        // Type's full name without templates
+        public string CppFullyQualifiedName { 
+            get {
+                if (cppNamespace.Length == 0)
+                    return cppTypeName;
+                else
+                    return cppNamespace + "::" + cppTypeName;
+            }
+        }
+
+        // Header file location inside the current assembly directory
+        public string TypeHeaderFileRelativeLocation 
+        {
+            get
+            {
+                string loc = "";
+                if (cppNamespace.Length != 0)
+                    loc += cppNamespace + "/";
+                loc += cppTypeName + ".h";
+
+                return loc; 
+            }
+        }
+
+        public HashSet<TypeDef> referencedTypes;
+        public HashSet<TypeSig> referencedTypeSigs; // for types that we did not find a TypeDef for
+
+        public TypeInfo() {
+            ownTypeDef = null;
+            typeSig = null;
+            cppTypeName = "";
+            cppNamespace = "";
+
+            referencedTypes = new HashSet<TypeDef>();
+            referencedTypeSigs = new HashSet<TypeSig>();
+        }
+    }
+
+    internal class Preprocess
+    {
+        public static Dictionary<TypeDef, TypeInfo> processedTypeDefs = new Dictionary<TypeDef, TypeInfo>();
+        public static Dictionary<TypeSig, TypeInfo> processedDifferentAssemblyTypes = new Dictionary<TypeSig, TypeInfo>();
+        public static ModuleDefMD currentModule = null;
+
+        public static void InitializeTypeInfoStructs()
+        {
+            foreach (uint typeId in currentModule.Metadata.GetTypeDefRidList())
+            {
+                TypeDef def = currentModule.ResolveTypeDef(typeId);
+                if (def == null) continue;
+
+                processedTypeDefs[def] = new TypeInfo();
+            }
+        }
+
+        // processes & formats namespace, type name and
+        public static void FormatNamesForTypeDefs()
+        {
+            foreach (uint typeId in currentModule.Metadata.GetTypeDefRidList())
+            {
+                TypeDef def = currentModule.ResolveTypeDef(typeId);
+                if (def == null) continue;
+
+                processedTypeDefs[def].cppTypeName = Helpers.FormatClassname(def.Name);
+                processedTypeDefs[def].cppNamespace = Helpers.ParseNamespaceForType(def.Namespace, def.FullName);
+            }
+        }
+
+        // formats the names for assembly types that aren't included in this assembly, but are referenced
+        public static void FormatNamesForOtherAssemblyTypes()
+        {
+            List<KeyValuePair<TypeSig, TypeInfo>> kvPairsList = [.. processedDifferentAssemblyTypes]; // separate list since we modify the dictionary during loop, thus foreach wont work directly on dict
+
+            foreach (KeyValuePair<TypeSig, TypeInfo> kvpair in kvPairsList)
+            {
+                TypeSig sig = kvpair.Key;
+
+                processedDifferentAssemblyTypes[sig].cppTypeName = Helpers.FormatClassname(sig.TypeName);
+                processedDifferentAssemblyTypes[sig].cppNamespace = Helpers.ParseNamespaceForType(sig.Namespace, sig.FullName);
+
+                if(sig.IsGenericInstanceType)
+                {
+                    foreach(TypeSig genericSig in sig.ToGenericInstSig().GenericArguments)
+                    {
+                        if (processedDifferentAssemblyTypes.ContainsKey(genericSig)) continue;
+
+                        processedDifferentAssemblyTypes[genericSig] = new TypeInfo();
+                        processedDifferentAssemblyTypes[genericSig].cppTypeName = Helpers.FormatClassname(genericSig.TypeName);
+                        processedDifferentAssemblyTypes[genericSig].cppNamespace = Helpers.ParseNamespaceForType(genericSig.Namespace, genericSig.FullName);
+                    }
+                }
+
+                // nested types
+                TypeSig nextSig = sig.GetNext();
+                while (nextSig != null)
+                {
+                    if(!processedDifferentAssemblyTypes.ContainsKey(nextSig))
+                    {
+                        processedDifferentAssemblyTypes[nextSig] = new TypeInfo();
+                        processedDifferentAssemblyTypes[nextSig].cppTypeName = Helpers.FormatClassname(nextSig.TypeName);
+                        processedDifferentAssemblyTypes[nextSig].cppNamespace = Helpers.ParseNamespaceForType(nextSig.Namespace, nextSig.FullName);
+                    }
+
+                    nextSig = nextSig.GetNext();
+                }
+            }
+        }
+
+        public static void AddReferenceForType(TypeInfo typeInfo, TypeSig typeSig, string mainTypeName)
+        {
+            if (typeSig.FullName.Contains("c__") || typeSig.FullName.Contains("d__") || typeSig.FullName.Contains("<>c")) // usually a bad sign, as these classes are compiler generated
+                return; // dont add them to references
+
+            TypeDef typeDef = typeSig.TryGetTypeDef();
+            if (typeDef == null) // no typedef means that this type is defined in another assembly, only referenced here
+            {
+                typeInfo.referencedTypeSigs.Add(typeSig);
+                processedDifferentAssemblyTypes[typeSig] = new TypeInfo();
+                if(typeSig.IsGenericInstanceType)
+                {
+                    GenericInstSig generic = typeSig.ToGenericInstSig();
+                    foreach(TypeSig arg in generic.GenericArguments)
+                        AddReferenceForType(typeInfo, arg, mainTypeName);
+                }
+
+            }
+            else if (typeInfo.ownTypeDef != typeDef)
+            {
+                foreach (TypeDef nestedType in typeDef.GetTypes())
+                    AddReferenceForType(typeInfo, nestedType.ToTypeSig(), mainTypeName);
+                typeInfo.referencedTypes.Add(typeDef);
+            }
+        }
+
+        // Gets referenced types in class, except for the parent class.
+        public static void GetTypesReferencedInClasses()
+        {
+            foreach (uint typeId in currentModule.Metadata.GetTypeDefRidList())
+            {
+                TypeDef def = currentModule.ResolveTypeDef(typeId);
+                if (def == null) continue;
+
+                if (def.Name.Equals("ChatManager"))
+                    Console.WriteLine("aaa");
+
+                foreach (FieldDef field in def.Fields) 
+                {
+                    if (Helpers.IsPrimitiveType(field.FieldType)) continue; // primitive types such as int, char, byte etc we don't need to include as header files
+
+                    AddReferenceForType(processedTypeDefs[def], field.FieldType, def.Name);
+                }
+
+                foreach(MethodDef method in def.Methods)
+                {
+                    if (Helpers.IsPrimitiveType(method.ReturnType)) continue; // primitive types such as int, char, byte etc we don't need to include as header files
+
+                    AddReferenceForType(processedTypeDefs[def], method.ReturnType, def.Name);
+
+                    foreach (Parameter param in method.Parameters)
+                    {
+                        if (Helpers.IsPrimitiveType(param.Type)) continue;
+
+                        AddReferenceForType(processedTypeDefs[def], param.Type, def.Name);
+                    }
+                }
+            }
+
+            FormatNamesForOtherAssemblyTypes();
+        }
+
+        public static string GetHeaderLocationInAssembly(TypeSig typeSig)
+        {
+            if (typeSig == null) return "";
+
+            TypeDef typeDef = typeSig.TryGetTypeDef();
+            if (typeDef != null)
+                return processedTypeDefs[typeDef].TypeHeaderFileRelativeLocation;
+            else
+                return processedDifferentAssemblyTypes[typeSig].TypeHeaderFileRelativeLocation;
+        }
+
+        // Returns the type name without template arguments nor namespace
+        public static string GetProcessedCppTypeNameForType(TypeSig typeSig)
+        {
+            if (typeSig == null) return "";
+
+            TypeDef typeDef = typeSig.TryGetTypeDef();
+            if (typeDef != null)
+                return processedTypeDefs[typeDef].cppTypeName;
+            else if (processedDifferentAssemblyTypes.ContainsKey(typeSig))
+                return processedDifferentAssemblyTypes[typeSig].cppTypeName;
+            else
+                return Helpers.FormatClassname(typeSig.TypeName);
+        }
+
+        // Returns the namespace that a type is in
+        public static string GetProcessedNamespaceForType(TypeSig typeSig)
+        {
+            if (typeSig == null) return "";
+
+            TypeDef typeDef = typeSig.TryGetTypeDef();
+            if (typeDef != null)
+                return processedTypeDefs[typeDef].cppNamespace;
+            else if (processedDifferentAssemblyTypes.ContainsKey(typeSig))
+                return processedDifferentAssemblyTypes[typeSig].cppNamespace;
+            else
+                return Helpers.ParseNamespaceForType(typeSig.Namespace, typeSig.FullName);
+        }
+
+        public static string GetFullTypenameForIl2CppType(TypeSig typeSig)
+        {
+            if (typeSig == null) return "";
+
+            TypeDef typeDef = typeSig.TryGetTypeDef();
+            if (typeDef != null)
+                return processedTypeDefs[typeDef].CppFullyQualifiedName;
+            else if (processedDifferentAssemblyTypes.ContainsKey(typeSig))
+                return processedDifferentAssemblyTypes[typeSig].CppFullyQualifiedName;
+            else
+                return Helpers.FormatClassname(typeSig.TypeName);
+        }
+
+        public static void PreprocessModule(ModuleDefMD currentModule)
+        {
+            Preprocess.currentModule = currentModule;
+            InitializeTypeInfoStructs();
+
+            FormatNamesForTypeDefs();
+            GetTypesReferencedInClasses();
+        }
+    }
+}
