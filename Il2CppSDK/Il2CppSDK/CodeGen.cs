@@ -135,6 +135,8 @@ namespace Il2CppSDK
             for (int i = methodDef.HasThis ? 1 : 0; i < methodDef.Parameters.Count; i++)
             {
                 Parameter paramDef = methodDef.Parameters[i];
+                if (i == 0 && methodDef.HasThis)
+                    paramDef.Name = "this";
 
                 parameterNames.Add(paramDef.Name);
                 parameterTypes.Add(CodeGenHelpers.ConvertToFullCppTypename(paramDef.Type));
@@ -154,9 +156,9 @@ namespace Il2CppSDK
             currentFile.WriteLine(returnCast + " " + cleanedMethodName + "(" + string.Join(", ", parametersWithTypeAndName) + ") {");
 
             // method body
-            currentFile.WriteLine(namespaceTab + "\t\tusing FnPtr = " + returnCast + " (*)(" + string.Join(", ", parameterTypes) + ")");
+            currentFile.WriteLine(namespaceTab + "\t\tusing FnPtr = " + CodeGenHelpers.GenerateMethodTypedef(classDef, methodDef, returnCast, parameterTypes) + ";");
             currentFile.WriteLine(namespaceTab + "\t\tFnPtr call_func = reinterpret_cast<FnPtr>(Il2CppBase() + " + methodOffset + ");");
-            currentFile.WriteLine(namespaceTab + "\t\treturn " + CodeGenHelpers.GenerateMethodCall(methodDef, "call_func", parameterNames));
+            currentFile.WriteLine(namespaceTab + "\t\treturn " + CodeGenHelpers.GenerateMethodCall(methodDef, "call_func", parameterNames) + ";");
             currentFile.WriteLine(namespaceTab + "\t}");
 
             currentFile.WriteLine();

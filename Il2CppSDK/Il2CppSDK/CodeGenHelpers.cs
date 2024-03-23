@@ -269,13 +269,21 @@ namespace Il2CppSDK
             return references;
         }
 
+        public static string GenerateMethodTypedef(TypeDef classDef, MethodDef methodDef, string returnCast, List<string> parameterTypes)
+        {
+            if (methodDef.HasThis)
+                parameterTypes.Insert(0, CodeGenHelpers.ConvertToFullCppTypename(classDef.ToTypeSig()));
+
+            return returnCast + " (*)(" + string.Join(", ", parameterTypes) + ")";
+        }
+
         // Generates a string that represents a certain method being called inside a class
         public static string GenerateMethodCall(MethodDef methodDef, string funcName, List<string> paramNames)
         {
             if (methodDef.HasThis)
-                paramNames.Prepend("this");
+                paramNames.Insert(0, "this");
 
-            return funcName + "(" + string.Join(", ", paramNames) + ");";
+            return funcName + "(" + string.Join(", ", paramNames) + ")";
         }
 
         public static string GetFieldOffset(FieldDef field)
