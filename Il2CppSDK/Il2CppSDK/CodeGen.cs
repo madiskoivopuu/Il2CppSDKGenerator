@@ -195,6 +195,8 @@ namespace Il2CppSDK
 
             currentFile.WriteLine("#pragma once");
             currentFile.WriteLine();
+            currentFile.Write("#include \"" + CodeGenHelpers.GetRelativeIl2CppHeaderIncludePath(classTypeSig, Program.IL2CPP_HEADER_LOC) + "\"")
+            currentFile.WriteLine();
 
             HashSet<string> typeReferences = CodeGenHelpers.ResolveTypeReferences(classTypeSig);
             foreach (string typeReference in typeReferences) // #include first

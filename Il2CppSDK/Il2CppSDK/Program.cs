@@ -20,6 +20,7 @@ namespace Il2CppSDK
         static HashSet<string> typeNamesInModule = new HashSet<string>();
         static Dictionary<string, TypeDef> typeWithANamespace = new Dictionary<string, TypeDef>();
         public static string OUTPUT_DIR = "SDK";
+        public static string IL2CPP_HEADER_LOC = "Il2Cpp/Il2Cpp.h";
         public static ModuleDefMD currentModule = null;
         static StreamWriter currentFile = null;
 

@@ -173,6 +173,16 @@ namespace Il2CppSDK
             return includePath;
         }
 
+        public static string GetRelativeIl2CppHeaderIncludePath(TypeSig type, string il2cppHeaderInSDK)
+        {
+            string includePath = "../";
+            if (Preprocess.GetProcessedNamespaceForType(type).Length > 0)
+                includePath += "../";
+            includePath += il2cppHeaderInSDK;
+
+            return includePath;
+        }
+
         // Checks whether we should explicitly include the header file for a type over forward declaration
         public static bool ShouldIncludeType(TypeSig type, TypeDef typeDef)
         {
