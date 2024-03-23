@@ -129,7 +129,7 @@ namespace Il2CppSDK
                 return; // dont add them to references
             if (typeSig.GetElementType() == ElementType.Var || typeSig.GetElementType() == ElementType.MVar) // template types cannot be referenced, and shouldn't
                 return;
-            if (typeSig.GetElementType() == ElementType.String) // base type, no need to reference
+            if (typeSig.GetElementType() == ElementType.String || typeSig.GetElementType() == ElementType.Object || typeSig.FullName.StartsWith("System.Collections.Generic.Dictionary")) // base type, no need to reference
                 return;
             if (typeSig.GetElementType() == ElementType.SZArray || typeSig.GetElementType() == ElementType.Array)
             { // we don't need to reference the array, but we do need the underlying type
