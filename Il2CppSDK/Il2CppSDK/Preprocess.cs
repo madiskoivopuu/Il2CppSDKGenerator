@@ -10,7 +10,6 @@ namespace Il2CppSDK
     public class TypeInfo
     {
         public TypeDef ownTypeDef;
-        public TypeSig typeSig;
 
         public string cppTypeName;
         public string cppNamespace;
@@ -44,7 +43,6 @@ namespace Il2CppSDK
 
         public TypeInfo() {
             ownTypeDef = null;
-            typeSig = null;
             cppTypeName = "";
             cppNamespace = "";
 
@@ -57,7 +55,8 @@ namespace Il2CppSDK
     {
         public static Dictionary<TypeDef, TypeInfo> processedTypeDefs = new Dictionary<TypeDef, TypeInfo>();
         public static Dictionary<TypeSig, TypeInfo> processedDifferentAssemblyTypes = new Dictionary<TypeSig, TypeInfo>();
-        public static ModuleDefMD currentModule = null;
+        public static Dictionary<TypeDef, List<TypeSpec>> genericTypeInstantiations = new Dictionary<TypeDef, List<TypeSpec>>();
+        static ModuleDefMD currentModule = null;
 
         public static void InitializeTypeInfoStructs()
         {
@@ -125,8 +124,20 @@ namespace Il2CppSDK
 
         public static void AddReferenceForType(TypeInfo typeInfo, TypeSig typeSig, string mainTypeName)
         {
+            if (typeSig == null) return;
             if (typeSig.FullName.Contains("c__") || typeSig.FullName.Contains("d__") || typeSig.FullName.Contains("<>c")) // usually a bad sign, as these classes are compiler generated
                 return; // dont add them to references
+            if (typeSig.GetElementType() == ElementType.Var || typeSig.GetElementType() == ElementType.MVar) // template types cannot be referenced, and shouldn't
+                return;
+            if (typeSig.GetElementType() == ElementType.String) // base type, no need to reference
+                return;
+            if (typeSig.GetElementType() == ElementType.SZArray || typeSig.GetElementType() == ElementType.Array)
+            { // we don't need to reference the array, but we do need the underlying type
+                AddReferenceForType(typeInfo, typeSig.GetNext(), mainTypeName);
+                return;
+            }
+
+            // TODO: don't reference dictionary type, that is builtin
 
             TypeDef typeDef = typeSig.TryGetTypeDef();
             if (typeDef == null) // no typedef means that this type is defined in another assembly, only referenced here
@@ -150,15 +161,15 @@ namespace Il2CppSDK
         }
 
         // Gets referenced types in class, except for the parent class.
-        public static void GetTypesReferencedInClasses()
+        public static void ProcessTypesReferencedInClasses()
         {
             foreach (uint typeId in currentModule.Metadata.GetTypeDefRidList())
             {
                 TypeDef def = currentModule.ResolveTypeDef(typeId);
                 if (def == null) continue;
 
-                if (def.Name.Equals("ChatManager"))
-                    Console.WriteLine("aaa");
+                if (def.BaseType != null && def.BaseType.ToTypeSig() != null)
+                    AddReferenceForType(processedTypeDefs[def], def.BaseType.ToTypeSig(), def.BaseType.Name);
 
                 foreach (FieldDef field in def.Fields) 
                 {
@@ -183,6 +194,35 @@ namespace Il2CppSDK
             }
 
             FormatNamesForOtherAssemblyTypes();
+        }
+
+        public static void CacheGenericTypeInstantiations()
+        {
+            foreach (uint typeId in currentModule.Metadata.GetTypeDefRidList())
+            {
+                TypeDef def = currentModule.ResolveTypeDef(typeId);
+                if (def == null || !def.HasGenericParameters) continue;
+
+                if (!genericTypeInstantiations.ContainsKey(def))
+                    genericTypeInstantiations[def] = new List<TypeSpec>();
+
+                for (uint i = 1; i < currentModule.Metadata.TablesStream.TypeSpecTable.Rows; i++)
+                {
+                    TypeSpec spec = currentModule.ResolveTypeSpec(i);
+                    if (spec == null) continue;
+
+                    if (spec.FullName.Contains(def.FullName))
+                        genericTypeInstantiations[def].Add(spec);
+                }
+            }
+        }
+
+        public static List<TypeSpec> GetGenericTypeInstantiations(TypeDef genericType)
+        {
+            if (!genericTypeInstantiations.ContainsKey(genericType))
+                return new List<TypeSpec>();
+
+            return genericTypeInstantiations[genericType];
         }
 
         public static string GetHeaderLocationInAssembly(TypeSig typeSig)
@@ -243,7 +283,8 @@ namespace Il2CppSDK
             InitializeTypeInfoStructs();
 
             FormatNamesForTypeDefs();
-            GetTypesReferencedInClasses();
+            ProcessTypesReferencedInClasses();
+            CacheGenericTypeInstantiations();
         }
     }
 }

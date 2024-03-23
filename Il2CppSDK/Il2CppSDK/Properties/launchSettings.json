@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Il2CppSDK": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\Users\\madis\\Desktop\\PROJECTFOLDER\\Cheat related programs\\il2cpp reverser\\DummyDll\\mscorlib.dll"
+    }
+  }
+}

@@ -85,7 +85,7 @@ namespace Il2CppSDK
 
                 if(field.IsStatic)
                 {
-                    currentFile.WriteLine(string.Format(namespaceTab + "\t\treturn *({0}*)((uintptr_t)ClassDef()->static_fields + {1});", returnCast, CodeGenHelpers.GetFieldOffset(field)));
+                    currentFile.WriteLine(string.Format(namespaceTab + "\t\treturn *({0}*)((uintptr_t)this->klass->static_fields + {1});", returnCast, CodeGenHelpers.GetFieldOffset(field)));
                 } 
                 else
                 {
@@ -98,52 +98,86 @@ namespace Il2CppSDK
             }
         }
 
+        public static void GenerateGenericMethod(StreamWriter currentFile, TypeDef classDef, MethodDef methodDef, string namespaceTab)
+        {
+            List<TypeSpec> genericTypeInstantiations = Preprocess.GetGenericTypeInstantiations(classDef);
+            var cleanedMethodName = methodDef.Name.Replace("::", "_").Replace("<", "").Replace(">", "").Replace(".", "_").Replace("`", "_");
+
+            if (genericTypeInstantiations.Count == 0)
+            {
+                currentFile.WriteLine(namespaceTab + "\t" + "// This function has no body as it most likely is not used within the assembly code (TypeSpecs count for classDef was 0)");
+                currentFile.WriteLine(namespaceTab + "\t" + "void " + cleanedMethodName + "() { }");
+                currentFile.WriteLine();
+                return;
+            }
+
+            // TODO: use Il2CppDumper .json file for generic inst methods
+            currentFile.WriteLine(namespaceTab + "\t" + "// GenericInstMethod || GenericMethod || GenericInstGenericMethod is not supported at this moment");
+            currentFile.WriteLine(namespaceTab + "\t" + "void " + cleanedMethodName + "() { }");
+            currentFile.WriteLine();
+            return;
+        }
+
+        public static void GenerateNormalMethod(StreamWriter currentFile, TypeDef classDef, MethodDef methodDef, string namespaceTab)
+        {
+            var cleanedMethodName = methodDef.Name.Replace("::", "_").Replace("<", "").Replace(">", "").Replace(".", "_").Replace("`", "_");
+            var returnCppType = CodeGenHelpers.ConvertToFullCppTypename(methodDef.ReturnType);
+            string methodOffset = CodeGenHelpers.GetMethodOffset(methodDef);
+
+            currentFile.Write(namespaceTab + "\t");
+
+            // get method argument names and types in their own separate lists
+            List<string> parameterTypes = new List<string>();
+            List<string> parameterNames = new List<string>();
+            List<string> parametersWithTypeAndName = new List<string>();
+
+            for (int i = methodDef.HasThis ? 1 : 0; i < methodDef.Parameters.Count; i++)
+            {
+                Parameter paramDef = methodDef.Parameters[i];
+
+                parameterNames.Add(paramDef.Name);
+                parameterTypes.Add(CodeGenHelpers.ConvertToFullCppTypename(paramDef.Type));
+                parametersWithTypeAndName.Add(paramDef.Name + " " + CodeGenHelpers.ConvertToFullCppTypename(paramDef.Type));
+            }
+
+            // method header
+            var returnCast = returnCppType;
+            if (returnCppType.Contains("uintptr_t")) // if we are uncertain about the type, we will make a template
+            {
+                currentFile.Write("template <typename TReturnVal = " + returnCppType + "> ");
+                returnCast = "TReturnVal";
+            }
+
+            if (methodDef.IsStatic)
+                currentFile.Write("static ");
+            currentFile.WriteLine(returnCast + " " + cleanedMethodName + "(" + string.Join(", ", parametersWithTypeAndName) + ") {");
+
+            // method body
+            currentFile.WriteLine(namespaceTab + "\t\tusing FnPtr = " + returnCast + " (*)(" + string.Join(", ", parameterTypes) + ")");
+            currentFile.WriteLine(namespaceTab + "\t\tFnPtr call_func = reinterpret_cast<FnPtr>(Il2CppBase() + " + methodOffset + ")");
+            currentFile.Write(namespaceTab + "\t\treturn " + CodeGenHelpers.GenerateMethodCall(methodDef, "call_func", parameterNames));
+            currentFile.WriteLine(namespaceTab + "\t}");
+
+            currentFile.WriteLine();
+        }
+
         public static void GenerateMethodsForClass(StreamWriter currentFile, TypeDef classDef, string namespaceTab)
         {
-            foreach(MethodDef methodDef in classDef.Methods)
+            foreach (MethodDef methodDef in classDef.Methods)
             {
                 if (methodDef.IsConstructor || methodDef.IsStaticConstructor) continue;
 
-                var cleanedMethodName = methodDef.Name.Replace("::", "_").Replace("<", "").Replace(">", "").Replace(".", "_").Replace("`", "_");
-                var returnCppType = CodeGenHelpers.ConvertToFullCppTypename(methodDef.ReturnType);
-
-                currentFile.Write(namespaceTab + "\t");
-
-                // get method argument names and types in their own separate lists
-                List<string> parameterTypes = new List<string>();
-                List<string> parameterNames = new List<string>();
-                List<string> parametersWithTypeAndName = new List<string>();
-
-                foreach(Parameter paramDef in methodDef.Parameters)
-                {
-                    parameterNames.Add(paramDef.Name);
-                    parameterTypes.Add(CodeGenHelpers.ConvertToFullCppTypename(paramDef.Type));
-                    parametersWithTypeAndName.Add(paramDef.Name + " " + CodeGenHelpers.ConvertToFullCppTypename(paramDef.Type));
-                }
-
-                // method header
-                var returnCast = returnCppType;
-                if (returnCppType.Contains("uintptr_t")) // if we are uncertain about the type, we will make a template
-                {
-                    currentFile.Write("template <typename TReturnVal = " + returnCppType + "> ");
-                    returnCast = "TReturnVal";
-                }
-
-                if (methodDef.IsStatic)
-                    currentFile.Write("static ");
-                currentFile.WriteLine(returnCast + " " + cleanedMethodName + "(" + string.Join(", ", parametersWithTypeAndName) + ") {");
-
-                // method body
-                currentFile.Write(namespaceTab + "\t\t");
-                currentFile.Write("using FnPtr = " + returnCppType + " (*)(" + string.Join(", ", parameterTypes) + ")");
-
-                currentFile.WriteLine();
+                string offset = CodeGenHelpers.GetMethodOffset(methodDef);
+                if (offset == "0x0" && (classDef.HasGenericParameters || methodDef.HasGenericParameters))
+                    GenerateGenericMethod(currentFile, classDef, methodDef, namespaceTab);
+                else
+                    GenerateNormalMethod(currentFile, classDef, methodDef, namespaceTab);
             }
         }
 
         public static void GenerateClassFromType(TypeDef classDef)
         {
-            if (classDef.Name.Contains("TypeVector3JsonConverter"))
+            if (classDef.FullName.Contains("ImmunityCacheComponent"))
                 Debugger.Break();
 
             TypeSig classTypeSig = classDef.ToTypeSig();
@@ -176,6 +210,15 @@ namespace Il2CppSDK
             }
 
             //// class start
+            if (classDef.HasGenericParameters)
+            {
+                HashSet<string> typenames = new HashSet<string>();
+                foreach(GenericParam param in classDef.GenericParameters)
+                    typenames.Add("typename " + param.Name);
+
+                currentFile.WriteLine("template <" + string.Join(", ", typenames) + ">");
+            }
+
             currentFile.Write(namespaceTab + "class " + Preprocess.GetProcessedCppTypeNameForType(classTypeSig));
             if(classDef.BaseType != null)
             {
@@ -189,17 +232,18 @@ namespace Il2CppSDK
 
             currentFile.WriteLine(namespaceTab + "public:");
             currentFile.WriteLine("");
-            currentFile.WriteLine(namespaceTab + "\tstatic Il2CppClass* ClassDef() {");
-            currentFile.WriteLine(namespaceTab + string.Format("\t\treturn (Il2CppClass *)(Il2Cpp::GetClass(\"{0}\", \"{1}\", \"{2}\"));", classDef.Module.Name, classDef.Namespace, classDef.Name));
-            currentFile.WriteLine(namespaceTab + "\t}");
-            currentFile.WriteLine("");
 
             GenerateFieldsForClass(currentFile, classDef, namespaceTab);
 
-            currentFile.Write(namespaceTab + "};");
+            currentFile.WriteLine("");
+
+            GenerateMethodsForClass(currentFile, classDef, namespaceTab);
+
+            currentFile.WriteLine(namespaceTab + "};");
             //// class end
 
-            currentFile.WriteLine("};");
+            if (useNamespace)
+                currentFile.WriteLine("};");
             // namespace end
 
             currentFile.Close();
@@ -209,11 +253,6 @@ namespace Il2CppSDK
         {
             foreach(TypeDef typeDef in currentModule.Types)
             {
-                foreach(var attr in typeDef.CustomAttributes) {
-                    if (attr.TypeFullName.Contains("CompilerGeneratedAttribute"))
-                        Console.WriteLine("pls");
-                }
-
                 if (typeDef.IsEnum)
                     GenerateEnumFromType(typeDef);
                 else

@@ -138,7 +138,8 @@ namespace Il2CppSDK
                     result = Preprocess.GetFullTypenameForIl2CppType(type) + "*";
                     break;
 
-                case ElementType.Var: // template type
+                case ElementType.Var: // generic param in method
+                case ElementType.MVar:
                     result = Preprocess.GetProcessedCppTypeNameForType(type);
                     break;
             }
@@ -226,6 +227,11 @@ namespace Il2CppSDK
             }
         }
 
+        public static List<TypeSpec> GetGenericTypeInstantiations(TypeDef genericType)
+        {
+            return null;
+        }
+
         // Returns a list of references to other types. Contains either forward declarations for types we do not need to necessarily include or #include for types that are required (parent class, enum, class with generic)
         public static HashSet<string> ResolveTypeReferences(TypeSig type)
         {
@@ -238,20 +244,10 @@ namespace Il2CppSDK
                 return references;
             }
 
-            // base type will be included no matter what
-            if (typeDef.GetBaseType() != null)
-            {
-                ITypeDefOrRef baseType = typeDef.GetBaseType();
-                TypeSig baseTypeSig = baseType.ToTypeSig();
-                if (baseTypeSig != null)
-                    references.Add(string.Format("#include \"{0}\"", GetIncludePathFromTypeToAnother(type, baseTypeSig)));
-            }
-
             // types in the same assembly
             foreach (TypeDef referencedType in Preprocess.processedTypeDefs[typeDef].referencedTypes)
             {
                 if (referencedType == typeDef) continue;
-
                 TypeSig referencedTypeSig = referencedType.ToTypeSig();
                 references.Add(GetTypeResolveFormat(type, referencedTypeSig, referencedType));
             }
@@ -261,6 +257,15 @@ namespace Il2CppSDK
                 references.Add(GetTypeResolveFormat(type, outsideType, null));
 
             return references;
+        }
+
+        // Generates a string that represents a certain method being called inside a class
+        public static string GenerateMethodCall(MethodDef methodDef, string funcName, List<string> paramNames)
+        {
+            if (methodDef.HasThis)
+                paramNames.Prepend("this");
+
+            return funcName + "(" + string.Join(", ", paramNames) + ");";
         }
 
         public static string GetFieldOffset(FieldDef field)
@@ -279,7 +284,7 @@ namespace Il2CppSDK
             return "0x0";
         }
 
-        static string GetMethodOffset(MethodDef method)
+        public static string GetMethodOffset(MethodDef method)
         {
             foreach (var attr in method.CustomAttributes)
             {

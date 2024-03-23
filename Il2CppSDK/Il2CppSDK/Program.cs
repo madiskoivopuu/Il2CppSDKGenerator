@@ -619,12 +619,12 @@ namespace Il2CppSDK
 
         static void ParseModule(string moduleFile)
         {
+            moduleFile = "C:\\Users\\madis\\Desktop\\PROJECTFOLDER\\Cheat related programs\\il2cpp reverser\\DummyDll\\Assembly-CSharp.dll";
+            
             Console.WriteLine("Generating SDK for {0}...", Path.GetFileName(moduleFile));
 
             ModuleContext modCtx = ModuleDef.CreateModuleContext();
             currentModule = ModuleDefMD.Load(moduleFile, modCtx);
-
-            currentModule.ResolveAssembly;
 
             Preprocess.PreprocessModule(currentModule);
             CodeGen.GenerateSDK(currentModule);
