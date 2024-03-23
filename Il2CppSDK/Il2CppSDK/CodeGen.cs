@@ -155,8 +155,8 @@ namespace Il2CppSDK
 
             // method body
             currentFile.WriteLine(namespaceTab + "\t\tusing FnPtr = " + returnCast + " (*)(" + string.Join(", ", parameterTypes) + ")");
-            currentFile.WriteLine(namespaceTab + "\t\tFnPtr call_func = reinterpret_cast<FnPtr>(Il2CppBase() + " + methodOffset + ")");
-            currentFile.Write(namespaceTab + "\t\treturn " + CodeGenHelpers.GenerateMethodCall(methodDef, "call_func", parameterNames));
+            currentFile.WriteLine(namespaceTab + "\t\tFnPtr call_func = reinterpret_cast<FnPtr>(Il2CppBase() + " + methodOffset + ");");
+            currentFile.WriteLine(namespaceTab + "\t\treturn " + CodeGenHelpers.GenerateMethodCall(methodDef, "call_func", parameterNames));
             currentFile.WriteLine(namespaceTab + "\t}");
 
             currentFile.WriteLine();
