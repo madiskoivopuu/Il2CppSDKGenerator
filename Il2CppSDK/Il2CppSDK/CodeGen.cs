@@ -216,7 +216,7 @@ namespace Il2CppSDK
                 foreach(GenericParam param in classDef.GenericParameters)
                     typenames.Add("typename " + param.Name);
 
-                currentFile.WriteLine("template <" + string.Join(", ", typenames) + ">");
+                currentFile.WriteLine(namespaceTab + "template <" + string.Join(", ", typenames) + ">");
             }
 
             currentFile.Write(namespaceTab + "class " + Preprocess.GetProcessedCppTypeNameForType(classTypeSig));
