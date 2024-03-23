@@ -127,15 +127,13 @@ namespace Il2CppSDK
             if (typeSig == null) return;
             if (typeSig.FullName.Contains("c__") || typeSig.FullName.Contains("d__") || typeSig.FullName.Contains("<>c")) // usually a bad sign, as these classes are compiler generated
                 return; // dont add them to references
-            if (typeSig.GetElementType() == ElementType.Var || typeSig.GetElementType() == ElementType.MVar) // template types cannot be referenced, and shouldn't
-                return;
-            if (typeSig.GetElementType() == ElementType.String || typeSig.GetElementType() == ElementType.Object) // base type, no need to reference
-                return;
             if (typeSig.GetElementType() == ElementType.SZArray || typeSig.GetElementType() == ElementType.Array)
             { // we don't need to reference the array, but we do need the underlying type
                 AddReferenceForType(typeInfo, typeSig.GetNext(), mainTypeName);
                 return;
             }
+            if (Helpers.IsPrimitiveType(typeSig))
+                return;
 
             TypeDef typeDef = typeSig.TryGetTypeDef();
             if (typeDef == null) // no typedef means that this type is defined in another assembly, only referenced here
@@ -170,7 +168,7 @@ namespace Il2CppSDK
                 TypeDef def = currentModule.ResolveTypeDef(typeId);
                 if (def == null) continue;
 
-                if (def.BaseType != null && def.BaseType.ToTypeSig() != null)
+                if (def.BaseType != null && def.BaseType.ToTypeSig() != null && !Helpers.IsPrimitiveType(def.BaseType.ToTypeSig()))
                     AddReferenceForType(processedTypeDefs[def], def.BaseType.ToTypeSig(), def.BaseType.Name);
 
                 foreach (FieldDef field in def.Fields) 

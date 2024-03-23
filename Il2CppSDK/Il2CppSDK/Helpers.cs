@@ -47,10 +47,6 @@ namespace Il2CppSDK
 
             switch (type.GetElementType())
             {
-                //case ElementType.String:
-                //case ElementType.SZArray:
-                //case ElementType.Array:
-                //case ElementType.Object:
                 case ElementType.Class:
                 case ElementType.ValueType:
                     return false;
