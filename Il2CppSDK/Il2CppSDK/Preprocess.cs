@@ -129,7 +129,7 @@ namespace Il2CppSDK
                 return; // dont add them to references
             if (typeSig.GetElementType() == ElementType.Var || typeSig.GetElementType() == ElementType.MVar) // template types cannot be referenced, and shouldn't
                 return;
-            if (typeSig.GetElementType() == ElementType.String || typeSig.GetElementType() == ElementType.Object || typeSig.FullName.StartsWith("System.Collections.Generic.Dictionary")) // base type, no need to reference
+            if (typeSig.GetElementType() == ElementType.String || typeSig.GetElementType() == ElementType.Object) // base type, no need to reference
                 return;
             if (typeSig.GetElementType() == ElementType.SZArray || typeSig.GetElementType() == ElementType.Array)
             { // we don't need to reference the array, but we do need the underlying type
@@ -137,12 +137,12 @@ namespace Il2CppSDK
                 return;
             }
 
-            // TODO: don't reference dictionary type, that is builtin
-
             TypeDef typeDef = typeSig.TryGetTypeDef();
             if (typeDef == null) // no typedef means that this type is defined in another assembly, only referenced here
             {
-                typeInfo.referencedTypeSigs.Add(typeSig);
+                if (!typeSig.FullName.StartsWith("System.Collections.Generic.Dictionary"))
+                    typeInfo.referencedTypeSigs.Add(typeSig);
+
                 processedDifferentAssemblyTypes[typeSig] = new TypeInfo();
                 if(typeSig.IsGenericInstanceType)
                 {
@@ -156,7 +156,9 @@ namespace Il2CppSDK
             {
                 foreach (TypeDef nestedType in typeDef.GetTypes())
                     AddReferenceForType(typeInfo, nestedType.ToTypeSig(), mainTypeName);
-                typeInfo.referencedTypes.Add(typeDef);
+
+                if(!typeSig.FullName.StartsWith("System.Collections.Generic.Dictionary"))
+                    typeInfo.referencedTypes.Add(typeDef);
             }
         }
 
