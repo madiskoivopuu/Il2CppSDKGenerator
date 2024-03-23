@@ -98,23 +98,24 @@ namespace Il2CppSDK
             }
         }
 
+        public static void GenerateMethodStub(StreamWriter currentFile, MethodDef methodDef, string namespaceTab, string comment)
+        {
+            var cleanedMethodName = methodDef.Name.Replace("::", "_").Replace("<", "").Replace(">", "").Replace(".", "_").Replace("`", "_");
+            currentFile.WriteLine(namespaceTab + "\t" + "// " + comment);
+            currentFile.WriteLine(namespaceTab + "\t" + "void " + cleanedMethodName + "() { }");
+            currentFile.WriteLine();
+        }
+
         public static void GenerateGenericMethod(StreamWriter currentFile, TypeDef classDef, MethodDef methodDef, string namespaceTab)
         {
             List<TypeSpec> genericTypeInstantiations = Preprocess.GetGenericTypeInstantiations(classDef);
             var cleanedMethodName = methodDef.Name.Replace("::", "_").Replace("<", "").Replace(">", "").Replace(".", "_").Replace("`", "_");
 
             if (genericTypeInstantiations.Count == 0)
-            {
-                currentFile.WriteLine(namespaceTab + "\t" + "// This function has no body as it most likely is not used within the assembly code (TypeSpecs count for classDef was 0)");
-                currentFile.WriteLine(namespaceTab + "\t" + "void " + cleanedMethodName + "() { }");
-                currentFile.WriteLine();
-                return;
-            }
-
+                GenerateMethodStub(currentFile, methodDef, namespaceTab, "This function has no body as it most likely is not used within the assembly code (TypeSpecs count for classDef was 0)");
+            else
+                GenerateMethodStub(currentFile, methodDef, namespaceTab, "GenericInstMethod || GenericMethod || GenericInstGenericMethod is not supported at this moment");
             // TODO: use Il2CppDumper .json file for generic inst methods
-            currentFile.WriteLine(namespaceTab + "\t" + "// GenericInstMethod || GenericMethod || GenericInstGenericMethod is not supported at this moment");
-            currentFile.WriteLine(namespaceTab + "\t" + "void " + cleanedMethodName + "() { }");
-            currentFile.WriteLine();
             return;
         }
 
@@ -166,6 +167,11 @@ namespace Il2CppSDK
             foreach (MethodDef methodDef in classDef.Methods)
             {
                 if (methodDef.IsConstructor || methodDef.IsStaticConstructor) continue;
+                if(methodDef.IsAbstract)
+                {
+                    GenerateMethodStub(currentFile, methodDef, namespaceTab, "This method is abstract and thus has no body");
+                    continue;
+                }
 
                 string offset = CodeGenHelpers.GetMethodOffset(methodDef);
                 if (offset == "0x0" && (classDef.HasGenericParameters || methodDef.HasGenericParameters))
