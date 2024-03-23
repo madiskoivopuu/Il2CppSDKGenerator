@@ -183,7 +183,7 @@ namespace Il2CppSDK
 
         public static void GenerateClassFromType(TypeDef classDef)
         {
-            if (classDef.FullName.Contains("ImmunityCacheComponent"))
+            if (classDef.FullName.Contains("ManualQuestTrackerView"))
                 Debugger.Break();
 
             TypeSig classTypeSig = classDef.ToTypeSig();
@@ -265,6 +265,13 @@ namespace Il2CppSDK
                     GenerateEnumFromType(typeDef);
                 else
                     GenerateClassFromType(typeDef);
+
+                // we also need to generate class code for referenced typedefs, since they might not be in the main table
+                foreach(TypeDef referencedType in Preprocess.processedTypeDefs[typeDef].referencedTypes)
+                    if (referencedType.IsEnum)
+                        GenerateEnumFromType(referencedType);
+                    else
+                        GenerateClassFromType(referencedType);
             }
         }
 
