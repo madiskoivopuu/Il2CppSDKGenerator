@@ -99,6 +99,10 @@ namespace Il2CppSDK
             }
             else if (typeFullname.LastIndexOf('.') != -1) // if dnlib for some reason doesn't use slashes
             {
+                // ugh this is so spaghetti but generic types can potentially have a . in their template, we don't want to think of it as a namespace
+                if (typeFullname.IndexOf("<") != -1 && typeFullname.IndexOf("<") < typeFullname.LastIndexOf('.'))
+                    return "";
+
                 string useAsNamespace = typeFullname.Substring(0, typeFullname.LastIndexOf('.'));
                 return FormatNamespace(useAsNamespace);
             }
