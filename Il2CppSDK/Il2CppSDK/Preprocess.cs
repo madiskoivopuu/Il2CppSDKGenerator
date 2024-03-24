@@ -184,9 +184,8 @@ namespace Il2CppSDK
 
                 foreach(MethodDef method in def.Methods)
                 {
-                    if (Helpers.IsPrimitiveType(method.ReturnType)) continue; // primitive types such as int, char, byte etc we don't need to include as header files
-
-                    AddReferenceForType(processedTypeDefs[def], method.ReturnType, def.Name);
+                    if (!Helpers.IsPrimitiveType(method.ReturnType))
+                        AddReferenceForType(processedTypeDefs[def], method.ReturnType, def.Name);
 
                     foreach (Parameter param in method.Parameters)
                     {

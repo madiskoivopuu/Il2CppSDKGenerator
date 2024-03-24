@@ -186,6 +186,9 @@ namespace Il2CppSDK
 
         public static void GenerateClassFromType(TypeDef classDef)
         {
+            if (classDef.FullName.Contains("ArenaUnityWorld"))
+                Debugger.Break();
+
             TypeSig classTypeSig = classDef.ToTypeSig();
             string currentHeaderFile = CodeGenHelpers.GetHeaderAbsoluteSavePath(classTypeSig, Program.OUTPUT_DIR);
             string namespaceTab = "";
