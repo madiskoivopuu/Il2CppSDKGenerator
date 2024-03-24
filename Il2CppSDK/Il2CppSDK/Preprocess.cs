@@ -142,7 +142,9 @@ namespace Il2CppSDK
                 if (!typeSig.FullName.StartsWith("System.Collections.Generic.Dictionary"))
                     typeInfo.referencedTypeSigs.Add(typeSig);
 
-                processedDifferentAssemblyTypes[typeSig] = new TypeInfo();
+                if(typeDef.DefinitionAssembly.Name != currentModule.Assembly.Name)
+                    processedDifferentAssemblyTypes[typeSig] = new TypeInfo();
+
                 if(typeSig.IsGenericInstanceType)
                 {
                     GenericInstSig generic = typeSig.ToGenericInstSig();

@@ -284,6 +284,9 @@ namespace Il2CppSDK
                 if (type.IsGenericParameter || type.ContainsGenericParameter) continue;
 
                 string headerAbsolutePath = CodeGenHelpers.GetHeaderAbsoluteSavePath(kvpair.Key, Program.OUTPUT_DIR);
+                if (headerAbsolutePath.Contains("UIWindow_1LoadingWindow"))
+                    Debugger.Break();
+
 
                 if (File.Exists(headerAbsolutePath)) continue;
 
