@@ -171,6 +171,9 @@ namespace Il2CppSDK
                 TypeDef def = currentModule.ResolveTypeDef(typeId);
                 if (def == null) continue;
 
+                if (def.FullName.Contains("ArenaUnityWorld"))
+                    Debugger.Break();
+
                 if (def.BaseType != null && def.BaseType.ToTypeSig() != null && !Helpers.IsPrimitiveType(def.BaseType.ToTypeSig()))
                     AddReferenceForType(processedTypeDefs[def], def.BaseType.ToTypeSig(), def.BaseType.Name);
 
@@ -185,11 +188,7 @@ namespace Il2CppSDK
                     AddReferenceForType(processedTypeDefs[def], method.ReturnType, def.Name);
 
                     foreach (Parameter param in method.Parameters)
-                    {
-                        if (Helpers.IsPrimitiveType(param.Type)) continue;
-
                         AddReferenceForType(processedTypeDefs[def], param.Type, def.Name);
-                    }
                 }
             }
 
