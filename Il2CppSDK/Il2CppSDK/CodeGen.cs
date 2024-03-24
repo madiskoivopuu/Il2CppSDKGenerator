@@ -141,7 +141,7 @@ namespace Il2CppSDK
 
                 parameterNames.Add(paramDef.Name);
                 parameterTypes.Add(CodeGenHelpers.ConvertToFullCppTypename(paramDef.Type));
-                parametersWithTypeAndName.Add(paramDef.Name + " " + CodeGenHelpers.ConvertToFullCppTypename(paramDef.Type));
+                parametersWithTypeAndName.Add(CodeGenHelpers.ConvertToFullCppTypename(paramDef.Type) + " " + paramDef.Name);
             }
 
             // method header
