@@ -186,6 +186,9 @@ namespace Il2CppSDK
 
         public static void GenerateClassFromType(TypeDef classDef)
         {
+            if (classDef.FullName.Contains("RoofsAndWalls"))
+                Debugger.Break();
+
             TypeSig classTypeSig = classDef.ToTypeSig();
             string currentHeaderFile = CodeGenHelpers.GetHeaderAbsoluteSavePath(classTypeSig, Program.OUTPUT_DIR);
             string namespaceTab = "";
@@ -284,9 +287,6 @@ namespace Il2CppSDK
                 if (type.IsGenericParameter || type.ContainsGenericParameter) continue;
 
                 string headerAbsolutePath = CodeGenHelpers.GetHeaderAbsoluteSavePath(kvpair.Key, Program.OUTPUT_DIR);
-                if (headerAbsolutePath.Contains("UIWindow_1LoadingWindow"))
-                    Debugger.Break();
-
 
                 if (File.Exists(headerAbsolutePath)) continue;
 

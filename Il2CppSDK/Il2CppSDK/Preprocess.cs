@@ -142,7 +142,7 @@ namespace Il2CppSDK
                 if (!typeSig.FullName.StartsWith("System.Collections.Generic.Dictionary"))
                     typeInfo.referencedTypeSigs.Add(typeSig);
 
-                if(typeDef.DefinitionAssembly.Name != currentModule.Assembly.Name)
+                if(typeSig.DefinitionAssembly.Name != currentModule.Assembly.Name)
                     processedDifferentAssemblyTypes[typeSig] = new TypeInfo();
 
                 if(typeSig.IsGenericInstanceType)
