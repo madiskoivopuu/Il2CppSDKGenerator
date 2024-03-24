@@ -67,6 +67,7 @@ namespace Il2CppSDK
                 if (def == null) continue;
 
                 processedTypeDefs[def] = new TypeInfo();
+                processedTypeDefs[def].ownTypeDef = def;
             }
         }
 
@@ -126,6 +127,7 @@ namespace Il2CppSDK
         public static void AddReferenceForType(TypeInfo typeInfo, TypeSig typeSig, string mainTypeName)
         {
             if (typeSig == null) return;
+            if (typeSig.FullName.StartsWith(typeInfo.ownTypeDef.FullName)) return; // don't add itself as reference
             if (typeSig.FullName.Contains("c__") || typeSig.FullName.Contains("d__") || typeSig.FullName.Contains("<>c")) // usually a bad sign, as these classes are compiler generated
                 return; // dont add them to references
             if (typeSig.GetElementType() == ElementType.SZArray || typeSig.GetElementType() == ElementType.Array)
@@ -169,6 +171,9 @@ namespace Il2CppSDK
                 TypeDef def = currentModule.ResolveTypeDef(typeId);
                 if (def == null) continue;
 
+                if (def.FullName.Contains("ArenaUnityWorld"))
+                    Debugger.Break();
+
                 if (def.BaseType != null && def.BaseType.ToTypeSig() != null && !Helpers.IsPrimitiveType(def.BaseType.ToTypeSig()))
                     AddReferenceForType(processedTypeDefs[def], def.BaseType.ToTypeSig(), def.BaseType.Name);
 
@@ -184,8 +189,7 @@ namespace Il2CppSDK
 
                 foreach(MethodDef method in def.Methods)
                 {
-                    if (!Helpers.IsPrimitiveType(method.ReturnType))
-                        AddReferenceForType(processedTypeDefs[def], method.ReturnType, def.Name);
+                    AddReferenceForType(processedTypeDefs[def], method.ReturnType, def.Name);
 
                     foreach (Parameter param in method.Parameters)
                     {
