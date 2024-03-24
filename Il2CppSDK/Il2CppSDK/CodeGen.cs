@@ -33,7 +33,7 @@ namespace Il2CppSDK
 
             currentFile.WriteLine();
 
-            currentFile.Write("enum " + Preprocess.GetProcessedCppTypeNameForType(enumTypeSig));
+            currentFile.Write("enum class " + Preprocess.GetProcessedCppTypeNameForType(enumTypeSig) + " : int ");
 
             currentFile.WriteLine();
             currentFile.WriteLine("{");
@@ -139,8 +139,10 @@ namespace Il2CppSDK
                 if (i == 0 && methodDef.HasThis)
                     paramDef.Name = "this";
 
+                string paramType = CodeGenHelpers.ConvertToFullCppTypename(paramDef.Type);
+
                 parameterNames.Add(paramDef.Name);
-                parameterTypes.Add(CodeGenHelpers.ConvertToFullCppTypename(paramDef.Type));
+                parameterTypes.Add(paramType);
                 parametersWithTypeAndName.Add(CodeGenHelpers.ConvertToFullCppTypename(paramDef.Type) + " " + paramDef.Name);
             }
 

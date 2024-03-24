@@ -144,6 +144,9 @@ namespace Il2CppSDK
                     break;
             }
 
+            if (type.IsByRef)
+                result += "*";
+
             return result;
         }
 
