@@ -270,7 +270,7 @@ namespace Il2CppSDK
             foreach (TypeSig outsideType in Preprocess.processedTypeDefs[typeDef].referencedTypeSigs)
                 if (typeDef.BaseType != null && outsideType.FullName == typeDef.BaseType.FullName) // always include base type
                     references.Add(string.Format("#include \"{0}\"", GetIncludePathFromTypeToAnother(type, outsideType)));
-                else
+                else if(!outsideType.FullName.StartsWith(type.FullName)) // to fix including own type's header file, yay even more spaghetti code
                     references.Add(GetTypeResolveFormat(type, outsideType, null));
 
             return references;
