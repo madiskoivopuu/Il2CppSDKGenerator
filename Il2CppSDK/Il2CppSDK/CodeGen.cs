@@ -284,11 +284,11 @@ namespace Il2CppSDK
                 StreamWriter headerFile = new StreamWriter(File.Open(headerAbsolutePath, FileMode.Open));
 
                 headerFile.WriteLine("#pragma once");
-                headerFile.WriteLine(CodeGenHelpers.FormatGenericParametersToTemplate(type)); // is this even required for a simple declaration
 
                 if(Preprocess.GetProcessedNamespaceForType(type).Length > 0)
                     headerFile.WriteLine("namespace " + Preprocess.GetProcessedNamespaceForType(type) + " {");
 
+                headerFile.WriteLine(CodeGenHelpers.FormatGenericParametersToTemplate(type));
                 headerFile.WriteLine("class " + Preprocess.GetProcessedCppTypeNameForType(type) + " { };");
 
                 if (Preprocess.GetProcessedNamespaceForType(type).Length > 0)
