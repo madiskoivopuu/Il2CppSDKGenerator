@@ -13,12 +13,12 @@ namespace Il2CppSDK
         static string FormatIl2CppGeneric(TypeSig type)
         {
             string result = "";
-            if (type.GetName().StartsWith("List"))
+            if (type.FullName.StartsWith("System.Collections.Generic.List"))
             {
                 result = "Il2CppList<";
             }
             else
-            if (type.GetName().StartsWith("Dictionary"))
+            if (type.FullName.StartsWith("System.Collections.Generic.Dictionary"))
             {
                 result = "Il2CppDictionary<";
             }
