@@ -135,8 +135,17 @@ namespace Il2CppSDK
                 AddReferenceForType(typeInfo, typeSig.GetNext(), mainTypeName);
                 return;
             }
-            if (Helpers.IsPrimitiveType(typeSig))
+            if (Helpers.IsPrimitiveType(typeSig)) // maybe primitive type has templates to other types that are not primitive
+            {
+                if (typeSig.IsGenericInstanceType)
+                {
+                    GenericInstSig generic = typeSig.ToGenericInstSig();
+                    foreach (TypeSig arg in generic.GenericArguments)
+                        AddReferenceForType(typeInfo, arg, mainTypeName);
+                }
+
                 return;
+            }
 
             TypeDef typeDef = typeSig.TryGetTypeDef();
             if (typeDef == null) // no typedef means that this type is defined in another assembly, only referenced here
