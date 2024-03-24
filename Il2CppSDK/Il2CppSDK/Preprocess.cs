@@ -282,6 +282,7 @@ namespace Il2CppSDK
             else
             {
                 string namespaceAndType = Helpers.ParseNamespaceForType(typeSig.Namespace, typeSig.FullName);
+                if (namespaceAndType != "") namespaceAndType += "::";
                 namespaceAndType += Helpers.FormatClassname(typeSig.TypeName);
                 return namespaceAndType;
             }
