@@ -259,12 +259,19 @@ namespace Il2CppSDK
             {
                 if (referencedType == typeDef) continue;
                 TypeSig referencedTypeSig = referencedType.ToTypeSig();
-                references.Add(GetTypeResolveFormat(type, referencedTypeSig, referencedType));
+
+                if (referencedType == typeDef.BaseType) // always include base type
+                    references.Add(string.Format("#include \"{0}\"", GetIncludePathFromTypeToAnother(type, referencedTypeSig)));
+                else
+                    references.Add(GetTypeResolveFormat(type, referencedTypeSig, referencedType));
             }
 
             // types in a different assembly, we might still want to include them if necessary
             foreach (TypeSig outsideType in Preprocess.processedTypeDefs[typeDef].referencedTypeSigs)
-                references.Add(GetTypeResolveFormat(type, outsideType, null));
+                if (typeDef.BaseType != null && outsideType.FullName == typeDef.BaseType.FullName) // always include base type
+                    references.Add(string.Format("#include \"{0}\"", GetIncludePathFromTypeToAnother(type, outsideType)));
+                else
+                    references.Add(GetTypeResolveFormat(type, outsideType, null));
 
             return references;
         }
