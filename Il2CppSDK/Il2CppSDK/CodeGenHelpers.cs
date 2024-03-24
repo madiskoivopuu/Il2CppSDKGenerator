@@ -151,14 +151,14 @@ namespace Il2CppSDK
         public static string GetIncludePathFromTypeToAnother(TypeSig currType, TypeSig typeToInclude)
         {
             string includePath = "";
-            if (Preprocess.GetProcessedNamespaceForType(currType).Length > 0)
-                if (Preprocess.GetProcessedNamespaceForType(currType) != Preprocess.GetProcessedNamespaceForType(typeToInclude))
-                    includePath += "../";
+            bool areNamespacesDifferent = Preprocess.GetProcessedNamespaceForType(currType) != Preprocess.GetProcessedNamespaceForType(typeToInclude);
+            if (Preprocess.GetProcessedNamespaceForType(currType).Length > 0 && areNamespacesDifferent)
+                includePath += "../";
 
             if (currType.DefinitionAssembly.Name != typeToInclude.DefinitionAssembly.Name)
                 includePath += "../" + Helpers.FormatNamespace(typeToInclude.DefinitionAssembly.Name) + "/";
 
-            if (Preprocess.GetProcessedNamespaceForType(typeToInclude).Length > 0)
+            if (Preprocess.GetProcessedNamespaceForType(typeToInclude).Length > 0 && areNamespacesDifferent)
                 includePath += Preprocess.GetProcessedNamespaceForType(typeToInclude) + "/";
 
             includePath += Preprocess.GetProcessedCppTypeNameForType(typeToInclude) + ".h";

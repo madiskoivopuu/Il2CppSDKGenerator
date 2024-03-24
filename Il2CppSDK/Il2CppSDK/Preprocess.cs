@@ -139,7 +139,6 @@ namespace Il2CppSDK
             TypeDef typeDef = typeSig.TryGetTypeDef();
             if (typeDef == null) // no typedef means that this type is defined in another assembly, only referenced here
             {
-                //if (!typeSig.FullName.StartsWith("System.Collections.Generic.Dictionary"))
                 typeInfo.referencedTypeSigs.Add(typeSig);
 
                 if(typeSig.DefinitionAssembly.Name != currentModule.Assembly.Name)
@@ -158,7 +157,6 @@ namespace Il2CppSDK
                 foreach (TypeDef nestedType in typeDef.GetTypes())
                     AddReferenceForType(typeInfo, nestedType.ToTypeSig(), mainTypeName);
 
-                //if(!typeSig.FullName.StartsWith("System.Collections.Generic.Dictionary"))
                 typeInfo.referencedTypes.Add(typeDef);
             }
         }

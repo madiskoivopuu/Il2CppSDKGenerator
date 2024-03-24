@@ -26,7 +26,7 @@ namespace Il2CppSDK
 
         static void ParseModule(string moduleFile)
         {
-            moduleFile = "C:\\Users\\madis\\Desktop\\PROJECTFOLDER\\Cheat related programs\\il2cpp reverser\\DummyDll\\Assembly-CSharp.dll";
+            moduleFile = "C:\\Users\\madis\\Desktop\\PROJECTFOLDER\\Cheat related programs\\il2cpp reverser\\DummyDll\\mscorlib.dll";
             
             Console.WriteLine("Generating SDK for {0}...", Path.GetFileName(moduleFile));
 
