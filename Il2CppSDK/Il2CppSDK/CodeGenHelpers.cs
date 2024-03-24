@@ -274,7 +274,11 @@ namespace Il2CppSDK
         public static string GenerateMethodTypedef(TypeDef classDef, MethodDef methodDef, string returnCast, List<string> parameterTypes)
         {
             if (methodDef.HasThis)
-                parameterTypes.Insert(0, CodeGenHelpers.ConvertToFullCppTypename(classDef.ToTypeSig()));
+            {
+                string currTypeClass = CodeGenHelpers.ConvertToFullCppTypename(classDef.ToTypeSig());
+                if (currTypeClass[currTypeClass.Length - 1] != '*') currTypeClass += "*";
+                parameterTypes.Insert(0, currTypeClass);
+            }
 
             return returnCast + " (*)(" + string.Join(", ", parameterTypes) + ")";
         }

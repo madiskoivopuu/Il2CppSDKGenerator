@@ -171,9 +171,6 @@ namespace Il2CppSDK
                 TypeDef def = currentModule.ResolveTypeDef(typeId);
                 if (def == null) continue;
 
-                if (def.FullName.Contains("ArenaUnityWorld"))
-                    Debugger.Break();
-
                 if (def.BaseType != null && def.BaseType.ToTypeSig() != null && !Helpers.IsPrimitiveType(def.BaseType.ToTypeSig()))
                     AddReferenceForType(processedTypeDefs[def], def.BaseType.ToTypeSig(), def.BaseType.Name);
 
