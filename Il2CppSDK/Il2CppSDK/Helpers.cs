@@ -114,7 +114,7 @@ namespace Il2CppSDK
                 MatchCollection matches = r.Matches(typeNameWithoutTemplates);
                 if (matches.Count == 0) return "";
                 
-                List<string> names = new List<string>();
+                List<string> names = ["NS"];
                 foreach (Match match in matches)
                     names.Add(
                         FormatNamespace(match.Value.Remove(match.Value.Length - 1))
