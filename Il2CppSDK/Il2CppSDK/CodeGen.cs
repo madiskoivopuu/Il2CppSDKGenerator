@@ -79,8 +79,9 @@ namespace Il2CppSDK
                 if (field.IsStatic)
                     currentFile.Write("static ");
 
+                string clearedFieldName = field.Name.Replace("::", "_").Replace("<", "").Replace(">", "").Replace("k__BackingField", "").Replace(".", "_").Replace("`", "_");
                 currentFile.Write(returnCast + "& ");
-                currentFile.Write(field.Name + "() {");
+                currentFile.Write(clearedFieldName + "() {");
                 currentFile.WriteLine();
 
                 if(field.IsStatic)
