@@ -81,6 +81,24 @@ namespace Il2CppSDK
             return rgx.Replace(namespace_, "_");
         }
 
+        // Removes all templates & nested templates from a type's name
+        static string RemoveAllTemplates(string typeFullName)
+        {
+            string typeNameWithoutTemplates = "";
+            int openingBracketSeen = 0;
+            foreach(char letter in typeFullName)
+            {
+                if(letter == '<') openingBracketSeen++;
+                if(letter == '>') openingBracketSeen--;
+
+                if(openingBracketSeen == 0)
+                    typeNameWithoutTemplates += letter;
+            }
+
+            return typeNameWithoutTemplates;
+        }
+
+
         // Generates a namespace for type if the type is an inner class of another, but doesn't have a namespace. Returns the regular namespace for type if it exists.
         public static string ParseNamespaceForType(string typeNamespace, string typeFullname)
         {
@@ -89,25 +107,21 @@ namespace Il2CppSDK
             {
                 return namespace_;
             }
-            else if (typeFullname.LastIndexOf('/') != -1) // sometimes it has slashes, sometimes dots..... seems like the 2nd last element would be a good namespace
+            else 
             {
-                // use long class name as the namespace
-                string[] potentialNamespaces = typeFullname.Split('/');
-                string useAsNamespace = potentialNamespaces[potentialNamespaces.Length - 2];
+                string typeNameWithoutTemplates = RemoveAllTemplates(typeFullname);
+                Regex r = new Regex("[^\\.\\/]+[\\.\\/]");
+                MatchCollection matches = r.Matches(typeNameWithoutTemplates);
+                if (matches.Count == 0) return "";
+                
+                List<string> names = new List<string>();
+                foreach (Match match in matches)
+                    names.Add(
+                        FormatNamespace(match.Value.Remove(match.Value.Length - 1))
+                    );
 
-                return FormatNamespace(useAsNamespace);
+                return string.Join("_", names);
             }
-            else if (typeFullname.LastIndexOf('.') != -1) // if dnlib for some reason doesn't use slashes
-            {
-                // ugh this is so spaghetti but generic types can potentially have a . in their template, we don't want to think of it as a namespace
-                if (typeFullname.IndexOf("<") != -1 && typeFullname.IndexOf("<") < typeFullname.LastIndexOf('.'))
-                    return "";
-
-                string useAsNamespace = typeFullname.Substring(0, typeFullname.LastIndexOf('.'));
-                return FormatNamespace(useAsNamespace);
-            }
-
-            return "";
         }
     }
 }

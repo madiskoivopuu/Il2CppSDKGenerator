@@ -174,6 +174,9 @@ namespace Il2CppSDK
                 if (def.BaseType != null && def.BaseType.ToTypeSig() != null && !Helpers.IsPrimitiveType(def.BaseType.ToTypeSig()))
                     AddReferenceForType(processedTypeDefs[def], def.BaseType.ToTypeSig(), def.BaseType.Name);
 
+                foreach(TypeDef nestedType in def.NestedTypes)
+                    AddReferenceForType(processedTypeDefs[def], nestedType.ToTypeSig(), nestedType.Name);
+
                 foreach (FieldDef field in def.Fields) 
                 {
                     if (Helpers.IsPrimitiveType(field.FieldType)) continue; // primitive types such as int, char, byte etc we don't need to include as header files
