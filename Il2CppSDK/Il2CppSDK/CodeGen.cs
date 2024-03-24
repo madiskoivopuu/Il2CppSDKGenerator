@@ -218,14 +218,7 @@ namespace Il2CppSDK
             }
 
             //// class start
-            if (classDef.HasGenericParameters)
-            {
-                HashSet<string> typenames = new HashSet<string>();
-                foreach(GenericParam param in classDef.GenericParameters)
-                    typenames.Add("typename " + param.Name);
-
-                currentFile.WriteLine(namespaceTab + "template <" + string.Join(", ", typenames) + ">");
-            }
+            currentFile.WriteLine(CodeGenHelpers.FormatGenericParametersToTemplate(classTypeSig));
 
             currentFile.Write(namespaceTab + "class " + Preprocess.GetProcessedCppTypeNameForType(classTypeSig));
             if(classDef.BaseType != null)
