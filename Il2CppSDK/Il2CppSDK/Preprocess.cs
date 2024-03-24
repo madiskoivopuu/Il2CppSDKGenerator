@@ -280,7 +280,11 @@ namespace Il2CppSDK
             else if (processedDifferentAssemblyTypes.ContainsKey(typeSig))
                 return processedDifferentAssemblyTypes[typeSig].CppFullyQualifiedName;
             else
-                return Helpers.FormatClassname(typeSig.TypeName);
+            {
+                string namespaceAndType = Helpers.ParseNamespaceForType(typeSig.Namespace, typeSig.FullName);
+                namespaceAndType += Helpers.FormatClassname(typeSig.TypeName);
+                return namespaceAndType;
+            }
         }
 
         public static void PreprocessModule(ModuleDefMD currentModule)
