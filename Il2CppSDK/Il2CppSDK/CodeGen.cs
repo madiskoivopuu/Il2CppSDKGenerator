@@ -281,7 +281,7 @@ namespace Il2CppSDK
             foreach (KeyValuePair<TypeSig, TypeInfo> kvpair in Preprocess.processedDifferentAssemblyTypes)
             {
                 TypeSig type = kvpair.Key;
-                if (type.IsGenericParameter || type.ContainsGenericParameter) continue;
+                if (type.IsGenericParameter || Helpers.IsPrimitiveType(type)) continue;
 
                 string headerAbsolutePath = CodeGenHelpers.GetHeaderAbsoluteSavePath(kvpair.Key, Program.OUTPUT_DIR);
 
