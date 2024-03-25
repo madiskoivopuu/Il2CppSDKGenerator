@@ -34,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -53,6 +53,10 @@
               "Name": "ST:0:0:{cf577b8c-4134-11d2-83e5-00c04f9902c1}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "Preprocess.cs",
@@ -60,7 +64,7 @@
               "RelativeDocumentMoniker": "Il2CppSDK\\Preprocess.cs",
               "ToolTip": "C:\\Users\\madis\\source\\repos\\Il2CppSDKGenerator_withTemplates\\Il2CppSDK\\Il2CppSDK\\Preprocess.cs",
               "RelativeToolTip": "Il2CppSDK\\Preprocess.cs",
-              "ViewState": "AQIAACEAAAAAAAAAAAAowJwAAAAAAAAA",
+              "ViewState": "AQIAAGgAAAAAAAAAAAAuwIcAAAAXAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-24T14:40:50.723Z",
               "EditorCaption": ""
@@ -73,7 +77,7 @@
               "RelativeDocumentMoniker": "Il2CppSDK\\Program.cs",
               "ToolTip": "C:\\Users\\madis\\source\\repos\\Il2CppSDKGenerator_withTemplates\\Il2CppSDK\\Il2CppSDK\\Program.cs",
               "RelativeToolTip": "Il2CppSDK\\Program.cs",
-              "ViewState": "AQIAABQAAAAAAAAAAAAQwCoAAAAfAAAA",
+              "ViewState": "AQIAACIAAAAAAAAAAAAgwCoAAAAfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-24T14:31:52.708Z",
               "EditorCaption": ""
@@ -86,7 +90,7 @@
               "RelativeDocumentMoniker": "Il2CppSDK\\CodeGenHelpers.cs",
               "ToolTip": "C:\\Users\\madis\\source\\repos\\Il2CppSDKGenerator_withTemplates\\Il2CppSDK\\Il2CppSDK\\CodeGenHelpers.cs",
               "RelativeToolTip": "Il2CppSDK\\CodeGenHelpers.cs",
-              "ViewState": "AQIAALkAAAAAAAAAAAAUwMUAAAA0AAAA",
+              "ViewState": "AQIAAJ4AAAAAAAAAAAAuwLAAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-16T13:28:46.581Z",
               "EditorCaption": ""
@@ -99,7 +103,7 @@
               "RelativeDocumentMoniker": "Il2CppSDK\\CodeGen.cs",
               "ToolTip": "C:\\Users\\madis\\source\\repos\\Il2CppSDKGenerator_withTemplates\\Il2CppSDK\\Il2CppSDK\\CodeGen.cs",
               "RelativeToolTip": "Il2CppSDK\\CodeGen.cs",
-              "ViewState": "AQIAABUBAAAAAAAAAAAmwDUBAAAAAAAA",
+              "ViewState": "AQIAAA4BAAAAAAAAAAAuwCMBAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-16T11:27:43.877Z",
               "EditorCaption": ""
@@ -112,9 +116,10 @@
               "RelativeDocumentMoniker": "Il2CppSDK\\Helpers.cs",
               "ToolTip": "C:\\Users\\madis\\source\\repos\\Il2CppSDKGenerator_withTemplates\\Il2CppSDK\\Il2CppSDK\\Helpers.cs",
               "RelativeToolTip": "Il2CppSDK\\Helpers.cs",
-              "ViewState": "AQIAACQAAAAAAAAAAAAuwCgAAAA0AAAA",
+              "ViewState": "AQIAACAAAAAAAAAAAAAYwCgAAAAqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-16T11:18:33.197Z"
+              "WhenOpened": "2024-03-16T11:18:33.197Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",

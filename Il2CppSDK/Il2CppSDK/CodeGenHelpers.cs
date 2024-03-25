@@ -203,7 +203,7 @@ namespace Il2CppSDK
                 List<string> typenames = new List<string>();
                 foreach (TypeSig generic in type.ToGenericInstSig().GenericArguments)
                 {
-                    typenames.Add("typename " + Helpers.FormatNamespace(generic.FullName));
+                    typenames.Add("typename " + Helpers.FormatNamespace(generic.TypeName));
                 }
 
                 template += "template <" + string.Join(", ", typenames) + ">";
@@ -220,7 +220,7 @@ namespace Il2CppSDK
                 List<string> typenames = new List<string>();
                 foreach (GenericParam generic in typeDef.GenericParameters)
                 {
-                    typenames.Add("typename " + Helpers.FormatNamespace(generic.FullName));
+                    typenames.Add("typename " + Helpers.FormatNamespace(generic.Name));
                 }
 
                 template += "template <" + string.Join(", ", typenames) + ">";
