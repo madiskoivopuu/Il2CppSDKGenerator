@@ -86,7 +86,7 @@ namespace Il2CppSDK
 
                 if(field.IsStatic)
                 {
-                    currentFile.WriteLine(string.Format(namespaceTab + "\t\treturn *({0}*)((uintptr_t)this->klass->static_fields + {1});", returnCast, CodeGenHelpers.GetFieldOffset(field)));
+                    currentFile.WriteLine(string.Format(namespaceTab + "\t\treturn *({0}*)((uintptr_t)StaticClass()->static_fields + {1});", returnCast, CodeGenHelpers.GetFieldOffset(field)));
                 } 
                 else
                 {
@@ -234,6 +234,11 @@ namespace Il2CppSDK
             currentFile.WriteLine(" {");
 
             currentFile.WriteLine(namespaceTab + "public:");
+            currentFile.WriteLine("");
+
+            currentFile.WriteLine(namespaceTab + "\tstatic Il2CppClass *StaticClass() {");
+            currentFile.WriteLine(string.Format(namespaceTab + "\t\treturn (Il2CppClass *)(Il2Cpp::GetClass(\"{0}\", \"{1}\", \"{2}\"));", classDef.Module.Name, classDef.Namespace, classDef.Name));
+            currentFile.WriteLine(namespaceTab + "\t}");
             currentFile.WriteLine("");
 
             GenerateFieldsForClass(currentFile, classDef, namespaceTab);
