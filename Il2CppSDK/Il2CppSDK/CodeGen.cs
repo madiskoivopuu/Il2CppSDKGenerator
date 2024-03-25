@@ -220,7 +220,7 @@ namespace Il2CppSDK
             }
 
             //// class start
-            currentFile.WriteLine(CodeGenHelpers.FormatGenericParametersToTemplate(classTypeSig));
+            currentFile.WriteLine(CodeGenHelpers.FormatGenericParametersToTemplate(classDef));
 
             currentFile.Write(namespaceTab + "class " + Preprocess.GetProcessedCppTypeNameForType(classTypeSig));
             if(classDef.BaseType != null)

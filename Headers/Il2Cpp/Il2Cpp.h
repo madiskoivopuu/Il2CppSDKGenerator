@@ -4,6 +4,7 @@
 #pragma once
 
 #include <stdio.h>
+#include <cstdint>
 #include <android/log.h>
 #include <dlfcn.h>
 #include <cstring>

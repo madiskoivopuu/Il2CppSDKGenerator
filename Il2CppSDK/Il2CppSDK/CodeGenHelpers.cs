@@ -212,6 +212,23 @@ namespace Il2CppSDK
             return template;
         }
 
+        public static string FormatGenericParametersToTemplate(TypeDef typeDef)
+        {
+            string template = "";
+            if (typeDef.HasGenericParameters)
+            {
+                List<string> typenames = new List<string>();
+                foreach (GenericParam generic in typeDef.GenericParameters)
+                {
+                    typenames.Add("typename " + Helpers.FormatNamespace(generic.FullName));
+                }
+
+                template += "template <" + string.Join(", ", typenames) + ">";
+            }
+
+            return template;
+        }
+
         public static string GetTypeResolveFormat(TypeSig currentType, TypeSig referencedTypeSig, TypeDef referencedType)
         {
             if (ShouldIncludeType(referencedTypeSig, referencedType))

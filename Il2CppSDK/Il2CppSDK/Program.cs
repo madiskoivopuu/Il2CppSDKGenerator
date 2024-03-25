@@ -35,6 +35,8 @@ namespace Il2CppSDK
 
             Preprocess.PreprocessModule(currentModule);
             CodeGen.GenerateSDK(currentModule);
+
+            Console.WriteLine("SDK generated, make sure to update Il2CppType.h with proper structs from Il2CppDumper header file.");
         }
         static void Main(string[] args)
         {

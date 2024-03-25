@@ -14,47 +14,46 @@ map<string, size_t> m_cacheFields;
 map<string, void *> m_cacheMethods;
 map<string, void *> m_cacheClasses;
 // ========================================================================================================================================== //
-namespace {
-    const void *(*il2cpp_assembly_get_image)(const void *assembly);
+const void *(*il2cpp_assembly_get_image)(const void *assembly);
 
-    void *(*il2cpp_domain_get)();
+void *(*il2cpp_domain_get)();
 
-    void **(*il2cpp_domain_get_assemblies)(const void *domain, size_t *size);
+void **(*il2cpp_domain_get_assemblies)(const void *domain, size_t *size);
 
-    const char *(*il2cpp_image_get_name)(void *image);
+const char *(*il2cpp_image_get_name)(void *image);
 
-    void *(*il2cpp_class_from_name)(const void *image, const char *namespaze, const char *name);
+void *(*il2cpp_class_from_name)(const void *image, const char *namespaze, const char *name);
 
-    void *(*il2cpp_class_get_field_from_name)(void *klass, const char *name);
+void *(*il2cpp_class_get_field_from_name)(void *klass, const char *name);
 
-    void *(*il2cpp_class_get_method_from_name)(void *klass, const char *name, int argsCount);
+void *(*il2cpp_class_get_method_from_name)(void *klass, const char *name, int argsCount);
 
-    size_t (*il2cpp_field_get_offset)(void *field);
+size_t (*il2cpp_field_get_offset)(void *field);
 
-    void (*il2cpp_field_static_get_value)(void *field, void *value);
+void (*il2cpp_field_static_get_value)(void *field, void *value);
 
-    void (*il2cpp_field_static_set_value)(void *field, void *value);
+void (*il2cpp_field_static_set_value)(void *field, void *value);
 
-    void *(*il2cpp_array_new)(void *elementTypeInfo, size_t length);
+void *(*il2cpp_array_new)(void *elementTypeInfo, size_t length);
 
-    char *(*il2cpp_type_get_name)(void *type);
+char *(*il2cpp_type_get_name)(void *type);
 
-    void* (*il2cpp_method_get_param)(void *method, uint32_t index);
+void* (*il2cpp_method_get_param)(void *method, uint32_t index);
 
-    void* (*il2cpp_class_get_methods)(void *klass, void* *iter);
+void* (*il2cpp_class_get_methods)(void *klass, void* *iter);
 
-    const char* (*il2cpp_method_get_name)(void *method);
+const char* (*il2cpp_method_get_name)(void *method);
 
-    const char *(*il2cpp_class_get_name)(void *klass);
+const char *(*il2cpp_class_get_name)(void *klass);
 
-    void *(*il2cpp_class_get_nested_types)(void *, void **);
+void *(*il2cpp_class_get_nested_types)(void *, void **);
 
-    void *(*il2cpp_object_new)(void *);
+void *(*il2cpp_object_new)(void *);
 
-    Il2CppString *(*il2cpp_string_new)(const char *);
+Il2CppString *(*il2cpp_string_new)(const char *);
 
-    Il2CppString *(*il2cpp_string_new_utf16)(const wchar_t *, size_t len);
-}
+Il2CppString *(*il2cpp_string_new_utf16)(const wchar_t *, size_t len);
+
 // ========================================================================================================================================== //
 vector<string> split_string(string str, string token) {
     vector<string> result;
