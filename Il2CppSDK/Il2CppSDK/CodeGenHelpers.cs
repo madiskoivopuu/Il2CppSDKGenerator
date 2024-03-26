@@ -45,6 +45,7 @@ namespace Il2CppSDK
         // Uses Preprocess data
         public static string ConvertToFullCppTypename(TypeSig type)
         {
+            // covers generic enums case
             if (type.IsGenericInstanceType)
             {
                 if(type.ScopeType == null)
@@ -55,6 +56,8 @@ namespace Il2CppSDK
 
                 if(type.ScopeType.GetBaseType().FullName != "System.Enum")
                     return FormatIl2CppGeneric(type);
+                else
+                    return Preprocess.GetFullTypenameForIl2CppType(type);
             }
 
             string result = "uintptr_t";
