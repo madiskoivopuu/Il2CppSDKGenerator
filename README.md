@@ -1,5 +1,5 @@
 # Il2CppSDKGenerator
-An Il2Cpp SDK generator for Android (And probably IOS)
+An Il2Cpp SDK generator for Android (And probably IOS).
 
 # How to use
 1. Compile Il2CppSDK generator (or use release version)
@@ -18,32 +18,41 @@ Please read how to Initialize Il2Cpp Functions first before using any of the SDK
 
 **Example:**
 ```c++
-#include "SDK/Assembly-CSharp.dll/GameBase.h"
-#include "SDK/Assembly-CSharp.dll/GameEngine.h"
+#include "SDK/Il2Cpp/Il2Cpp.h"
+#include "SDK/Assembly_CSharp/ActionEntity.h"
+#include "SDK/Assembly_CSharp/ItemEntity.h"
+#include "SDK/Assembly_CSharp/ClientWorld.h"
+#include "SDK/Assembly_CSharp/ArenaUnityWorld.h"
+#include "SDK/Assembly_CSharp/ActionDataContext.h"
 
-#include "SDK/UnityEngine.dll/Includes/UnityEngine/Component.h"
-#include "SDK/UnityEngine.dll/Includes/UnityEngine/Transform.h"
-#include "SDK/UnityEngine.dll/Includes/UnityEngine/Screen.h"
-#include "SDK/UnityEngine.dll/Includes/UnityEngine/Camera.h"
-#include "SDK/UnityEngine.dll/Includes/UnityEngine/Physics.h"
-#include "SDK/UnityEngine.dll/Includes/UnityEngine/RaycastHit.h"
-#include "SDK/UnityEngine.dll/Includes/UnityEngine/Object.h"
-
-using namespace UnityEngine;
-using namespace GameBase;
-using namespace GameEngine;
-
-void PrintLocation()
-{
-  auto baseGame = GamePlay::get_Game<BaseGame *>();
-  if (baseGame) {
-    auto localPawn = GamePlay::get_LocalPawn<Pawn *>();
-    if(localPawn){
-      auto pawnTransform = ((Component *)localPawn)->get_transform<Transform *>();
-      LOG("Local Pawn: %f %f %f", pawnTransform->get_position().x, pawnTransform->get_position().y, pawnTransform->get_position().z);
-      localPawn->m_Health() = 9999.9f;
+ActionEntity* ItemRelated::GetAttackActionForItem(ItemEntity* item) {
+    ArenaUnityWorld* unityWorld = ClientWorld::get_ArenaUnity();
+    if(!unityWorld) {
+        LOGD("ItemRelated::GetAttackActionForItem -> unityWorld was null");
+        return nullptr;
     }
-  }
+
+    ActionDataContext* actionDataContext = unityWorld->get_actionData();
+    if(!actionDataContext) {
+        LOGD("ItemRelated::GetAttackActionForItem -> actionDataContext was null");
+        return nullptr;
+    }
+
+    AttackActionComponent* attackActionComponent = item->get_attackAction();
+    if(!attackActionComponent) {
+        LOGD("ItemRelated::GetAttackActionForItem -> attackActionComponent was null");
+        return nullptr;
+    }
+
+    LOGD("ItemRelated::GetAttackActionForItem -> attack action name is %s", GetUTF8StringFromNETString(attackActionComponent->f_Name()).c_str());
+
+    ActionEntity* attackActionEntity = actionDataContext->GetEntityWithBlueprintOrCreate(attackActionComponent->f_Name());
+    if(!attackActionEntity) {
+        LOGD("ItemRelated::GetAttackActionForItem -> attackActionEntity was null");
+        return nullptr;
+    }
+
+    return attackActionEntity;
 }
 ```
 # Initiating Il2Cpp Functions
@@ -63,10 +72,12 @@ void WaitForAttach()
   // You can call any Il2Cpp functions now.
 }
 ```
-# Changelogs
-7 July 2020:
-```
-- Added CreateString functions to Il2Cpp Header
-```
+# Bugs
+Since I can't foresee all of the problems that could arise trying to convert C# to C++ (from Il2CppDumper's generated C# DLLs), there might be bugs that cause the SDK to not be generated correctly every time. This means that you can't compile your C++ project without modifying the SDK.
+
+If you do encounter these issues and I'm still working on the project, make an issue report with the DLLs you used to generate the assemblies, along with the header file that is causing problems.
+If I'm not working on the project, then I suggest forking it and fixing it in your own repo, then making a pull request.
+
 # Credits
 dnlib: [dnlib](https://github.com/0xd4d/dnlib)
+Il2CppSDKGenerator (by Octowolve & aimardcr): [Il2CppSDKGenerator](https://github.com/Octowolve/Il2CppSDKGenerator/tree/master/Il2CppSDK)
