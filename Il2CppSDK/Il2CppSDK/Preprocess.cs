@@ -187,9 +187,6 @@ namespace Il2CppSDK
                 foreach(TypeDef nestedType in def.NestedTypes)
                     AddReferenceForType(processedTypeDefs[def], nestedType.ToTypeSig(), nestedType.Name);
 
-                if (def.FullName.Contains("TargetsSelector"))
-                    Debugger.Break();
-
                 foreach (FieldDef field in def.Fields) 
                     AddReferenceForType(processedTypeDefs[def], field.FieldType, def.Name);
 

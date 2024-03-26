@@ -229,7 +229,7 @@ namespace Il2CppSDK
             return template;
         }
 
-        /*public static string GetTypeResolveFormat(TypeSig currentType, TypeSig referencedTypeSig, TypeDef referencedType)
+        public static string GetTypeResolveFormat(TypeSig currentType, TypeSig referencedTypeSig, TypeDef referencedType)
         {
             if (ShouldIncludeType(referencedTypeSig, referencedType))
                 return string.Format("#include \"{0}\"", GetIncludePathFromTypeToAnother(currentType, referencedTypeSig));
@@ -255,7 +255,7 @@ namespace Il2CppSDK
                     return string.Format("class {0};", typeName);
                 }
             }
-        }*/
+        }
 
         // Returns a list of references to other types. Contains either forward declarations for types we do not need to necessarily include or #include for types that are required (parent class, enum, class with generic)
         public static HashSet<string> ResolveTypeReferences(TypeSig type)
@@ -275,12 +275,18 @@ namespace Il2CppSDK
                 if (referencedType == typeDef) continue;
                 TypeSig referencedTypeSig = referencedType.ToTypeSig();
 
-                references.Add(string.Format("#include \"{0}\"", GetIncludePathFromTypeToAnother(type, referencedTypeSig)));
+                if (referencedType == typeDef.BaseType) // always include base type
+                    references.Add(string.Format("#include \"{0}\"", GetIncludePathFromTypeToAnother(type, referencedTypeSig)));
+                else
+                    references.Add(GetTypeResolveFormat(type, referencedTypeSig, referencedType));
             }
 
             // types in a different assembly, we might still want to include them if necessary
             foreach (TypeSig outsideType in Preprocess.processedTypeDefs[typeDef].referencedTypeSigs)
-                references.Add(string.Format("#include \"{0}\"", GetIncludePathFromTypeToAnother(type, outsideType)));
+                if (typeDef.BaseType != null && outsideType.FullName == typeDef.BaseType.FullName) // always include base type
+                    references.Add(string.Format("#include \"{0}\"", GetIncludePathFromTypeToAnother(type, outsideType)));
+                else if (!outsideType.FullName.StartsWith(type.FullName)) // to fix including own type's header file, yay even more spaghetti code
+                    references.Add(GetTypeResolveFormat(type, outsideType, null));
 
             return references;
         }
