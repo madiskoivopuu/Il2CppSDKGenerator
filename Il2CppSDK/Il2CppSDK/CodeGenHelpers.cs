@@ -1,6 +1,7 @@
 ﻿using dnlib.DotNet;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -46,7 +47,14 @@ namespace Il2CppSDK
         {
             if (type.IsGenericInstanceType)
             {
-                return FormatIl2CppGeneric(type);
+                if(type.ScopeType == null)
+                    return FormatIl2CppGeneric(type);
+
+                if(type.ScopeType.GetBaseType() == null)
+                    return FormatIl2CppGeneric(type);
+
+                if(type.ScopeType.GetBaseType().FullName != "System.Enum")
+                    return FormatIl2CppGeneric(type);
             }
 
             string result = "uintptr_t";
