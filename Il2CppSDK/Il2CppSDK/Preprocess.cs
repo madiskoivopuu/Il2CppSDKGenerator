@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Il2CppSDK
@@ -127,7 +128,8 @@ namespace Il2CppSDK
         public static void AddReferenceForType(TypeInfo typeInfo, TypeSig typeSig, string mainTypeName)
         {
             if (typeSig == null) return;
-            if (typeSig.FullName.StartsWith(typeInfo.ownTypeDef.FullName)) return; // don't add itself as reference
+            TypeDef typeDef = typeSig.TryGetTypeDef();
+            if (typeInfo.ownTypeDef == typeDef) return; // don't add itself as reference
             if (typeSig.FullName.Contains("c__") || typeSig.FullName.Contains("d__") || typeSig.FullName.Contains("<>c")) // usually a bad sign, as these classes are compiler generated
                 return; // dont add them to references
             if (typeSig.GetElementType() == ElementType.SZArray || typeSig.GetElementType() == ElementType.Array)
@@ -147,7 +149,6 @@ namespace Il2CppSDK
                 return;
             }
 
-            TypeDef typeDef = typeSig.TryGetTypeDef();
             if (typeDef == null) // no typedef means that this type is defined in another assembly, only referenced here
             {
                 typeInfo.referencedTypeSigs.Add(typeSig);
@@ -185,6 +186,9 @@ namespace Il2CppSDK
 
                 foreach(TypeDef nestedType in def.NestedTypes)
                     AddReferenceForType(processedTypeDefs[def], nestedType.ToTypeSig(), nestedType.Name);
+
+                if (def.FullName.Contains("TargetsSelector"))
+                    Debugger.Break();
 
                 foreach (FieldDef field in def.Fields) 
                     AddReferenceForType(processedTypeDefs[def], field.FieldType, def.Name);
