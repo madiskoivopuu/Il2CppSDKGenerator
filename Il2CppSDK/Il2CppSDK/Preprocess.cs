@@ -17,7 +17,7 @@ namespace Il2CppSDK
         public string cppNamespace;
 
         // Type's full name without templates
-        public string CppFullyQualifiedName { 
+        public string CppFullyQualifiedName {
             get {
                 if (cppNamespace.Length == 0)
                     return cppTypeName;
@@ -27,7 +27,7 @@ namespace Il2CppSDK
         }
 
         // Header file location inside the current assembly directory
-        public string TypeHeaderFileRelativeLocation 
+        public string TypeHeaderFileRelativeLocation
         {
             get
             {
@@ -36,7 +36,7 @@ namespace Il2CppSDK
                     loc += cppNamespace + "/";
                 loc += cppTypeName + ".h";
 
-                return loc; 
+                return loc;
             }
         }
 
@@ -53,11 +53,35 @@ namespace Il2CppSDK
         }
     }
 
+    public class GenericMethodInfo {
+        string genericMethodName;
+        string genericMethodClassName;
+
+        List<string> classTemplateArgs; // class templates as C++ types
+        List<string> methodTemplateArgs; // method template args as C++ types
+        ulong genericMethodAddr;
+    }
+
+    public class TypeConversionResult
+    {
+        public string cppType;
+        public List<TypeDef> referencedTypeDefs;
+        public List<TypeSig> referencedTypeSigs;
+
+        public TypeConversionResult()
+        {
+            referencedTypeDefs = new List<TypeDef>();
+            referencedTypeSigs = new List<TypeSig>();
+        }
+    }
+
     internal class Preprocess
     {
-        public static Dictionary<TypeDef, TypeInfo> processedTypeDefs = new Dictionary<TypeDef, TypeInfo>();
-        public static Dictionary<TypeSig, TypeInfo> processedDifferentAssemblyTypes = new Dictionary<TypeSig, TypeInfo>();
-        public static Dictionary<TypeDef, List<TypeSpec>> genericTypeInstantiations = new Dictionary<TypeDef, List<TypeSpec>>();
+        public static Dictionary<TypeDef, TypeInfo> processedTypeDefs = new();
+        public static Dictionary<TypeSig, TypeInfo> processedDifferentAssemblyTypes = new();
+        public static Dictionary<TypeDef, List<TypeSpec>> genericTypeInstantiations = new();
+        public static Dictionary<string, Dictionary<string, GenericMethodInfo>> genericMethodsForClasses = new();
+
         static ModuleDefMD currentModule = null;
 
         public static void InitializeTypeInfoStructs()
@@ -223,6 +247,22 @@ namespace Il2CppSDK
             }
         }
 
+        public static void CacheAllGenericMethods(ScriptJson jsonData)
+        {
+            foreach(ScriptMethod method in jsonData.ScriptMethod)
+            {
+                string[] data = method.Name.Split("$$");
+                string classNameWTemplates = data[0];
+                string classNameNoTemplates = classNameWTemplates.Split("<")[0]; // if for some reason the full class name is saved as System.Type<T>.AnotherType<V> then fuck me
+                string methodNameWTemplates = data[1];
+                string methodNameNoTemplates = methodNameWTemplates.Split("<")[0];
+
+                if (!classNameWTemplates.Contains("<") && !methodNameWTemplates.Contains("<")) continue;
+
+                if (!genericMethodsForClasses.ContainsKey(classNameNoTemplates)) genericMethodsForClasses[classNameNoTemplates] = new();
+            }
+        }
+
         public static List<TypeSpec> GetGenericTypeInstantiations(TypeDef genericType)
         {
             if (!genericTypeInstantiations.ContainsKey(genericType))
@@ -270,6 +310,7 @@ namespace Il2CppSDK
                 return Helpers.ParseNamespaceForType(typeSig.Namespace, typeSig.FullName);
         }
 
+        // Returns the C++ type name with namespace and name, no template args
         public static string GetFullTypenameForIl2CppType(TypeSig typeSig)
         {
             if (typeSig == null) return "";
@@ -288,14 +329,16 @@ namespace Il2CppSDK
             }
         }
 
-        public static void PreprocessModule(ModuleDefMD currentModule)
+        public static void PreprocessModule(ScriptJson jsonData, ModuleDefMD currentModule)
         {
             Preprocess.currentModule = currentModule;
             InitializeTypeInfoStructs();
 
             FormatNamesForTypeDefs();
             ProcessTypesReferencedInClasses();
+
             CacheGenericTypeInstantiations();
+            CacheAllGenericMethods(jsonData);
         }
     }
 }

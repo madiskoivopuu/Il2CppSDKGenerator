@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Il2CppSDK
@@ -157,6 +158,89 @@ namespace Il2CppSDK
 
             if (type.IsByRef)
                 result += "*";
+
+            return result;
+        }
+
+        // Returns the outmost template arguments in a string, shall only be called from ConvertCSharpTypeToCpp
+        private static List<string> GetTemplateArgumentsFromCSharpType(string templateArgs)
+        {
+            templateArgs = templateArgs.Remove(templateArgs.Length - 1); // the result should be something like "Type1<Type2<AA>>, Type3, Type4<T>"
+
+            List<string> outerTemplates = new();
+            string current = "";
+            int bracketsSeen = 0;
+            foreach(char letter in templateArgs)
+            {
+                switch(letter)
+                {
+                    case '<':
+                        bracketsSeen++;
+                        break;
+                    case '>':
+                        bracketsSeen--;
+                        break;
+                    case ',':
+                        if(bracketsSeen == 0)
+                        {
+                            outerTemplates.Add(current);
+                            current = "";
+                        }
+                        break;
+                    case ' ':
+                        break;
+                    default:
+                        if (bracketsSeen == 0)
+                            current += letter;
+                        break;
+                }
+            }
+
+            // in case of multiple templates, the last one wont be added
+            if(current != "")
+                outerTemplates.Add(current);
+
+            return outerTemplates;
+        }
+
+        public static TypeConversionResult ConvertCSharpTypeToCpp(string cSharpFullType)
+        {
+            TypeConversionResult result = new TypeConversionResult();
+
+            string[] data = cSharpFullType.Split("<");
+            string mainTypeName = data[0];
+
+            string cppType = "";
+            foreach (TypeDef typeDef in Preprocess.processedTypeDefs.Keys)
+            {
+                string typedefNameCleaned = Regex.Replace(typeDef.FullName, @"`\d+", "");
+                if (typedefNameCleaned == mainTypeName)
+                {
+                    cppType = Preprocess.GetProcessedCppTypeNameForType(typeDef.ToTypeSig());
+                    result.referencedTypeDefs.Add(typeDef);
+                    break;
+                }
+            }
+
+            // if type def wasn't found, search through type sigs
+            if (cppType == "")
+            {
+                foreach(TypeSig typeSig in Preprocess.processedDifferentAssemblyTypes.Keys)
+                {
+                    string typedefNameCleaned = Regex.Replace(typeSig.FullName, @"`\d+", "");
+                    if (typedefNameCleaned == mainTypeName)
+                    {
+                        cppType = Preprocess.GetProcessedCppTypeNameForType(typeSig);
+                        result.referencedTypeSigs.Add(typeSig);
+                        break;
+                    }
+                }
+            }
+
+            /*if (data.Length > 1)
+            { // template arguments were present
+                List<string> 
+            }*/
 
             return result;
         }

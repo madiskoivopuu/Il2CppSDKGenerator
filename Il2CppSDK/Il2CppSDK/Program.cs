@@ -24,41 +24,45 @@ namespace Il2CppSDK
         public static ModuleDefMD currentModule = null;
         static StreamWriter currentFile = null;
 
-        static void ParseModule(string moduleFile)
+        static void ParseModule(string scriptJson, string moduleFile)
         {
             moduleFile = "C:\\Users\\madis\\Desktop\\PROJECTFOLDER\\Cheat related programs\\il2cpp reverser\\DummyDll\\Assembly-CSharp.dll";
+            scriptJson = "C:\\Users\\madis\\Desktop\\PROJECTFOLDER\\Cheat related programs\\il2cpp reverser\\script.json";
             
             Console.WriteLine("Generating SDK for {0}...", Path.GetFileName(moduleFile));
 
+            ScriptJson jsonData = ScriptJsonReader.readFile(scriptJson);
             ModuleContext modCtx = ModuleDef.CreateModuleContext();
             currentModule = ModuleDefMD.Load(moduleFile, modCtx);
 
-            Preprocess.PreprocessModule(currentModule);
+            Preprocess.PreprocessModule(jsonData, currentModule);
             CodeGen.GenerateSDK(currentModule);
 
             Console.WriteLine("SDK generated, make sure to update Il2CppType.h with proper structs from Il2CppDumper header file.");
         }
         static void Main(string[] args)
         {
-            if(args.Length < 1)
+            if(args.Length < 2)
             {
-                Console.WriteLine("Invalid Arguments!");
+                Console.WriteLine("Incorrect number of arguments, expected 2.");
+                Console.WriteLine("Command example: ./Il2CppSDKGenerator scriptJsonFile moduleDllFile");
+                Console.WriteLine("Command example: ./Il2CppSDKGenerator scriptJsonFile dllsDirectory");
                 return;
             }
 
             if (Directory.Exists(OUTPUT_DIR))
                 Directory.Delete(OUTPUT_DIR, true);
 
-            if (Directory.Exists(args[0]))
+            if (Directory.Exists(args[1]))
             {
-                foreach(var file in Directory.GetFiles(args[0]))
+                foreach(var file in Directory.GetFiles(args[1]))
                 {
-                    ParseModule(file);
+                    ParseModule(args[0], file);
                 }
             }
             else
             {
-                ParseModule(args[0]);
+                ParseModule(args[0], args[1]);
             }
         }
     }
