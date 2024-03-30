@@ -188,7 +188,7 @@ namespace Il2CppSDK
 
         public static void GenerateClassFromType(TypeDef classDef)
         {
-            if (classDef.FullName.Contains("BaseClientWorld"))
+            if (classDef.FullName.Contains("ObjectPool"))
                 Debugger.Break();
 
             TypeSig classTypeSig = classDef.ToTypeSig();
@@ -281,7 +281,7 @@ namespace Il2CppSDK
         // Creates (if needed) header files for types in other assemblies, which are referenced in this assembly.
         public static void CreateOtherAssembliesHeaderFiles()
         {
-            foreach (KeyValuePair<TypeSig, TypeInfo> kvpair in Preprocess.processedDifferentAssemblyTypes)
+            foreach (KeyValuePair<TypeSig, TypeInfo> kvpair in Preprocess.processedAllTypeSigs)
             {
                 TypeSig type = kvpair.Key;
                 if (type.IsGenericParameter || Helpers.IsPrimitiveType(type)) continue;

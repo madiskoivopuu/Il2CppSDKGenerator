@@ -27,6 +27,8 @@ namespace Il2CppSDK
         static void ParseModule(string scriptJson, string moduleFile)
         {
             moduleFile = "C:\\Users\\madis\\Desktop\\PROJECTFOLDER\\Cheat related programs\\il2cpp reverser\\DummyDll\\Assembly-CSharp.dll";
+            //moduleFile = "C:\\Users\\madis\\Desktop\\PROJECTFOLDER\\Cheat related programs\\Cpp2IL\\cpp2il_out\\Assembly-CSharp.dll";
+            //moduleFile = "C:\\Users\\madis\\source\\repos\\Il2CppDumper\\Il2CppDumper\\bin\\Debug\\net6.0\\DummyDll\\mscorlib.dll";
             scriptJson = "C:\\Users\\madis\\Desktop\\PROJECTFOLDER\\Cheat related programs\\il2cpp reverser\\script.json";
             
             Console.WriteLine("Generating SDK for {0}...", Path.GetFileName(moduleFile));
@@ -36,6 +38,8 @@ namespace Il2CppSDK
             currentModule = ModuleDefMD.Load(moduleFile, modCtx);
 
             Preprocess.PreprocessModule(jsonData, currentModule);
+            Test.AreAllGenericMethodsPresent(currentModule);
+
             CodeGen.GenerateSDK(currentModule);
 
             Console.WriteLine("SDK generated, make sure to update Il2CppType.h with proper structs from Il2CppDumper header file.");

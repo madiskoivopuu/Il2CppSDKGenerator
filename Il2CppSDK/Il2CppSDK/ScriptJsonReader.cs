@@ -7,46 +7,46 @@ namespace Il2CppSDK
 {
     public class ScriptJson
     {
-        public List<ScriptMethod> ScriptMethod = new();
-        public List<ScriptString> ScriptString = new();
-        public List<ScriptMetadata> ScriptMetadata = new();
-        public List<ScriptMetadataMethod> ScriptMetadataMethod = new();
-        public ulong[] Addresses;
+        public List<ScriptMethod> ScriptMethod { get; set; }
+        public List<ScriptString> ScriptString { get; set; }
+        public List<ScriptMetadata> ScriptMetadata { get; set; }
+        public List<ScriptMetadataMethod> ScriptMetadataMethod { get; set; }
+        public ulong[] Addresses { get; set; }
     }
 
     public class ScriptMethod
     {
-        public ulong Address;
-        public string Name;
-        public string Signature;
-        public string TypeSignature;
+        public ulong Address { get; set; }
+        public string Name { get; set; }
+        public string Signature { get; set; }
+        public string TypeSignature { get; set; }
     }
 
     public class ScriptString
     {
-        public ulong Address;
-        public string Value;
+        public ulong Address { get; set; }
+        public string Value { get; set; } 
     }
 
     public class ScriptMetadata
     {
-        public ulong Address;
-        public string Name;
-        public string Signature;
+        public ulong Address { get; set; } 
+        public string Name { get; set; } 
+        public string Signature { get; set; }
     }
 
     public class ScriptMetadataMethod
     {
-        public ulong Address;
-        public string Name;
-        public ulong MethodAddress;
+        public ulong Address { get; set; }
+        public string Name { get; set; }
+        public ulong MethodAddress { get; set; }
     }
 
     public class ScriptJsonReader
     {
         public static ScriptJson readFile(string fileLoc)
         {
-            return JsonSerializer.Deserialize<ScriptJson>(File.ReadAllText(fileLoc));
+            return JsonSerializer.Deserialize<ScriptJson>(File.ReadAllText(fileLoc), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
         }
     }
 }

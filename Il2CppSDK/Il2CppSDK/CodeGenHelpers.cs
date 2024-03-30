@@ -49,13 +49,13 @@ namespace Il2CppSDK
             // covers generic enums case
             if (type.IsGenericInstanceType)
             {
-                if(type.ScopeType == null)
+                if (type.ScopeType == null)
                     return FormatIl2CppGeneric(type);
 
-                if(type.ScopeType.GetBaseType() == null)
+                if (type.ScopeType.GetBaseType() == null)
                     return FormatIl2CppGeneric(type);
 
-                if(type.ScopeType.GetBaseType().FullName != "System.Enum")
+                if (type.ScopeType.GetBaseType().FullName != "System.Enum")
                     return FormatIl2CppGeneric(type);
                 else
                     return Preprocess.GetFullTypenameForIl2CppType(type);
@@ -158,89 +158,6 @@ namespace Il2CppSDK
 
             if (type.IsByRef)
                 result += "*";
-
-            return result;
-        }
-
-        // Returns the outmost template arguments in a string, shall only be called from ConvertCSharpTypeToCpp
-        private static List<string> GetTemplateArgumentsFromCSharpType(string templateArgs)
-        {
-            templateArgs = templateArgs.Remove(templateArgs.Length - 1); // the result should be something like "Type1<Type2<AA>>, Type3, Type4<T>"
-
-            List<string> outerTemplates = new();
-            string current = "";
-            int bracketsSeen = 0;
-            foreach(char letter in templateArgs)
-            {
-                switch(letter)
-                {
-                    case '<':
-                        bracketsSeen++;
-                        break;
-                    case '>':
-                        bracketsSeen--;
-                        break;
-                    case ',':
-                        if(bracketsSeen == 0)
-                        {
-                            outerTemplates.Add(current);
-                            current = "";
-                        }
-                        break;
-                    case ' ':
-                        break;
-                    default:
-                        if (bracketsSeen == 0)
-                            current += letter;
-                        break;
-                }
-            }
-
-            // in case of multiple templates, the last one wont be added
-            if(current != "")
-                outerTemplates.Add(current);
-
-            return outerTemplates;
-        }
-
-        public static TypeConversionResult ConvertCSharpTypeToCpp(string cSharpFullType)
-        {
-            TypeConversionResult result = new TypeConversionResult();
-
-            string[] data = cSharpFullType.Split("<");
-            string mainTypeName = data[0];
-
-            string cppType = "";
-            foreach (TypeDef typeDef in Preprocess.processedTypeDefs.Keys)
-            {
-                string typedefNameCleaned = Regex.Replace(typeDef.FullName, @"`\d+", "");
-                if (typedefNameCleaned == mainTypeName)
-                {
-                    cppType = Preprocess.GetProcessedCppTypeNameForType(typeDef.ToTypeSig());
-                    result.referencedTypeDefs.Add(typeDef);
-                    break;
-                }
-            }
-
-            // if type def wasn't found, search through type sigs
-            if (cppType == "")
-            {
-                foreach(TypeSig typeSig in Preprocess.processedDifferentAssemblyTypes.Keys)
-                {
-                    string typedefNameCleaned = Regex.Replace(typeSig.FullName, @"`\d+", "");
-                    if (typedefNameCleaned == mainTypeName)
-                    {
-                        cppType = Preprocess.GetProcessedCppTypeNameForType(typeSig);
-                        result.referencedTypeSigs.Add(typeSig);
-                        break;
-                    }
-                }
-            }
-
-            /*if (data.Length > 1)
-            { // template arguments were present
-                List<string> 
-            }*/
 
             return result;
         }
@@ -389,6 +306,8 @@ namespace Il2CppSDK
                     references.Add(string.Format("#include \"{0}\"", GetIncludePathFromTypeToAnother(type, outsideType)));
                 else if (!outsideType.FullName.StartsWith(type.FullName)) // to fix including own type's header file, yay even more spaghetti code
                     references.Add(GetTypeResolveFormat(type, outsideType, null));
+
+            // generic method references
 
             return references;
         }

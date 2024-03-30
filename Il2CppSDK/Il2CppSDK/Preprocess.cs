@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -54,33 +55,51 @@ namespace Il2CppSDK
     }
 
     public class GenericMethodInfo {
-        string genericMethodName;
-        string genericMethodClassName;
+        public string genericMethodName;
+        public string genericMethodClassName;
+        public string genericMethodSignature;
 
-        List<string> classTemplateArgs; // class templates as C++ types
-        List<string> methodTemplateArgs; // method template args as C++ types
-        ulong genericMethodAddr;
+        public List<string> classTemplateArgs; // class templates as C++ types
+        public List<string> methodTemplateArgs; // method template args as C++ types
+        public ulong genericMethodAddr;
+
+        public HashSet<TypeDef> referencedTypeDefs;
+        public HashSet<TypeSig> referencedTypeSigs;
+
+        public GenericMethodInfo()
+        {
+            classTemplateArgs = new();
+            methodTemplateArgs = new();
+            referencedTypeDefs = new();
+            referencedTypeSigs = new();
+        }
+
+        public void AddReferences(HashSet<TypeDef> refdTypeDefs, HashSet<TypeSig> refdTypeSigs)
+        {
+            referencedTypeDefs.Union(refdTypeDefs);
+            referencedTypeSigs.Union(refdTypeSigs);
+        }
     }
 
     public class TypeConversionResult
     {
         public string cppType;
-        public List<TypeDef> referencedTypeDefs;
-        public List<TypeSig> referencedTypeSigs;
+        public HashSet<TypeDef> referencedTypeDefs;
+        public HashSet<TypeSig> referencedTypeSigs;
 
         public TypeConversionResult()
         {
-            referencedTypeDefs = new List<TypeDef>();
-            referencedTypeSigs = new List<TypeSig>();
+            referencedTypeDefs = new HashSet<TypeDef>();
+            referencedTypeSigs = new HashSet<TypeSig>();
         }
     }
 
     internal class Preprocess
     {
         public static Dictionary<TypeDef, TypeInfo> processedTypeDefs = new();
-        public static Dictionary<TypeSig, TypeInfo> processedDifferentAssemblyTypes = new();
+        public static Dictionary<TypeSig, TypeInfo> processedAllTypeSigs = new(); // type sigs for types that can be in either this assembly or another
         public static Dictionary<TypeDef, List<TypeSpec>> genericTypeInstantiations = new();
-        public static Dictionary<string, Dictionary<string, GenericMethodInfo>> genericMethodsForClasses = new();
+        public static Dictionary<TypeDef, Dictionary<string, List<GenericMethodInfo>>> genericMethodsForClasses = new(); // only holds our current assembly generic methods, thats why we use typedefs
 
         static ModuleDefMD currentModule = null;
 
@@ -112,24 +131,24 @@ namespace Il2CppSDK
         // formats the names for assembly types that aren't included in this assembly, but are referenced
         public static void FormatNamesForOtherAssemblyTypes()
         {
-            List<KeyValuePair<TypeSig, TypeInfo>> kvPairsList = [.. processedDifferentAssemblyTypes]; // separate list since we modify the dictionary during loop, thus foreach wont work directly on dict
+            List<KeyValuePair<TypeSig, TypeInfo>> kvPairsList = [.. processedAllTypeSigs]; // separate list since we modify the dictionary during loop, thus foreach wont work directly on dict
 
             foreach (KeyValuePair<TypeSig, TypeInfo> kvpair in kvPairsList)
             {
                 TypeSig sig = kvpair.Key;
 
-                processedDifferentAssemblyTypes[sig].cppTypeName = Helpers.FormatClassname(sig.TypeName);
-                processedDifferentAssemblyTypes[sig].cppNamespace = Helpers.ParseNamespaceForType(sig.Namespace, sig.FullName);
+                processedAllTypeSigs[sig].cppTypeName = Helpers.FormatClassname(sig.TypeName);
+                processedAllTypeSigs[sig].cppNamespace = Helpers.ParseNamespaceForType(sig.Namespace, sig.FullName);
 
                 if(sig.IsGenericInstanceType)
                 {
                     foreach(TypeSig genericSig in sig.ToGenericInstSig().GenericArguments)
                     {
-                        if (processedDifferentAssemblyTypes.ContainsKey(genericSig)) continue;
+                        if (processedAllTypeSigs.ContainsKey(genericSig)) continue;
 
-                        processedDifferentAssemblyTypes[genericSig] = new TypeInfo();
-                        processedDifferentAssemblyTypes[genericSig].cppTypeName = Helpers.FormatClassname(genericSig.TypeName);
-                        processedDifferentAssemblyTypes[genericSig].cppNamespace = Helpers.ParseNamespaceForType(genericSig.Namespace, genericSig.FullName);
+                        processedAllTypeSigs[genericSig] = new TypeInfo();
+                        processedAllTypeSigs[genericSig].cppTypeName = Helpers.FormatClassname(genericSig.TypeName);
+                        processedAllTypeSigs[genericSig].cppNamespace = Helpers.ParseNamespaceForType(genericSig.Namespace, genericSig.FullName);
                     }
                 }
 
@@ -137,11 +156,11 @@ namespace Il2CppSDK
                 TypeSig nextSig = sig.GetNext();
                 while (nextSig != null)
                 {
-                    if(!processedDifferentAssemblyTypes.ContainsKey(nextSig))
+                    if(!processedAllTypeSigs.ContainsKey(nextSig))
                     {
-                        processedDifferentAssemblyTypes[nextSig] = new TypeInfo();
-                        processedDifferentAssemblyTypes[nextSig].cppTypeName = Helpers.FormatClassname(nextSig.TypeName);
-                        processedDifferentAssemblyTypes[nextSig].cppNamespace = Helpers.ParseNamespaceForType(nextSig.Namespace, nextSig.FullName);
+                        processedAllTypeSigs[nextSig] = new TypeInfo();
+                        processedAllTypeSigs[nextSig].cppTypeName = Helpers.FormatClassname(nextSig.TypeName);
+                        processedAllTypeSigs[nextSig].cppNamespace = Helpers.ParseNamespaceForType(nextSig.Namespace, nextSig.FullName);
                     }
 
                     nextSig = nextSig.GetNext();
@@ -154,7 +173,7 @@ namespace Il2CppSDK
             if (typeSig == null) return;
             TypeDef typeDef = typeSig.TryGetTypeDef();
             if (typeInfo.ownTypeDef == typeDef) return; // don't add itself as reference
-            if (typeSig.FullName.Contains("c__") || typeSig.FullName.Contains("d__") || typeSig.FullName.Contains("<>c")) // usually a bad sign, as these classes are compiler generated
+            if (Helpers.IsCompilerGeneratedType(typeSig.FullName)) // usually a bad sign, as these classes are compiler generated
                 return; // dont add them to references
             if (typeSig.GetElementType() == ElementType.SZArray || typeSig.GetElementType() == ElementType.Array)
             { // we don't need to reference the array, but we do need the underlying type
@@ -178,7 +197,7 @@ namespace Il2CppSDK
                 typeInfo.referencedTypeSigs.Add(typeSig);
 
                 if(typeSig.DefinitionAssembly.Name != currentModule.Assembly.Name)
-                    processedDifferentAssemblyTypes[typeSig] = new TypeInfo();
+                    processedAllTypeSigs[typeSig] = new TypeInfo();
 
                 if(typeSig.IsGenericInstanceType)
                 {
@@ -188,12 +207,13 @@ namespace Il2CppSDK
                 }
 
             }
-            else if (typeInfo.ownTypeDef != typeDef)
+            else
             {
                 foreach (TypeDef nestedType in typeDef.GetTypes())
                     AddReferenceForType(typeInfo, nestedType.ToTypeSig(), mainTypeName);
 
-                typeInfo.referencedTypes.Add(typeDef);
+                if (typeInfo.ownTypeDef != typeDef)
+                    typeInfo.referencedTypes.Add(typeDef);
             }
         }
 
@@ -249,17 +269,76 @@ namespace Il2CppSDK
 
         public static void CacheAllGenericMethods(ScriptJson jsonData)
         {
-            foreach(ScriptMethod method in jsonData.ScriptMethod)
+            Console.WriteLine("Caching generic methods, this will take a while.");
+            List<TypeDef> allTypeDefs = processedTypeDefs.Keys.ToList();
+            List<TypeSig> allTypeSigs = processedAllTypeSigs.Keys.ToList();
+
+            Console.WriteLine("");
+            for (int i = 0; i < jsonData.ScriptMethod.Count; i++)
             {
+                Helpers.ClearConsoleLine();
+                Console.WriteLine(string.Format("Methods checked: {0} / {1}", i, jsonData.ScriptMethod.Count));
+
+                ScriptMethod method = jsonData.ScriptMethod[i];
+
                 string[] data = method.Name.Split("$$");
                 string classNameWTemplates = data[0];
-                string classNameNoTemplates = classNameWTemplates.Split("<")[0]; // if for some reason the full class name is saved as System.Type<T>.AnotherType<V> then fuck me
+                string classNameNoTemplates = classNameWTemplates.Split("<")[0]; // TODO: make this work for types where the names are something like System.TypeOne<T>.TypeTwo<
                 string methodNameWTemplates = data[1];
                 string methodNameNoTemplates = methodNameWTemplates.Split("<")[0];
 
+                if (Helpers.IsCompilerGeneratedType(classNameWTemplates) || Helpers.IsCompilerGeneratedType(methodNameWTemplates)) continue;
                 if (!classNameWTemplates.Contains("<") && !methodNameWTemplates.Contains("<")) continue;
 
-                if (!genericMethodsForClasses.ContainsKey(classNameNoTemplates)) genericMethodsForClasses[classNameNoTemplates] = new();
+                TypeDef classTypeDef = Helpers.FindTypeDefByFullName(classNameWTemplates, allTypeDefs);
+                if (classTypeDef == null) continue; // probably in another assembly, or our name search sucked
+
+                if (!genericMethodsForClasses.ContainsKey(classTypeDef)) genericMethodsForClasses[classTypeDef] = new();
+                if (!genericMethodsForClasses[classTypeDef].ContainsKey(methodNameWTemplates)) genericMethodsForClasses[classTypeDef][methodNameNoTemplates] = new();
+
+                GenericMethodInfo methodInfo = new GenericMethodInfo();
+                methodInfo.genericMethodName = methodNameNoTemplates;
+                methodInfo.genericMethodClassName = classNameNoTemplates;
+                methodInfo.genericMethodSignature = method.Signature;
+                methodInfo.genericMethodAddr = method.Address;
+
+                // class template args
+                string innerMostClassname = classNameWTemplates.Split(".").Last(); // there's a possibility for types like System.TypeOne<T>.TypeTwo<V>, so we'll need to split it by "." and get the very last item so we could get its templates correctly
+                if (innerMostClassname.Contains("<"))
+                {
+                    List<string> classTemplatesCSharp = Helpers.ConvertTemplateArgsToCppType(innerMostClassname);
+                    foreach(string template in classTemplatesCSharp)
+                    {
+                        TypeConversionResult res = Helpers.ConvertCSharpTypeToCpp(template, allTypeDefs, allTypeSigs);
+                        methodInfo.classTemplateArgs.Add(res.cppType);
+                        methodInfo.AddReferences(res.referencedTypeDefs, res.referencedTypeSigs);
+                    }
+                }
+
+                string innerMostMethodName = methodNameWTemplates.Split(".").Last();
+                if(innerMostMethodName.Contains("<"))
+                {
+                    List<string> methodTemplatesCSharp = Helpers.ConvertTemplateArgsToCppType(innerMostMethodName);
+                    foreach(string template in methodTemplatesCSharp)
+                    {
+                        TypeConversionResult res = Helpers.ConvertCSharpTypeToCpp(template, allTypeDefs, allTypeSigs);
+                        methodInfo.methodTemplateArgs.Add(res.cppType);
+                        methodInfo.AddReferences(res.referencedTypeDefs, res.referencedTypeSigs);
+                    }
+                }
+
+                // choose how to save the method name
+                // if it has a template before the actual method name (System.IEnumerable<T>.MethodName), then usually the entire thing gets saved, otherwise only the last part
+                string[] methodNameParts = methodNameWTemplates.Split(".");
+                bool saveFullName = false;
+                for(int j = 0; j < methodNameParts.Length-1; j++)
+                {
+                    if (methodNameParts[j].Contains("<")) saveFullName = true;
+                }
+                if(saveFullName)
+                    genericMethodsForClasses[classTypeDef][methodNameWTemplates.Replace(innerMostMethodName, innerMostMethodName.Split("<")[0])].Add(methodInfo);
+                else
+                    genericMethodsForClasses[classTypeDef][innerMostMethodName.Split("<")[0]].Add(methodInfo);
             }
         }
 
@@ -279,7 +358,7 @@ namespace Il2CppSDK
             if (typeDef != null)
                 return processedTypeDefs[typeDef].TypeHeaderFileRelativeLocation;
             else
-                return processedDifferentAssemblyTypes[typeSig].TypeHeaderFileRelativeLocation;
+                return processedAllTypeSigs[typeSig].TypeHeaderFileRelativeLocation;
         }
 
         // Returns the type name without template arguments nor namespace
@@ -290,8 +369,8 @@ namespace Il2CppSDK
             TypeDef typeDef = typeSig.TryGetTypeDef();
             if (typeDef != null)
                 return processedTypeDefs[typeDef].cppTypeName;
-            else if (processedDifferentAssemblyTypes.ContainsKey(typeSig))
-                return processedDifferentAssemblyTypes[typeSig].cppTypeName;
+            else if (processedAllTypeSigs.ContainsKey(typeSig))
+                return processedAllTypeSigs[typeSig].cppTypeName;
             else
                 return Helpers.FormatClassname(typeSig.TypeName);
         }
@@ -304,8 +383,8 @@ namespace Il2CppSDK
             TypeDef typeDef = typeSig.TryGetTypeDef();
             if (typeDef != null)
                 return processedTypeDefs[typeDef].cppNamespace;
-            else if (processedDifferentAssemblyTypes.ContainsKey(typeSig))
-                return processedDifferentAssemblyTypes[typeSig].cppNamespace;
+            else if (processedAllTypeSigs.ContainsKey(typeSig))
+                return processedAllTypeSigs[typeSig].cppNamespace;
             else
                 return Helpers.ParseNamespaceForType(typeSig.Namespace, typeSig.FullName);
         }
@@ -318,8 +397,8 @@ namespace Il2CppSDK
             TypeDef typeDef = typeSig.TryGetTypeDef();
             if (typeDef != null)
                 return processedTypeDefs[typeDef].CppFullyQualifiedName;
-            else if (processedDifferentAssemblyTypes.ContainsKey(typeSig))
-                return processedDifferentAssemblyTypes[typeSig].CppFullyQualifiedName;
+            else if (processedAllTypeSigs.ContainsKey(typeSig))
+                return processedAllTypeSigs[typeSig].CppFullyQualifiedName;
             else
             {
                 string namespaceAndType = Helpers.ParseNamespaceForType(typeSig.Namespace, typeSig.FullName);
