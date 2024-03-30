@@ -12,6 +12,7 @@
 #include <vector>
 #include <map>
 #include <inttypes.h>
+#include <type_traits>
 #include <codecvt>
 #include <locale>
 

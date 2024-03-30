@@ -69,6 +69,26 @@ namespace Il2CppSDK
             return true;
         }
 
+        public static bool IsTypeNameReverseSubpartOf(string[] mainTypeName, string[] subpart)
+        {
+            int i = mainTypeName.Length - 1, j = subpart.Length - 1;
+            while (i >= 0 && j >= 0)
+            {
+                string namePart = mainTypeName[i];
+                string searchPart = subpart[j];
+                if (namePart != searchPart)
+                    break;
+
+                i--;
+                j--;
+            }
+
+            if (j == -1) // only accept the typedef if we fully consumed the searchByNameParts
+                return true;
+
+            return false;
+        }
+
         // Returns true if the type is an anonymous type or some compiler generated type, usually they have a specific set of characters in them
         // This could accidentally flag a regular type as compiler generated.
         public static bool IsCompilerGeneratedType(string typeFullName)
@@ -87,11 +107,11 @@ namespace Il2CppSDK
             int templateCount = 0;
             if(fullTypeName.Contains("<"))
             {
-                List<string> templateArgs = GetTemplateArgumentsFromCSharpType(fullTypeName.Split("<")[1]);
+                List<string> templateArgs = GetTemplateArgumentsFromCSharpType(fullTypeName.Split("<", 2)[1]);
                 templateCount = templateArgs.Count;
             }
 
-            string searchBy = fullTypeName.Split("<")[0];
+            string searchBy = fullTypeName.Split("<", 2)[0];
             foreach (TypeDef typeDef in typeDefs)
             {
                 if (typeDef.GenericParameters.Count != templateCount) continue;
@@ -102,20 +122,7 @@ namespace Il2CppSDK
                 // backwards search the name parts until we run out of search space
                 string[] typedefNameParts = typedefNameCleaned.Split(".");
                 string[] searchByNameParts = searchBy.Split(".");
-
-                int i = typedefNameParts.Length-1, j = searchByNameParts.Length-1;
-                while(i >= 0 && j >= 0)
-                {
-                    string namePart = typedefNameParts[i];
-                    string searchPart = searchByNameParts[j];
-                    if (namePart != searchPart)
-                        break;
-
-                    i--;
-                    j--;
-                }
-
-                if (j == -1) // only accept the typedef if we fully consumed the searchByNameParts
+                if(IsTypeNameReverseSubpartOf(typedefNameParts, searchByNameParts))
                     return typeDef;
 
             }
@@ -125,11 +132,39 @@ namespace Il2CppSDK
 
         public static List<string> ConvertTemplateArgsToCppType(string fullTypeName)
         {
-            string[] data = fullTypeName.Split("<");
+            string[] data = fullTypeName.Split("<", 2);
             if(data.Length == 1)
                 return new();
 
             return GetTemplateArgumentsFromCSharpType(data[1]);
+        }
+
+        public static bool DoesMethodSignatureMatch(MethodDef methodDef, GenericMethodInfo methodInfo)
+        {
+            string sigOnlyParameters = methodInfo.genericMethodSignature.Split("(")[1];
+            string[] sigParameters = sigOnlyParameters.Split(",");
+            for (int i = methodDef.HasThis ? 1 : 0; i < methodDef.Parameters.Count; i++)
+            {
+                Parameter param = methodDef.Parameters[i];
+                if (!sigParameters[i].Contains(param.Name))
+                    return false;
+
+                if (param.Type.GetElementType() == ElementType.Var || param.Type.GetElementType() == ElementType.MVar)
+                    continue;
+
+                // try checking the type aswell
+                string dumperParamSig = CSharpPrimitiveToCpp(param.Type.FullName);
+                if (dumperParamSig == "")
+                {
+                    dumperParamSig = Regex.Replace(param.Type.TypeName, @"`\d+", ""); // remove "`1" from type names
+                    dumperParamSig = Regex.Replace(dumperParamSig, "[^a-zA-Z0-9_]", "_");
+                }
+
+                if (!sigParameters[i].Contains(dumperParamSig))
+                    return false;
+            }
+
+            return true;
         }
 
         // Returns the outmost template arguments in a string, shall only be called from ConvertCSharpTypeToCpp
@@ -181,26 +216,43 @@ namespace Il2CppSDK
             Dictionary<string, string> typeLookup = new()
             {
                 {"sbyte", "int8_t" },
+                {"System.SByte", "int8_t" },
                 {"byte", "uint8_t" },
+                {"System.Byte", "uint8_t" },
                 {"short", "int16_t" },
+                {"System.Int16", "int16_t" },
                 {"ushort", "uint16_t" },
+                {"System.UInt16", "uint16_t" },
                 {"int", "int32_t" },
+                {"System.Int32", "int32_t" },
                 {"uint", "uint32_t" },
+                {"System.UInt32", "uint32_t" },
                 {"long", "int64_t" },
+                {"System.Int64", "int64_t" },
                 {"ulong", "uint64_t" },
+                {"System.UInt64", "uint64_t" },
                 {"float", "float" },
+                {"System.Single", "float" },
                 {"double", "double" },
+                {"System.Double", "double" },
                 {"bool", "bool" },
+                {"System.Boolean", "bool" },
                 {"char", "char" },
+                {"System.Char", "char" },
                 {"string", "Il2CppString*" },
+                {"System.String", "Il2CppString*" },
                 {"object", "Il2CppObject*" },
+                {"System.Object", "Il2CppObject*" },
                 {"void", "void" },
+                {"System.Void", "void" },
                 {"IntPtr", "intptr_t" },
+                {"System.IntPtr", "intptr_t" },
                 {"UIntPtr", "uintptr_t" },
+                {"System.UIntPtr", "uintptr_t" },
             };
 
             if (!typeLookup.ContainsKey(typeName))
-                return "TYPE_LOOKUP_ERROR";
+                return "";
 
             return typeLookup[typeName];
         }
@@ -210,19 +262,20 @@ namespace Il2CppSDK
         {
             TypeConversionResult result = new();
 
-            if(CSharpPrimitiveToCpp(cSharpFullType) != "TYPE_LOOKUP_ERROR")
+            if(CSharpPrimitiveToCpp(cSharpFullType) != "")
             {
                 result.cppType = CSharpPrimitiveToCpp(cSharpFullType);
                 return result;
             }
 
-            string[] data = cSharpFullType.Split("<");
+            string[] data = cSharpFullType.Split("<", 2);
             string mainTypeName = data[0];
             List<string> convertedTemplates = new();
+            List<string> templateArgs = new();
 
             if (data.Length > 1)
             { // template arguments were present
-                List<string> templateArgs = GetTemplateArgumentsFromCSharpType(data[1]);
+                templateArgs = GetTemplateArgumentsFromCSharpType(data[1]);
                 foreach (string templateArg in templateArgs) // verify types based on num templates and name
                 {
                     TypeConversionResult templateConverted = ConvertCSharpTypeToCpp(templateArg, ownAssemblyTypes, otherAssemblyTypes);
@@ -242,9 +295,9 @@ namespace Il2CppSDK
             {
                 string typedefNameCleaned = Regex.Replace(typeDef.FullName, @"`\d+", "");
                 typedefNameCleaned = typedefNameCleaned.Replace("/", "."); // dnlib sometimes has spaces, sometimes dots and i do not know when one or the other shows up
-                if (typedefNameCleaned.EndsWith(mainTypeName) && typeDef.GenericParameters.Count == convertedTemplates.Count) // verify types based on num templates and name
+                if (IsTypeNameReverseSubpartOf(typedefNameCleaned.Split("."), mainTypeName.Split(".")) && typeDef.GenericParameters.Count == convertedTemplates.Count) // verify types based on num templates and name
                 {
-                    cppType = Preprocess.GetProcessedCppTypeNameForType(typeDef.ToTypeSig());
+                    cppType = Preprocess.GetFullTypenameForIl2CppType(typeDef.ToTypeSig());
                     isTypeByRef = typeDef.ToTypeSig().IsByRef;
                     elemType = typeDef.ToTypeSig().GetElementType();
                     isValueType = typeDef.IsValueType;
@@ -262,11 +315,14 @@ namespace Il2CppSDK
                 {
                     if (convertedTemplates.Count > 0 && !typeSig.ContainsGenericParameter) continue;
 
+                    if(typeSig.FullName.Contains("ByteEnum"))
+                        Debugger.Break();
+
                     string typedefNameCleaned = Regex.Replace(typeSig.FullName, @"`\d+", "");
                     typedefNameCleaned = typedefNameCleaned.Replace("/", ".");
-                    if (typedefNameCleaned.EndsWith(mainTypeName))
+                    if (IsTypeNameReverseSubpartOf(typedefNameCleaned.Split("."), mainTypeName.Split(".")))
                     {
-                        cppType = Preprocess.GetProcessedCppTypeNameForType(typeSig);
+                        cppType = Preprocess.GetFullTypenameForIl2CppType(typeSig);
                         isTypeByRef = typeSig.IsByRef;
                         elemType = typeSig.GetElementType();
 

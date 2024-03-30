@@ -283,9 +283,9 @@ namespace Il2CppSDK
 
                 string[] data = method.Name.Split("$$");
                 string classNameWTemplates = data[0];
-                string classNameNoTemplates = classNameWTemplates.Split("<")[0]; // TODO: make this work for types where the names are something like System.TypeOne<T>.TypeTwo<
+                string classNameNoTemplates = classNameWTemplates.Split("<", 2)[0]; // TODO: make this work for types where the names are something like System.TypeOne<T>.TypeTwo<
                 string methodNameWTemplates = data[1];
-                string methodNameNoTemplates = methodNameWTemplates.Split("<")[0];
+                string methodNameNoTemplates = methodNameWTemplates.Split("<", 2)[0];
 
                 if (Helpers.IsCompilerGeneratedType(classNameWTemplates) || Helpers.IsCompilerGeneratedType(methodNameWTemplates)) continue;
                 if (!classNameWTemplates.Contains("<") && !methodNameWTemplates.Contains("<")) continue;
@@ -294,7 +294,8 @@ namespace Il2CppSDK
                 if (classTypeDef == null) continue; // probably in another assembly, or our name search sucked
 
                 if (!genericMethodsForClasses.ContainsKey(classTypeDef)) genericMethodsForClasses[classTypeDef] = new();
-                if (!genericMethodsForClasses[classTypeDef].ContainsKey(methodNameWTemplates)) genericMethodsForClasses[classTypeDef][methodNameNoTemplates] = new();
+                if(methodNameWTemplates.Contains("CheckNotNull"))
+                    Debugger.Break();
 
                 GenericMethodInfo methodInfo = new GenericMethodInfo();
                 methodInfo.genericMethodName = methodNameNoTemplates;
@@ -335,10 +336,10 @@ namespace Il2CppSDK
                 {
                     if (methodNameParts[j].Contains("<")) saveFullName = true;
                 }
-                if(saveFullName)
-                    genericMethodsForClasses[classTypeDef][methodNameWTemplates.Replace(innerMostMethodName, innerMostMethodName.Split("<")[0])].Add(methodInfo);
-                else
-                    genericMethodsForClasses[classTypeDef][innerMostMethodName.Split("<")[0]].Add(methodInfo);
+
+                string saveWithMethodName = saveFullName ? methodNameWTemplates.Replace(innerMostMethodName, innerMostMethodName.Split("<")[0]) : innerMostMethodName.Split("<")[0];
+                if (!genericMethodsForClasses[classTypeDef].ContainsKey(saveWithMethodName)) genericMethodsForClasses[classTypeDef][saveWithMethodName] = new();
+                genericMethodsForClasses[classTypeDef][saveWithMethodName].Add(methodInfo);
             }
         }
 

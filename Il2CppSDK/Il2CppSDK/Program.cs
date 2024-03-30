@@ -38,7 +38,6 @@ namespace Il2CppSDK
             currentModule = ModuleDefMD.Load(moduleFile, modCtx);
 
             Preprocess.PreprocessModule(jsonData, currentModule);
-            Test.AreAllGenericMethodsPresent(currentModule);
 
             CodeGen.GenerateSDK(currentModule);
 
