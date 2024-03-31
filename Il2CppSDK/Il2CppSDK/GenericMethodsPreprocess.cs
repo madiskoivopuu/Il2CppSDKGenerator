@@ -24,6 +24,111 @@ namespace Il2CppSDK
         public static Dictionary<TypeDef, Dictionary<string, List<GenericMethodInfo>>> genericMethodsForClasses = new(); // only holds our current assembly generic methods, thats why we use typedefs
         public static Dictionary<TypeDef, Dictionary<string, ulong>> genericMethodAddyLookup = new();
 
+        public static string GetOutmostTypeNameAsDumperType(TypeSig type)
+        {
+            string result = "uintptr_t";
+
+            switch (type.GetElementType())
+            {
+                case ElementType.Void:
+                    result = "void";
+                    break;
+
+                case ElementType.Boolean:
+                    result = "bool";
+                    break;
+
+                case ElementType.Char:
+                    result = "char";
+                    break;
+
+                case ElementType.I1:
+                    result = "int8_t";
+                    break;
+
+                case ElementType.U1:
+                    result = "uint8_t";
+                    break;
+
+                case ElementType.I2:
+                    result = "int16_t";
+                    break;
+
+                case ElementType.U2:
+                    result = "uint16_t";
+                    break;
+
+                case ElementType.I4:
+                    result = "int32_t";
+                    break;
+
+                case ElementType.U4:
+                    result = "uint32_t";
+                    break;
+
+                case ElementType.I8:
+                    result = "int64_t";
+                    break;
+
+                case ElementType.U8:
+                    result = "uint64_t";
+                    break;
+
+                case ElementType.I:
+                    result = "intptr_t";
+                    break;
+
+                case ElementType.U:
+                    result = "uintptr_t";
+                    break;
+
+                case ElementType.R4:
+                    result = "float";
+                    break;
+
+                case ElementType.R8:
+                    result = "double";
+                    break;
+
+                case ElementType.String:
+                    result = "System_String";
+                    break;
+
+                case ElementType.Array:
+                    result = string.Concat(Enumerable.Repeat("_array", (int)type.ToArraySig().Rank));
+                    break;
+
+                // TODO: parse multidimensional arrays correctly
+                case ElementType.SZArray:
+                    result = "_array";
+                    break;
+
+                case ElementType.Object:
+                    result = "Il2CppObject";
+                    break;
+
+                case ElementType.Ptr:
+                case ElementType.ByRef:
+                    result = GetOutmostTypeNameAsDumperType(type.GetNext());
+                    break;
+
+                case ElementType.Var: // generic param in method
+                case ElementType.MVar:
+                    result = "";
+                    break;
+
+                default:
+                    result = Regex.Replace(
+                        RemoveTemplatesFromInnerMostTypeName(Regex.Replace(type.FullName, @"`\d+", "")), 
+                        "[^a-zA-Z0-9_]", "_"
+                    );
+                    break;
+
+            }
+
+            return result;
+        }
+
         public static bool DoesMethodSignatureMatch(MethodDef methodDef, GenericMethodInfo methodInfo)
         {
             string sigOnlyParameters = methodInfo.genericMethodSignature.Split("(")[1];
@@ -32,7 +137,7 @@ namespace Il2CppSDK
             if (methodDef.HasThis)
                 shouldHaveNumParams--;
 
-            if (methodDef.Parameters.Count != shouldHaveNumParams)
+            if (methodDef.ParamDefs.Count != shouldHaveNumParams) // paramdefs wont include this*
                 return false;
 
             for (int i = methodDef.HasThis ? 1 : 0; i < methodDef.Parameters.Count; i++)
@@ -45,12 +150,9 @@ namespace Il2CppSDK
                     continue;
 
                 // try checking the type aswell
-                string dumperParamSig = Helpers.CSharpPrimitiveToCpp(param.Type.FullName);
+                string dumperParamSig = Helpers.CSharpPrimitiveToDumperGeneratedType(param.Type.FullName);
                 if (dumperParamSig == "")
-                {
-                    dumperParamSig = Regex.Replace(param.Type.TypeName, @"`\d+", ""); // remove "`1" from type names
-                    dumperParamSig = Regex.Replace(dumperParamSig, "[^a-zA-Z0-9_]", "_");
-                }
+                    dumperParamSig = GetOutmostTypeNameAsDumperType(param.Type);
 
                 if (!sigParameters[i].Contains(dumperParamSig))
                     return false;
@@ -91,7 +193,7 @@ namespace Il2CppSDK
         {
             List<string> paramTypes = new();
             foreach(Parameter param in methodDef.Parameters)
-                paramTypes.Add(param.Type.TypeName);
+                paramTypes.Add(param.Type.FullName);
 
             return string.Join(", ", paramTypes);
         }
@@ -115,6 +217,7 @@ namespace Il2CppSDK
                 string methodNameNoTemplates = RemoveTemplatesFromInnerMostTypeName(methodNameWTemplates);
 
                 if (Helpers.IsCompilerGeneratedType(classNameWTemplates) || Helpers.IsCompilerGeneratedType(methodNameWTemplates)) continue;
+
                 if (!classNameWTemplates.Contains("<") && !methodNameWTemplates.Contains("<")) continue;
 
                 TypeDef classTypeDef = Helpers.FindTypeDefByFullName(classNameWTemplates, allTypeDefs);
@@ -147,6 +250,9 @@ namespace Il2CppSDK
         {
             foreach(TypeDef typeDef in allTypeDefs)
             {
+                if (Helpers.HasCompilerGeneratedAttribute(typeDef.CustomAttributes)) // ignore compiler generated types
+                    continue;
+
                 genericMethodAddyLookup[typeDef] = new(); 
 
                 Dictionary<string, int> methodOccurrences = new Dictionary<string, int>();
@@ -159,7 +265,7 @@ namespace Il2CppSDK
 
                 foreach (MethodDef methodDef in typeDef.Methods)
                 {
-                    if (methodDef.IsAbstract || CodeGenHelpers.GetMethodOffset(methodDef) != "0x0") continue;
+                    if (CodeGenHelpers.GetMethodOffset(methodDef) != "0x0" || methodDef.IsAbstract || Helpers.HasCompilerGeneratedAttribute(methodDef.CustomAttributes)) continue;
 
                     int prevCount = genericMethodAddyLookup[typeDef].Count;
                     foreach (GenericMethodInfo genericMethod in genericMethodsForClasses[typeDef][methodDef.Name])

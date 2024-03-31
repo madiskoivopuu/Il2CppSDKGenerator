@@ -69,6 +69,16 @@ namespace Il2CppSDK
             return true;
         }
 
+        public static bool HasCompilerGeneratedAttribute(CustomAttributeCollection attrs)
+        {
+            foreach (var attr in attrs)
+                if (attr.AttributeType.Name == "AttributeAttribute")
+                    foreach (CANamedArgument namedArg in attr.NamedArguments)
+                        if (namedArg.Value.ToString() == "CompilerGeneratedAttribute")
+                            return true;
+            return false;
+        }
+
         public static bool IsTypeNameReverseSubpartOf(string[] mainTypeName, string[] subpart)
         {
             int i = mainTypeName.Length - 1, j = subpart.Length - 1;
@@ -202,7 +212,7 @@ namespace Il2CppSDK
 
         // TODO: Verify that this works CORRECTLY
         // Turns a primitive type in script.json into a C++ type. We only cover some of the types as not all of them are present
-        public static string CSharpPrimitiveToCpp(string typeName)
+        public static string CSharpPrimitiveToDumperGeneratedType(string typeName)
         {
             Dictionary<string, string> typeLookup = new()
             {
@@ -230,10 +240,10 @@ namespace Il2CppSDK
                 {"System.Boolean", "bool" },
                 {"char", "char" },
                 {"System.Char", "char" },
-                {"string", "Il2CppString*" },
-                {"System.String", "Il2CppString*" },
-                {"object", "Il2CppObject*" },
-                {"System.Object", "Il2CppObject*" },
+                {"string", "System_String" },
+                {"System.String", "System_String" },
+                {"object", "Il2CppObject" },
+                {"System.Object", "Il2CppObject" },
                 {"void", "void" },
                 {"System.Void", "void" },
                 {"IntPtr", "intptr_t" },
