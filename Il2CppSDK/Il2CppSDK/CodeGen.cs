@@ -112,50 +112,6 @@ namespace Il2CppSDK
             List<TypeSpec> genericTypeInstantiations = Preprocess.GetGenericTypeInstantiations(classDef);
             var cleanedMethodName = methodDef.Name.Replace("::", "_").Replace("<", "").Replace(">", "").Replace(".", "_").Replace("`", "_");
 
-            if (!Preprocess.genericMethodsForClasses.ContainsKey(classDef))
-            {
-                GenerateMethodStub(currentFile, methodDef, namespaceTab, "The generic method instantiations were not found for this class, issue with preprocessor.");
-                return;
-            }
-
-            if (!Preprocess.genericMethodsForClasses[classDef].ContainsKey(methodDef.Name))
-            {
-                GenerateMethodStub(currentFile, methodDef, namespaceTab, "This generic method instantiation was not found, probably a bug with method lookup by name.");
-                return;
-            }
-
-            if (methodDef.Name.Contains("CheckNotNull"))
-                Debugger.Break();
-
-            // gather only methods where the parameter names and their sigs match
-            List<GenericMethodInfo> genericsInfo = new();
-            foreach(GenericMethodInfo genericMethod in Preprocess.genericMethodsForClasses[classDef][methodDef.Name])
-                if(Helpers.DoesMethodSignatureMatch(methodDef, genericMethod))
-                    genericsInfo.Add(genericMethod);
-
-            if(genericsInfo.Count == 0)
-            {
-                GenerateMethodStub(currentFile, methodDef, namespaceTab, "Generic method instantiations were found, but for some reason the signature (parameter and their types) check failed.");
-                return;
-            }
-
-            // start generating the method
-            // get method argument names and types in their own separate lists
-            List<string> parameterTypes = new List<string>();
-            List<string> parameterNames = new List<string>();
-            List<string> parametersWithTypeAndName = new List<string>();
-
-            for (int i = methodDef.HasThis ? 1 : 0; i < methodDef.Parameters.Count; i++)
-            {
-                Parameter paramDef = methodDef.Parameters[i];
-                string paramType = CodeGenHelpers.ConvertToFullCppTypename(paramDef.Type);
-
-                parameterNames.Add(paramDef.Name);
-                parameterTypes.Add(paramType);
-                parametersWithTypeAndName.Add(CodeGenHelpers.ConvertToFullCppTypename(paramDef.Type) + " " + paramDef.Name);
-            }
-
-
             return;
         }
 

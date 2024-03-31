@@ -54,33 +54,6 @@ namespace Il2CppSDK
         }
     }
 
-    public class GenericMethodInfo {
-        public string genericMethodName;
-        public string genericMethodClassName;
-        public string genericMethodSignature;
-
-        public List<string> classTemplateArgs; // class templates as C++ types
-        public List<string> methodTemplateArgs; // method template args as C++ types
-        public ulong genericMethodAddr;
-
-        public HashSet<TypeDef> referencedTypeDefs;
-        public HashSet<TypeSig> referencedTypeSigs;
-
-        public GenericMethodInfo()
-        {
-            classTemplateArgs = new();
-            methodTemplateArgs = new();
-            referencedTypeDefs = new();
-            referencedTypeSigs = new();
-        }
-
-        public void AddReferences(HashSet<TypeDef> refdTypeDefs, HashSet<TypeSig> refdTypeSigs)
-        {
-            referencedTypeDefs.Union(refdTypeDefs);
-            referencedTypeSigs.Union(refdTypeSigs);
-        }
-    }
-
     public class TypeConversionResult
     {
         public string cppType;
@@ -99,7 +72,6 @@ namespace Il2CppSDK
         public static Dictionary<TypeDef, TypeInfo> processedTypeDefs = new();
         public static Dictionary<TypeSig, TypeInfo> processedAllTypeSigs = new(); // type sigs for types that can be in either this assembly or another
         public static Dictionary<TypeDef, List<TypeSpec>> genericTypeInstantiations = new();
-        public static Dictionary<TypeDef, Dictionary<string, List<GenericMethodInfo>>> genericMethodsForClasses = new(); // only holds our current assembly generic methods, thats why we use typedefs
 
         static ModuleDefMD currentModule = null;
 
@@ -112,6 +84,12 @@ namespace Il2CppSDK
 
                 processedTypeDefs[def] = new TypeInfo();
                 processedTypeDefs[def].ownTypeDef = def;
+
+                foreach(TypeDef nestedDef in def.NestedTypes)
+                {
+                    processedTypeDefs[nestedDef] = new TypeInfo();
+                    processedTypeDefs[nestedDef].ownTypeDef = nestedDef;
+                }
             }
         }
 
@@ -267,82 +245,6 @@ namespace Il2CppSDK
             }
         }
 
-        public static void CacheAllGenericMethods(ScriptJson jsonData)
-        {
-            Console.WriteLine("Caching generic methods, this will take a while.");
-            List<TypeDef> allTypeDefs = processedTypeDefs.Keys.ToList();
-            List<TypeSig> allTypeSigs = processedAllTypeSigs.Keys.ToList();
-
-            Console.WriteLine("");
-            for (int i = 0; i < jsonData.ScriptMethod.Count; i++)
-            {
-                Helpers.ClearConsoleLine();
-                Console.WriteLine(string.Format("Methods checked: {0} / {1}", i, jsonData.ScriptMethod.Count));
-
-                ScriptMethod method = jsonData.ScriptMethod[i];
-
-                string[] data = method.Name.Split("$$");
-                string classNameWTemplates = data[0];
-                string classNameNoTemplates = classNameWTemplates.Split("<", 2)[0]; // TODO: make this work for types where the names are something like System.TypeOne<T>.TypeTwo<
-                string methodNameWTemplates = data[1];
-                string methodNameNoTemplates = methodNameWTemplates.Split("<", 2)[0];
-
-                if (Helpers.IsCompilerGeneratedType(classNameWTemplates) || Helpers.IsCompilerGeneratedType(methodNameWTemplates)) continue;
-                if (!classNameWTemplates.Contains("<") && !methodNameWTemplates.Contains("<")) continue;
-
-                TypeDef classTypeDef = Helpers.FindTypeDefByFullName(classNameWTemplates, allTypeDefs);
-                if (classTypeDef == null) continue; // probably in another assembly, or our name search sucked
-
-                if (!genericMethodsForClasses.ContainsKey(classTypeDef)) genericMethodsForClasses[classTypeDef] = new();
-                if(methodNameWTemplates.Contains("CheckNotNull"))
-                    Debugger.Break();
-
-                GenericMethodInfo methodInfo = new GenericMethodInfo();
-                methodInfo.genericMethodName = methodNameNoTemplates;
-                methodInfo.genericMethodClassName = classNameNoTemplates;
-                methodInfo.genericMethodSignature = method.Signature;
-                methodInfo.genericMethodAddr = method.Address;
-
-                // class template args
-                string innerMostClassname = classNameWTemplates.Split(".").Last(); // there's a possibility for types like System.TypeOne<T>.TypeTwo<V>, so we'll need to split it by "." and get the very last item so we could get its templates correctly
-                if (innerMostClassname.Contains("<"))
-                {
-                    List<string> classTemplatesCSharp = Helpers.ConvertTemplateArgsToCppType(innerMostClassname);
-                    foreach(string template in classTemplatesCSharp)
-                    {
-                        TypeConversionResult res = Helpers.ConvertCSharpTypeToCpp(template, allTypeDefs, allTypeSigs);
-                        methodInfo.classTemplateArgs.Add(res.cppType);
-                        methodInfo.AddReferences(res.referencedTypeDefs, res.referencedTypeSigs);
-                    }
-                }
-
-                string innerMostMethodName = methodNameWTemplates.Split(".").Last();
-                if(innerMostMethodName.Contains("<"))
-                {
-                    List<string> methodTemplatesCSharp = Helpers.ConvertTemplateArgsToCppType(innerMostMethodName);
-                    foreach(string template in methodTemplatesCSharp)
-                    {
-                        TypeConversionResult res = Helpers.ConvertCSharpTypeToCpp(template, allTypeDefs, allTypeSigs);
-                        methodInfo.methodTemplateArgs.Add(res.cppType);
-                        methodInfo.AddReferences(res.referencedTypeDefs, res.referencedTypeSigs);
-                    }
-                }
-
-                // choose how to save the method name
-                // if it has a template before the actual method name (System.IEnumerable<T>.MethodName), then usually the entire thing gets saved, otherwise only the last part
-                string[] methodNameParts = methodNameWTemplates.Split(".");
-                bool saveFullName = false;
-                for(int j = 0; j < methodNameParts.Length-1; j++)
-                {
-                    if (methodNameParts[j].Contains("<")) saveFullName = true;
-                }
-
-                string saveWithMethodName = saveFullName ? methodNameWTemplates.Replace(innerMostMethodName, innerMostMethodName.Split("<")[0]) : innerMostMethodName.Split("<")[0];
-                if (!genericMethodsForClasses[classTypeDef].ContainsKey(saveWithMethodName)) genericMethodsForClasses[classTypeDef][saveWithMethodName] = new();
-                genericMethodsForClasses[classTypeDef][saveWithMethodName].Add(methodInfo);
-            }
-        }
-
         public static List<TypeSpec> GetGenericTypeInstantiations(TypeDef genericType)
         {
             if (!genericTypeInstantiations.ContainsKey(genericType))
@@ -417,8 +319,7 @@ namespace Il2CppSDK
             FormatNamesForTypeDefs();
             ProcessTypesReferencedInClasses();
 
-            CacheGenericTypeInstantiations();
-            CacheAllGenericMethods(jsonData);
+            GenericMethodsPreprocess.SetupGenericMethodSupport(jsonData, processedTypeDefs.Keys.ToList());
         }
     }
 }

@@ -19,15 +19,15 @@ namespace Il2CppSDK
                 {
                     if (CodeGenHelpers.GetMethodOffset(methodDef) != "0x0" || methodDef.IsAbstract || Helpers.IsCompilerGeneratedType(methodDef.FullName)) continue;
 
-                    if(!Preprocess.genericMethodsForClasses.ContainsKey(typeDef)) {
+                    if(!GenericMethodsPreprocess.genericMethodsForClasses.ContainsKey(typeDef)) {
                         
-                        Console.WriteLine(string.Format("No generic methods found for typeDef {0}, even though there should be some", typeDef.FullName));
+                        Console.WriteLine(string.Format("WARNING: No generic methods found for typeDef {0}, even though there should be some", typeDef.FullName));
                         break;
                     }
 
-                    if (!Preprocess.genericMethodsForClasses[typeDef].ContainsKey(methodDef.Name))
+                    if (!GenericMethodsPreprocess.genericMethodsForClasses[typeDef].ContainsKey(methodDef.Name))
                     {
-                        Console.WriteLine(string.Format("No generic methods with name {0} found for typeDef {1}", methodDef.Name, typeDef.FullName));
+                        Console.WriteLine(string.Format("WARNING: No generic methods with name {0} found for typeDef {1}", methodDef.Name, typeDef.FullName));
                         break;
                     }
                 }
