@@ -206,6 +206,9 @@ namespace Il2CppSDK
                 if (def.BaseType != null && def.BaseType.ToTypeSig() != null && !Helpers.IsPrimitiveType(def.BaseType.ToTypeSig()))
                     AddReferenceForType(processedTypeDefs[def], def.BaseType.ToTypeSig(), def.BaseType.Name);
 
+                foreach (InterfaceImpl interfaceImpl in def.Interfaces)
+                    AddReferenceForType(processedTypeDefs[def], interfaceImpl.Interface.ToTypeSig(), def.BaseType.Name);
+
                 foreach(TypeDef nestedType in def.NestedTypes)
                     AddReferenceForType(processedTypeDefs[def], nestedType.ToTypeSig(), nestedType.Name);
 

@@ -359,6 +359,19 @@ namespace Il2CppSDK
             return funcName + "(" + string.Join(", ", paramNames) + ")";
         }
 
+        public static List<string> GetInheritancesForType(TypeDef typeDef)
+        {
+            List<string> inheritanceList = new();
+
+            if (typeDef.BaseType != null)
+                inheritanceList.Add("public " + ConvertToFullCppTypename(typeDef.BaseType.ToTypeSig()));
+
+            foreach(InterfaceImpl interfaceImpl in typeDef.Interfaces)
+                inheritanceList.Add("public " + ConvertToFullCppTypename(interfaceImpl.Interface.ToTypeSig()));
+
+            return inheritanceList;
+        }
+
         public static string GetFieldOffset(FieldDef field)
         {
             foreach (var attr in field.CustomAttributes)
