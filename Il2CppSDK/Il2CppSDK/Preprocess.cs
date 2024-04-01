@@ -282,6 +282,26 @@ namespace Il2CppSDK
             }
         }
 
+        // Returns a list of all non compiler generated the type definitions along with whatever other typedefs they reference
+        public static List<TypeDef> GetAllTypesWithReferences()
+        {
+            HashSet<TypeDef> allTypes = new();
+
+            foreach (uint typeId in currentModule.Metadata.GetTypeDefRidList())
+            {
+                TypeDef def = currentModule.ResolveTypeDef(typeId);
+                if (def == null || Helpers.HasCompilerGeneratedAttribute(def.CustomAttributes)) continue;
+
+                allTypes.Add(def);
+
+                foreach(TypeDef referenced in processedTypeDefs[def].referencedTypes)
+                    if(!Helpers.HasCompilerGeneratedAttribute(referenced.CustomAttributes))
+                        allTypes.Add(referenced);
+            }
+
+            return allTypes.ToList();
+        }
+
         public static void PreprocessModule(ScriptJson jsonData, ModuleDefMD currentModule)
         {
             Preprocess.currentModule = currentModule;
@@ -290,7 +310,7 @@ namespace Il2CppSDK
             FormatNamesForTypeDefs();
             ProcessTypesReferencedInClasses();
 
-            //GenericMethodsPreprocess.SetupGenericMethodSupport(jsonData, processedTypeDefs.Keys.ToList());
+            //GenericMethodsPreprocess.SetupGenericMethodSupport(jsonData, GetAllTypesWithReferences());
         }
     }
 }

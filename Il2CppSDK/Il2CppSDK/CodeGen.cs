@@ -284,19 +284,20 @@ namespace Il2CppSDK
 
         public static void GenerateClasses()
         {
-            foreach(TypeDef typeDef in currentModule.Types)
+            foreach(TypeDef typeDef in Preprocess.GetAllTypesWithReferences())
             {
                 if (typeDef.IsEnum)
                     GenerateEnumFromType(typeDef);
                 else
                     GenerateClassFromType(typeDef);
 
+                /* SHOULD NO LONGER BE NEEDED
                 // we also need to generate class code for referenced typedefs, since they might not be in the main table
                 foreach(TypeDef referencedType in Preprocess.processedTypeDefs[typeDef].referencedTypes)
                     if (referencedType.IsEnum)
                         GenerateEnumFromType(referencedType);
                     else
-                        GenerateClassFromType(referencedType);
+                        GenerateClassFromType(referencedType);*/
             }
         }
 
