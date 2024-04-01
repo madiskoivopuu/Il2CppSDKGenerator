@@ -152,6 +152,7 @@ namespace Il2CppSDK
             }
             typeNameParts[typeNameParts.Count - 1] = typeNameParts.Last().Split("<")[0]; // remove templates from type name now that we have them stored
 
+            // TODO: maybe also check for referenced type defs, although we should just add them to the typeDefs list
             foreach (TypeDef typeDef in typeDefs)
             {
                 if (typeDef.GenericParameters.Count != templateCount) continue;

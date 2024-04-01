@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -129,7 +130,7 @@ namespace Il2CppSDK
             return result;
         }
 
-        public static bool DoesMethodSignatureMatch(MethodDef methodDef, GenericMethodInfo methodInfo)
+        private static bool DoesMethodSignatureMatch(MethodDef methodDef, GenericMethodInfo methodInfo)
         {
             string sigOnlyParameters = methodInfo.genericMethodSignature.Split("(")[1];
             string[] sigParameters = sigOnlyParameters.Split(",");
@@ -162,7 +163,7 @@ namespace Il2CppSDK
         }
 
         // Checks whether to save a method by the full name (including namespace with dots) or not
-        public static bool ShouldSaveFullName(TypeDef classTypeDef, List<string> methodNameParts)
+        private static bool ShouldSaveFullName(TypeDef classTypeDef, List<string> methodNameParts)
         {
             string fullMethodName = string.Join(".", methodNameParts);
             fullMethodName = fullMethodName.Replace(methodNameParts.Last(), methodNameParts.Last().Split("<")[0]);
@@ -198,7 +199,7 @@ namespace Il2CppSDK
             return string.Join(", ", paramTypes);
         }
 
-        public static void CacheAllGenericMethods(ScriptJson jsonData, List<TypeDef> allTypeDefs)
+        private static void CacheAllGenericMethods(ScriptJson jsonData, List<TypeDef> allTypeDefs)
         {
             Console.WriteLine("Caching generic methods, this will take a while.");
 
@@ -246,45 +247,73 @@ namespace Il2CppSDK
             }
         }
 
-        public static void GenerateGenericMethodAddressLookupTables(List<TypeDef> allTypeDefs) 
+        private static void GenerateGenericMethodAddressLookupTables(List<TypeDef> allTypeDefs)
         {
-            foreach(TypeDef typeDef in allTypeDefs)
+            foreach (TypeDef typeDef in allTypeDefs)
             {
                 if (Helpers.HasCompilerGeneratedAttribute(typeDef.CustomAttributes)) // ignore compiler generated types
                     continue;
 
-                genericMethodAddyLookup[typeDef] = new(); 
-
-                Dictionary<string, int> methodOccurrences = new Dictionary<string, int>();
-                // count methods with same name, but different params/sig
-                foreach (MethodDef methodDef in typeDef.Methods)
-                {
-                    if (!methodOccurrences.ContainsKey(methodDef.Name)) methodOccurrences[methodDef.Name] = 1;
-                    else methodOccurrences[methodDef.Name]++;
-                }
+                genericMethodAddyLookup[typeDef] = new();
 
                 foreach (MethodDef methodDef in typeDef.Methods)
                 {
                     if (CodeGenHelpers.GetMethodOffset(methodDef) != "0x0" || methodDef.IsAbstract || Helpers.HasCompilerGeneratedAttribute(methodDef.CustomAttributes)) continue;
 
                     int prevCount = genericMethodAddyLookup[typeDef].Count;
-                    foreach (GenericMethodInfo genericMethod in genericMethodsForClasses[typeDef][methodDef.Name])
-                    {
-                        if (methodOccurrences[methodDef.Name] == 1)
-                            genericMethodAddyLookup[typeDef][genericMethod.dumperMethodClassAndNameWTemplates] = genericMethod.genericMethodAddr;
-                        else // method with same name, but different param types
-                        {
-                            if (!DoesMethodSignatureMatch(methodDef, genericMethod)) continue;
+                    Dictionary<string, ulong> genericMethodAddresses = GetGenericMethodAddresses(typeDef, methodDef);
 
-                            string addrLookupSig = genericMethod.dumperMethodClassAndNameWTemplates + "(" + GetParameterSigsAsString(methodDef) + ")";
-                            genericMethodAddyLookup[typeDef][addrLookupSig] = genericMethod.genericMethodAddr;
-                        }
-                    }
-
-                    if (prevCount == genericMethodAddyLookup[typeDef].Count)
+                    if (genericMethodAddresses.Count == 0)
                         Console.WriteLine(string.Format("WARNING: Method {0} is generic, but no generic method addresses were added into the generic method address lookup table for type {1}. Most likely an issue with DoesMethodSignatureMatch()", methodDef.FullName, typeDef.FullName));
+                    else
+                        foreach (KeyValuePair<string, ulong> kvPair in genericMethodAddresses)
+                            genericMethodAddyLookup[typeDef][kvPair.Key] = kvPair.Value;
                 }
             }
+        }
+
+        public static Dictionary<string, ulong> GetGenericMethodAddresses(TypeDef typeDef, MethodDef methodDefForType)
+        {
+            Dictionary<string, int> methodOccurrences = new Dictionary<string, int>();
+            // count methods with same name, but different params/sig
+            foreach (MethodDef methodDef in typeDef.Methods)
+            {
+                if (!methodOccurrences.ContainsKey(methodDef.Name)) methodOccurrences[methodDef.Name] = 1;
+                else methodOccurrences[methodDef.Name]++;
+            }
+
+            Dictionary<string, ulong> genericMethodAddresses = new();
+            foreach (GenericMethodInfo genericMethod in genericMethodsForClasses[typeDef][methodDefForType.Name])
+            {
+                if (methodOccurrences[methodDefForType.Name] == 1)
+                    genericMethodAddresses[genericMethod.dumperMethodClassAndNameWTemplates] = genericMethod.genericMethodAddr;
+                else // method with same name, but different param types
+                {
+                    if (!DoesMethodSignatureMatch(methodDefForType, genericMethod)) continue;
+
+                    string addrLookupSig = genericMethod.dumperMethodClassAndNameWTemplates + "(" + GetParameterSigsAsString(methodDefForType) + ")";
+                    genericMethodAddresses[addrLookupSig] = genericMethod.genericMethodAddr;
+                }
+            }
+
+            return genericMethodAddresses;
+        }
+
+        // Returns all generic method pointers that match the current method's signature
+        public static List<GenericMethodInfo> GetGenericMethodsThatMatchSignature(TypeDef classDef, MethodDef methodDef)
+        {
+            if (!genericMethodsForClasses.ContainsKey(classDef))
+                return new();
+
+            if (!genericMethodsForClasses[classDef].ContainsKey(methodDef.Name))
+                return new();
+
+            List<GenericMethodInfo> genericMethods = new();
+            foreach (GenericMethodInfo genericMethod in genericMethodsForClasses[classDef][methodDef.Name])
+                if (DoesMethodSignatureMatch(methodDef, genericMethod))
+                    genericMethods.Add(genericMethod);
+
+            return genericMethods;
         }
 
         public static void SetupGenericMethodSupport(ScriptJson jsonData, List<TypeDef> allTypeDefs)

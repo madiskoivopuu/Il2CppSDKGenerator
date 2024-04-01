@@ -224,35 +224,6 @@ namespace Il2CppSDK
             FormatNamesForOtherAssemblyTypes();
         }
 
-        public static void CacheGenericTypeInstantiations()
-        {
-            foreach (uint typeId in currentModule.Metadata.GetTypeDefRidList())
-            {
-                TypeDef def = currentModule.ResolveTypeDef(typeId);
-                if (def == null || !def.HasGenericParameters) continue;
-
-                if (!genericTypeInstantiations.ContainsKey(def))
-                    genericTypeInstantiations[def] = new List<TypeSpec>();
-
-                for (uint i = 1; i < currentModule.Metadata.TablesStream.TypeSpecTable.Rows; i++)
-                {
-                    TypeSpec spec = currentModule.ResolveTypeSpec(i);
-                    if (spec == null) continue;
-
-                    if (spec.FullName.Contains(def.FullName))
-                        genericTypeInstantiations[def].Add(spec);
-                }
-            }
-        }
-
-        public static List<TypeSpec> GetGenericTypeInstantiations(TypeDef genericType)
-        {
-            if (!genericTypeInstantiations.ContainsKey(genericType))
-                return new List<TypeSpec>();
-
-            return genericTypeInstantiations[genericType];
-        }
-
         public static string GetHeaderLocationInAssembly(TypeSig typeSig)
         {
             if (typeSig == null) return "";
@@ -319,7 +290,7 @@ namespace Il2CppSDK
             FormatNamesForTypeDefs();
             ProcessTypesReferencedInClasses();
 
-            GenericMethodsPreprocess.SetupGenericMethodSupport(jsonData, processedTypeDefs.Keys.ToList());
+            //GenericMethodsPreprocess.SetupGenericMethodSupport(jsonData, processedTypeDefs.Keys.ToList());
         }
     }
 }

@@ -12,6 +12,32 @@ namespace Il2CppSDK
 {
     internal class CodeGenHelpers
     {
+        public class ParameterNamesAndTypes
+        {
+            public List<string> parameterTypes;
+            public List<string> parameterNames;
+            public List<string> parametersWithTypeAndName;
+
+            public ParameterNamesAndTypes(MethodDef methodDef) {
+                parameterTypes = new List<string>();
+                parameterNames = new List<string>();
+                parametersWithTypeAndName = new List<string>();
+
+                for (int i = methodDef.HasThis ? 1 : 0; i < methodDef.Parameters.Count; i++)
+                {
+                    Parameter paramDef = methodDef.Parameters[i];
+                    if (i == 0 && methodDef.HasThis)
+                        paramDef.Name = "this";
+
+                    string paramType = ConvertToFullCppTypename(paramDef.Type);
+
+                    parameterNames.Add(paramDef.Name);
+                    parameterTypes.Add(paramType);
+                    parametersWithTypeAndName.Add(ConvertToFullCppTypename(paramDef.Type) + " " + paramDef.Name);
+                }
+            }
+        }
+
         static string FormatIl2CppGeneric(TypeSig type)
         {
             string result = "";
