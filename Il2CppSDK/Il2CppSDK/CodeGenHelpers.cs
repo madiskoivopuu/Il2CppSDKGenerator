@@ -321,7 +321,12 @@ namespace Il2CppSDK
                 if (referencedType == typeDef) continue;
                 TypeSig referencedTypeSig = referencedType.ToTypeSig();
 
-                if (referencedType == typeDef.BaseType) // always include base type
+                bool isInheritedInterface = false;
+                foreach (InterfaceImpl interfaceImpl in typeDef.Interfaces)
+                    if (interfaceImpl.Interface.ResolveTypeDef() == referencedType)
+                        isInheritedInterface = true;
+
+                if (referencedType == typeDef.BaseType || isInheritedInterface) // always include base type
                     references.Add(string.Format("#include \"{0}\"", GetIncludePathFromTypeToAnother(type, referencedTypeSig)));
                 else
                     references.Add(GetTypeResolveFormat(type, referencedTypeSig, referencedType));
