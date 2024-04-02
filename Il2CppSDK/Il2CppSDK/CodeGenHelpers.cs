@@ -306,7 +306,7 @@ namespace Il2CppSDK
             if (methodDef.HasThis)
             {
                 string currTypeClass = CodeGenHelpers.ConvertToFullCppTypename(methodDef.Parameters[0].Type);
-                currTypeClass = Regex.Replace(currTypeClass, "\\**$", "*"); // replace all pointers at the end with only one, cus of weird anomalies....
+                currTypeClass = Regex.Replace(currTypeClass, @"\**$", "*", RegexOptions.RightToLeft); // replace all * at the end of str with one *, or add it if missing
                 parameterTypes.Insert(0, currTypeClass);
             }
 
