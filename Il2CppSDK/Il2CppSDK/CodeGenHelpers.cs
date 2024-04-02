@@ -281,10 +281,17 @@ namespace Il2CppSDK
 
             // types in a different assembly, we might still want to include them if necessary
             foreach (TypeSig outsideType in Preprocess.processedTypeDefs[typeDef].referencedTypeSigs)
-                if (typeDef.BaseType != null && outsideType.FullName == typeDef.BaseType.FullName) // always include base type
+            {
+                bool isInheritedInterface = false;
+                foreach (InterfaceImpl interfaceImpl in typeDef.Interfaces)
+                    if (interfaceImpl.Interface.ResolveTypeDef().FullName == outsideType.FullName)
+                        isInheritedInterface = true;
+
+                if ((typeDef.BaseType != null && outsideType.FullName == typeDef.BaseType.FullName) || isInheritedInterface) // always include base type
                     references.Add(string.Format("#include \"{0}\"", GetIncludePathFromTypeToAnother(type, outsideType)));
                 else if (!outsideType.FullName.StartsWith(type.FullName)) // to fix including own type's header file, yay even more spaghetti code
                     references.Add(GetTypeResolveFormat(type, outsideType, null));
+            }
 
             // generic method references
 
