@@ -14,6 +14,7 @@
 #include <inttypes.h>
 #include <type_traits>
 #include <codecvt>
+#include <unordered_map>
 #include <locale>
 
 using namespace std;
