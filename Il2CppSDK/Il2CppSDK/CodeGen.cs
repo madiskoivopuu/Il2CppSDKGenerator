@@ -133,11 +133,14 @@ namespace Il2CppSDK
                 currentFile.WriteLine(namespaceTab + "\ttemplate <" + string.Join(", ", genericParams) + ">");
             }
 
+            string genericAddrParam = "uintptr_t __genericMethodAddy";
+            if (paramsInfo.parametersWithTypeAndName.Count > 0)
+                genericAddrParam = ", " + genericAddrParam;
 
             currentFile.Write(namespaceTab + "\t");
             if (methodDef.IsStatic)
                 currentFile.Write("static ");
-            currentFile.WriteLine(returnCast + " " + cleanedMethodName + "(" + string.Join(", ", paramsInfo.parametersWithTypeAndName) + ", uintptr_t __genericMethodAddy" + ") {");
+            currentFile.WriteLine(returnCast + " " + cleanedMethodName + "(" + string.Join(", ", paramsInfo.parametersWithTypeAndName) + genericAddrParam + ") {");
             currentFile.WriteLine(namespaceTab + "\t\tusing FnPtr = " + CodeGenHelpers.GenerateMethodTypedef(classDef, methodDef, returnCast, paramsInfo.parameterTypes) + ";");
             currentFile.WriteLine(namespaceTab + "\t\tFnPtr call_func = reinterpret_cast<FnPtr>(Il2CppBase() + __genericMethodAddy);");
             currentFile.WriteLine(namespaceTab + "\t\treturn " + CodeGenHelpers.GenerateMethodCall(methodDef, "call_func", paramsInfo.parameterNames) + ";");
