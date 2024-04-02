@@ -72,6 +72,9 @@ namespace Il2CppSDK
         // Uses Preprocess data
         public static string ConvertToFullCppTypename(TypeSig type)
         {
+            if (Extensions.IsPrimitive(type.GetElementType()))
+                return Helpers.CSharpPrimitiveToDumperGeneratedType(type.FullName);
+
             // covers generic enums case
             if (type.IsGenericInstanceType)
             {
@@ -89,68 +92,10 @@ namespace Il2CppSDK
 
             string result = "uintptr_t";
 
-            Extensions.IsPrimitive
-
             switch (type.GetElementType())
             {
                 case ElementType.Void:
                     result = "void";
-                    break;
-
-                case ElementType.Boolean:
-                    result = "bool";
-                    break;
-
-                case ElementType.Char:
-                    result = "char";
-                    break;
-
-                case ElementType.I1:
-                    result = "int8_t";
-                    break;
-
-                case ElementType.U1:
-                    result = "uint8_t";
-                    break;
-
-                case ElementType.I2:
-                    result = "int16_t";
-                    break;
-
-                case ElementType.U2:
-                    result = "uint16_t";
-                    break;
-
-                case ElementType.I4:
-                    result = "int32_t";
-                    break;
-
-                case ElementType.U4:
-                    result = "uint32_t";
-                    break;
-
-                case ElementType.I8:
-                    result = "int64_t";
-                    break;
-
-                case ElementType.U8:
-                    result = "uint64_t";
-                    break;
-
-                case ElementType.I:
-                    result = "intptr_t";
-                    break;
-
-                case ElementType.U:
-                    result = "uintptr_t";
-                    break;
-
-                case ElementType.R4:
-                    result = "float";
-                    break;
-
-                case ElementType.R8:
-                    result = "double";
                     break;
 
                 case ElementType.String:
