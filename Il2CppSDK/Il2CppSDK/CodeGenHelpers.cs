@@ -364,10 +364,22 @@ namespace Il2CppSDK
             List<string> inheritanceList = new();
 
             if (typeDef.BaseType != null)
-                inheritanceList.Add("public " + ConvertToFullCppTypename(typeDef.BaseType.ToTypeSig()));
+            {
+                string parent = ConvertToFullCppTypename(typeDef.BaseType.ToTypeSig());
+                if (parent.Last() == '*')
+                    parent = parent.Remove(parent.Length - 1);
+
+                inheritanceList.Add("public " + parent);
+            }
 
             foreach(InterfaceImpl interfaceImpl in typeDef.Interfaces)
-                inheritanceList.Add("public " + ConvertToFullCppTypename(interfaceImpl.Interface.ToTypeSig()));
+            {
+                string interfaceName = ConvertToFullCppTypename(interfaceImpl.Interface.ToTypeSig());
+                if (interfaceName.Last() == '*')
+                    interfaceName = interfaceName.Remove(interfaceName.Length - 1);
+
+                inheritanceList.Add("public " + interfaceName);
+            }
 
             return inheritanceList;
         }

@@ -199,10 +199,11 @@ namespace Il2CppSDK
         public static void GenerateGenericMethodPtrTable(StreamWriter currentFile, TypeDef classDef, string namespaceTab)
         {
             if (!GenericMethodsPreprocess.genericMethodAddyLookup.ContainsKey(classDef)) return;
+            if (GenericMethodsPreprocess.genericMethodAddyLookup[classDef].Keys.Count == 0) return;
 
-            currentFile.WriteLine(namespaceTab + "\tstatic std::unordered_map<std::string, uintptr_t> genericMethodAddrs = {");
+            currentFile.WriteLine(namespaceTab + "\tconst static std::unordered_map<std::string, uintptr_t> genericMethodAddrs = {");
             foreach (KeyValuePair<string, ulong> keyValue in GenericMethodsPreprocess.genericMethodAddyLookup[classDef])
-                currentFile.WriteLine(namespaceTab + string.Format("\t\t{ \"{0}\", 0x{1:X}}", keyValue.Key, keyValue.Value));
+                currentFile.WriteLine(namespaceTab + "\t\t{ " + string.Format("\"{0}\", 0x{1}", keyValue.Key, keyValue.Value.ToString("X")) + " }");
 
             currentFile.WriteLine(namespaceTab + "\t};");
             currentFile.WriteLine();

@@ -146,7 +146,7 @@ namespace Il2CppSDK
             }
         }
 
-        public static void AddReferenceForType(TypeInfo typeInfo, TypeSig typeSig, string mainTypeName)
+        public static void AddReferenceForType(TypeInfo typeInfo, TypeSig typeSig)
         {
             if (typeSig == null) return;
             TypeDef typeDef = typeSig.TryGetTypeDef();
@@ -155,7 +155,7 @@ namespace Il2CppSDK
                 return; // dont add them to references
             if (typeSig.GetElementType() == ElementType.SZArray || typeSig.GetElementType() == ElementType.Array)
             { // we don't need to reference the array, but we do need the underlying type
-                AddReferenceForType(typeInfo, typeSig.GetNext(), mainTypeName);
+                AddReferenceForType(typeInfo, typeSig.GetNext());
                 return;
             }
             if (Helpers.IsPrimitiveType(typeSig)) // maybe primitive type has templates to other types that are not primitive
@@ -164,7 +164,7 @@ namespace Il2CppSDK
                 {
                     GenericInstSig generic = typeSig.ToGenericInstSig();
                     foreach (TypeSig arg in generic.GenericArguments)
-                        AddReferenceForType(typeInfo, arg, mainTypeName);
+                        AddReferenceForType(typeInfo, arg);
                 }
 
                 return;
@@ -181,14 +181,14 @@ namespace Il2CppSDK
                 {
                     GenericInstSig generic = typeSig.ToGenericInstSig();
                     foreach(TypeSig arg in generic.GenericArguments)
-                        AddReferenceForType(typeInfo, arg, mainTypeName);
+                        AddReferenceForType(typeInfo, arg);
                 }
 
             }
             else
             {
                 foreach (TypeDef nestedType in typeDef.GetTypes())
-                    AddReferenceForType(typeInfo, nestedType.ToTypeSig(), mainTypeName);
+                    AddReferenceForType(typeInfo, nestedType.ToTypeSig());
 
                 if (typeInfo.ownTypeDef != typeDef)
                     typeInfo.referencedTypes.Add(typeDef);
@@ -204,23 +204,23 @@ namespace Il2CppSDK
                 if (def == null) continue;
 
                 if (def.BaseType != null && def.BaseType.ToTypeSig() != null && !Helpers.IsPrimitiveType(def.BaseType.ToTypeSig()))
-                    AddReferenceForType(processedTypeDefs[def], def.BaseType.ToTypeSig(), def.BaseType.Name);
+                    AddReferenceForType(processedTypeDefs[def], def.BaseType.ToTypeSig());
 
                 foreach (InterfaceImpl interfaceImpl in def.Interfaces)
-                    AddReferenceForType(processedTypeDefs[def], interfaceImpl.Interface.ToTypeSig(), def.BaseType.Name);
+                    AddReferenceForType(processedTypeDefs[def], interfaceImpl.Interface.ToTypeSig());
 
                 foreach(TypeDef nestedType in def.NestedTypes)
-                    AddReferenceForType(processedTypeDefs[def], nestedType.ToTypeSig(), nestedType.Name);
+                    AddReferenceForType(processedTypeDefs[def], nestedType.ToTypeSig());
 
                 foreach (FieldDef field in def.Fields) 
-                    AddReferenceForType(processedTypeDefs[def], field.FieldType, def.Name);
+                    AddReferenceForType(processedTypeDefs[def], field.FieldType);
 
                 foreach(MethodDef method in def.Methods)
                 {
-                    AddReferenceForType(processedTypeDefs[def], method.ReturnType, def.Name);
+                    AddReferenceForType(processedTypeDefs[def], method.ReturnType);
 
                     foreach (Parameter param in method.Parameters)
-                        AddReferenceForType(processedTypeDefs[def], param.Type, def.Name);
+                        AddReferenceForType(processedTypeDefs[def], param.Type);
                 }
             }
 
@@ -313,7 +313,7 @@ namespace Il2CppSDK
             FormatNamesForTypeDefs();
             ProcessTypesReferencedInClasses();
 
-            //GenericMethodsPreprocess.SetupGenericMethodSupport(jsonData, GetAllTypesWithReferences());
+            GenericMethodsPreprocess.SetupGenericMethodSupport(jsonData, GetAllTypesWithReferences());
         }
     }
 }
