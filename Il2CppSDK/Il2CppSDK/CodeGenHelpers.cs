@@ -37,10 +37,11 @@ namespace Il2CppSDK
                 {
                     Parameter paramDef = methodDef.Parameters[i];
                     string paramType = ConvertToFullCppTypename(paramDef.Type);
+                    string cleanedName = cleanParamName(paramDef.Name);
 
-                    parameterNames.Add(paramDef.Name);
+                    parameterNames.Add(cleanedName);
                     parameterTypes.Add(paramType);
-                    parametersWithTypeAndName.Add(ConvertToFullCppTypename(paramDef.Type) + " " + paramDef.Name);
+                    parametersWithTypeAndName.Add(paramType + " " + cleanedName);
                 }
             }
         }
