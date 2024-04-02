@@ -134,8 +134,9 @@ namespace Il2CppSDK
             }
 
 
+            currentFile.Write(namespaceTab + "\t");
             if (methodDef.IsStatic)
-                currentFile.Write(namespaceTab + "\tstatic ");
+                currentFile.Write("static ");
             currentFile.WriteLine(returnCast + " " + cleanedMethodName + "(" + string.Join(", ", paramsInfo.parametersWithTypeAndName) + ", uintptr_t __genericMethodAddy" + ") {");
             currentFile.WriteLine(namespaceTab + "\t\tusing FnPtr = " + CodeGenHelpers.GenerateMethodTypedef(classDef, methodDef, returnCast, paramsInfo.parameterTypes) + ";");
             currentFile.WriteLine(namespaceTab + "\t\tFnPtr call_func = reinterpret_cast<FnPtr>(Il2CppBase() + __genericMethodAddy);");
@@ -164,8 +165,9 @@ namespace Il2CppSDK
                 returnCast = "TReturnVal";
             }
 
+            currentFile.Write(namespaceTab + "\t");
             if (methodDef.IsStatic)
-                currentFile.Write(namespaceTab + "\tstatic ");
+                currentFile.Write("static ");
             currentFile.WriteLine(returnCast + " " + cleanedMethodName + "(" + string.Join(", ", paramsInfo.parametersWithTypeAndName) + ") {");
 
             // method body
@@ -198,12 +200,18 @@ namespace Il2CppSDK
 
         public static void GenerateGenericMethodPtrTable(StreamWriter currentFile, TypeDef classDef, string namespaceTab)
         {
-            if (!GenericMethodsPreprocess.genericMethodAddyLookup.ContainsKey(classDef)) return;
-            if (GenericMethodsPreprocess.genericMethodAddyLookup[classDef].Keys.Count == 0) return;
+            var addyLookupDict = GenericMethodsPreprocess.genericMethodAddyLookup;
+            if (!addyLookupDict.ContainsKey(classDef)) return;
+            if (addyLookupDict[classDef].Keys.Count == 0) return;
 
             currentFile.WriteLine(namespaceTab + "\tconst static std::unordered_map<std::string, uintptr_t> genericMethodAddrs = {");
-            foreach (KeyValuePair<string, ulong> keyValue in GenericMethodsPreprocess.genericMethodAddyLookup[classDef])
-                currentFile.WriteLine(namespaceTab + "\t\t{ " + string.Format("\"{0}\", 0x{1}", keyValue.Key, keyValue.Value.ToString("X")) + " }");
+            foreach (KeyValuePair<string, ulong> keyValue in addyLookupDict[classDef])
+            {
+                currentFile.Write(namespaceTab + "\t\t{ " + string.Format("\"{0}\", 0x{1}", keyValue.Key, keyValue.Value.ToString("X")) + " }");
+                if (!addyLookupDict[classDef][keyValue.Key].Equals(addyLookupDict.Last().Value))
+                    currentFile.Write(",");
+                currentFile.WriteLine();
+            }
 
             currentFile.WriteLine(namespaceTab + "\t};");
             currentFile.WriteLine();
