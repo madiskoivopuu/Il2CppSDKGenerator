@@ -132,7 +132,7 @@ namespace Il2CppSDK
         // This could accidentally flag a regular type as compiler generated.
         public static bool IsCompilerGeneratedType(string typeFullName)
         {
-            string[] compilerLetters = { "b", "c", "d", "f", "t"};
+            string[] compilerLetters = { "b", "c", "d", "f", "g", "t"};
             foreach (string letter in compilerLetters)
                 if (typeFullName.Contains(">" + letter + "__") || typeFullName.Contains("<>" + letter))
                     return true;

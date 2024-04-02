@@ -184,7 +184,7 @@ namespace Il2CppSDK
         {
             foreach (MethodDef methodDef in classDef.Methods)
             {
-                if (methodDef.IsConstructor || methodDef.IsStaticConstructor) continue;
+                if (methodDef.IsConstructor || methodDef.IsStaticConstructor || Helpers.IsCompilerGeneratedType(methodDef.Name)) continue;
                 if(methodDef.IsAbstract)
                 {
                     GenerateMethodStub(currentFile, methodDef, namespaceTab, "This method is abstract and thus has no body");
@@ -223,9 +223,6 @@ namespace Il2CppSDK
             TypeSig classTypeSig = classDef.ToTypeSig();
             string currentHeaderFile = CodeGenHelpers.GetHeaderAbsoluteSavePath(classTypeSig, Program.OUTPUT_DIR);
             string namespaceTab = "";
-
-            if(classDef.FullName.Contains("EntitiesWithPositionNear"))
-                Debugger.Break  ();
 
             Helpers.CreateFileWithDirectories(currentHeaderFile);
             StreamWriter currentFile = new StreamWriter(currentHeaderFile);
