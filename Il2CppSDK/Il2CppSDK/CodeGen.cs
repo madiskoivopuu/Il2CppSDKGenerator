@@ -202,7 +202,7 @@ namespace Il2CppSDK
             if (!addyLookupDict.ContainsKey(classDef)) return;
             if (addyLookupDict[classDef].Keys.Count == 0) return;
 
-            currentFile.WriteLine(namespaceTab + "\tconst static std::unordered_map<std::string, uintptr_t> genericMethodAddrs = {");
+            currentFile.WriteLine(namespaceTab + "\tinline static std::unordered_map<std::string, uintptr_t> genericMethodAddrs = {");
             foreach (KeyValuePair<string, ulong> keyValue in addyLookupDict[classDef])
             {
                 currentFile.Write(namespaceTab + "\t\t{ " + string.Format("\"{0}\", 0x{1}", keyValue.Key, keyValue.Value.ToString("X")) + " }");
