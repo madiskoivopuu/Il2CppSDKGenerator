@@ -124,7 +124,7 @@ namespace Il2CppSDK
             {
                 currentFile.WriteLine("template <typename TReturnVal = " + returnCppType + "> ");
                 returnCast = "TReturnVal";
-            } else
+            } else if(methodDef.GenericParameters.Count != 0)
             {
                 List<string> genericParams = new List<string>();
                 foreach(GenericParam genericParam in methodDef.GenericParameters)
