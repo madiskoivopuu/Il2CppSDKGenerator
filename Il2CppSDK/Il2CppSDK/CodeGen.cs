@@ -152,8 +152,6 @@ namespace Il2CppSDK
             var returnCppType = CodeGenHelpers.ConvertToFullCppTypename(methodDef.ReturnType);
             string methodOffset = CodeGenHelpers.GetMethodOffset(methodDef);
 
-            currentFile.Write(namespaceTab + "\t");
-
             // get method argument names and types in their own separate lists
             ParameterNamesAndTypes paramsInfo = new CodeGenHelpers.ParameterNamesAndTypes(methodDef);
 
@@ -161,7 +159,7 @@ namespace Il2CppSDK
             var returnCast = returnCppType;
             if (returnCppType.Contains("uintptr_t")) // if we are uncertain about the type, we will make a template
             {
-                currentFile.WriteLine("template <typename TReturnVal = " + returnCppType + "> ");
+                currentFile.WriteLine(namespaceTab + "\ttemplate <typename TReturnVal = " + returnCppType + "> ");
                 returnCast = "TReturnVal";
             }
 

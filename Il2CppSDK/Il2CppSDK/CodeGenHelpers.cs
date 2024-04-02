@@ -89,6 +89,8 @@ namespace Il2CppSDK
 
             string result = "uintptr_t";
 
+            Extensions.IsPrimitive
+
             switch (type.GetElementType())
             {
                 case ElementType.Void:
