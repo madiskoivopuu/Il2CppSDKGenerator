@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -17,6 +18,15 @@ namespace Il2CppSDK
             public List<string> parameterTypes;
             public List<string> parameterNames;
             public List<string> parametersWithTypeAndName;
+
+            private HashSet<string> CPPKeywords = new HashSet<string>(){ "and", "double", "not_eq", "throw", "and_eq", "dynamic_cast", "operator", "true", "asm", "else", "or", "try", "auto", "enum", "or_eq", "typedef", "bitand", "explicit", "private", "typeid", "bitor", "extern", "protected", "typename", "bool", "false", "public", "union", "break", "float", "register", "unsigned", "case", "for", "reinterpret", -"cast", "using", "catch", "friend", "return", "virtual", "char", "goto", "short", "void", "class", "if", "signed", "volatile", "compl", "inline", "sizeof", "wchar_t", "const", "int", "static", "while", "const", -"cast", "long", "static_cast", "xor", "continue", "mutable", "struct", "xor_eq", "default", "namespace", "switch", "delete", "new", "template", "do", "not", "this" };
+            private string cleanParamName(string name)
+            {
+                if (CPPKeywords.Contains(name))
+                    return "_" + name + "_";
+                else
+                    return name;    
+            }
 
             public ParameterNamesAndTypes(MethodDef methodDef) {
                 parameterTypes = new List<string>();

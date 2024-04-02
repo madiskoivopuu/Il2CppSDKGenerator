@@ -184,7 +184,7 @@ namespace Il2CppSDK
         {
             foreach (MethodDef methodDef in classDef.Methods)
             {
-                if (methodDef.IsConstructor || methodDef.IsStaticConstructor || Helpers.HasCompilerGeneratedAttribute(methodDef.CustomAttributes)) continue;
+                if (methodDef.IsConstructor || methodDef.IsStaticConstructor) continue;
                 if(methodDef.IsAbstract)
                 {
                     GenerateMethodStub(currentFile, methodDef, namespaceTab, "This method is abstract and thus has no body");
