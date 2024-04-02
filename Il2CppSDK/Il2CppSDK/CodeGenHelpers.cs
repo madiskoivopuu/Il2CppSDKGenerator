@@ -26,9 +26,6 @@ namespace Il2CppSDK
                 for (int i = methodDef.HasThis ? 1 : 0; i < methodDef.Parameters.Count; i++)
                 {
                     Parameter paramDef = methodDef.Parameters[i];
-                    if (i == 0 && methodDef.HasThis)
-                        paramDef.Name = "this";
-
                     string paramType = ConvertToFullCppTypename(paramDef.Type);
 
                     parameterNames.Add(paramDef.Name);
@@ -64,7 +61,11 @@ namespace Il2CppSDK
                 else args.Add(ConvertToFullCppTypename(arg));
             }
             result += string.Join(", ", args.ToArray());
-            result += ">*";
+            result += ">";
+
+            if (!type.IsValueType)
+                result += "*";
+
             return result;
         }
 
@@ -106,6 +107,11 @@ namespace Il2CppSDK
                     result = "Il2CppArray<" + ConvertToFullCppTypename(type.Next) + ">*";
                     break;
 
+                case ElementType.Var: // generic param in method
+                case ElementType.MVar:
+                    result = Preprocess.GetProcessedCppTypeNameForType(type);
+                    break;
+
                 // TODO: parse multidimensional arrays correctly
                 case ElementType.Array:
                     result = "Il2CppArray<uintptr_t>*";
@@ -123,14 +129,11 @@ namespace Il2CppSDK
                     result = Preprocess.GetFullTypenameForIl2CppType(type) + "*";
                     break;
 
-                case ElementType.Var: // generic param in method
-                case ElementType.MVar:
-                    result = Preprocess.GetProcessedCppTypeNameForType(type);
+                case ElementType.ByRef:
+                case ElementType.TypedByRef: // no idea what TYPED by ref means
+                    result = ConvertToFullCppTypename(type.GetNext()) + "*";
                     break;
             }
-
-            if (type.IsByRef)
-                result += "*";
 
             return result;
         }
@@ -302,8 +305,8 @@ namespace Il2CppSDK
         {
             if (methodDef.HasThis)
             {
-                string currTypeClass = CodeGenHelpers.ConvertToFullCppTypename(classDef.ToTypeSig());
-                if (currTypeClass[currTypeClass.Length - 1] != '*') currTypeClass += "*";
+                string currTypeClass = CodeGenHelpers.ConvertToFullCppTypename(methodDef.Parameters[0].Type);
+                currTypeClass = Regex.Replace(currTypeClass, "\\**$", "*"); // replace all pointers at the end with only one, cus of weird anomalies....
                 parameterTypes.Insert(0, currTypeClass);
             }
 

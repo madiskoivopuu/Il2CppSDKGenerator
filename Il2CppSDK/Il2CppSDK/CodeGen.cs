@@ -224,6 +224,9 @@ namespace Il2CppSDK
             string currentHeaderFile = CodeGenHelpers.GetHeaderAbsoluteSavePath(classTypeSig, Program.OUTPUT_DIR);
             string namespaceTab = "";
 
+            if(classDef.FullName.Contains("EntitiesWithPositionNear"))
+                Debugger.Break  ();
+
             Helpers.CreateFileWithDirectories(currentHeaderFile);
             StreamWriter currentFile = new StreamWriter(currentHeaderFile);
 
@@ -252,7 +255,7 @@ namespace Il2CppSDK
             }
 
             //// class start
-            currentFile.WriteLine(CodeGenHelpers.FormatGenericParametersToTemplate(classDef));
+            currentFile.WriteLine(namespaceTab + CodeGenHelpers.FormatGenericParametersToTemplate(classDef));
 
             currentFile.Write(namespaceTab + "class " + Preprocess.GetProcessedCppTypeNameForType(classTypeSig));
             List<string> inheritanceList = GetInheritancesForType(classDef);
