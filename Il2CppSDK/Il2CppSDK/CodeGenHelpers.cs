@@ -239,6 +239,7 @@ namespace Il2CppSDK
             if (type.IsGenericInstanceType)
             {
                 List<string> typenames = new List<string>();
+                //ITypeDefOr typeRef = type.ToTypeDefOrRef().ScopeType;
                 foreach (TypeSig generic in type.ToGenericInstSig().GenericArguments)
                 {
                     string templateName = "typename " + Helpers.FormatNamespace(generic.TypeName);
