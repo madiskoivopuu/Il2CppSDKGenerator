@@ -122,7 +122,7 @@ namespace Il2CppSDK
             var returnCast = returnCppType;
             if(methodDef.GenericParameters.Count == 0 && returnCppType.Contains("uintptr_t"))
             {
-                currentFile.WriteLine("template <typename TReturnVal = " + returnCppType + "> ");
+                currentFile.WriteLine(namespaceTab + "\ttemplate <typename TReturnVal = " + returnCppType + "> ");
                 returnCast = "TReturnVal";
             } else if(methodDef.GenericParameters.Count != 0)
             {
@@ -130,7 +130,7 @@ namespace Il2CppSDK
                 foreach(GenericParam genericParam in methodDef.GenericParameters)
                     genericParams.Add("typename " + genericParam.Name); // TODO: maybe add full name?
 
-                currentFile.WriteLine("template <" + string.Join(", ", genericParams) + ">");
+                currentFile.WriteLine(namespaceTab + "\ttemplate <" + string.Join(", ", genericParams) + ">");
             }
 
 
