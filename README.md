@@ -80,4 +80,5 @@ If I'm not working on the project, then I suggest forking it and fixing it in yo
 
 # Credits
 dnlib: [dnlib](https://github.com/0xd4d/dnlib)
+
 Il2CppSDKGenerator (by Octowolve & aimardcr): [Il2CppSDKGenerator](https://github.com/Octowolve/Il2CppSDKGenerator/tree/master/Il2CppSDK)
