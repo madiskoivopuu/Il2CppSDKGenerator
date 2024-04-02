@@ -190,8 +190,7 @@ namespace Il2CppSDK
 
                 string offset = CodeGenHelpers.GetMethodOffset(methodDef);
                 if (offset == "0x0" && (classDef.HasGenericParameters || methodDef.HasGenericParameters))
-                    GenerateMethodStub(currentFile, methodDef, namespaceTab, "TEST");
-                //GenerateGenericMethod(currentFile, classDef, methodDef, namespaceTab);
+                    GenerateGenericMethod(currentFile, classDef, methodDef, namespaceTab);
                 else
                     GenerateNormalMethod(currentFile, classDef, methodDef, namespaceTab);
             }

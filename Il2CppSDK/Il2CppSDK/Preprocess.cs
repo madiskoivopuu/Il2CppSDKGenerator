@@ -313,7 +313,7 @@ namespace Il2CppSDK
             FormatNamesForTypeDefs();
             ProcessTypesReferencedInClasses();
 
-            //GenericMethodsPreprocess.SetupGenericMethodSupport(jsonData, GetAllTypesWithReferences());
+            GenericMethodsPreprocess.SetupGenericMethodSupport(jsonData, GetAllTypesWithReferences());
         }
     }
 }
