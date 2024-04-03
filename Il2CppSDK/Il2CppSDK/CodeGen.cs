@@ -103,7 +103,7 @@ namespace Il2CppSDK
         {
             var cleanedMethodName = methodDef.Name.Replace("::", "_").Replace("<", "").Replace(">", "").Replace(".", "_").Replace("`", "_");
             currentFile.WriteLine(namespaceTab + "\t" + "// " + comment);
-            currentFile.WriteLine(namespaceTab + "\t" + "void " + cleanedMethodName + "() { }");
+            currentFile.WriteLine(namespaceTab + "\t" + "// void " + cleanedMethodName + "() { }");
             currentFile.WriteLine();
         }
 
