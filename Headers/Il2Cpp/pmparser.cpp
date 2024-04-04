@@ -21,7 +21,7 @@ implied warranty.
 
 
 procmaps_iterator* pmparser_parse(int pid){
-	procmaps_iterator* maps_it = malloc(sizeof(procmaps_iterator));
+	procmaps_iterator* maps_it = reinterpret_cast<procmaps_iterator*>(malloc(sizeof(procmaps_iterator)));
 	char maps_path[500];
 	if(pid>=0 ){
 		sprintf(maps_path,"/proc/%d/maps",pid);
@@ -55,7 +55,7 @@ procmaps_iterator* pmparser_parse(int pid){
 		sscanf(addr1,"%lx",(long unsigned *)&tmp->addr_start );
 		sscanf(addr2,"%lx",(long unsigned *)&tmp->addr_end );
 		//size
-		tmp->length=(unsigned long)(tmp->addr_end-tmp->addr_start);
+		tmp->length=(unsigned long)(reinterpret_cast<uintptr_t>(tmp->addr_end) - reinterpret_cast<uintptr_t>(tmp->addr_start));
 		//perm
 		strcpy(tmp->perm,perm);
 		tmp->is_r=(perm[0]=='r');
