@@ -3,6 +3,8 @@
 //
 
 #include "Il2Cpp.h"
+#include "pmparser.h"
+
 // ========================================================================================================================================== //
 #define IL2CPP__TAG "Il2CppSdk"
 #define IL2CPP_LOGI(...) __android_log_print(ANDROID_LOG_INFO,IL2CPP__TAG,__VA_ARGS__)
@@ -14,45 +16,47 @@ map<string, size_t> m_cacheFields;
 map<string, void *> m_cacheMethods;
 map<string, void *> m_cacheClasses;
 // ========================================================================================================================================== //
-const void *(*il2cpp_assembly_get_image)(const void *assembly);
+const void *(*il2cpp_assembly_get_image)(const void *assembly) = 0;
 
-void *(*il2cpp_domain_get)();
+void *(*il2cpp_domain_get)() = 0;
 
-void **(*il2cpp_domain_get_assemblies)(const void *domain, size_t *size);
+void* (*il2cpp_domain_assembly_open)(const void* domain, char* assemblyName) = 0;
 
-const char *(*il2cpp_image_get_name)(void *image);
+void **(*il2cpp_domain_get_assemblies)(const void *domain, size_t *size) = 0;
 
-void *(*il2cpp_class_from_name)(const void *image, const char *namespaze, const char *name);
+const char *(*il2cpp_image_get_name)(void *image) = 0;
 
-void *(*il2cpp_class_get_field_from_name)(void *klass, const char *name);
+void *(*il2cpp_class_from_name)(const void *image, const char *namespaze, const char *name) = 0;
 
-void *(*il2cpp_class_get_method_from_name)(void *klass, const char *name, int argsCount);
+void *(*il2cpp_class_get_field_from_name)(void *klass, const char *name) = 0;
 
-size_t (*il2cpp_field_get_offset)(void *field);
+void *(*il2cpp_class_get_method_from_name)(void *klass, const char *name, int argsCount) = 0;
 
-void (*il2cpp_field_static_get_value)(void *field, void *value);
+size_t (*il2cpp_field_get_offset)(void *field) = 0;
 
-void (*il2cpp_field_static_set_value)(void *field, void *value);
+void (*il2cpp_field_static_get_value)(void *field, void *value) = 0;
 
-void *(*il2cpp_array_new)(void *elementTypeInfo, size_t length);
+void (*il2cpp_field_static_set_value)(void *field, void *value) = 0;
 
-char *(*il2cpp_type_get_name)(void *type);
+void *(*il2cpp_array_new)(void *elementTypeInfo, size_t length) = 0;
 
-void* (*il2cpp_method_get_param)(void *method, uint32_t index);
+char *(*il2cpp_type_get_name)(void *type) = 0;
 
-void* (*il2cpp_class_get_methods)(void *klass, void* *iter);
+void* (*il2cpp_method_get_param)(void *method, uint32_t index) = 0;
 
-const char* (*il2cpp_method_get_name)(void *method);
+void* (*il2cpp_class_get_methods)(void *klass, void* *iter) = 0;
 
-const char *(*il2cpp_class_get_name)(void *klass);
+const char* (*il2cpp_method_get_name)(void *method) = 0;
 
-void *(*il2cpp_class_get_nested_types)(void *, void **);
+const char *(*il2cpp_class_get_name)(void *klass) = 0;
 
-void *(*il2cpp_object_new)(void *);
+void *(*il2cpp_class_get_nested_types)(void *, void **) = 0;
 
-Il2CppString *(*il2cpp_string_new)(const char *);
+void *(*il2cpp_object_new)(void *) = 0;
 
-Il2CppString *(*il2cpp_string_new_utf16)(const wchar_t *, size_t len);
+Il2CppString *(*il2cpp_string_new)(const char *) = 0;
+
+Il2CppString *(*il2cpp_string_new_utf16)(const wchar_t *, size_t len) = 0;
 
 // ========================================================================================================================================== //
 vector<string> split_string(string str, string token) {
@@ -87,7 +91,9 @@ void *get_export_function(const char *lib, const char *name)
     return 0;
 }
 // ========================================================================================================================================== //
+
 #define GAME_LIB_ENGINE "libil2cpp.so"
+
 uintptr_t lib_addr = 0;
 
 uintptr_t Il2CppBase(){
@@ -96,25 +102,24 @@ uintptr_t Il2CppBase(){
         return lib_addr;
     }
 
-    char line[512];
+    int pid=-1; //-1 to use the running process id, use pid>0 to list the map of another process
+    procmaps_iterator* maps = pmparser_parse(pid);
+	if(maps==NULL){
+		printf ("[map]: cannot parse the memory map of game\n");
+		return lib_addr;
+	}
 
-    FILE *f = fopen("/proc/self/maps", "r");
-
-    if (!f)
-        return 0;
-
-    while (fgets(line, sizeof line, f)) {
-        uintptr_t base;
-        char tmp[64];
-        sscanf(line, "%" PRIXPTR "-%*" PRIXPTR " %*s %*s %*s %*s %s", &base, tmp);
-        if (strstr(tmp, GAME_LIB_ENGINE)) {
-            fclose(f);
-            lib_addr = base;
-            return base;
+	//iterate over areas
+	procmaps_struct* maps_tmp=NULL;
+	
+	while( (maps_tmp = pmparser_next(maps)) != NULL){
+		if(strstr(maps_tmp->pathname, GAME_LIB_ENGINE) && maps_tmp->is_x) {
+            lib_addr = maps_tmp->addr_start;
         }
-    }
-    fclose(f);
-    return 0;
+	}
+
+	pmparser_free(maps);
+    return lib_addr;
 }
 // ========================================================================================================================================== //
 typedef unsigned short UTF16;
@@ -177,6 +182,8 @@ int Il2Cpp::Attach(const char *libname) {
     il2cpp_assembly_get_image = (const void *(*)(const void *)) get_export_function(libname, "il2cpp_assembly_get_image");
 
     il2cpp_domain_get = (void *(*)()) get_export_function(libname, "il2cpp_domain_get");
+
+    il2cpp_domain_assembly_open = (void *(*)(const void*, char*)) get_export_function(libname, "il2cpp_domain_assembly_open");
 
     il2cpp_domain_get_assemblies = (void **(*)(const void* , size_t*)) get_export_function(libname, "il2cpp_domain_get_assemblies");
 
@@ -428,7 +435,7 @@ void *Il2Cpp::GetMethodOffset(const char *image, const char *namespaze, const ch
                     } else {
                         IL2CPP_LOGI("Argument at index %d didn't matched requested argument!\r\n\tRequested: %s\r\n\tActual: %s\r\nSkipping function...", i, args[i], tname);
                         score = 0;
-goto skip;
+                        goto skip;
                     }
                 }
             }
