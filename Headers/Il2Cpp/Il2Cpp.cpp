@@ -114,7 +114,7 @@ uintptr_t Il2CppBase(){
 	
 	while( (maps_tmp = pmparser_next(maps)) != NULL){
 		if(strstr(maps_tmp->pathname, GAME_LIB_ENGINE) && maps_tmp->is_x) {
-            lib_addr = maps_tmp->addr_start;
+            lib_addr = reinterpret_cast<uintptr_t>(maps_tmp->addr_start);
         }
 	}
 
