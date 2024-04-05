@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "pmparser.h": "c"
+        "pmparser.h": "c",
+        "type_traits": "cpp"
     }
 }

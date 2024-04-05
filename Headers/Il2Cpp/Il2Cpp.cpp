@@ -3,7 +3,6 @@
 //
 
 #include "Il2Cpp.h"
-#include "pmparser.h"
 
 // ========================================================================================================================================== //
 #define IL2CPP__TAG "Il2CppSdk"
@@ -97,29 +96,31 @@ void *get_export_function(const char *lib, const char *name)
 uintptr_t lib_addr = 0;
 
 uintptr_t Il2CppBase(){
-    if(lib_addr)
+   if(lib_addr)
     {
         return lib_addr;
     }
 
-    int pid=-1; //-1 to use the running process id, use pid>0 to list the map of another process
-    procmaps_iterator* maps = pmparser_parse(pid);
-	if(maps==NULL){
-		printf ("[map]: cannot parse the memory map of game\n");
-		return lib_addr;
-	}
+    char line[512];
 
-	//iterate over areas
-	procmaps_struct* maps_tmp=NULL;
-	
-	while( (maps_tmp = pmparser_next(maps)) != NULL){
-		if(strstr(maps_tmp->pathname, GAME_LIB_ENGINE) && maps_tmp->is_x) {
-            lib_addr = reinterpret_cast<uintptr_t>(maps_tmp->addr_start);
+    FILE *f = fopen("/proc/self/maps", "r");
+
+    if (!f)
+        return 0;
+
+    while (fgets(line, sizeof line, f)) {
+        uintptr_t base;
+        char sectionPerms[7];
+        char filePath[512];
+        sscanf(line, "%" PRIXPTR "-%*" PRIXPTR " %s %*s %*s %*s %s", &base, mapPerms, filePath);
+        if (strstr(filePath, GAME_LIB_ENGINE) && sectionPerms[2] == 'x') {
+            fclose(f);
+            lib_addr = base;
+            return base;
         }
-	}
-
-	pmparser_free(maps);
-    return lib_addr;
+    }
+    fclose(f);
+    return 0;
 }
 // ========================================================================================================================================== //
 typedef unsigned short UTF16;
