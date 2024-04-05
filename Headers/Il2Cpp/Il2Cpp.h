@@ -28,6 +28,8 @@ extern const void *(*il2cpp_assembly_get_image)(const void *assembly);
 
 extern void *(*il2cpp_domain_get)();
 
+extern void* (*il2cpp_thread_attach)(void*);
+
 extern void* (*il2cpp_domain_assembly_open)(const void* domain, char* assemblyName);
 
 extern void **(*il2cpp_domain_get_assemblies)(const void *domain, size_t *size);

@@ -90,7 +90,7 @@ namespace Il2CppSDK
                 } 
                 else
                 {
-                    currentFile.WriteLine(string.Format(namespaceTab + "\t\treturn *({0}*)((uintptr_t)this + sizeof(Il2CppObject) + {1});", returnCast, CodeGenHelpers.GetFieldOffset(field)));
+                    currentFile.WriteLine(string.Format(namespaceTab + "\t\treturn *({0}*)((uintptr_t)this + {1});", returnCast, CodeGenHelpers.GetFieldOffset(field)));
                 }
 
                 currentFile.WriteLine(namespaceTab + "\t}");

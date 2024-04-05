@@ -19,6 +19,8 @@ const void *(*il2cpp_assembly_get_image)(const void *assembly) = 0;
 
 void *(*il2cpp_domain_get)() = 0;
 
+void* (*il2cpp_thread_attach)(void*) = 0;
+
 void* (*il2cpp_domain_assembly_open)(const void* domain, char* assemblyName) = 0;
 
 void **(*il2cpp_domain_get_assemblies)(const void *domain, size_t *size) = 0;
@@ -183,6 +185,8 @@ int Il2Cpp::Attach(const char *libname) {
     il2cpp_assembly_get_image = (const void *(*)(const void *)) get_export_function(libname, "il2cpp_assembly_get_image");
 
     il2cpp_domain_get = (void *(*)()) get_export_function(libname, "il2cpp_domain_get");
+
+    il2cpp_thread_attach = (void* (*)(void*))get_export_function(libname, "il2cpp_thread_attach");
 
     il2cpp_domain_assembly_open = (void *(*)(const void*, char*)) get_export_function(libname, "il2cpp_domain_assembly_open");
 
