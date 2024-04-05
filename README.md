@@ -24,6 +24,12 @@ Please read how to Initialize Il2Cpp Functions first before using any of the SDK
 #include "SDK/Assembly_CSharp/ClientWorld.h"
 #include "SDK/Assembly_CSharp/ArenaUnityWorld.h"
 #include "SDK/Assembly_CSharp/ActionDataContext.h"
+#include "SDK/Assembly_CSharp/IdComponent.h"
+#include "SDK/Assembly_CSharp/DurationComponent.h"
+#include "SDK/Assembly_CSharp/DelayComponent.h"
+#include "SDK/Assembly_CSharp/CooldownComponent.h"
+#include "SDK/Assembly_CSharp/ItemDataContext.h"
+#include "SDK/Assembly_CSharp/AttackActionComponent.h"
 
 ActionEntity* ItemRelated::GetAttackActionForItem(ItemEntity* item) {
     ArenaUnityWorld* unityWorld = ClientWorld::get_ArenaUnity();
@@ -46,7 +52,7 @@ ActionEntity* ItemRelated::GetAttackActionForItem(ItemEntity* item) {
 
     LOGD("ItemRelated::GetAttackActionForItem -> attack action name is %s", GetUTF8StringFromNETString(attackActionComponent->f_Name()).c_str());
 
-    ActionEntity* attackActionEntity = actionDataContext->GetEntityWithBlueprintOrCreate(attackActionComponent->f_Name());
+    ActionEntity* attackActionEntity = actionDataContext->GetEntityWithBlueprint(attackActionComponent->f_Name(), ActionDataContext::genericMethodAddrs["DataContext<ActionEntity>$$GetEntityWithBlueprintOrCreate"]);
     if(!attackActionEntity) {
         LOGD("ItemRelated::GetAttackActionForItem -> attackActionEntity was null");
         return nullptr;
