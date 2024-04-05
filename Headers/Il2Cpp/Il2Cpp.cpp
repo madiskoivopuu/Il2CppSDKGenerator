@@ -112,7 +112,7 @@ uintptr_t Il2CppBase(){
         uintptr_t base;
         char sectionPerms[7];
         char filePath[512];
-        sscanf(line, "%" PRIXPTR "-%*" PRIXPTR " %s %*s %*s %*s %s", &base, mapPerms, filePath);
+        sscanf(line, "%" PRIXPTR "-%*" PRIXPTR " %s %*s %*s %*s %s", &base, sectionPerms, filePath);
         if (strstr(filePath, GAME_LIB_ENGINE) && sectionPerms[2] == 'x') {
             fclose(f);
             lib_addr = base;
