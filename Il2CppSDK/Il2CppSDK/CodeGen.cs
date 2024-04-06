@@ -76,9 +76,6 @@ namespace Il2CppSDK
                 string fieldCppType = CodeGenHelpers.ConvertToFullCppTypename(fieldType);
                 string clearedFieldName = "f_" + field.Name.Replace("::", "_").Replace("<", "").Replace(">", "").Replace("k__BackingField", "").Replace(".", "_").Replace("`", "_");
 
-                if (field.FieldType.IsValueType && !dnlib.DotNet.Extensions.IsPrimitive(field.FieldType.GetElementType()) && !field.FieldType.ScopeType.ResolveTypeDef().IsEnum)
-                    Console.WriteLine(field.FullName + " " + field.GetFieldSize());
-
                 currentFile.Write(namespaceTab + "\t");
                 currentFile.WriteLine(fieldCppType + " " + clearedFieldName + ";");
             }
