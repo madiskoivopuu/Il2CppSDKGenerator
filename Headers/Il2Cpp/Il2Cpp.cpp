@@ -300,7 +300,7 @@ Il2CppClass *Il2Cpp::GetClass(const char *image, const char *namespaze, const ch
 
     if(m_cacheClasses.count(_sig) > 0)
     {
-        return m_cacheClasses[_sig];
+        return (Il2CppClass*)m_cacheClasses[_sig];
     }
 
     void *img = GetImage(image);
