@@ -326,7 +326,7 @@ Il2CppClass *Il2Cpp::GetClass(const char *image, const char *namespaze, const ch
             const char *name = il2cpp_class_get_name(nest);
             if(strcmp(name, classes[1].c_str()) == 0)
             {
-                return nest;
+                return (Il2CppClass*)nest;
             }
 
             nest = il2cpp_class_get_nested_types(klass, &iter);
