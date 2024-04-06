@@ -63,13 +63,32 @@ namespace Il2CppSDK
             currentFile.Close();
         }
 
-        public static void GenerateFieldsForClass(StreamWriter currentFile, TypeDef classDef, string namespaceTab)
+        public static void GenerateStaticFieldsStruct(StreamWriter currentFile, TypeDef classDef, string namespaceTab)
         {
             string className = Preprocess.GetProcessedCppTypeNameForType(classDef.ToTypeSig());
-            List<FieldDef> regularFields = classDef.Fields.Where(field => !field.IsStatic).ToList();
-            List<FieldDef> staticFields = classDef.Fields.Where(field => field.IsStatic).ToList();
-
             string staticFieldsStructName = className + "_StaticFields";
+            List<FieldDef> staticFields = classDef.Fields.Where(field => field.IsStatic).ToList();
+            if (staticFields.Count > 0)
+            {
+                currentFile.WriteLine(namespaceTab + "struct " + staticFieldsStructName + " {");
+                foreach (FieldDef field in staticFields)
+                {
+                    TypeSig fieldType = field.FieldType;
+                    string fieldCppType = CodeGenHelpers.ConvertToFullCppTypename(fieldType);
+                    string clearedFieldName = field.Name.Replace("::", "_").Replace("<", "").Replace(">", "").Replace("k__BackingField", "").Replace(".", "_").Replace("`", "_");
+
+                    currentFile.WriteLine(namespaceTab + "\t" + fieldCppType + " " + clearedFieldName + ";");
+                }
+                currentFile.WriteLine(namespaceTab + "};");
+                currentFile.WriteLine("");
+            }
+        }
+
+        // Generates non-static fields for class, forward declares static ones if they exist
+        public static void GenerateFieldsForClass(StreamWriter currentFile, TypeDef classDef, string namespaceTab)
+        {
+            List<FieldDef> regularFields = classDef.Fields.Where(field => !field.IsStatic).ToList();
+
             foreach (FieldDef field in regularFields)
             {
                 TypeSig fieldType = field.FieldType;
@@ -78,26 +97,6 @@ namespace Il2CppSDK
 
                 currentFile.Write(namespaceTab + "\t");
                 currentFile.WriteLine(fieldCppType + " " + clearedFieldName + ";");
-            }
-
-            if (staticFields.Count > 0)
-            {
-                currentFile.WriteLine(namespaceTab + "\tstruct " + staticFieldsStructName + " {");
-                foreach (FieldDef field in staticFields)
-                {
-                    TypeSig fieldType = field.FieldType;
-                    string fieldCppType = CodeGenHelpers.ConvertToFullCppTypename(fieldType);
-                    string clearedFieldName = field.Name.Replace("::", "_").Replace("<", "").Replace(">", "").Replace("k__BackingField", "").Replace(".", "_").Replace("`", "_");
-
-                    currentFile.WriteLine(namespaceTab + "\t\t" + fieldCppType + " " + clearedFieldName + ";");
-                }
-                currentFile.WriteLine(namespaceTab + "\t};");
-                currentFile.WriteLine("");
-
-                currentFile.WriteLine(namespaceTab + "\tstatic " + staticFieldsStructName + "* StaticFields() {");
-                currentFile.WriteLine(string.Format(namespaceTab + "\t\treturn ({0}*)(Il2Cpp::GetClass(\"{1}\", \"{2}\", \"{3}\")->static_fields);", staticFieldsStructName, classDef.Module.Name, classDef.Namespace, classDef.Name));
-                currentFile.WriteLine(namespaceTab + "\t}");
-                currentFile.WriteLine();
             }
         }
 
@@ -265,18 +264,34 @@ namespace Il2CppSDK
             currentFile.WriteLine(" {");
 
             currentFile.WriteLine(namespaceTab + "public:");
-            currentFile.WriteLine("");
+            currentFile.WriteLine();
 
             GenerateGenericMethodPtrTable(currentFile, classDef, namespaceTab);
+            currentFile.WriteLine();
 
             GenerateFieldsForClass(currentFile, classDef, namespaceTab);
+            currentFile.WriteLine();
 
-            currentFile.WriteLine("");
+            bool hasStaticFields = classDef.Fields.Any(field => field.IsStatic);
+            if(hasStaticFields)
+            {
+                string className = Preprocess.GetProcessedCppTypeNameForType(classDef.ToTypeSig());
+                string staticFieldsStructName = className + "_StaticFields";
+                currentFile.WriteLine(namespaceTab + "\tstruct " + staticFieldsStructName + "; // forward declaration in case this struct contains the current class as valuetype");
+                currentFile.WriteLine(namespaceTab + "\tstatic " + staticFieldsStructName + "* StaticFields() {");
+                currentFile.WriteLine(string.Format(namespaceTab + "\t\treturn ({0}*)(Il2Cpp::GetClass(\"{1}\", \"{2}\", \"{3}\")->static_fields);", staticFieldsStructName, classDef.Module.Name, classDef.Namespace, classDef.Name));
+                currentFile.WriteLine(namespaceTab + "\t}");
+                currentFile.WriteLine();
+            }
 
             GenerateMethodsForClass(currentFile, classDef, namespaceTab);
+            currentFile.WriteLine();
 
             currentFile.WriteLine(namespaceTab + "};");
+            currentFile.WriteLine();
             //// class end
+
+            GenerateStaticFieldsStruct(currentFile, classDef, namespaceTab);
 
             if (useNamespace)
                 currentFile.WriteLine("};");
