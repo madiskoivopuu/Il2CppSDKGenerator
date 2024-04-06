@@ -7,12 +7,12 @@
       "RelativeMoniker": "D:0:0:{FD21F546-6847-42CE-834D-DF54B8463474}|Il2CppSDK\\Il2CppSDK.csproj|solutionrelative:il2cppsdk\\codegen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FD21F546-6847-42CE-834D-DF54B8463474}|Il2CppSDK\\Il2CppSDK.csproj|c:\\users\\madis\\source\\repos\\il2cppsdkgenerator_withtemplates\\il2cppsdk\\il2cppsdk\\codegenhelpers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FD21F546-6847-42CE-834D-DF54B8463474}|Il2CppSDK\\Il2CppSDK.csproj|solutionrelative:il2cppsdk\\codegenhelpers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{FD21F546-6847-42CE-834D-DF54B8463474}|Il2CppSDK\\Il2CppSDK.csproj|c:\\users\\madis\\source\\repos\\il2cppsdkgenerator_withtemplates\\il2cppsdk\\il2cppsdk\\preprocess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FD21F546-6847-42CE-834D-DF54B8463474}|Il2CppSDK\\Il2CppSDK.csproj|solutionrelative:il2cppsdk\\preprocess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FD21F546-6847-42CE-834D-DF54B8463474}|Il2CppSDK\\Il2CppSDK.csproj|c:\\users\\madis\\source\\repos\\il2cppsdkgenerator_withtemplates\\il2cppsdk\\il2cppsdk\\codegenhelpers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FD21F546-6847-42CE-834D-DF54B8463474}|Il2CppSDK\\Il2CppSDK.csproj|solutionrelative:il2cppsdk\\codegenhelpers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FD21F546-6847-42CE-834D-DF54B8463474}|Il2CppSDK\\Il2CppSDK.csproj|c:\\users\\madis\\source\\repos\\il2cppsdkgenerator_withtemplates\\il2cppsdk\\il2cppsdk\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -75,8 +75,7 @@
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAABJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-24T14:31:52.708Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Bookmark",
@@ -96,7 +95,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "CodeGenHelpers.cs",
               "DocumentMoniker": "C:\\Users\\madis\\source\\repos\\Il2CppSDKGenerator_withTemplates\\Il2CppSDK\\Il2CppSDK\\CodeGenHelpers.cs",
               "RelativeDocumentMoniker": "Il2CppSDK\\CodeGenHelpers.cs",
@@ -158,7 +157,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Preprocess.cs",
               "DocumentMoniker": "C:\\Users\\madis\\source\\repos\\Il2CppSDKGenerator_withTemplates\\Il2CppSDK\\Il2CppSDK\\Preprocess.cs",
               "RelativeDocumentMoniker": "Il2CppSDK\\Preprocess.cs",
@@ -166,8 +165,7 @@
               "RelativeToolTip": "Il2CppSDK\\Preprocess.cs",
               "ViewState": "AQIAAOgAAAAAAAAAAAAlwP4AAAAyAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-24T14:40:50.723Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-24T14:40:50.723Z"
             },
             {
               "$type": "Document",
@@ -177,7 +175,7 @@
               "RelativeDocumentMoniker": "Il2CppSDK\\CodeGen.cs",
               "ToolTip": "C:\\Users\\madis\\source\\repos\\Il2CppSDKGenerator_withTemplates\\Il2CppSDK\\Il2CppSDK\\CodeGen.cs",
               "RelativeToolTip": "Il2CppSDK\\CodeGen.cs",
-              "ViewState": "AQIAAEgAAAAAAAAAAAAawFgAAAA4AAAA",
+              "ViewState": "AQIAAJgAAAAAAAAAAAD4v68AAAAtAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-16T11:27:43.877Z",
               "EditorCaption": ""

@@ -183,6 +183,12 @@ namespace Il2CppSDK
             currentFile.WriteLine(namespaceTab + "\t}");
 
             currentFile.WriteLine();
+
+            // write a function that will return the method ptr
+            currentFile.WriteLine(namespaceTab + "\tstatic uintptr_t " + cleanedMethodName + "_addr(" + string.Join(", ", paramsInfo.parametersWithTypeAndName) + ") {");
+            currentFile.WriteLine(namespaceTab + "\t\treturn Il2CppBase() + " + methodOffset + ";");
+            currentFile.WriteLine(namespaceTab + "\t}");
+            currentFile.WriteLine();
         }
 
         public static void GenerateMethodsForClass(StreamWriter currentFile, TypeDef classDef, string namespaceTab)
