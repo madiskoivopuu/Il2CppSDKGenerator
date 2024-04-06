@@ -82,6 +82,7 @@ namespace Il2CppSDK
 
             if (staticFields.Count > 0)
             {
+                currentFile.WriteLine(namespaceTab + "private:"); // we do not want this struct to be directly accessed
                 currentFile.WriteLine(namespaceTab + "\tstruct " + staticFieldsStructName + " {");
                 foreach (FieldDef field in staticFields)
                 {
@@ -89,10 +90,11 @@ namespace Il2CppSDK
                     string fieldCppType = CodeGenHelpers.ConvertToFullCppTypename(fieldType);
                     string clearedFieldName = field.Name.Replace("::", "_").Replace("<", "").Replace(">", "").Replace("k__BackingField", "").Replace(".", "_").Replace("`", "_");
 
-                    currentFile.WriteLine(namespaceTab + "\t\t" + fieldCppType + " " + clearedFieldName + ";");
+                    currentFile.WriteLine(namespaceTab + "\t\tstatic " + fieldCppType + " " + clearedFieldName + ";");
                 }
                 currentFile.WriteLine(namespaceTab + "\t};");
                 currentFile.WriteLine("");
+                currentFile.WriteLine(namespaceTab + "public:");
 
                 currentFile.WriteLine(namespaceTab + "\tstatic " + staticFieldsStructName + "* StaticFields() {");
                 currentFile.WriteLine(string.Format(namespaceTab + "\t\treturn ({0}*)(Il2Cpp::GetClass(\"{1}\", \"{2}\", \"{3}\")->static_fields);", staticFieldsStructName, classDef.Module.Name, classDef.Namespace, classDef.Name));
