@@ -94,7 +94,7 @@ namespace Il2CppSDK
 
                     currentFile.WriteLine(namespaceTab + "\t\t" + fieldCppType + " " + clearedFieldName + ";");
                 }
-                currentFile.WriteLine(namespaceTab + "\t}");
+                currentFile.WriteLine(namespaceTab + "\t};");
                 currentFile.WriteLine("");
 
                 currentFile.WriteLine(namespaceTab + "\tstatic " + staticFieldsStructName + "* StaticFields() {");
