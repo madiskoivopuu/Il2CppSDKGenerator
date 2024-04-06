@@ -88,3 +88,5 @@ If I'm not working on the project, then I suggest forking it and fixing it in yo
 dnlib: [dnlib](https://github.com/0xd4d/dnlib)
 
 Il2CppSDKGenerator (by Octowolve & aimardcr): [Il2CppSDKGenerator](https://github.com/Octowolve/Il2CppSDKGenerator/tree/master/Il2CppSDK)
+
+IL2Cpp-Dictionary (by Rednick16): [IL2Cpp-Dictionary](https://github.com/Rednick16/IL2Cpp-Dictionary)
