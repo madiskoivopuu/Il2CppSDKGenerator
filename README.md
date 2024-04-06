@@ -50,9 +50,9 @@ ActionEntity* ItemRelated::GetAttackActionForItem(ItemEntity* item) {
         return nullptr;
     }
 
-    LOGD("ItemRelated::GetAttackActionForItem -> attack action name is %s", GetUTF8StringFromNETString(attackActionComponent->f_Name()).c_str());
+    LOGD("ItemRelated::GetAttackActionForItem -> attack action name is %s", GetUTF8StringFromNETString(attackActionComponent->f_Name).c_str());
 
-    ActionEntity* attackActionEntity = actionDataContext->GetEntityWithBlueprint(attackActionComponent->f_Name(), ActionDataContext::genericMethodAddrs["DataContext<ActionEntity>$$GetEntityWithBlueprintOrCreate"]);
+    ActionEntity* attackActionEntity = actionDataContext->GetEntityWithBlueprint(attackActionComponent->f_Name, ActionDataContext::genericMethodAddrs["DataContext<ActionEntity>$$GetEntityWithBlueprint"]);
     if(!attackActionEntity) {
         LOGD("ItemRelated::GetAttackActionForItem -> attackActionEntity was null");
         return nullptr;
