@@ -20,6 +20,9 @@ namespace Il2CppSDK
 
         public static void GenerateEnumFromType(TypeDef enumDef)
         {
+
+            //dnlib.DotNet.Extensions.GetPrimitiveSize();
+
             TypeSig enumTypeSig = enumDef.ToTypeSig();
             string currentHeaderFile = CodeGenHelpers.GetHeaderAbsoluteSavePath(enumTypeSig, Program.OUTPUT_DIR);
             Helpers.CreateFileWithDirectories(currentHeaderFile);
@@ -62,39 +65,41 @@ namespace Il2CppSDK
 
         public static void GenerateFieldsForClass(StreamWriter currentFile, TypeDef classDef, string namespaceTab)
         {
-            foreach(FieldDef field in classDef.Fields)
+            string className = Preprocess.GetProcessedCppTypeNameForType(classDef.ToTypeSig());
+            List<FieldDef> regularFields = classDef.Fields.Where(field => !field.IsStatic).ToList();
+            List<FieldDef> staticFields = classDef.Fields.Where(field => field.IsStatic).ToList();
+
+            string staticFieldsStructName = className + "_StaticFields";
+            foreach (FieldDef field in regularFields)
             {
                 TypeSig fieldType = field.FieldType;
                 string fieldCppType = CodeGenHelpers.ConvertToFullCppTypename(fieldType);
-                string returnCast = fieldCppType;
+                string clearedFieldName = "f_" + field.Name.Replace("::", "_").Replace("<", "").Replace(">", "").Replace("k__BackingField", "").Replace(".", "_").Replace("`", "_");
+
+                if (field.FieldType.IsValueType && !dnlib.DotNet.Extensions.IsPrimitive(field.FieldType.GetElementType()) && !field.FieldType.ScopeType.ResolveTypeDef().IsEnum)
+                    Console.WriteLine(field.FullName + " " + field.GetFieldSize());
 
                 currentFile.Write(namespaceTab + "\t");
+                currentFile.WriteLine(fieldCppType + " " + clearedFieldName + ";");
+            }
 
-                if (fieldCppType.Contains("uintptr_t")) // if we are uncertain about the type, we will make a template
+            if (staticFields.Count > 0)
+            {
+                currentFile.WriteLine(namespaceTab + "\tstruct " + staticFieldsStructName + " {");
+                foreach (FieldDef field in staticFields)
                 {
-                    currentFile.Write("template <typename TReturnVal = " + fieldCppType + "> ");
-                    returnCast = "TReturnVal";
+                    TypeSig fieldType = field.FieldType;
+                    string fieldCppType = CodeGenHelpers.ConvertToFullCppTypename(fieldType);
+                    string clearedFieldName = field.Name.Replace("::", "_").Replace("<", "").Replace(">", "").Replace("k__BackingField", "").Replace(".", "_").Replace("`", "_");
+
+                    currentFile.WriteLine(namespaceTab + "\t\t" + fieldCppType + " " + clearedFieldName + ";");
                 }
-
-                if (field.IsStatic)
-                    currentFile.Write("static ");
-
-                string clearedFieldName = "f_" + field.Name.Replace("::", "_").Replace("<", "").Replace(">", "").Replace("k__BackingField", "").Replace(".", "_").Replace("`", "_");
-                currentFile.Write(returnCast + "& ");
-                currentFile.Write(clearedFieldName + "() {");
-                currentFile.WriteLine();
-
-                if(field.IsStatic)
-                {
-                    currentFile.WriteLine(string.Format(namespaceTab + "\t\treturn *({0}*)((uintptr_t)StaticClass()->static_fields + {1});", returnCast, CodeGenHelpers.GetFieldOffset(field)));
-                } 
-                else
-                {
-                    currentFile.WriteLine(string.Format(namespaceTab + "\t\treturn *({0}*)((uintptr_t)this + {1});", returnCast, CodeGenHelpers.GetFieldOffset(field)));
-                }
-
                 currentFile.WriteLine(namespaceTab + "\t}");
+                currentFile.WriteLine("");
 
+                currentFile.WriteLine(namespaceTab + "\tstatic " + staticFieldsStructName + "* StaticFields() {");
+                currentFile.WriteLine(string.Format(namespaceTab + "\t\treturn ({0}*)(Il2Cpp::GetClass(\"{1}\", \"{2}\", \"{3}\")->static_fields);", staticFieldsStructName, classDef.Module.Name, classDef.Namespace, classDef.Name));
+                currentFile.WriteLine(namespaceTab + "\t}");
                 currentFile.WriteLine();
             }
         }
@@ -133,7 +138,7 @@ namespace Il2CppSDK
                 currentFile.WriteLine(namespaceTab + "\ttemplate <" + string.Join(", ", genericParams) + ">");
             }
 
-            string genericAddrParam = "uintptr_t __genericMethodAddy";
+            string genericAddrParam = "uintptr_t __genericMethodOffset";
             if (paramsInfo.parametersWithTypeAndName.Count > 0)
                 genericAddrParam = ", " + genericAddrParam;
 
@@ -142,9 +147,10 @@ namespace Il2CppSDK
                 currentFile.Write("static ");
             currentFile.WriteLine(returnCast + " " + cleanedMethodName + "(" + string.Join(", ", paramsInfo.parametersWithTypeAndName) + genericAddrParam + ") {");
             currentFile.WriteLine(namespaceTab + "\t\tusing FnPtr = " + CodeGenHelpers.GenerateMethodTypedef(classDef, methodDef, returnCast, paramsInfo.parameterTypes) + ";");
-            currentFile.WriteLine(namespaceTab + "\t\tFnPtr call_func = reinterpret_cast<FnPtr>(Il2CppBase() + __genericMethodAddy);");
+            currentFile.WriteLine(namespaceTab + "\t\tFnPtr call_func = reinterpret_cast<FnPtr>(Il2CppBase() + __genericMethodOffset);");
             currentFile.WriteLine(namespaceTab + "\t\treturn " + CodeGenHelpers.GenerateMethodCall(methodDef, "call_func", paramsInfo.parameterNames) + ";");
             currentFile.WriteLine(namespaceTab + "\t}");
+            currentFile.WriteLine();
 
             return;
         }
@@ -223,6 +229,9 @@ namespace Il2CppSDK
             TypeSig classTypeSig = classDef.ToTypeSig();
             string currentHeaderFile = CodeGenHelpers.GetHeaderAbsoluteSavePath(classTypeSig, Program.OUTPUT_DIR);
             string namespaceTab = "";
+
+            if (classDef.FullName.Contains("BaseMessageWindow"))
+                Debugger.Break();
 
             Helpers.CreateFileWithDirectories(currentHeaderFile);
             StreamWriter currentFile = new StreamWriter(currentHeaderFile);

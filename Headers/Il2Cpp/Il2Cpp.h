@@ -73,7 +73,7 @@ namespace Il2Cpp {
 
     void *GetImage(const char *image);
 
-    void *GetClass(const char *image, const char *namespaze, const char *clazz);
+    Il2CppClass *GetClass(const char *image, const char *namespaze, const char *clazz);
 
     void *CreateArray(const char *image, const char *namespaze, const char *clazz, size_t length);
 

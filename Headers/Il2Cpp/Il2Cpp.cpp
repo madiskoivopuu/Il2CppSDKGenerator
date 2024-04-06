@@ -293,7 +293,7 @@ void Il2Cpp::SetStaticFieldValue(const char *image, const char *namespaze, const
     il2cpp_field_static_set_value(field, value);
 }
 // ========================================================================================================================================== //
-void *Il2Cpp::GetClass(const char *image, const char *namespaze, const char *clazz) {
+Il2CppClass *Il2Cpp::GetClass(const char *image, const char *namespaze, const char *clazz) {
     string _sig = image;
     _sig += namespaze;
     _sig += clazz;
@@ -335,7 +335,7 @@ void *Il2Cpp::GetClass(const char *image, const char *namespaze, const char *cla
         return 0;
     }
 
-    return klass;
+    return (Il2CppClass*)klass;
 }
 // ========================================================================================================================================== //
 void *Il2Cpp::NewClassObject(const char *image, const char *namespaze, const char *clazz) {

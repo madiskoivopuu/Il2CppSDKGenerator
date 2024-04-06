@@ -47,7 +47,7 @@ namespace Il2CppSDK
         // Returns whether the outmost type in TypeSig is primitive
         public static bool IsPrimitiveType(TypeSig type)
         {
-            if (type.IsGenericParameter)
+            if (type.IsGenericParameter || Extensions.IsPrimitive(type.GetElementType()))
             {
                 return true;
             }
