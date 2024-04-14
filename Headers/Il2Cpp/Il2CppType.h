@@ -140,6 +140,7 @@ struct MethodInfo
     uint8_t parameters_count;
     uint8_t bitflags;
 };
+
 template<typename T> struct Il2CppArray {
     Il2CppClass *klass;
     void *monitor;
@@ -194,15 +195,15 @@ template<typename T> struct Il2CppList {
     }
 };
 
-template<typename TKey, typename TValue> 
-struct Dictionary 
+template<typename TKey, typename TValue>
+struct Il2CppDictionary
 {
     struct KeysCollection;
     struct ValueCollection;
 
     struct Entry
     {
-        int hashCode; 
+        int hashCode;
         int next;
         TKey key;
         TValue value;
@@ -243,21 +244,21 @@ struct Dictionary
         return (*values);
     }
 
-    TValue operator [] (TKey key) 
+    TValue operator [] (TKey key)
     {
         int i = FindEntry(key);
         if (i >= 0) return (*entries)[i].value;
         return TValue();
     }
 
-    const TValue operator [] (TKey key) const 
+    const TValue operator [] (TKey key) const
     {
         int i = FindEntry(key);
         if (i >= 0) return (*entries)[i].value;
         return TValue();
     }
-    
-    int FindEntry(TKey key) 
+
+    int FindEntry(TKey key)
     {
         for (int i = 0; i < count; i++)
         {
@@ -265,23 +266,23 @@ struct Dictionary
         }
         return -1;
     }
-    
-    bool ContainsKey(TKey key) 
+
+    bool ContainsKey(TKey key)
     {
         return FindEntry(key) >= 0;
     }
-    
-    bool ContainsValue(TValue value) 
+
+    bool ContainsValue(TValue value)
     {
         for (int i = 0; i < count; i++)
         {
-            if((*entries)[i].hashCode >= 0 && 
-                    (*entries)[i].value == value) return true;
+            if((*entries)[i].hashCode >= 0 &&
+               (*entries)[i].value == value) return true;
         }
         return false;
     }
 
-    bool TryGetValue(TKey key, TValue *value) 
+    bool TryGetValue(TKey key, TValue *value)
     {
         int i = FindEntry(key);
         if (i >= 0) {
@@ -292,7 +293,7 @@ struct Dictionary
         return false;
     }
 
-    TValue GetValueOrDefault(TKey key) 
+    TValue GetValueOrDefault(TKey key)
     {
         int i = FindEntry(key);
         if (i >= 0) {
@@ -301,23 +302,23 @@ struct Dictionary
         return TValue();
     }
 
-    struct KeysCollection 
+    struct KeysCollection
     {
-        Dictionary *dictionary;
+        Il2CppDictionary *dictionary;
 
-        KeysCollection(Dictionary *dictionary)
+        KeysCollection(Il2CppDictionary *dictionary)
         {
             this->dictionary = dictionary;
         }
 
-        TKey operator [] (int i) 
+        TKey operator [] (int i)
         {
             auto entries = dictionary->entries;
             if(!entries) return TKey();
             return (*entries)[i].key;
         }
 
-        const TKey operator [] (int i) const 
+        const TKey operator [] (int i) const
         {
             auto entries = dictionary->entries;
             if(!entries) return TKey();
@@ -330,23 +331,23 @@ struct Dictionary
         }
     };
 
-    struct ValueCollection 
+    struct ValueCollection
     {
-        Dictionary *dictionary;
+        Il2CppDictionary *dictionary;
 
-        ValueCollection(Dictionary *dictionary)
+        ValueCollection(Il2CppDictionary *dictionary)
         {
             this->dictionary = dictionary;
         }
 
-        TValue operator [] (int i) 
+        TValue operator [] (int i)
         {
             auto entries = dictionary->entries;
             if(!entries) return TValue();
             return (*entries)[i].value;
         }
 
-        const TValue operator [] (int i) const 
+        const TValue operator [] (int i) const
         {
             auto entries = dictionary->entries;
             if(!entries) return TValue();
