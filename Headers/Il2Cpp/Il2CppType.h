@@ -145,7 +145,7 @@ template<typename T> struct Il2CppArray {
     void *monitor;
     void *bounds;
     int max_length;
-    T m_Items[65535];
+    T m_Items[128];
 
     int getLength() {
         return max_length;
