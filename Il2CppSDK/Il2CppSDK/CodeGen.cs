@@ -277,12 +277,12 @@ namespace Il2CppSDK
 
             GenerateGenericMethodPtrTable(currentFile, classDef, namespaceTab);
 
+            GenerateFieldsForClass(currentFile, classDef, namespaceTab);
+
             currentFile.WriteLine(namespaceTab + "\tstatic Il2CppClass *StaticClass() {");
             currentFile.WriteLine(string.Format(namespaceTab + "\t\treturn (Il2CppClass *)(Il2Cpp::GetClass(\"{0}\", \"{1}\", \"{2}\"));", classDef.Module.Name, classDef.Namespace, classDef.Name));
             currentFile.WriteLine(namespaceTab + "\t}");
             currentFile.WriteLine("");
-
-            GenerateFieldsForClass(currentFile, classDef, namespaceTab);
 
             currentFile.WriteLine("");
 
