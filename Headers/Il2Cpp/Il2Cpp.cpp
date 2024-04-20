@@ -59,7 +59,7 @@ Il2CppString *(*il2cpp_string_new)(const char *) = 0;
 
 Il2CppString *(*il2cpp_string_new_utf16)(const wchar_t *, size_t len) = 0;
 
-void (*il2cpp_free)(void*)
+void (*il2cpp_free)(void*);
 
 // ========================================================================================================================================== //
 vector<string> split_string(string str, string token) {
@@ -510,8 +510,7 @@ bool Il2Cpp::IsAssembliesLoaded() {
     return size != 0 && assemblies != 0;
 }
 // ========================================================================================================================================== //
-template <typename T>
-Il2CppArray<T>* Il2Cpp::CreateArray(const char *image, const char *namespaze, const char *clazz, size_t length) {
+void* Il2Cpp::CreateArray(const char *image, const char *namespaze, const char *clazz, size_t length) {
     void *img = GetImage(image);
     if(!img) {
         IL2CPP_LOGI("Can't find image %s!", image);
