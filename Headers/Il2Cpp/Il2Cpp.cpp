@@ -59,6 +59,8 @@ Il2CppString *(*il2cpp_string_new)(const char *) = 0;
 
 Il2CppString *(*il2cpp_string_new_utf16)(const wchar_t *, size_t len) = 0;
 
+void (*il2cpp_free)(void*)
+
 // ========================================================================================================================================== //
 vector<string> split_string(string str, string token) {
     vector<string> result;
@@ -226,6 +228,8 @@ int Il2Cpp::Attach(const char *libname) {
 
     il2cpp_string_new_utf16 = (Il2CppString *(*)(const wchar_t *, size_t)) get_export_function(libname, "il2cpp_string_new_utf16");
 
+    il2cpp_free = (void (*)(void*))get_export_function(libname, "il2cpp_free");
+
     if(not_found_export)
     {
         return -1;
@@ -326,6 +330,7 @@ Il2CppClass *Il2Cpp::GetClass(const char *image, const char *namespaze, const ch
             const char *name = il2cpp_class_get_name(nest);
             if(strcmp(name, classes[1].c_str()) == 0)
             {
+                m_cacheClasses[_sig] = nest;
                 return (Il2CppClass*)nest;
             }
 
@@ -335,6 +340,7 @@ Il2CppClass *Il2Cpp::GetClass(const char *image, const char *namespaze, const ch
         return 0;
     }
 
+    m_cacheClasses[_sig] = klass;
     return (Il2CppClass*)klass;
 }
 // ========================================================================================================================================== //
@@ -504,7 +510,8 @@ bool Il2Cpp::IsAssembliesLoaded() {
     return size != 0 && assemblies != 0;
 }
 // ========================================================================================================================================== //
-void* Il2Cpp::CreateArray(const char *image, const char *namespaze, const char *clazz, size_t length) {
+template <typename T>
+Il2CppArray<T>* Il2Cpp::CreateArray(const char *image, const char *namespaze, const char *clazz, size_t length) {
     void *img = GetImage(image);
     if(!img) {
         IL2CPP_LOGI("Can't find image %s!", image);

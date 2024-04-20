@@ -308,8 +308,6 @@ namespace Il2CppSDK
                     references.Add(GetTypeResolveFormat(type, outsideType, null));
             }
 
-            // generic method references
-
             return references;
         }
 

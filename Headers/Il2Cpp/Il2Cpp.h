@@ -68,6 +68,8 @@ extern Il2CppString *(*il2cpp_string_new)(const char *);
 
 extern Il2CppString *(*il2cpp_string_new_utf16)(const wchar_t *, size_t len);
 
+extern void (*il2cpp_free)(void*);
+
 namespace Il2Cpp {
     int Attach(const char *libname = "libil2cpp.so");
 

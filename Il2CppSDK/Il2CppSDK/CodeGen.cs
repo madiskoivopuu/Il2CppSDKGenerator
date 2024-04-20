@@ -266,9 +266,12 @@ namespace Il2CppSDK
             currentFile.WriteLine(namespaceTab + CodeGenHelpers.FormatGenericParametersToTemplate(classDef));
 
             currentFile.Write(namespaceTab + "class " + Preprocess.GetProcessedCppTypeNameForType(classTypeSig));
-            List<string> inheritanceList = GetInheritancesForType(classDef);
-            if(inheritanceList.Count > 0)
-                currentFile.Write(" : " + string.Join(", ", inheritanceList));
+            if(!classDef.IsInterface)
+            {
+                List<string> inheritanceList = GetInheritancesForType(classDef);
+                if (inheritanceList.Count > 0)
+                    currentFile.Write(" : " + string.Join(", ", inheritanceList));
+            }
 
             currentFile.WriteLine(" {");
 
@@ -347,10 +350,10 @@ namespace Il2CppSDK
             }
         }
 
-        public static void GenerateSDK(ModuleDefMD currentModule)
+        public static void GenerateSDK(ModuleDefMD currentModule, string currentAssemblyDir)
         {
             CodeGen.currentModule = currentModule;
-            currentAssemblyDir = Program.OUTPUT_DIR + "/" + Helpers.FormatNamespace(currentModule.Assembly.Name);
+            CodeGen.currentAssemblyDir = currentAssemblyDir;
 
             Helpers.RecreateDirectory(currentAssemblyDir);
 

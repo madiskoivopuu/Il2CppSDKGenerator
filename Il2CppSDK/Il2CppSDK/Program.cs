@@ -26,20 +26,25 @@ namespace Il2CppSDK
 
         static void ParseModule(string scriptJson, string moduleFile)
         {
-            moduleFile = "C:\\Users\\madis\\Desktop\\PROJECTFOLDER\\Cheat related programs\\il2cpp reverser\\DummyDll\\Assembly-CSharp.dll";
+
+            //moduleFile = "C:\\Users\\madis\\Desktop\\PROJECTFOLDER\\Cheat related programs\\il2cpp reverser\\DummyDll\\Assembly-CSharp.dll";
             //moduleFile = "C:\\Users\\madis\\source\\repos\\Il2CppDumper\\Il2CppDumper\\bin\\Debug\\net6.0\\DummyDll\\mscorlib.dll";
-            scriptJson = "C:\\Users\\madis\\Desktop\\PROJECTFOLDER\\Cheat related programs\\il2cpp reverser\\script.json";
+            //scriptJson = "C:\\Users\\madis\\Desktop\\PROJECTFOLDER\\Cheat related programs\\il2cpp reverser\\script.json";
             
             Console.WriteLine("Generating SDK for {0}...", Path.GetFileName(moduleFile));
 
             ScriptJson jsonData = ScriptJsonReader.readFile(scriptJson);
             ModuleContext modCtx = ModuleDef.CreateModuleContext();
             currentModule = ModuleDefMD.Load(moduleFile, modCtx);
+            string assemblyDir = Program.OUTPUT_DIR + "/" + Helpers.FormatNamespace(currentModule.Assembly.Name);
+            if (Directory.Exists(assemblyDir))
+                Directory.Delete(assemblyDir, true);
+
 
             Preprocess.PreprocessModule(jsonData, currentModule);
             Test.AreAllGenericMethodsPresent(currentModule);
 
-            CodeGen.GenerateSDK(currentModule);
+            CodeGen.GenerateSDK(currentModule, assemblyDir);
 
             Console.WriteLine("SDK generated, make sure to update Il2CppType.h with proper structs from Il2CppDumper header file.");
         }
@@ -53,9 +58,7 @@ namespace Il2CppSDK
                 return;
             }
 
-            if (Directory.Exists(OUTPUT_DIR))
-                Directory.Delete(OUTPUT_DIR, true);
-
+            Helpers.CreateDirectoryIfNotExists(OUTPUT_DIR);
             if (Directory.Exists(args[1]))
             {
                 foreach(var file in Directory.GetFiles(args[1]))

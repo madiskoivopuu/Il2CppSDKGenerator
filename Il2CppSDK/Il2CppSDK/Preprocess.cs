@@ -307,7 +307,11 @@ namespace Il2CppSDK
 
         public static void PreprocessModule(ScriptJson jsonData, ModuleDefMD currentModule)
         {
+            processedTypeDefs = new();
+            processedAllTypeSigs = new();
+            genericTypeInstantiations = new();
             Preprocess.currentModule = currentModule;
+
             InitializeTypeInfoStructs();
 
             FormatNamesForTypeDefs();
