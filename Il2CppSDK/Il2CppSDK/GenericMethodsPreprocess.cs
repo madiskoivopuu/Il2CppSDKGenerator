@@ -283,6 +283,19 @@ namespace Il2CppSDK
             }
 
             Dictionary<string, ulong> genericMethodAddresses = new();
+            if (!genericMethodsForClasses.ContainsKey(typeDef))
+            {
+                Console.WriteLine(string.Format("WARNING: Script.json file did not contain any generic methods for type '{0}', even though there should be some.", typeDef.FullName));
+                return genericMethodAddresses;
+            }
+
+            if (!genericMethodsForClasses[typeDef].ContainsKey(methodDefForType.Name))
+            {
+                Console.WriteLine(string.Format("WARNING: Script.json file did not contain any generic methods with name '{0} for type '{1}', even though there should be some.", methodDefForType.Name, typeDef.FullName));
+                return genericMethodAddresses;
+            }
+
+
             foreach (GenericMethodInfo genericMethod in genericMethodsForClasses[typeDef][methodDefForType.Name])
             {
                 if (methodOccurrences[methodDefForType.Name] == 1)

@@ -30,6 +30,7 @@ namespace Il2CppSDK
             StreamWriter currentFile = new StreamWriter(currentHeaderFile);
 
             currentFile.WriteLine("#pragma once");
+            currentFile.WriteLine("#include <cstdint>");
 
             bool useNamespace = Preprocess.GetProcessedNamespaceForType(enumTypeSig).Length > 0;
             if (useNamespace)
@@ -37,7 +38,7 @@ namespace Il2CppSDK
 
             currentFile.WriteLine();
 
-            currentFile.Write("enum class " + Preprocess.GetProcessedCppTypeNameForType(enumTypeSig) + " : int ");
+            currentFile.Write("enum class " + Preprocess.GetProcessedCppTypeNameForType(enumTypeSig) + " : int64_t ");
 
             currentFile.WriteLine();
             currentFile.WriteLine("{");
@@ -46,7 +47,7 @@ namespace Il2CppSDK
             for (int i = 1; i < enumDef.Fields.Count; i++)
             {
                 FieldDef field = enumDef.Fields[i];
-                currentFile.Write(string.Format("\t{0} = {1}", Helpers.FormatClassname(field.Name), Convert.ToInt32(field.Constant.Value)));
+                currentFile.Write(string.Format("\t{0} = {1}", Helpers.FormatClassname(field.Name), Convert.ToInt64(field.Constant.Value)));
                 if (i != enumDef.Fields.Count - 1)
                     currentFile.Write(",");
 
@@ -310,13 +311,12 @@ namespace Il2CppSDK
                 else
                     GenerateClassFromType(typeDef);
 
-                /* SHOULD NO LONGER BE NEEDED
                 // we also need to generate class code for referenced typedefs, since they might not be in the main table
                 foreach(TypeDef referencedType in Preprocess.processedTypeDefs[typeDef].referencedTypes)
                     if (referencedType.IsEnum)
                         GenerateEnumFromType(referencedType);
                     else
-                        GenerateClassFromType(referencedType);*/
+                        GenerateClassFromType(referencedType);
             }
         }
 

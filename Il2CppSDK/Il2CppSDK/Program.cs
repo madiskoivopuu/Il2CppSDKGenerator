@@ -26,10 +26,11 @@ namespace Il2CppSDK
 
         static void ParseModule(string scriptJson, string moduleFile)
         {
-
-            //moduleFile = "C:\\Users\\madis\\Desktop\\PROJECTFOLDER\\Cheat related programs\\il2cpp reverser\\DummyDll\\Assembly-CSharp.dll";
-            //moduleFile = "C:\\Users\\madis\\source\\repos\\Il2CppDumper\\Il2CppDumper\\bin\\Debug\\net6.0\\DummyDll\\mscorlib.dll";
-            //scriptJson = "C:\\Users\\madis\\Desktop\\PROJECTFOLDER\\Cheat related programs\\il2cpp reverser\\script.json";
+            if(moduleFile.Contains("Il2CppDummyDll.dll"))
+            {
+                Console.WriteLine("Skipping Il2CppDummyDll.dll");
+                return;
+            }
             
             Console.WriteLine("Generating SDK for {0}...", Path.GetFileName(moduleFile));
 
@@ -57,6 +58,9 @@ namespace Il2CppSDK
                 Console.WriteLine("Command example: ./Il2CppSDKGenerator scriptJsonFile dllsDirectory");
                 return;
             }
+
+            //args[0] = "C:\\Users\\madis\\Desktop\\PROJECTFOLDER\\Cheat related programs\\il2cpp reverser\\script.json";
+            //args[1] = "C:\\Users\\madis\\Desktop\\PROJECTFOLDER\\Cheat related programs\\il2cpp reverser\\DummyDll\\Assembly-CSharp.dll";
 
             Helpers.CreateDirectoryIfNotExists(OUTPUT_DIR);
             if (Directory.Exists(args[1]))

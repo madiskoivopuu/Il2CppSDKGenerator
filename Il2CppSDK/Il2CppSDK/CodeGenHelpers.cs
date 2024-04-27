@@ -142,8 +142,11 @@ namespace Il2CppSDK
                     break;
 
                 case ElementType.ByRef:
-                case ElementType.TypedByRef: // no idea what TYPED by ref means
                     result = ConvertToFullCppTypename(type.GetNext()) + "*";
+                    break;
+
+                case ElementType.TypedByRef: // only happens for type System.TypedReference
+                    result = Preprocess.GetFullTypenameForIl2CppType(type) + "*";
                     break;
             }
 
@@ -153,16 +156,33 @@ namespace Il2CppSDK
         // Returns the relative include path to include 'typeToInclude' in 'currType' header file
         public static string GetIncludePathFromTypeToAnother(TypeSig currType, TypeSig typeToInclude)
         {
+            if(currType.FullName.Contains("IConditionContext") && typeToInclude.FullName.Contains("Args"))
+                Debugger.Break();
+
             string includePath = "";
-            bool areNamespacesDifferent = Preprocess.GetProcessedNamespaceForType(currType) != Preprocess.GetProcessedNamespaceForType(typeToInclude);
-            if (Preprocess.GetProcessedNamespaceForType(currType).Length > 0 && areNamespacesDifferent)
-                includePath += "../";
 
             if (currType.DefinitionAssembly.Name != typeToInclude.DefinitionAssembly.Name)
-                includePath += "../" + Helpers.FormatNamespace(typeToInclude.DefinitionAssembly.Name) + "/";
+            {
+                includePath += "../";
+                if(Preprocess.GetProcessedNamespaceForType(currType).Length > 0)
+                    includePath += "../";
 
-            if (Preprocess.GetProcessedNamespaceForType(typeToInclude).Length > 0 && areNamespacesDifferent)
-                includePath += Preprocess.GetProcessedNamespaceForType(typeToInclude) + "/";
+                includePath += Helpers.FormatNamespace(typeToInclude.DefinitionAssembly.Name) + "/";
+                if (Preprocess.GetProcessedNamespaceForType(typeToInclude).Length > 0)
+                    includePath += Preprocess.GetProcessedNamespaceForType(typeToInclude) + "/";
+
+            } else
+            {
+                bool areNamespacesDifferent = Preprocess.GetProcessedNamespaceForType(currType) != Preprocess.GetProcessedNamespaceForType(typeToInclude);
+                if (areNamespacesDifferent)
+                {
+                    if(Preprocess.GetProcessedNamespaceForType(currType).Length > 0)
+                        includePath += "../";
+
+                    if(Preprocess.GetProcessedNamespaceForType(typeToInclude).Length > 0)
+                        includePath += Preprocess.GetProcessedNamespaceForType(typeToInclude) + "/";
+                }
+            }
 
             includePath += Preprocess.GetProcessedCppTypeNameForType(typeToInclude) + ".h";
 

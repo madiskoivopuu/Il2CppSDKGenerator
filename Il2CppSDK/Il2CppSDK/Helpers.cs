@@ -302,7 +302,7 @@ namespace Il2CppSDK
             string namespace_ = FormatNamespace(typeNamespace);
             if (namespace_.Length > 0)
             {
-                return namespace_;
+                return "NS_" + namespace_;
             }
             else 
             {

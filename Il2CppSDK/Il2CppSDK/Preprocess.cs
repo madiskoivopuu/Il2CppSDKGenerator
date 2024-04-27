@@ -257,12 +257,12 @@ namespace Il2CppSDK
         {
             if (typeSig == null) return "";
 
-            TypeDef typeDef = typeSig.TryGetTypeDef();
+            /*TypeDef typeDef = typeSig.TryGetTypeDef();
             if (typeDef != null)
                 return processedTypeDefs[typeDef].cppNamespace;
             else if (processedAllTypeSigs.ContainsKey(typeSig))
                 return processedAllTypeSigs[typeSig].cppNamespace;
-            else
+            else*/
                 return Helpers.ParseNamespaceForType(typeSig.Namespace, typeSig.FullName);
         }
 
