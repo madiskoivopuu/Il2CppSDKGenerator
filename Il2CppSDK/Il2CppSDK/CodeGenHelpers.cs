@@ -156,9 +156,6 @@ namespace Il2CppSDK
         // Returns the relative include path to include 'typeToInclude' in 'currType' header file
         public static string GetIncludePathFromTypeToAnother(TypeSig currType, TypeSig typeToInclude)
         {
-            if(currType.FullName.Contains("IConditionContext") && typeToInclude.FullName.Contains("Args"))
-                Debugger.Break();
-
             string includePath = "";
 
             if (currType.DefinitionAssembly.Name != typeToInclude.DefinitionAssembly.Name)
